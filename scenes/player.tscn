@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2wyldslu3fnh"]
+
+[ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://dxercd3rkhvwt" path="res://models/rockguy/RockGuy.glb" id="2_g2els"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
+height = 1.27028
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573687, 0)
+shape = SubResource("CapsuleShape3D_g2els")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+
+[node name="RockGuy" parent="Mesh" instance=ExtResource("2_g2els")]
