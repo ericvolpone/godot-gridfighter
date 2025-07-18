@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 height = 1.27028
 
-[node name="PlayerCharacterBody3D" type="CharacterBody3D"]
+[node name="Player_CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_g2els")
 rock_scene = ExtResource("2_qhqgy")

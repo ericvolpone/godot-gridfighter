@@ -11,6 +11,10 @@ const JUMP_VELOCITY: float = 4.5
 var combat_1_cd: float = 3.0;
 var combat_1_is_ready: bool = true;
 
+var is_knocked: bool = false
+var knockback_velocity: Vector3 = Vector3.ZERO
+var knockback_timer: float = 0.0
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	process_movement(delta);
@@ -18,7 +22,14 @@ func _physics_process(delta: float) -> void:
 
 func process_combat_actions(delta: float) -> void:
 	if (Input.is_action_just_pressed("combat_1") and combat_1_is_ready):
-		print("Combat 1");
+		# Spawn a rock
+		var rock: RigidBody3D = rock_scene.instantiate();
+		get_parent_node_3d().add_child(rock);
+		rock.global_position = global_position + (mesh.get_global_transform().basis.z.normalized());
+		rock.global_position.y += 1;
+		print(mesh.rotation);
+		rock.apply_impulse(mesh.get_global_transform().basis.z * 25)
+		
 		combat_1_is_ready = false;
 		var timer: Timer = Timer.new();
 		add_child(timer)
@@ -27,40 +38,44 @@ func process_combat_actions(delta: float) -> void:
 			func() -> void: 
 				combat_1_is_ready = true; 
 				print("Done")
+				rock.queue_free();
 				timer.queue_free()
 				);
 		timer.start();
-		
-		# Spawn a rock
-		var rock: Node = rock_scene.instantiate();
-		get_parent_node_3d().add_child(rock);
-		rock.global_position = global_position;
-		rock.global_position.y += 2;
-		var rock_rb: RigidBody3D = rock.get_node("RigidBody3D");
-		print(mesh.rotation);
-		rock_rb.apply_impulse(mesh.get_global_transform().basis.z * 25
-	);
 
 func process_movement(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		animator.play("rockguy_anim_lib/RockGuy_Run")
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-		mesh.rotation.y = -atan2(-direction.x, direction.z)
+	
+	if is_knocked:
+		velocity = knockback_velocity
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			is_knocked = false
+			velocity = Vector3.ZERO
 	else:
-		animator.play("rockguy_anim_lib/RockGuy_Idle")
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if direction:
+			animator.play("rockguy_anim_lib/RockGuy_Run", 0.3)
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+			mesh.rotation.y = -atan2(-direction.x, direction.z)
+		else:
+			animator.play("rockguy_anim_lib/RockGuy_Idle", 0.3)
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func knock_back(direction: Vector3, strength: float, duration: float) -> void:
+	knockback_velocity = direction * strength
+	knockback_timer = duration
+	is_knocked = true
+	# Probably need a knockdown animation here!

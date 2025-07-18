@@ -4,7 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t8sxr"]
 resource_local_to_scene = true
-friction = 0.6
+friction = 0.5
 rough = true
 bounce = 0.5
 
@@ -22,14 +22,13 @@ roughness = 0.8
 [sub_resource type="SphereMesh" id="SphereMesh_mek2u"]
 material = SubResource("StandardMaterial3D_1di36")
 
-[node name="Rock" type="Node3D"]
+[node name="Rock_RigidBody3D" type="RigidBody3D"]
+mass = 30.0
+physics_material_override = SubResource("PhysicsMaterial_t8sxr")
 script = ExtResource("1_1di36")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_t8sxr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_t8sxr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_mek2u")
