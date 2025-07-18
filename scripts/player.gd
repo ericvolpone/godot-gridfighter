@@ -12,6 +12,7 @@ var combat_1_cd: float = 3.0;
 var combat_1_is_ready: bool = true;
 
 var is_knocked: bool = false
+var is_standing_back_up: bool = false;
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
 
@@ -48,11 +49,16 @@ func process_movement(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if is_knocked:
+		knockback_velocity = knockback_velocity * (1 - .2*delta);
 		velocity = knockback_velocity
 		knockback_timer -= delta
+		if(knockback_timer <= 0.55 and !is_standing_back_up):
+			is_standing_back_up = true;
+			animator.play("rockguy_anim_lib/RockGuy_Idle", .5);
 		if knockback_timer <= 0.0:
 			is_knocked = false
 			velocity = Vector3.ZERO
+			# TODO Make it so that walking is disabled until the blend is over?
 	else:
 		# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -79,3 +85,4 @@ func knock_back(direction: Vector3, strength: float, duration: float) -> void:
 	knockback_timer = duration
 	is_knocked = true
 	# Probably need a knockdown animation here!
+	animator.play("rockguy_anim_lib/RockGuy_FallingDown", 0.3);

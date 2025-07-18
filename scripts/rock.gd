@@ -9,9 +9,11 @@ func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody3D:
 		var player := body as CharacterBody3D
 		var impact_force: float = linear_velocity.length()
-		if impact_force > 1:
+		if impact_force > .01:
 			var direction: Vector3 = (player.global_transform.origin - global_transform.origin).normalized()
-			player.knock_back(direction, impact_force, 1.0)
+			# TODO debug what makes sense for clamp values and force here
+			var knockback_velocity: float = clamp(impact_force, .5, 2);
+			player.knock_back(direction, knockback_velocity, 2.5)
 
 func _physics_process(delta: float) -> void:
 	if(global_position.y < -5.0):
