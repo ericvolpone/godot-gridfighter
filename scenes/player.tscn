@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2wyldslu3fnh"]
 
-[ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://c0amxhoe18fqr" path="res://scenes/rock_guy.tscn" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://fghp8k6tca08" path="res://scenes/rock.tscn" id="2_qhqgy"]
 

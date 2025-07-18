@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://fghp8k6tca08"]
 
-[ext_resource type="Script" uid="uid://buffw4so33xkv" path="res://scenes/rock.gd" id="1_1di36"]
+[ext_resource type="Script" uid="uid://buffw4so33xkv" path="res://scripts/rock.gd" id="1_1di36"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t8sxr"]
 resource_local_to_scene = true
