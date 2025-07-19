@@ -1,0 +1,10 @@
+Clean up movement for AI and Player.  There needs to be some handling of input better for player controlled characters
+
+Tutorial levels need to know when to move forward.  Build a few more!
+	You got win conditions working generally, but we should probably free up AI and have players respawn if they fall off
+
+Tutorial ideas:
+	Punching a rock thats being thrown at you
+	Punching a person off the map
+	Maybe using block to dodge an incoming rock?
+	

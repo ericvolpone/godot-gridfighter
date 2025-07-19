@@ -36,3 +36,4 @@ fov = 50.0
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50793, 0.210684, 1.74635)
+is_player_controlled = true
