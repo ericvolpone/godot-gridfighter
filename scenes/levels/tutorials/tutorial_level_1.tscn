@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2cbos0hpdj72"]
+[gd_scene load_steps=5 format=3 uid="uid://d2w5llyn6sfvf"]
 
-[ext_resource type="Script" uid="uid://bdig4fvgua7ac" path="res://scripts/levels/tutorial_level_3.gd" id="1_48uxe"]
+[ext_resource type="Script" uid="uid://c2vby6t8wq7ti" path="res://scenes/levels/tutorials/tutorial_level_1.gd" id="1_hruly"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ad1um"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,8 +15,8 @@ sky = SubResource("Sky_ad1um")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="TutorialLevel3" type="Node3D"]
-script = ExtResource("1_48uxe")
+[node name="TutorialLevel1" type="Node3D"]
+script = ExtResource("1_hruly")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8j3t6")

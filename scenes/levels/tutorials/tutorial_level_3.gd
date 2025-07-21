@@ -1,6 +1,6 @@
 extends AbstractTutorialLevel
 
-@onready var rock_scene: PackedScene = load("res://scenes/rock.tscn")
+@onready var rock_scene: PackedScene = load("res://scenes/objects/combat/rock.tscn")
 var time_to_stay_alive: float = 6.0;
 
 func get_level_number() -> int:
@@ -18,7 +18,8 @@ func _ready() -> void:
 	rock.global_position = Vector3(1.5, 1, -1.5)
 	var rock_timer: SceneTreeTimer = get_tree().create_timer(3)
 	rock_timer.timeout.connect(func() -> void:
-		rock.apply_central_force(Vector3(-10000, 0 , 10000))
+		if(rock != null):
+			rock.apply_impulse(Vector3(-300, 0 , 300))
 	)
 
 func get_player_spawn_position() -> Vector3:

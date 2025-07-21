@@ -8,7 +8,11 @@ class_name Player
 @onready var mesh: Node3D = $RockGuy;
 
 # Packed Scenes
-@export var rock_scene: PackedScene;
+@onready var rock_scene: PackedScene = preload("res://scenes/objects/combat/rock.tscn");
+
+# Menu Variables
+var is_in_menu: bool = false;
+@onready var in_game_menu: Node = load("res://scenes/menu/in_game_menu.tscn").instantiate();
 
 # Movement / Control variables
 @export var is_player_controlled: bool;
@@ -35,14 +39,25 @@ func _ready() -> void:
 		add_child(combat_action_2)
 	else:
 		$BlueIndicatorCircle.queue_free();
+	
+	add_child(in_game_menu)
+	in_game_menu.hide()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action("menu_open") and event.is_pressed():
+		if(is_in_menu):
+			is_in_menu = false
+			in_game_menu.hide()
+		else:
+			is_in_menu = true
+			in_game_menu.show()
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	process_movement(delta);
 	process_combat_actions(delta);
 
 func has_control() -> bool:
-	return is_player_controlled and !is_knocked and !is_blocking;
+	return is_player_controlled and !is_knocked and !is_blocking and !is_in_menu;
 
 func process_combat_actions(delta: float) -> void:
 	if (is_player_controlled):
@@ -52,6 +67,7 @@ func process_combat_actions(delta: float) -> void:
 			combat_action_2.execute()
 
 func process_movement(delta: float) -> void:
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	

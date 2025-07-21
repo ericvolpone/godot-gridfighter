@@ -1,0 +1,1 @@
+class_name AbstractLevel extends Node3D

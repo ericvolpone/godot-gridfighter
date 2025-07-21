@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://brw55wna48nno"]
 
-[ext_resource type="PackedScene" uid="uid://bbwvtn6c33ljj" path="res://levels/Greybox.glb" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://b2wyldslu3fnh" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bbwvtn6c33ljj" path="res://levels/Greybox.glb" id="1_eqihu"]
+[ext_resource type="PackedScene" uid="uid://b2wyldslu3fnh" path="res://scenes/player/player.tscn" id="2_61jgc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqjtg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -28,12 +28,12 @@ shadow_enabled = true
 [node name="Level" type="Node3D" parent="."]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
-[node name="Greybox" parent="Level" instance=ExtResource("1_yqjtg")]
+[node name="Greybox" parent="Level" instance=ExtResource("1_eqihu")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 14)
 fov = 50.0
 
-[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+[node name="Player" parent="." instance=ExtResource("2_61jgc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50793, 0.210684, 1.74635)
 is_player_controlled = true

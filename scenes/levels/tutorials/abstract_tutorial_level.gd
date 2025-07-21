@@ -1,12 +1,10 @@
-extends Node3D
+class_name AbstractTutorialLevel extends AbstractLevel
 
-class_name AbstractTutorialLevel
-
-const SCENE_PREFIX: String = "res://scenes/levels/tutorial_level_"
+const SCENE_PREFIX: String = "res://scenes/levels/tutorials/tutorial_level_"
 const SCENE_POSTFIX: String = ".tscn"
 
-var player_scene: PackedScene = preload("res://scenes/player.tscn")
-var hud_scene: PackedScene = preload("res://scenes/levels/tutorial_level_hud.tscn")
+var player_scene: PackedScene = preload("res://scenes/player/player.tscn")
+var hud_scene: PackedScene = preload("res://scenes/levels/tutorials/tutorial_level_hud.tscn")
 
 var hud: TutorialHud;
 

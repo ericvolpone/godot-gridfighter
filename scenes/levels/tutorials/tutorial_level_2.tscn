@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cp8xgko8qubdo"]
 
-[ext_resource type="Script" uid="uid://bc50b6p8mkcny" path="res://scripts/levels/tutorial_level_2.gd" id="1_3ko87"]
+[ext_resource type="Script" uid="uid://bc50b6p8mkcny" path="res://scenes/levels/tutorials/tutorial_level_2.gd" id="1_riv70"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3ko87"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,7 +16,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="TutorialLevel2" type="Node3D"]
-script = ExtResource("1_3ko87")
+script = ExtResource("1_riv70")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
