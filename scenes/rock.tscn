@@ -13,6 +13,7 @@ bounce = 0.5
 [sub_resource type="MeshTexture" id="MeshTexture_t8sxr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1di36"]
+transparency = 1
 albedo_color = Color(0.301961, 0.278431, 0.164706, 1)
 albedo_texture = SubResource("MeshTexture_t8sxr")
 metallic = 0.3
