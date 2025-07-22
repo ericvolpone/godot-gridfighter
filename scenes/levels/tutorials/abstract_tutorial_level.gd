@@ -9,7 +9,7 @@ var hud_scene: PackedScene = preload("res://scenes/levels/tutorials/tutorial_lev
 var hud: TutorialHud;
 
 var player: Player; 
-var ai_chars: Array;
+var ai_chars: Dictionary;
 var has_won: bool = false;
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	for ai_location: Vector3 in get_ai_spawn_locations():
 		var ai: Player = player_scene.instantiate();
-		ai_chars.append(ai);
+		ai_chars[ai] = ai_location
 		ai.is_player_controlled = false;
 		add_child(ai);
 		ai.global_position = ai_location;
@@ -32,13 +32,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(player.global_position.y <= -5):
-		player.global_position = get_player_spawn_position()
 
 	if(!has_won and is_win_condition_met()):
 		has_won = true;
 		print("You beat level " + str(get_level_number()));
 		get_tree().change_scene_to_packed(load(SCENE_PREFIX + str(get_next_level_number()) + SCENE_POSTFIX))
+
+func handle_player_death(player: Player) -> void:
+	if(player.is_player_controlled):
+		player.global_position = get_player_spawn_position()
+	else:
+		ai_chars.erase(player)
+		player.queue_free()
 
 # Generic Methods, override in levels
 func get_player_spawn_position() -> Vector3:
@@ -57,10 +62,7 @@ func is_win_condition_met() -> bool:
 	return are_all_ais_gone()
 
 func are_all_ais_gone() -> bool:
-	for ai: Player in ai_chars:
-		if(ai.global_position.y >= -5):
-			return false;
-	return true
+	return ai_chars.size() == 0
 
 func get_level_number() -> int:
 	push_error("Please define level number in child")

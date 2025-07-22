@@ -3,6 +3,9 @@ extends CharacterBody3D
 
 class_name Player
 
+# Parent Level Accessor Nodes
+@onready var level: AbstractLevel = get_parent();
+
 # Children Node Accessors
 @onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
 @onready var mesh: Node3D = $RockGuy;
@@ -16,7 +19,7 @@ var is_in_menu: bool = false;
 
 # Movement / Control variables
 @export var is_player_controlled: bool;
-@export var starting_move_speed: float = 5.0;
+@export var starting_move_speed: float = 4.0;
 @onready var current_move_speed: float = starting_move_speed;
 @export var jump_velocity: float = 4.5;
 
@@ -52,6 +55,10 @@ func _input(event: InputEvent) -> void:
 			is_in_menu = true
 			in_game_menu.show()
 
+func _process(delta: float) -> void:
+	if(global_position.y <= -5):
+		level.handle_player_death(self)
+
 func _physics_process(delta: float) -> void:
 	process_movement(delta);
 	process_combat_actions(delta);
@@ -72,7 +79,8 @@ func process_movement(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if is_knocked:
-		knockback_velocity = knockback_velocity * (1 - .2*delta);
+		knockback_velocity = knockback_velocity * (1 - delta);
+		print("KB Velocity: " + str(knockback_velocity))
 		velocity.x = knockback_velocity.x
 		velocity.z = knockback_velocity.z
 		knockback_timer -= delta
