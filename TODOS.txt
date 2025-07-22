@@ -4,8 +4,7 @@ Now we would like to do a few things
 
 KOTH: 
 	Scoring works!
-	This could be a good use of the HUD, adding a side scoreboard and giving players names
-		Potentially a win condition
+	Have a basic scoreboard, alignment is rough but its hooked up, can fix that
 	Build some AIs that just run towards the current ring location?
 
 Player

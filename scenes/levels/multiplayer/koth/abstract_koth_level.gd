@@ -1,8 +1,11 @@
 class_name AbstractKothLevel extends AbstractMultiplayerLevel
 
+# Packed Scenes
+@onready var koth_scoreboard_scene: PackedScene = preload("res://scenes/ui/scoreboard/koth_scoreboard.tscn")
 @onready var hill_ring_scene: PackedScene = preload("res://scenes/levels/multiplayer/koth/hill_ring.tscn")
 
 # KOTH Variables
+var koth_scoreboard: KothScoreboard;
 var seconds_for_each_ring: float = 6
 var seconds_between_rings: float = 1
 @onready var ring_index_count: int = get_hill_ring_locations().size()
@@ -24,6 +27,9 @@ func _ready() -> void:
 		score_by_player[player.player_name] = 0
 	for ai: Player in ai_chars:
 		score_by_player[ai.player_name] = 0
+	
+	koth_scoreboard = koth_scoreboard_scene.instantiate();
+	add_child(koth_scoreboard)
 
 # TODO Why isn't this working if its _process() ?
 func _physics_process(delta: float) -> void:
