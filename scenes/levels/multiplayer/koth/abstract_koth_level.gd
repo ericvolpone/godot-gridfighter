@@ -35,6 +35,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#super._physics_process(delta);
 	increment_koth_score(delta)
+func _process(delta: float) -> void:
+	print("true")
 
 func increment_koth_score(delta: float) -> void:
 	var current_time: float = Time.get_unix_time_from_system()

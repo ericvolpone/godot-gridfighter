@@ -8,7 +8,7 @@ class_name Player
 
 # Children Node Accessors
 @onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
-@onready var mesh: Node3D = $RockGuy;
+@onready var mesh: RockGuy = $RockGuy;
 
 # Packed Scenes
 @onready var rock_scene: PackedScene = preload("res://scenes/objects/combat/rock.tscn");
@@ -33,6 +33,7 @@ var is_blocking: bool = false;
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
 @onready var combat_action_1: AbstractCombatAction = ThrowRockAction.new()
 @onready var combat_action_2: AbstractCombatAction = BlockAction.new()
+@onready var combat_action_3: AbstractCombatAction = PunchAction.new()
 
 # State variables
 var is_knocked: bool = false;
@@ -44,6 +45,7 @@ func _ready() -> void:
 	if(is_player_controlled):
 		add_child(combat_action_1)
 		add_child(combat_action_2)
+		add_child(combat_action_3)
 	else:
 		$BlueIndicatorCircle.queue_free();
 	
@@ -76,6 +78,8 @@ func process_combat_actions(delta: float) -> void:
 			combat_action_1.execute()
 		elif(Input.is_action_just_pressed("combat_2") and combat_action_2.is_usable()):
 			combat_action_2.execute()
+		elif(Input.is_action_just_pressed("combat_3") and combat_action_3.is_usable()):
+			combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
 	# Gravity

@@ -4,7 +4,7 @@ class_name AbstractLevel extends Node3D
 var player_scene: PackedScene = preload("res://scenes/player/player.tscn")
 
 func _ready() -> void:
-	pass;
+	set_process(true);
 
 func _process(delta: float) -> void:
 	pass;
