@@ -19,8 +19,7 @@ glow_enabled = true
 script = ExtResource("1_kqgyu")
 
 [node name="Terrain" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.25, 0)
-use_collision = true
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 size = Vector3(13, 0.5, 13)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

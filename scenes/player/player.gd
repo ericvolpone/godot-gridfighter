@@ -13,6 +13,9 @@ class_name Player
 # Packed Scenes
 @onready var rock_scene: PackedScene = preload("res://scenes/objects/combat/rock.tscn");
 
+var player_id: int;
+var player_name: String;
+
 # Menu Variables
 var is_in_menu: bool = false;
 @onready var in_game_menu: Node = load("res://scenes/menu/in_game_menu.tscn").instantiate();
@@ -22,6 +25,7 @@ var is_in_menu: bool = false;
 @export var starting_move_speed: float = 4.0;
 @onready var current_move_speed: float = starting_move_speed;
 @export var jump_velocity: float = 4.5;
+var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 var is_blocking: bool = false;
 
@@ -80,7 +84,6 @@ func process_movement(delta: float) -> void:
 	
 	if is_knocked:
 		knockback_velocity = knockback_velocity * (1 - delta);
-		print("KB Velocity: " + str(knockback_velocity))
 		velocity.x = knockback_velocity.x
 		velocity.z = knockback_velocity.z
 		knockback_timer -= delta
@@ -90,7 +93,7 @@ func process_movement(delta: float) -> void:
 		if knockback_timer <= 0.0:
 			is_knocked = false
 			velocity = Vector3.ZERO
-			# TODO Make it so that walking is disabled until the blend is over?
+		snapshot_velocity = velocity
 	elif has_control():
 		# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -101,14 +104,20 @@ func process_movement(delta: float) -> void:
 		var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
+			var blocking_modifier: float = 0.2 if is_blocking else 1.0
 			animator.play("rockguy_anim_lib/RockGuy_Run", 0.3)
-			velocity.x = direction.x * current_move_speed
-			velocity.z = direction.z * current_move_speed
+			velocity.x = direction.x * current_move_speed * blocking_modifier
+			velocity.z = direction.z * current_move_speed * blocking_modifier
 			mesh.rotation.y = -atan2(-direction.x, direction.z)
 		else:
 			animator.play("rockguy_anim_lib/RockGuy_Idle", 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
+		snapshot_velocity = velocity
+	elif is_blocking:
+		velocity.x = snapshot_velocity.x * 0.3
+		velocity.z = snapshot_velocity.z * 0.3
+		
 	
 	move_and_slide()
 

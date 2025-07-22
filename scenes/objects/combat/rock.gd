@@ -21,7 +21,6 @@ func _on_body_entered(body: Node) -> void:
 		var impact_force: float = linear_velocity.length()
 		if impact_force > LOW_VELOCITY_THRESHOLD:
 			if(player.is_blocking):
-				print("Player is blocking!");
 				var direction: Vector3 = (global_transform.origin - player.global_transform.origin).normalized()
 				apply_central_force(direction * 10000);
 			else:

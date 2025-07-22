@@ -1,10 +1,16 @@
-Clean up movement for AI and Player.  There needs to be some handling of input better for player controlled characters
+We have tutorials and a basic KOTH map with rotating rings.
 
-Tutorial levels need to know when to move forward.  Build a few more!
-	You got win conditions working generally, but we should probably free up AI and have players respawn if they fall off
+Now we would like to do a few things
 
-Tutorial ideas:
-	Punching a rock thats being thrown at you
-	Punching a person off the map
-	Maybe using block to dodge an incoming rock?
-	
+KOTH: 
+	Scoring works!
+	This could be a good use of the HUD, adding a side scoreboard and giving players names
+		Potentially a win condition
+	Build some AIs that just run towards the current ring location?
+
+Player
+	Add the punch!  It should just knock back people in front of you with minimal cooldown
+		We may be able to learn about raycasts here if we want, or just look at a cone in front
+
+Levels
+	For some reason, _process isnt running so scoring is done in _physics_process... figure this out

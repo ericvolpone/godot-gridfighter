@@ -3,7 +3,6 @@ class_name AbstractTutorialLevel extends AbstractLevel
 const SCENE_PREFIX: String = "res://scenes/levels/tutorials/tutorial_level_"
 const SCENE_POSTFIX: String = ".tscn"
 
-var player_scene: PackedScene = preload("res://scenes/player/player.tscn")
 var hud_scene: PackedScene = preload("res://scenes/levels/tutorials/tutorial_level_hud.tscn")
 
 var hud: TutorialHud;
@@ -14,15 +13,15 @@ var has_won: bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player = player_scene.instantiate();
-	player.is_player_controlled = true;
+	player = init_player(1, "TutorialPlayer", true)
 	add_child(player);
 	player.global_position = get_player_spawn_position();
 	
+	var i: int = 2;
 	for ai_location: Vector3 in get_ai_spawn_locations():
-		var ai: Player = player_scene.instantiate();
+		var ai: Player = init_player(i, "AI " + str(i), false);
+		i += 1
 		ai_chars[ai] = ai_location
-		ai.is_player_controlled = false;
 		add_child(ai);
 		ai.global_position = ai_location;
 	
@@ -35,7 +34,6 @@ func _process(delta: float) -> void:
 
 	if(!has_won and is_win_condition_met()):
 		has_won = true;
-		print("You beat level " + str(get_level_number()));
 		get_tree().change_scene_to_packed(load(SCENE_PREFIX + str(get_next_level_number()) + SCENE_POSTFIX))
 
 func handle_player_death(player: Player) -> void:
