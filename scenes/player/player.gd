@@ -28,6 +28,7 @@ var is_in_menu: bool = false;
 var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 var is_blocking: bool = false;
+var is_punching: bool = false;
 
 # Combat Actions Data
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
@@ -42,10 +43,13 @@ var knockback_velocity: Vector3 = Vector3.ZERO;
 var knockback_timer: float = 0.0;
 
 func _ready() -> void:
+	add_to_group(Groups.PLAYER)
+	
 	if(is_player_controlled):
 		add_child(combat_action_1)
 		add_child(combat_action_2)
 		add_child(combat_action_3)
+		mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
 	else:
 		$BlueIndicatorCircle.queue_free();
 	
@@ -70,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	process_combat_actions(delta);
 
 func has_control() -> bool:
-	return is_player_controlled and !is_knocked and !is_blocking and !is_in_menu;
+	return is_player_controlled and !is_knocked and !is_blocking and !is_punching and !is_in_menu;
 
 func process_combat_actions(delta: float) -> void:
 	if (is_player_controlled):
@@ -87,6 +91,7 @@ func process_movement(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if is_knocked:
+		print("KBT: " + str(knockback_timer))
 		knockback_velocity = knockback_velocity * (1 - delta);
 		velocity.x = knockback_velocity.x
 		velocity.z = knockback_velocity.z
@@ -96,6 +101,7 @@ func process_movement(delta: float) -> void:
 			animator.play("rockguy_anim_lib/RockGuy_Idle", .5);
 		if knockback_timer <= 0.0:
 			is_knocked = false
+			is_standing_back_up = false
 			velocity = Vector3.ZERO
 		snapshot_velocity = velocity
 	elif has_control():
@@ -118,7 +124,7 @@ func process_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
 		snapshot_velocity = velocity
-	elif is_blocking:
+	elif is_blocking or is_punching:
 		velocity.x = snapshot_velocity.x * 0.3
 		velocity.z = snapshot_velocity.z * 0.3
 		
@@ -126,9 +132,12 @@ func process_movement(delta: float) -> void:
 	move_and_slide()
 
 func knock_back(direction: Vector3, strength: float, duration: float) -> void:
-	if(!is_blocking):
+	if(!is_blocking and !is_knocked):
 		knockback_velocity = direction * strength
 		knockback_timer = duration
 		is_knocked = true
-		# Probably need a knockdown animation here!
 		animator.play("rockguy_anim_lib/RockGuy_FallingDown", 0.3);
+
+# Common physics functions
+func get_facing_direction() -> Vector3:
+	return mesh.global_transform.basis.z.normalized()

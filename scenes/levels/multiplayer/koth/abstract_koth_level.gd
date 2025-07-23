@@ -35,22 +35,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#super._physics_process(delta);
 	increment_koth_score(delta)
-func _process(delta: float) -> void:
-	print("true")
 
 func increment_koth_score(delta: float) -> void:
 	var current_time: float = Time.get_unix_time_from_system()
 	
 	if(current_time > time_until_next_score):
 		if(current_ring != null):
-			print("Time to score!")
 			current_ring.flash_ring()
 			# Give a point to everybody in the ring
 			var players_in_ring: Array = get_players_in_current_ring(player_chars);
 			players_in_ring.append_array(get_players_in_current_ring(ai_chars));
 			for player: Player in players_in_ring:
 				score_by_player[player.player_name] += 1
-				print("Score for player " + player.player_name + ": " + str(score_by_player[player.player_name]))
 			
 			time_until_next_score = time_until_next_score + time_between_scoring
 
@@ -66,10 +62,6 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 		var to_player: Vector3 = player.global_position - current_ring.global_position
 		var distance: float = to_player.length()
 
-		print("Distance: " + str(distance))
-		print("Ring Radius: " + str(current_ring.ring_radius))
-		print("Player Y: " + str(player.global_position.y))
-		print("Ring Y: " + str(current_ring.global_position.y))
 		# Check if within ring (outer radius) and clipping the y axis
 		# TODO Maybe adjust these magic numbers, but for now its working
 		if distance <= current_ring.ring_radius and player.global_position.y >= current_ring.global_position.y - 0.5 and player.global_position.y <= current_ring.global_position.y + 3:

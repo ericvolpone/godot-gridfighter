@@ -11,6 +11,7 @@ var is_slow_disappearing: bool = true;
 
 
 func _ready() -> void:
+	add_to_group(Groups.PUNCHABLE_RB)
 	contact_monitor = true
 	max_contacts_reported = 4
 	self.body_entered.connect(_on_body_entered)

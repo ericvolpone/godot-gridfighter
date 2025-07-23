@@ -39,3 +39,6 @@ func execute_child() -> void:
 
 func is_usable_child() -> bool:
 	return true;
+
+func handle_animation_signal() -> void:
+	pass
