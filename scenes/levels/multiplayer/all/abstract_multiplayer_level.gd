@@ -11,6 +11,7 @@ enum MPMatchType {
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Lobby Variables
+@export var spawn_locations: Array[Node3D];
 var player_chars: Dictionary = {}
 var ai_chars: Dictionary = {};
 var respawn_time: float = 3;
