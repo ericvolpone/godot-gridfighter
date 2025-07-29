@@ -41,13 +41,13 @@ fov = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.407, 0, -1.733)
 
 [node name="KothRing2" parent="." instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.743, -1.565, 1.712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.743, -0.434279, 1.712)
 
 [node name="KothRing3" parent="." instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 0.536, -9.115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 0.582, -9.115)
 
 [node name="KothRing4" parent="." instance=ExtResource("3_ppjc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.352, -0.519, -0.97)
 
 [node name="KothRing5" parent="." instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.467, -1.697, 7.149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10452, -1.65526, 7.149)

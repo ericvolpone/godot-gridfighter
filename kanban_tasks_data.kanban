@@ -74,7 +74,7 @@
 		},
 		{
 			"uuid": "e553e134-3817-4b50-aaa8-e205a767e9ea",
-			"title": "Player Spawn Locations in 3d Viewport (like koth)",
+			"title": "Player Spawn Locations in 3d Viewport (like koth) and rotate so not glitching",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
