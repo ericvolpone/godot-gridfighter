@@ -15,6 +15,7 @@ class_name Player
 
 var player_id: int;
 var player_name: String;
+var brain: Brain;
 
 # Menu Variables
 var is_in_menu: bool = false;
@@ -45,16 +46,17 @@ var knockback_timer: float = 0.0;
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
 	
+	add_child(combat_action_1)
+	add_child(combat_action_2)
+	add_child(combat_action_3)
+	mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
+	
 	if(is_player_controlled):
-		add_child(combat_action_1)
-		add_child(combat_action_2)
-		add_child(combat_action_3)
-		mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
+		# TODO Probably put this elsewhere?
+		add_child(in_game_menu)
+		in_game_menu.hide()
 	else:
 		$BlueIndicatorCircle.queue_free();
-	
-	add_child(in_game_menu)
-	in_game_menu.hide()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("menu_open") and event.is_pressed():
@@ -74,16 +76,15 @@ func _physics_process(delta: float) -> void:
 	process_combat_actions(delta);
 
 func has_control() -> bool:
-	return is_player_controlled and !is_knocked and !is_blocking and !is_punching and !is_in_menu;
+	return !is_knocked and !is_blocking and !is_punching and !is_in_menu;
 
 func process_combat_actions(delta: float) -> void:
-	if (is_player_controlled):
-		if(Input.is_action_just_pressed("combat_1") and combat_action_1.is_usable()):
-			combat_action_1.execute()
-		elif(Input.is_action_just_pressed("combat_2") and combat_action_2.is_usable()):
-			combat_action_2.execute()
-		elif(Input.is_action_just_pressed("combat_3") and combat_action_3.is_usable()):
-			combat_action_3.execute()
+	if brain.should_use_combat_action_1() and combat_action_1.is_usable():
+		combat_action_1.execute()
+	elif brain.should_use_combat_action_2() and combat_action_2.is_usable():
+		combat_action_2.execute()
+	elif brain.should_use_combat_action_3() and combat_action_3.is_usable():
+		combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
 	# Gravity
@@ -91,7 +92,6 @@ func process_movement(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if is_knocked:
-		print("KBT: " + str(knockback_timer))
 		knockback_velocity = knockback_velocity * (1 - delta);
 		velocity.x = knockback_velocity.x
 		velocity.z = knockback_velocity.z
@@ -106,19 +106,18 @@ func process_movement(delta: float) -> void:
 		snapshot_velocity = velocity
 	elif has_control():
 		# Handle jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+		if brain.should_jump() and is_on_floor():
 			velocity.y = jump_velocity
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
-		var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		if direction:
+		var move_direction: Vector3 = brain.get_movement_direction()
+		if move_direction != Vector3.ZERO:
 			var blocking_modifier: float = 0.2 if is_blocking else 1.0
 			animator.play("rockguy_anim_lib/RockGuy_Run", 0.3)
-			velocity.x = direction.x * current_move_speed * blocking_modifier
-			velocity.z = direction.z * current_move_speed * blocking_modifier
-			mesh.rotation.y = -atan2(-direction.x, direction.z)
+			velocity.x = move_direction.x * current_move_speed * blocking_modifier
+			velocity.z = move_direction.z * current_move_speed * blocking_modifier
+			mesh.rotation.y = -atan2(-move_direction.x, move_direction.z)
 		else:
 			animator.play("rockguy_anim_lib/RockGuy_Idle", 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
@@ -130,6 +129,10 @@ func process_movement(delta: float) -> void:
 		
 	
 	move_and_slide()
+
+func add_brain(_brain: Brain) -> void:
+	brain = _brain;
+	add_child(brain);
 
 func knock_back(direction: Vector3, strength: float, duration: float) -> void:
 	if(!is_blocking and !is_knocked):

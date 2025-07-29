@@ -10,4 +10,8 @@ func _process(delta: float) -> void:
 	pass
 
 func get_player_spawn_positions() -> Array:
-	return [Vector3(0,3,0)];
+	return [
+		Vector3(0,3,0),
+		Vector3(1,3,1),
+		Vector3(-1,3,-1)
+	];

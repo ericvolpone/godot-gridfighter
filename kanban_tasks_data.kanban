@@ -11,7 +11,6 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"bf79540f-6c2b-422d-b756-a70cc502b3eb",
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
@@ -21,12 +20,16 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"e553e134-3817-4b50-aaa8-e205a767e9ea"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
-			"tasks": []
+			"tasks": [
+				"bf79540f-6c2b-422d-b756-a70cc502b3eb"
+			]
 		}
 	],
 	"tasks": [
@@ -61,6 +64,13 @@
 		{
 			"uuid": "c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 			"title": "Koth Win Condition",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "e553e134-3817-4b50-aaa8-e205a767e9ea",
+			"title": "Player Spawn Locations in 3d Viewport (like koth)",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

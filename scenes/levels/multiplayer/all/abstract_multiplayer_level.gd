@@ -25,9 +25,16 @@ func _process(delta: float) -> void:
 
 func spawn_players() -> void:
 	var player: Player = init_player(1, "Player", true)
+	player.add_brain(PlayerBrain.new())
 	player_chars[player] = player
 	add_child(player)
 	respawn_player(player)
+	
+	var ai_1: Player = init_player(2, "JoeBob", false)
+	ai_1.add_brain(KothAIBrain.new(self))
+	ai_chars[ai_1] = ai_1
+	add_child(ai_1)
+	respawn_player(ai_1)
 
 func get_match_type() -> MPMatchType:
 	push_error("You must define a MP Match Type")
