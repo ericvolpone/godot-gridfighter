@@ -11,10 +11,14 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
-				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39"
+				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
+				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
+				"5b6267b0-a5df-402e-83a6-2a218a5ee39a",
+				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
+				"ff2406eb-38dc-43ef-996c-038402108c05",
+				"8b1209fc-0dd7-4903-8803-c1166dafdbc7"
 			]
 		},
 		{
@@ -71,6 +75,34 @@
 		{
 			"uuid": "e553e134-3817-4b50-aaa8-e205a767e9ea",
 			"title": "Player Spawn Locations in 3d Viewport (like koth)",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "5b6267b0-a5df-402e-83a6-2a218a5ee39a",
+			"title": "PowerUp: System",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "66f2a7d4-61c1-460c-91b5-19e6632b6f04",
+			"title": "PowerUp: Speed",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "8b1209fc-0dd7-4903-8803-c1166dafdbc7",
+			"title": "PowerUpUI",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "ff2406eb-38dc-43ef-996c-038402108c05",
+			"title": "PowerUp: Strength",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
