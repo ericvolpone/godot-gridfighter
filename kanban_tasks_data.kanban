@@ -18,7 +18,8 @@
 				"5b6267b0-a5df-402e-83a6-2a218a5ee39a",
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
-				"8b1209fc-0dd7-4903-8803-c1166dafdbc7"
+				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
+				"864048a4-4069-4b06-a3ba-5a2dd2b1fc9b"
 			]
 		},
 		{
@@ -103,6 +104,13 @@
 		{
 			"uuid": "ff2406eb-38dc-43ef-996c-038402108c05",
 			"title": "PowerUp: Strength",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "864048a4-4069-4b06-a3ba-5a2dd2b1fc9b",
+			"title": "Implement live lobby and push a build to itch.io",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
