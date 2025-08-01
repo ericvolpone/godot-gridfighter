@@ -67,18 +67,17 @@ func _input(event: InputEvent) -> void:
 			is_in_menu = true
 			in_game_menu.show()
 
-func _process(delta: float) -> void:
-	if(global_position.y <= -5):
-		level.handle_player_death(self)
-
 func _physics_process(delta: float) -> void:
 	process_movement(delta);
-	process_combat_actions(delta);
+	process_combat_actions();
+	
+	if(global_position.y <= -5):
+		level.handle_player_death(self)
 
 func has_control() -> bool:
 	return !is_knocked and !is_blocking and !is_punching and !is_in_menu;
 
-func process_combat_actions(delta: float) -> void:
+func process_combat_actions() -> void:
 	if brain.should_use_combat_action_1() and combat_action_1.is_usable():
 		combat_action_1.execute()
 	elif brain.should_use_combat_action_2() and combat_action_2.is_usable():

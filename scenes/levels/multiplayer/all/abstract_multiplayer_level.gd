@@ -10,6 +10,9 @@ enum MPMatchType {
 # Utility Variables
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+# Multiplayer Variables
+@onready var mp_spawner: MultiplayerSpawner = MultiplayerSpawner.new();
+
 # Lobby Variables
 @export var spawn_locations: Array[Node3D];
 var player_chars: Dictionary = {}
@@ -19,23 +22,39 @@ var respawn_time: float = 3;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready();
-	spawn_players()
-
-func _process(delta: float) -> void:
-	super._process(delta);
+	
+	if is_multiplayer_authority():
+		print("Spawning Players")
+		call_deferred("spawn_players")
 
 func spawn_players() -> void:
-	var player: Player = init_player(1, "Player", true)
-	player.add_brain(PlayerBrain.new())
-	player_chars[player] = player
-	add_child(player)
-	respawn_player(player)
+	print("This peer ID:", multiplayer.get_unique_id())  # Should be 1
+	print("Peers connected:", multiplayer.get_peers())  # Should be [1]
+	# MultiplayerSpawner already in the scene
+	# If not, instance and add it manually
+	if not has_node("MultiplayerSpawner"):
+		mp_spawner = MultiplayerSpawner.new()
+		mp_spawner.name = "MultiplayerSpawner"
+		
+		print("MP Spawn Path: " + str(mp_spawner.spawn_path))
+	else:
+		mp_spawner = $MultiplayerSpawner
+
 	
-	var ai_1: Player = init_player(2, "JoeBob", false)
-	ai_1.add_brain(KothAIBrain.new(self))
-	ai_chars[ai_1] = ai_1
-	add_child(ai_1)
-	respawn_player(ai_1)
+	mp_spawner.spawn_path = get_path()
+	mp_spawner.spawn_function = func(peer_id: int) -> Player:
+		print("Spawning player for peer_id:", peer_id)
+		var player: Player = init_player(peer_id, "Player", true)
+		var mp_sync: MultiplayerSynchronizer = MultiplayerSynchronizer.new()
+		player.add_brain(PlayerBrain.new())
+		player_chars[player] = player
+		respawn_player(player)
+		return player
+
+		add_child(mp_spawner)
+
+	if(multiplayer.is_server()):
+		mp_spawner.spawn(multiplayer.get_unique_id())
 
 func get_match_type() -> MPMatchType:
 	push_error("You must define a MP Match Type")

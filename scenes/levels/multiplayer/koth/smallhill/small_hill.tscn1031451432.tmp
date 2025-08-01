@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2lx4mt6gm8g1"]
+
+[ext_resource type="Script" uid="uid://dl0c5p8nkmojn" path="res://scenes/levels/multiplayer/koth/smallhill/small_hill.gd" id="1_ru15n"]
+[ext_resource type="PackedScene" uid="uid://onyasgeb8h0a" path="res://scenes/levels/multiplayer/koth/smallhill/SmallHill.glb" id="2_ppjc2"]
+[ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://scenes/levels/multiplayer/koth/all/koth_ring.tscn" id="3_ppjc2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru15n"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_kqgyu"]
+sky_material = SubResource("ProceduralSkyMaterial_ru15n")
+
+[sub_resource type="Environment" id="Environment_ppjc2"]
+background_mode = 2
+background_energy_multiplier = 0.84
+sky = SubResource("Sky_kqgyu")
+tonemap_mode = 2
+glow_enabled = true
+glow_strength = 0.8
+
+[node name="SmallHill" type="Node3D" node_paths=PackedStringArray("koth_rings")]
+script = ExtResource("1_ru15n")
+koth_rings = [NodePath("KothRing1"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
+
+[node name="Terrain" parent="." instance=ExtResource("2_ppjc2")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -1.17173, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ppjc2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.27391, 15.7015)
+fov = 50.0
+
+[node name="KothRing1" parent="." instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.407, 0, -1.733)
+
+[node name="KothRing2" parent="." instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.743, -0.434279, 1.712)
+
+[node name="KothRing3" parent="." instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 0.582, -9.115)
+
+[node name="KothRing4" parent="." instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.352, -0.519, -0.97)
+
+[node name="KothRing5" parent="." instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10452, -1.65526, 7.149)

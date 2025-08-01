@@ -16,8 +16,8 @@ func _ready() -> void:
 		var angle: float = TAU * i / point_count
 		var x: float = cos(angle) * ring_radius
 		var z: float = sin(angle) * ring_radius
-		var transform: Transform3D = Transform3D(Basis(), Vector3(x, 0, z))
-		multimesh.set_instance_transform(i, transform)
+		var my_transform: Transform3D = Transform3D(Basis(), Vector3(x, 0, z))
+		multimesh.set_instance_transform(i, my_transform)
 	
 	material = multimesh.mesh.material
 	original_emission = material.emission

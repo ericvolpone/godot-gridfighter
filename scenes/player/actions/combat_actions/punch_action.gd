@@ -58,9 +58,9 @@ func handle_animation_signal() -> void:
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
-			player_obj.knock_back(to_obj, punch_strength, 2.5)
+			player_obj.knock_back(force, punch_strength, 2.5)
 
-func draw_debug_sphere(position: Vector3, radius: float, duration: float = 0.5) -> void:
+func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float = 0.5) -> void:
 	var sphere_mesh: SphereMesh = SphereMesh.new()
 	sphere_mesh.radius = radius
 	sphere_mesh.height = radius * 2.0
@@ -75,7 +75,7 @@ func draw_debug_sphere(position: Vector3, radius: float, duration: float = 0.5) 
 	var mesh_instance: MeshInstance3D = MeshInstance3D.new()
 	mesh_instance.mesh = sphere_mesh
 	mesh_instance.material_override = material
-	mesh_instance.global_position = position
+	mesh_instance.global_position = sphere_position
 	mesh_instance.scale = Vector3.ONE * 1.0  # optional if you want scaling
 
 	get_tree().current_scene.add_child(mesh_instance)

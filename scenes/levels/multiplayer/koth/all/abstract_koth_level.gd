@@ -39,12 +39,10 @@ func _ready() -> void:
 	koth_scoreboard = koth_scoreboard_scene.instantiate();
 	add_child(koth_scoreboard)
 
-# TODO Why isn't this working if its _process() ?
 func _physics_process(delta: float) -> void:
-	#super._physics_process(delta);
-	increment_koth_score(delta)
+	increment_koth_score()
 
-func increment_koth_score(delta: float) -> void:
+func increment_koth_score() -> void:
 	var current_time: float = Time.get_unix_time_from_system()
 	
 	if(current_time > time_until_next_score):
@@ -79,8 +77,8 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 
 func respawn_player(player: Player) -> void:
 	var spawn_positions: Array = get_player_spawn_positions();
-	var spawn_index: int = rng.randi_range(0, get_player_spawn_positions().size() - 1);
-	player.global_position = get_player_spawn_positions()[spawn_index];
+	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
+	player.global_position = spawn_positions[spawn_index];
 
 func get_match_type() -> MPMatchType:
 	return MPMatchType.KING_OF_THE_HILL;

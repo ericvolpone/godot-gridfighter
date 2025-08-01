@@ -17,10 +17,15 @@ offset_bottom = 451.0
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="MPButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="MPHostButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 action_mode = 0
-text = "Multiplayer"
+text = "Host"
+
+[node name="MPJoinButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join
+"
 
 [node name="TutorialButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -41,6 +46,7 @@ offset_bottom = 90.0
 scale = Vector2(2.79386, 2.69021)
 text = "KING OF THE HILL"
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MPButton" to="." method="_on_mp_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MPHostButton" to="." method="_on_mp_host_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MPJoinButton" to="." method="_on_mp_join_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
