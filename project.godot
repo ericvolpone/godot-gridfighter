@@ -15,10 +15,6 @@ run/main_scene="uid://cyw3gro3ao66a"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-HighLevelNetworkHandler="*res://entities/levels/multiplayer/all/high_level_network_handler.gd"
-
 [debug]
 
 gdscript/warnings/untyped_declaration=2
