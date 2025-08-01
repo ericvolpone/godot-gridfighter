@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=5 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="PackedScene" uid="uid://c0amxhoe18fqr" path="res://entities/player/rocky/rock_guy.tscn" id="3_75vfm"]
@@ -6,26 +6,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 height = 1.27028
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pw5an"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:scale")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("RockGuy:position")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-properties/4/path = NodePath("RockGuy:rotation")
-properties/4/spawn = true
-properties/4/replication_mode = 1
-properties/5/path = NodePath("RockGuy:scale")
-properties/5/spawn = true
-properties/5/replication_mode = 1
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_lvxji")
@@ -39,6 +19,3 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="BlueIndicatorCircle" parent="." instance=ExtResource("4_0owmy")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0870759, 0)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_pw5an")

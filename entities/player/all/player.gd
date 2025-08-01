@@ -43,10 +43,6 @@ var is_standing_back_up: bool = false;
 var knockback_velocity: Vector3 = Vector3.ZERO;
 var knockback_timer: float = 0.0;
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
-	print("MP Authority: " + str(name.to_int()))
-
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
 	
@@ -71,16 +67,17 @@ func _input(event: InputEvent) -> void:
 			is_in_menu = true
 			in_game_menu.show()
 
-func _physics_process(delta: float) -> void:
-	if not is_mp_authority(): 
-		#print ("not MP authority... " + player_name)
-		return;
-
-	process_movement(delta);
-	process_combat_actions(delta);
+func _process(delta: float) -> void:
+	if not is_mp_authority(): pass;
 	
 	if(global_position.y <= -5):
 		level.handle_player_death(self)
+
+func _physics_process(delta: float) -> void:
+	if not is_mp_authority(): pass;
+
+	process_movement(delta);
+	process_combat_actions(delta);
 
 func has_control() -> bool:
 	return !is_knocked and !is_blocking and !is_punching and !is_in_menu;

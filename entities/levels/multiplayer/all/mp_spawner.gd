@@ -4,23 +4,20 @@ class_name MPSpawner extends MultiplayerSpawner
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("MP Ready")
 	multiplayer.peer_connected.connect(spawn_player)
-	add_spawnable_scene("res://entities/player/all/player.tscn")
 
 func spawn_player(id: int) -> void:
-	print("MP Server? " + str(multiplayer.is_server()))
-	if not multiplayer.is_server(): return;
-	print("MP Spawning " + str(id))
 	var player: Player = mp_level.init_player(id, "Player" + str(id), true)
 	player.add_brain(PlayerBrain.new())
-	player.name = str(id)
 	mp_level.player_chars[player] = player
 
 	get_node(spawn_path).call_deferred("add_child", player)
 	
 	mp_level.respawn_player(player)
 	
+	var mp_synchronizer: MultiplayerSynchronizer = MultiplayerSynchronizer.new()
+	player.add_child(mp_synchronizer)
+	player.set_multiplayer_authority(player.name.to_int())
 	print("Name: " + player.name);
 
 func spawn_ai(id: int) -> void:
