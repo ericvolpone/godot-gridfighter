@@ -17,7 +17,7 @@ var ai_chars: Dictionary = {};
 var respawn_time: float = 3;
 
 # Networking Variables
-var mp_spawner: MultiplayerSpawner
+var mp_spawner: MPSpawner
 var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -37,6 +37,7 @@ func create_server(host_port: int) -> void:
 	multiplayer.multiplayer_peer = peer
 
 func spawn_players() -> void:
+	# This is probably breaking, I'm updating the ID 
 	mp_spawner.spawn_player(1);
 	#mp_spawner.spawn_ai(5001);
 
