@@ -23,22 +23,24 @@ var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready();
-	mp_spawner = MPSpawner.new()
-	mp_spawner.spawn_path = get_path();
-	add_child(mp_spawner)
 	is_multiplayer = true
-	spawn_players()
+	mp_spawner = MPSpawner.new();
+	print("MP 1")
+	add_child(mp_spawner);
+	print("MP 2")
+	call_deferred("_setup_mp_spawner")
+	print("MP 3")
+	#spawn_players()
+
+func _setup_mp_spawner() -> void:
+	mp_spawner.spawn_path = get_path();
 
 func _process(delta: float) -> void:
 	super._process(delta);
 
-func create_server(host_port: int) -> void:
-	peer.create_server(host_port)
-	multiplayer.multiplayer_peer = peer
-
-func spawn_players() -> void:
+#func spawn_players() -> void:
 	# This is probably breaking, I'm updating the ID 
-	mp_spawner.spawn_player(1);
+	#mp_spawner.spawn_player(1);
 	#mp_spawner.spawn_ai(5001);
 
 func get_match_type() -> MPMatchType:
