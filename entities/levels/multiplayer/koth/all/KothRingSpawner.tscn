@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdmh1fw0684gb"]
+
+[ext_resource type="Script" uid="uid://70xod8urcffr" path="res://entities/levels/multiplayer/koth/all/koth_ring_spawner.gd" id="1_qlka8"]
+[ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="2_mexxb"]
+
+[node name="KothRingSpawner" type="Node3D"]
+script = ExtResource("1_qlka8")
+hill_ring_scene = ExtResource("2_mexxb")

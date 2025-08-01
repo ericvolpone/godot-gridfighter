@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp8xgko8qubdo"]
+
+[ext_resource type="Script" uid="uid://bc50b6p8mkcny" path="res://entities/levels/tutorials/tutorial_level_2.gd" id="1_riv70"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3ko87"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_5m6gs"]
+sky_material = SubResource("ProceduralSkyMaterial_3ko87")
+
+[sub_resource type="Environment" id="Environment_s3w7l"]
+background_mode = 2
+sky = SubResource("Sky_5m6gs")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TutorialLevel2" type="Node3D"]
+script = ExtResource("1_riv70")
+
+[node name="Terrain" type="CSGBox3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.25, 0)
+use_collision = true
+size = Vector3(10, 0.5, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, -0.25, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s3w7l")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 14)
+fov = 50.0
