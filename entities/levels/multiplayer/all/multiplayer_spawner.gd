@@ -8,6 +8,8 @@ func _ready() -> void:
 
 func spawn_player(id: int) -> void:
 	var player: Player = mp_level.init_player(id, "Player" + str(id), true)
+	
+	player.name = str(id)
 	player.add_brain(PlayerBrain.new())
 	mp_level.player_chars[player] = player
 
@@ -17,8 +19,8 @@ func spawn_player(id: int) -> void:
 	
 	var mp_synchronizer: MultiplayerSynchronizer = MultiplayerSynchronizer.new()
 	player.add_child(mp_synchronizer)
-	player.set_multiplayer_authority(player.name.to_int())
-	print("Name: " + player.name);
+	player.set_multiplayer_authority(name.to_int())
+	
 
 func spawn_ai(id: int) -> void:
 	var ai: Player = mp_level.init_player(id, "BOT " + str(id), false)
