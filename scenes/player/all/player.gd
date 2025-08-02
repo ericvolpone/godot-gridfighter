@@ -58,6 +58,9 @@ func _ready() -> void:
 	else:
 		$BlueIndicatorCircle.queue_free();
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _input(event: InputEvent) -> void:
 	if event.is_action("menu_open") and event.is_pressed():
 		if(is_in_menu):

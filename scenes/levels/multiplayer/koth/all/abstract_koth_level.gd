@@ -77,8 +77,8 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 
 func respawn_player(player: Player) -> void:
 	var spawn_positions: Array = get_player_spawn_positions();
-	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
-	player.global_position = spawn_positions[spawn_index];
+	#var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
+	player.global_position = spawn_positions[0];
 
 func get_match_type() -> MPMatchType:
 	return MPMatchType.KING_OF_THE_HILL;
