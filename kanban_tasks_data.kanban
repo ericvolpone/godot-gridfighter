@@ -11,6 +11,10 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"b590bdea-b727-41f5-9c24-3bfc20b5d21d",
+				"061d365d-c502-44a5-b27a-af83b5e4960c",
+				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
+				"d4b6d812-5349-4f9f-a36e-8028e78686af",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
@@ -19,21 +23,20 @@
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
 				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
-				"864048a4-4069-4b06-a3ba-5a2dd2b1fc9b"
+				"e553e134-3817-4b50-aaa8-e205a767e9ea"
 			]
 		},
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": [
-				"e553e134-3817-4b50-aaa8-e205a767e9ea"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
-				"bf79540f-6c2b-422d-b756-a70cc502b3eb"
+				"bf79540f-6c2b-422d-b756-a70cc502b3eb",
+				"864048a4-4069-4b06-a3ba-5a2dd2b1fc9b"
 			]
 		}
 	],
@@ -110,7 +113,35 @@
 		},
 		{
 			"uuid": "864048a4-4069-4b06-a3ba-5a2dd2b1fc9b",
-			"title": "Implement live lobby and push a build to itch.io",
+			"title": "MP: Players joining each others games",
+			"description": "Multiplayer Initialization",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "061d365d-c502-44a5-b27a-af83b5e4960c",
+			"title": "MP: Get animations and rotations syncing",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
+			"title": "MP: Get Rocks Syncing",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "d4b6d812-5349-4f9f-a36e-8028e78686af",
+			"title": "MP: Get rings syncing",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "b590bdea-b727-41f5-9c24-3bfc20b5d21d",
+			"title": "MP: Get score configured with client connection so its more dynamic",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

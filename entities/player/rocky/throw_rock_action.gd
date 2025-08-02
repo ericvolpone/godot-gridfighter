@@ -5,6 +5,7 @@ const rock_scene: PackedScene = preload("res://entities/objects/combat/rock.tscn
 func get_cd_time() -> float:
 	return 3.0;
 
+@rpc("call_local", "reliable")
 func execute_child() -> void:
 	# Spawn a rock
 	var rock: RigidBody3D = rock_scene.instantiate();
