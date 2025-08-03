@@ -10,7 +10,7 @@ var koth_scoreboard: KothScoreboard;
 var seconds_for_each_ring: float = 6
 var seconds_between_rings: float = 1
 @onready var ring_index_count: int = koth_rings.size()
-@onready var next_ring_index: int = rng.randi_range(0, ring_index_count-1)
+@export var current_ring_index: int = -1;
 var current_ring: KothRing = null;
 
 var time_between_scoring: float = 1.5;
@@ -30,7 +30,10 @@ func _ready() -> void:
 	for koth_ring: KothRing in koth_rings:
 		koth_ring.mark_inactive()
 	
-	create_timer_for_next_hill()
+	# Only create the rings on the server
+	if(is_multiplayer_authority()):
+		create_timer_for_next_hill()
+
 	for player: Player in player_chars:
 		score_by_player[player.player_name] = 0
 	for ai: Player in ai_chars:
@@ -41,8 +44,18 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	increment_koth_score()
+	
+	# Handle multiplayer ring syncing
+	if(current_ring_index >= 0 and current_ring != koth_rings[current_ring_index]):
+		if(current_ring):
+			current_ring.mark_inactive()
+		current_ring = koth_rings[current_ring_index];
+		current_ring.mark_active()
+		current_ring.flash_ring()
 
 func increment_koth_score() -> void:
+	if not is_multiplayer_authority(): return;
+	
 	var current_time: float = Time.get_unix_time_from_system()
 	
 	if(current_time > time_until_next_score):
@@ -77,7 +90,7 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 
 func respawn_player(player: Player) -> void:
 	var spawn_positions: Array = get_player_spawn_positions();
-	#var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
+	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
 	player.global_position = spawn_positions[0];
 
 func get_match_type() -> MPMatchType:
@@ -92,7 +105,8 @@ func create_timer_for_next_hill() -> void:
 		if(current_ring != null):
 			current_ring.mark_inactive()
 		get_tree().create_timer(seconds_between_rings).timeout.connect(func() -> void:
-			current_ring = koth_rings[rng.randi_range(0, ring_index_count-1)]
+			current_ring_index = rng.randi_range(0, ring_index_count-1)
+			current_ring = koth_rings[current_ring_index]
 			current_ring.mark_active()
 			time_until_next_score = Time.get_unix_time_from_system() + time_between_scoring
 			create_timer_for_next_hill()

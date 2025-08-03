@@ -32,7 +32,7 @@ func _configure_spawner() -> void:
 		player.add_brain(PlayerBrain.new())
 		player_chars[player] = player
 		add_player_to_score(player);
-		respawn_player(player)
+		call_deferred("respawn_player", player)
 		return player
 	
 	if(multiplayer.is_server()):

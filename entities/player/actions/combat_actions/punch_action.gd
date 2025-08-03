@@ -1,7 +1,5 @@
 class_name PunchAction extends AbstractCombatAction
 
-const PUNCH_ANIMATION: String = "rockguy_anim_lib/RockGuy_Hook";
-
 var punch_strength: float = 3;
 
 func _ready() -> void:
@@ -14,7 +12,7 @@ func execute_child() -> void:
 	# Spawn a rock
 	var player: Player = get_player();
 	player.is_punching = true;
-	player.animator.play(PUNCH_ANIMATION, .5);
+	player.play_anim(Player.ANIM_PUNCH, 0.5);
 
 func is_usable_child() -> bool:
 	return true;
@@ -86,5 +84,5 @@ func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float 
 	mesh_instance.queue_free()
 
 func _on_punch_animation_finished(anim_name: String) -> void:
-	if(PUNCH_ANIMATION == anim_name):
+	if(Player.ANIM_PUNCH == anim_name):
 		get_player().is_punching = false;

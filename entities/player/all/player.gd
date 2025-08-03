@@ -3,6 +3,12 @@ extends CharacterBody3D
 
 class_name Player
 
+const ANIM_IDLE: String = "rockguy_anim_lib/RockGuy_Idle"
+const ANIM_RUN: String = "rockguy_anim_lib/RockGuy_Run"
+const ANIM_FALL: String = "rockguy_anim_lib/RockGuy_FallingDown"
+const ANIM_PUNCH: String = "rockguy_anim_lib/RockGuy_Hook"
+const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
+
 # Parent Level Accessor Nodes
 @onready var level: AbstractLevel = get_parent();
 
@@ -28,8 +34,6 @@ var is_in_menu: bool = false;
 @export var jump_velocity: float = 4.5;
 var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
-var is_blocking: bool = false;
-var is_punching: bool = false;
 
 # Combat Actions Data
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
@@ -38,10 +42,15 @@ var is_punching: bool = false;
 @onready var combat_action_3: AbstractCombatAction = PunchAction.new()
 
 # State variables
-var is_knocked: bool = false;
-var is_standing_back_up: bool = false;
-var knockback_velocity: Vector3 = Vector3.ZERO;
-var knockback_timer: float = 0.0;
+@export var is_knocked: bool = false;
+@export var is_standing_back_up: bool = false;
+@export var knockback_velocity: Vector3 = Vector3.ZERO;
+@export var knockback_timer: float = 0.0;
+@export var current_animation: String = "rockguy_anim_lib/RockGuy_Idle"
+@export var current_animation_blend_time: float = 0.0
+@export var is_blocking: bool = false;
+@export var is_punching: bool = false;
+@export var is_walking: bool = false;
 
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
@@ -71,6 +80,9 @@ func _input(event: InputEvent) -> void:
 			in_game_menu.show()
 
 func _physics_process(delta: float) -> void:
+	if(animator.current_animation != current_animation):
+		animator.play(current_animation, current_animation_blend_time)
+
 	process_movement(delta);
 	process_combat_actions();
 	
@@ -89,6 +101,7 @@ func process_combat_actions() -> void:
 		combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
+	if not is_multiplayer_authority(): return;
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -100,7 +113,7 @@ func process_movement(delta: float) -> void:
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
 			is_standing_back_up = true;
-			animator.play("rockguy_anim_lib/RockGuy_Idle", .5);
+			play_anim(ANIM_IDLE, 0.5)
 		if knockback_timer <= 0.0:
 			is_knocked = false
 			is_standing_back_up = false
@@ -116,12 +129,12 @@ func process_movement(delta: float) -> void:
 		var move_direction: Vector3 = brain.get_movement_direction()
 		if move_direction != Vector3.ZERO:
 			var blocking_modifier: float = 0.2 if is_blocking else 1.0
-			animator.play("rockguy_anim_lib/RockGuy_Run", 0.3)
+			play_anim(ANIM_RUN, 0.3)
 			velocity.x = move_direction.x * current_move_speed * blocking_modifier
 			velocity.z = move_direction.z * current_move_speed * blocking_modifier
 			mesh.rotation.y = -atan2(-move_direction.x, move_direction.z)
 		else:
-			animator.play("rockguy_anim_lib/RockGuy_Idle", 0.3)
+			play_anim(ANIM_IDLE, 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
 		snapshot_velocity = velocity
@@ -141,7 +154,14 @@ func knock_back(direction: Vector3, strength: float, duration: float) -> void:
 		knockback_velocity = direction * strength
 		knockback_timer = duration
 		is_knocked = true
-		animator.play("rockguy_anim_lib/RockGuy_FallingDown", 0.3);
+		play_anim(ANIM_FALL, 0.3)
+
+func play_anim(animation_name: String, blend_time: float = 0) -> void:
+	if not is_multiplayer_authority(): return;
+	
+	animator.play(animation_name, blend_time)
+	current_animation = animation_name
+	current_animation_blend_time = blend_time
 
 # Common physics functions
 func get_facing_direction() -> Vector3:

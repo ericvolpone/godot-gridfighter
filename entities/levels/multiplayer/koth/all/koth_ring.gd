@@ -23,6 +23,7 @@ func _ready() -> void:
 	original_emission = material.emission
 	material.emission_enabled = true
 
+# TODO Can probably just move this into mark_active and mark_inactive accordingly?
 func flash_ring() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(material, "emission", original_emission * flash_strength, flash_duration * 0.5).as_relative()
