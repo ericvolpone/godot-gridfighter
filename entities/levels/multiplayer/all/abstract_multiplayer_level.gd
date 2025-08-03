@@ -31,6 +31,7 @@ func _configure_spawner() -> void:
 		player.name = str(peer_id)
 		player.add_brain(PlayerBrain.new())
 		player_chars[player] = player
+		add_player_to_score(player);
 		respawn_player(player)
 		return player
 	
@@ -70,6 +71,10 @@ func get_player_spawn_positions() -> Array:
 	return [
 		Vector3(0,0,0)
 		];
+
+func add_player_to_score(player: Player) -> void:
+	push_error("add_player_to_score Not Implemented")
+	pass;
 
 func get_ai_spawn_locations() -> Array:
 	push_error("Not Implemented")

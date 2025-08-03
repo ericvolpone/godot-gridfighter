@@ -83,6 +83,10 @@ func respawn_player(player: Player) -> void:
 func get_match_type() -> MPMatchType:
 	return MPMatchType.KING_OF_THE_HILL;
 
+func add_player_to_score(player: Player) -> void:
+	score_by_player[player.player_name] = 0;
+	koth_scoreboard.add_player_to_score(player.player_name)
+
 func create_timer_for_next_hill() -> void:
 	get_tree().create_timer(seconds_for_each_ring).timeout.connect(func() -> void:
 		if(current_ring != null):
