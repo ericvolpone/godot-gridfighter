@@ -11,7 +11,7 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
+				"57813b5c-872a-400a-ada8-8a8b132ff073",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
@@ -27,7 +27,9 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -129,7 +131,7 @@
 		{
 			"uuid": "a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
 			"title": "MP: Get Rocks Syncing",
-			"description": "I think what's happening here is the call_local rpc tag is calling it on each player, not the player that is executing the action.  See how both players throw a rock on the screen?",
+			"description": "Ah — thank you for clarifying. That’s super helpful.\nYou're absolutely right — if replication were working, you'd see the same rock print logs on both peers, not just the one who threw it.\n\n🧨 What This Means\nIf you're only seeing:\n\nOne log on the host when it throws\n\nOne log on the client when it throws\n\nNothing on the other peer\n\nThen the problem is:\n\n🎯 The rock is not replicating at all across the network.\nIt's only being spawned locally on the peer that throws it.\n\n✅ You Need to Use a MultiplayerSpawner\nRight now you're using:\n\ngdscript\nCopy\nEdit\nvar rock = rock_scene.instantiate()\nrock.set_multiplayer_authority(multiplayer.get_unique_id())\nget_tree().current_scene.add_child(rock)\nThat doesn’t replicate the node unless it's:\n\nAlready present in the scene on both peers, or\n\nSpawned through a MultiplayerSpawner, which tells Godot to replicate it properly\n\n✅ Fix: Use MultiplayerSpawner to Spawn the Rock\n🔧 Step-by-Step:\n1. Add a MultiplayerSpawner to your level scene (e.g., AbstractKothLevel or small_hill.tscn)\nName it something like RockSpawner\n\nMake sure it’s part of the scene before any player throws a rock\n\nAdd it as a child of your level root node (not under the player)\n\n2. Configure the Spawner\nIn the MultiplayerSpawner:\n\nSet the spawn_path to the path of your rock scene (e.g., \"res://entities/objects/combat/rock.tscn\")\n\n(Or in code: rock_spawner.spawn_path = \"res://entities/objects/combat/rock.tscn\")\n\n3. Spawn Rocks Through the Spawner\nIn your ThrowRockAction.gd, change to:\n\ngdscript\nCopy\nEdit\nvar spawner: MultiplayerSpawner = get_tree().get_root().get_node(\"Path/To/RockSpawner\")\n\nspawner.spawn_function = func(peer_id: int) -> Node:\n\tvar rock = rock_scene.instantiate()\n\trock.set_multiplayer_authority(peer_id)\n\t# You can also set initial velocity or rotation here\n\treturn rock\n\nspawner.spawn(multiplayer.get_unique_id())\n🔥 This causes Godot to automatically replicate the rock across peers.\n\n✅ Why This Works\nGodot only replicates nodes that are spawned via a MultiplayerSpawner or already exist in a shared scene.\n\nIf you instantiate something on one peer and just call add_child(), no other peers will see it. ❌\n\n🧪 Final Test\nOnce this is set up, try:\n\nThrowing a rock from the host: it should show up and move on both\n\nThrowing from the client: same\n\nLog should now appear twice for each throw (one per peer)\n\nWould you like help wiring this into your actual level scene (AbstractKothLevel) or want a sample implementation to paste in directly? You're super close to full object replication!\n\n\n\n\n\n\n\n\nYou said:\nOof - so am I going to have to have a multiplayer spawner for every projectile type I create?\n\n\nChatGPT said:\nGreat question — and yeah, it can feel like overkill at first.\n\nBut here's the real deal:\n\n✅ Short Answer:\nYes, you'll need a MultiplayerSpawner if you want a scene (like a projectile) to:\n\nBe spawned at runtime\n\nBe automatically replicated to all peers\n\nHave its authority and synchronization managed by Godot\n\n🔄 But You Don’t Need One Per Projectile Type\nHere’s how you can make it manageable:\n\n✅ Option 1: One Spawner, Many Scene Types\nGodot 4 supports dynamic spawning if you do it like this:\n\ngdscript\nCopy\nEdit\nrock_spawner.spawn_function = func(peer_id: int, spawn_data: Dictionary) -> Node:\n\tvar scene_path = spawn_data.get(\"scene_path\")\n\tvar scene: PackedScene = load(scene_path)\n\tvar rock = scene.instantiate()\n\trock.set_multiplayer_authority(peer_id)\n\t# Optionally: set initial velocity, rotation, etc.\n\treturn rock\nAnd to spawn:\n\ngdscript\nCopy\nEdit\nrock_spawner.spawn(multiplayer.get_unique_id(), { \"scene_path\": \"res://entities/objects/combat/rock.tscn\" })\n✅ This means:\n\nYou can have one generic spawner\n\nUse different scenes via a \"scene_path\" field\n\nAdd fields for velocity, direction, etc.\n\n✅ Option 2: One Spawner Per Gameplay Role\nRather than one per scene, do:\n\nA ProjectileSpawner\n\nAn ItemSpawner\n\nAn EffectSpawner\n\nEach one handles a category and has a switch inside the spawn_function.\n\ngdscript\nCopy\nEdit\nmatch spawn_data.type:\n\t\"rock\":\n\t\tscene = load(\"res://entities/objects/combat/rock.tscn\")\n\t\"bomb\":\n\t\tscene = load(\"res://entities/objects/combat/bomb.tscn\")\n✅ Bottom Line\nStrategy\tUse When\n1 spawner per projectile\tIf your game is small or simple\nOne generic spawner + spawn_data\tBest balance of flexibility and scalability\nOne spawner per gameplay category\tCleanest for larger games\n\nLet me know if you want help refactoring your setup to use one generic spawner with scene path + velocity, and I’ll walk you through it in a few lines of code. It'll future-proof your multiplayer projectiles really nicely.",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		},
@@ -150,6 +152,13 @@
 		{
 			"uuid": "c97abd51-cf6d-48f5-8a32-8501546227cf",
 			"title": "MP: Handle Disconnects",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "57813b5c-872a-400a-ada8-8a8b132ff073",
+			"title": "MP: Score Syncing",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
