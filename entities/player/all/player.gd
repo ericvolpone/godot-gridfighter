@@ -101,7 +101,7 @@ func process_combat_actions() -> void:
 		combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
-	if not is_multiplayer_authority(): return;
+	if not is_mp_authority(): return;
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -160,7 +160,7 @@ func knock_back(direction: Vector3, strength: float, duration: float) -> void:
 		play_anim(ANIM_FALL, 0.3)
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
-	if not is_multiplayer_authority(): return;
+	if not is_mp_authority(): return;
 	
 	animator.play(animation_name, blend_time)
 	current_animation = animation_name
@@ -169,3 +169,6 @@ func play_anim(animation_name: String, blend_time: float = 0) -> void:
 # Common physics functions
 func get_facing_direction() -> Vector3:
 	return mesh.global_transform.basis.z.normalized()
+
+func is_mp_authority() -> bool:
+	return is_multiplayer_authority() or brain is not PlayerBrain;
