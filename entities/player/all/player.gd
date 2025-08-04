@@ -10,7 +10,7 @@ const ANIM_PUNCH: String = "rockguy_anim_lib/RockGuy_Hook"
 const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 
 # Parent Level Accessor Nodes
-@onready var level: AbstractLevel = get_parent();
+@onready var level: Level = get_parent();
 
 # Children Node Accessors
 @onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
@@ -147,6 +147,9 @@ func process_movement(delta: float) -> void:
 
 func add_brain(_brain: Brain) -> void:
 	brain = _brain;
+	if(_brain is PlayerBrain):
+		is_player_controlled = true;
+
 	add_child(brain);
 
 func knock_back(direction: Vector3, strength: float, duration: float) -> void:

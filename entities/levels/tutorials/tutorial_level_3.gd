@@ -1,4 +1,4 @@
-extends AbstractTutorialLevel
+extends TutorialLevel
 
 @onready var rock_scene: PackedScene = load("res://entities/objects/combat/rock.tscn")
 var time_to_stay_alive: float = 6.0;
@@ -22,8 +22,8 @@ func _ready() -> void:
 			rock.apply_impulse(Vector3(-300, 0 , 300))
 	)
 
-func get_player_spawn_position() -> Vector3:
-	return Vector3(-1.5, 0, 1.5);
+func get_player_spawn_positions() -> Array[Vector3]:
+	return [Vector3(-1.5, 0, 1.5)];
 	
 # No AI, we are tossing a ball
 func get_ai_spawn_locations() -> Array:

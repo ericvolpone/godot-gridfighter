@@ -1,4 +1,4 @@
-extends AbstractKothLevel
+class_name SmallHill extends KothLevel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

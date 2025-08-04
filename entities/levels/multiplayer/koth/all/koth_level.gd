@@ -1,4 +1,4 @@
-class_name AbstractKothLevel extends AbstractMultiplayerLevel
+class_name KothLevel extends Level
 
 # Packed Scenes
 @onready var koth_ring_scene: PackedScene = preload("res://entities/levels/multiplayer/koth/all/koth_ring.tscn")
@@ -93,8 +93,8 @@ func respawn_player(player: Player) -> void:
 	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
 	player.global_position = spawn_positions[0];
 
-func get_match_type() -> MPMatchType:
-	return MPMatchType.KING_OF_THE_HILL;
+func get_match_type() -> MatchType:
+	return MatchType.KING_OF_THE_HILL;
 
 func add_player_to_score(player: Player) -> void:
 	score_by_player[player.player_name] = 0;
@@ -112,3 +112,9 @@ func create_timer_for_next_hill() -> void:
 			create_timer_for_next_hill()
 			)
 		)
+
+func get_ai_brain() -> Brain :
+	return KothAIBrain.new(self);
+
+func get_ai_spawn_locations() -> Array[Vector3]:
+	return get_player_spawn_positions()

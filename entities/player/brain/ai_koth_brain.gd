@@ -1,9 +1,9 @@
 class_name KothAIBrain extends Brain
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var koth_level: AbstractKothLevel;
+var koth_level: KothLevel;
 
-func _init(_koth_level: AbstractKothLevel) -> void:
+func _init(_koth_level: KothLevel) -> void:
 	koth_level = _koth_level;
 
 func get_movement_direction() -> Vector3:

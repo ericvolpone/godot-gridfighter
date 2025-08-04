@@ -1,7 +1,7 @@
 class_name KothScoreboard extends Control
 
 @onready var score_container: VSplitContainer = $VContainer/Scores
-@onready var level: AbstractKothLevel = get_parent();
+@onready var level: KothLevel = get_parent();
 var score_label_by_player: Dictionary = {}
 
 func _ready() -> void:
