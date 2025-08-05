@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2lx4mt6gm8g1"]
+[gd_scene load_steps=13 format=3 uid="uid://b2lx4mt6gm8g1"]
 
 [ext_resource type="Script" uid="uid://dl0c5p8nkmojn" path="res://entities/levels/multiplayer/koth/smallhill/small_hill.gd" id="1_ru15n"]
 [ext_resource type="PackedScene" uid="uid://onyasgeb8h0a" path="res://entities/levels/multiplayer/koth/smallhill/SmallHill.glb" id="2_ppjc2"]
 [ext_resource type="Script" uid="uid://r5ngirohclty" path="res://entities/levels/multiplayer/koth/all/koth_manager.gd" id="3_ajw7t"]
 [ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="3_ppjc2"]
 [ext_resource type="PackedScene" uid="uid://bwfxvg52snmmn" path="res://entities/ui/scoreboard/scoreboard.tscn" id="5_i01v2"]
+[ext_resource type="Script" uid="uid://dgyka6dxbswed" path="res://entities/levels/multiplayer/all/respawner.gd" id="6_olhxq"]
+[ext_resource type="Script" uid="uid://c8syp1kciaw3q" path="res://entities/levels/multiplayer/all/respawn_point.gd" id="7_vworv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru15n"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -22,6 +24,11 @@ glow_enabled = true
 glow_strength = 0.8
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_txg4c"]
+properties/0/path = NodePath(".:current_ring_index")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vworv"]
 properties/0/path = NodePath(".:current_ring_index")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -70,4 +77,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.352, -0.519, -0.97)
 [node name="KothRing5" parent="KothManager" instance=ExtResource("3_ppjc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10452, -1.65526, 7.149)
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="KothManager"]
+replication_config = SubResource("SceneReplicationConfig_vworv")
+
 [node name="Scoreboard" parent="." instance=ExtResource("5_i01v2")]
+
+[node name="Respawner" type="Node" parent="." node_paths=PackedStringArray("respawn_point_availability")]
+script = ExtResource("6_olhxq")
+respawn_point_availability = {
+NodePath("RespawnPoint"): true,
+NodePath("RespawnPoint2"): true,
+NodePath("RespawnPoint3"): true,
+NodePath("RespawnPoint4"): true,
+NodePath("RespawnPoint5"): true
+}
+metadata/_custom_type_script = "uid://dgyka6dxbswed"
+
+[node name="RespawnPoint" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"
+
+[node name="RespawnPoint2" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.623, 2.5, 1.26943)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"
+
+[node name="RespawnPoint3" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8896, 2.5, -6.18886)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"
+
+[node name="RespawnPoint4" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19501, 2.5, -2.67375)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"
+
+[node name="RespawnPoint5" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32842, 2.5, 2.33411)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"
+
+[node name="RespawnPoint6" type="Node3D" parent="Respawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.971269, 2.5, 3.7513)
+script = ExtResource("7_vworv")
+metadata/_custom_type_script = "uid://c8syp1kciaw3q"

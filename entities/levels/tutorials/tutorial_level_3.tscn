@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2cbos0hpdj72"]
+[gd_scene load_steps=6 format=3 uid="uid://c2cbos0hpdj72"]
 
 [ext_resource type="Script" uid="uid://bdig4fvgua7ac" path="res://entities/levels/tutorials/tutorial_level_3.gd" id="1_kg2d0"]
+[ext_resource type="PackedScene" uid="uid://bwfxvg52snmmn" path="res://entities/ui/scoreboard/scoreboard.tscn" id="2_qxrdk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ad1um"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -36,3 +37,5 @@ fov = 50.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
+
+[node name="Scoreboard" parent="." instance=ExtResource("2_qxrdk")]

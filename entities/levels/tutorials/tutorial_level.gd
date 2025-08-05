@@ -44,9 +44,11 @@ func handle_player_death(player: Player) -> void:
 		player.queue_free()
 
 # TODO Bro just put these guys in the scene themselves lol
+func get_player_spawn_positions() -> Array[Vector3]:
+	return [Vector3(1.5, 0, -1.5)];
+
 func get_ai_spawn_locations() -> Array[Vector3]:
-	push_error("get_ai_spawn_locations not implemented")
-	return [];
+	return [Vector3(-1.5, 0, 1.5)]
 
 func get_tutorial_text() -> String:
 	push_error("Not Implemented")

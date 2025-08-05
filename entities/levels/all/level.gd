@@ -20,6 +20,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Multiplayer Variables
 @onready var mp_spawner: MultiplayerSpawner = $MultiplayerSpawner
+@onready var respawner: Respawner = $Respawner
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
@@ -93,18 +94,7 @@ func get_match_type() -> MatchType:
 	return MatchType.UNDEFINED;
 
 func handle_player_death(player: Player) -> void:
-	get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
-		respawn_player(player)
-	);
-
-# Generic Methods, override in levels
-func get_player_spawn_positions() -> Array[Vector3]:
-	push_error("get_player_spawn_position Not Implemented")
-	return [
-		Vector3(0,0,0)
-		];
+	respawner.respawn_player(player);
 
 func respawn_player(player: Player) -> void:
-	var spawn_positions: Array = get_player_spawn_positions();
-	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
-	player.global_position = spawn_positions[spawn_index];
+	respawner.respawn_player(player);

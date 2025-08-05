@@ -1,0 +1,1 @@
+class_name RespawnPoint extends Node3D
