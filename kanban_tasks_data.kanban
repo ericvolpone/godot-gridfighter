@@ -11,7 +11,6 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"85e04777-9b47-4ed0-94ee-2a3e7fadbb4f",
 				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
 				"57813b5c-872a-400a-ada8-8a8b132ff073",
@@ -24,7 +23,8 @@
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
 				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
-				"8c295a0f-9a05-4290-b072-34004865de8f"
+				"8c295a0f-9a05-4290-b072-34004865de8f",
+				"ad5b45f5-4d06-4d45-a8d3-b80e2b685152"
 			]
 		},
 		{
@@ -46,7 +46,8 @@
 				"cdc4d921-a45e-4144-9e2a-6025a19b1112",
 				"47520bfe-ea36-4858-be69-abd24b5ddde1",
 				"f4c37236-9046-4fe8-9229-b93516da8e6c",
-				"e553e134-3817-4b50-aaa8-e205a767e9ea"
+				"e553e134-3817-4b50-aaa8-e205a767e9ea",
+				"85e04777-9b47-4ed0-94ee-2a3e7fadbb4f"
 			]
 		}
 	],
@@ -222,6 +223,13 @@
 		{
 			"uuid": "85e04777-9b47-4ed0-94ee-2a3e7fadbb4f",
 			"title": "Bug: MP Joining, peer doesn't have brain?",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "ad5b45f5-4d06-4d45-a8d3-b80e2b685152",
+			"title": "Bug: MP - Bots are not syncing across peers",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
