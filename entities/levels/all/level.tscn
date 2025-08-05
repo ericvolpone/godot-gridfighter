@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcml2xb31ytjt"]
+
+[ext_resource type="Script" uid="uid://bqr5qkduod3sj" path="res://entities/levels/all/level.gd" id="1_btq12"]
+[ext_resource type="Script" uid="uid://r5ngirohclty" path="res://entities/levels/multiplayer/koth/all/koth_manager.gd" id="2_rkb10"]
+[ext_resource type="PackedScene" uid="uid://bwfxvg52snmmn" path="res://entities/ui/scoreboard/scoreboard.tscn" id="3_quiwk"]
+[ext_resource type="Script" uid="uid://dgyka6dxbswed" path="res://entities/levels/multiplayer/all/respawner.gd" id="4_27bor"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mjkyc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_kqgyu"]
+sky_material = SubResource("ProceduralSkyMaterial_mjkyc")
+
+[sub_resource type="Environment" id="Environment_2bfne"]
+background_mode = 2
+background_energy_multiplier = 0.84
+sky = SubResource("Sky_kqgyu")
+tonemap_mode = 2
+glow_enabled = true
+glow_strength = 0.8
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_eus47"]
+properties/0/path = NodePath("KothManager:current_ring_index")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Respawner:respawn_point_availability")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_btq12")
+metadata/_custom_type_script = "uid://bqr5qkduod3sj"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2bfne")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.27391, 15.7015)
+fov = 50.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_eus47")
+
+[node name="KothManager" type="Node" parent="."]
+script = ExtResource("2_rkb10")
+metadata/_custom_type_script = "uid://r5ngirohclty"
+
+[node name="Scoreboard" parent="." instance=ExtResource("3_quiwk")]
+
+[node name="Respawner" type="Node" parent="."]
+script = ExtResource("4_27bor")
+metadata/_custom_type_script = "uid://dgyka6dxbswed"

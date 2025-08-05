@@ -11,7 +11,7 @@ func _on_mp_host_button_pressed() -> void:
 		while(peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED):
 			pass
 
-	var small_hill: SmallHill = load("res://entities/levels/multiplayer/koth/smallhill/small_hill.tscn").instantiate();
+	var small_hill: Level = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn").instantiate();
 	small_hill.lobby_settings = lobby_settings
 	get_tree().root.add_child(small_hill)
 	get_tree().current_scene.queue_free()
@@ -26,7 +26,7 @@ func _on_mp_join_button_pressed() -> void:
 
 func _on_connected_to_server() -> void:
 	print("✅ Connected to server")
-	get_tree().change_scene_to_file("res://entities/levels/multiplayer/koth/smallhill/small_hill.tscn")
+	get_tree().change_scene_to_file("res://entities/levels/multiplayer/smallhill/small_hill.tscn")
 
 func _on_tutorial_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://entities/levels/tutorials/tutorial_level_1.tscn")

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://onyasgeb8h0a"
-path="res://.godot/imported/SmallHill.glb-03e56a90b184d4ff12643d68bef7801a.scn"
+path="res://.godot/imported/SmallHill.glb-0483d82958f74ff609ad5d1ce8303282.scn"
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/koth/smallhill/SmallHill.glb"
-dest_files=["res://.godot/imported/SmallHill.glb-03e56a90b184d4ff12643d68bef7801a.scn"]
+source_file="res://entities/levels/multiplayer/smallhill/SmallHill.glb"
+dest_files=["res://.godot/imported/SmallHill.glb-0483d82958f74ff609ad5d1ce8303282.scn"]
 
 [params]
 

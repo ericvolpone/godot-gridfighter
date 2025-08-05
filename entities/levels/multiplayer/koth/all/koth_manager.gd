@@ -28,8 +28,9 @@ func _ready() -> void:
 	if koth_rings.is_empty():
 		push_error("There are no KOTH rings defined on the map")
 
-	for koth_ring: KothRing in koth_rings:
-		koth_ring.mark_inactive()
+	if koth_rings:
+		for koth_ring: KothRing in koth_rings:
+			koth_ring.mark_inactive()
 	
 	scoreboard = scoreboard_scene.instantiate();
 	add_child(scoreboard)

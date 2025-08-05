@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bunqrokhx5ye8"]
+
+[ext_resource type="PackedScene" uid="uid://bcml2xb31ytjt" path="res://entities/levels/all/level.tscn" id="1_3qiap"]
+[ext_resource type="PackedScene" uid="uid://onyasgeb8h0a" path="res://entities/levels/multiplayer/smallhill/SmallHill.glb" id="2_ppjc2"]
+[ext_resource type="PackedScene" uid="uid://h824idisfqu" path="res://entities/levels/multiplayer/all/RespawnPoint.tscn" id="3_51cky"]
+[ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="3_ppjc2"]
+
+[node name="SmallHill" instance=ExtResource("1_3qiap")]
+
+[node name="KothManager" parent="." index="5" node_paths=PackedStringArray("koth_rings")]
+koth_rings = [NodePath("KothRing")]
+
+[node name="KothRing" parent="KothManager" index="0" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.166043, 5.90023)
+
+[node name="Respawner" parent="." index="7" node_paths=PackedStringArray("respawn_point_availability")]
+respawn_point_availability = {
+NodePath("RespawnPoint"): true
+}
+
+[node name="RespawnPoint" parent="Respawner" index="0" instance=ExtResource("3_51cky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, 0)
+
+[node name="Terrain" parent="." index="8" instance=ExtResource("2_ppjc2")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[editable path="Terrain"]
