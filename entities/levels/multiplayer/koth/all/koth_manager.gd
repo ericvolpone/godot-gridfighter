@@ -1,12 +1,15 @@
-class_name KothLevel extends Level
+class_name KothManager extends Node
 
 # Packed Scenes
-@onready var koth_ring_scene: PackedScene = preload("res://entities/levels/multiplayer/koth/all/koth_ring.tscn")
 @onready var koth_scoreboard_scene: PackedScene = preload("res://entities/ui/scoreboard/koth_scoreboard.tscn")
 
+# Level Variables
+@onready var level: Level = get_parent();
+var is_enabled: bool = false;
+
 # KOTH Variables
-var koth_scoreboard: KothScoreboard;
 @export var koth_rings: Array[KothRing];
+var koth_scoreboard: KothScoreboard;
 var seconds_for_each_ring: float = 6
 var seconds_between_rings: float = 1
 @onready var ring_index_count: int = koth_rings.size()
@@ -16,27 +19,34 @@ var current_ring: KothRing = null;
 var time_between_scoring: float = 1.5;
 var time_until_next_score: float = Time.get_unix_time_from_system();
 
+# Utility
+var rng: RandomNumberGenerator = RandomNumberGenerator.new();
 
 # Scoring Variables
 var score_by_player: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super._ready()
-	
 	if koth_rings.is_empty():
 		push_error("There are no KOTH rings defined on the map")
-	
+
 	for koth_ring: KothRing in koth_rings:
 		koth_ring.mark_inactive()
-	
+
+func start_cycle() -> void:
+	if not is_enabled:
+		print("Not Enabled");
+		set_process(false);
+		set_physics_process(false);
+		return;
+
 	# Only create the rings on the server
 	if(is_multiplayer_authority()):
 		create_timer_for_next_hill()
 
-	for player: Player in player_chars:
+	for player: Player in level.player_chars:
 		score_by_player[player.player_name] = 0
-	for ai: Player in ai_chars:
+	for ai: Player in level.ai_chars:
 		score_by_player[ai.player_name] = 0
 	
 	koth_scoreboard = koth_scoreboard_scene.instantiate();
@@ -62,8 +72,8 @@ func increment_koth_score() -> void:
 		if(current_ring != null):
 			current_ring.flash_ring()
 			# Give a point to everybody in the ring
-			var players_in_ring: Array = get_players_in_current_ring(player_chars);
-			players_in_ring.append_array(get_players_in_current_ring(ai_chars));
+			var players_in_ring: Array = get_players_in_current_ring(level.player_chars);
+			players_in_ring.append_array(get_players_in_current_ring(level.ai_chars));
 			for player: Player in players_in_ring:
 				score_by_player[player.player_name] += 1
 			
@@ -88,18 +98,6 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 
 	return players_in_ring
 
-func respawn_player(player: Player) -> void:
-	var spawn_positions: Array = get_player_spawn_positions();
-	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
-	player.global_position = spawn_positions[0];
-
-func get_match_type() -> MatchType:
-	return MatchType.KING_OF_THE_HILL;
-
-func add_player_to_score(player: Player) -> void:
-	score_by_player[player.player_name] = 0;
-	koth_scoreboard.add_player_to_score(player.player_name)
-
 func create_timer_for_next_hill() -> void:
 	get_tree().create_timer(seconds_for_each_ring).timeout.connect(func() -> void:
 		if(current_ring != null):
@@ -112,9 +110,3 @@ func create_timer_for_next_hill() -> void:
 			create_timer_for_next_hill()
 			)
 		)
-
-func get_ai_brain() -> Brain :
-	return KothAIBrain.new(self);
-
-func get_ai_spawn_locations() -> Array[Vector3]:
-	return get_player_spawn_positions()

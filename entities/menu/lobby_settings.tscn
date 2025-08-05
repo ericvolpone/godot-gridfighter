@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjg3t43c8vhb8"]
+
+[ext_resource type="Script" uid="uid://bvumyandwe76k" path="res://entities/menu/lobby_settings.gd" id="1_70fbe"]
+
+[node name="LobbySettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_70fbe")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxLabels" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+alignment = 1
+
+[node name="AICountLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+layout_mode = 2
+text = "Number of AI Bots:"
+
+[node name="OnlineGameLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+layout_mode = 2
+text = "Online Game:"
+
+[node name="KothLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+layout_mode = 2
+text = "King of the Hill:"
+
+[node name="VBoxValues" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+alignment = 1
+
+[node name="AICountEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 1
+virtual_keyboard_type = 2
+
+[node name="OnlineCheckbox" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxValues"]
+layout_mode = 2
+
+[node name="KothCheckbox" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxValues"]
+layout_mode = 2

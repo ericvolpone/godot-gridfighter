@@ -12,7 +12,6 @@
 			"title": "Todo",
 			"tasks": [
 				"f4c37236-9046-4fe8-9229-b93516da8e6c",
-				"cdc4d921-a45e-4144-9e2a-6025a19b1112",
 				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
 				"57813b5c-872a-400a-ada8-8a8b132ff073",
@@ -31,7 +30,9 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"47520bfe-ea36-4858-be69-abd24b5ddde1"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -42,7 +43,9 @@
 				"b590bdea-b727-41f5-9c24-3bfc20b5d21d",
 				"061d365d-c502-44a5-b27a-af83b5e4960c",
 				"d4b6d812-5349-4f9f-a36e-8028e78686af",
-				"6efcad15-e905-4c43-b046-194860a2a09b"
+				"6efcad15-e905-4c43-b046-194860a2a09b",
+				"2fe7e62c-3d9c-4c96-8479-82718aec250f",
+				"cdc4d921-a45e-4144-9e2a-6025a19b1112"
 			]
 		}
 	],
@@ -190,6 +193,20 @@
 		{
 			"uuid": "cdc4d921-a45e-4144-9e2a-6025a19b1112",
 			"title": "Architecture: Pluggable game rules",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "2fe7e62c-3d9c-4c96-8479-82718aec250f",
+			"title": "Abstract KOTH into a manager, not a level",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "47520bfe-ea36-4858-be69-abd24b5ddde1",
+			"title": "Architecture: Generic scoring via game rules",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

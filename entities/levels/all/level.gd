@@ -8,6 +8,10 @@ enum MatchType {
 	TUTORIAL = 4
 }
 
+# Export Variables
+@export var spawn_locations: Array[Node3D];
+@export var koth_manager: KothManager;
+
 # Packed Scenes
 var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
 
@@ -18,23 +22,27 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var mp_spawner: MultiplayerSpawner = $MultiplayerSpawner
 
 # Lobby Variables
-@export var spawn_locations: Array[Node3D];
 var player_chars: Dictionary = {}
 var ai_chars: Dictionary = {};
 var respawn_time: float = 3;
-var is_networked: bool = false;
+var lobby_settings: LobbySettings;
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not lobby_settings:
+		lobby_settings = LobbySettings.default();
+
+	if lobby_settings.is_koth:
+		koth_manager.is_enabled = true;
+		koth_manager.start_cycle();
+
 	if multiplayer.multiplayer_peer == null:
 		var peer: MultiplayerPeer = OfflineMultiplayerPeer.new()
 		multiplayer.multiplayer_peer = peer
 		multiplayer.set_root_path("/")
 		print("Setup offline");
-	
-	print("Multiplayer is_server? " + str(multiplayer.is_server()))
-	
+
 	call_deferred("_configure_spawner")
 
 func init_player(id: int, player_name: String) -> Player:
@@ -60,6 +68,17 @@ func _configure_spawner() -> void:
 			var peer_player: Player = mp_spawner.spawn(peer_id)
 			peer_player.add_brain(PlayerBrain.new())
 		)
+	
+	if lobby_settings.ai_count > 0:
+		for index: int in lobby_settings.ai_count - 1:
+			var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index)
+			index += 1
+			if lobby_settings.is_koth:
+				ai.add_brain(KothAIBrain.new(koth_manager))
+			else:
+				ai.add_brain(ZeroBrain.new())
+			ai_chars[ai] = ai;
+			pass
 
 func get_match_type() -> MatchType:
 	push_error("You must define a MP Match Type")
@@ -90,16 +109,12 @@ func get_player_spawn_positions() -> Array[Vector3]:
 		Vector3(0,0,0)
 		];
 
+# TODO Move score more generic
 func add_player_to_score(player: Player) -> void:
-	push_error("add_player_to_score Not Implemented")
-	pass;
-
-func get_ai_spawn_locations() -> Array[Vector3]:
-	push_error("Not Implemented")
-	return []
+	koth_manager.score_by_player[player.player_name] = 0;
+	koth_manager.koth_scoreboard.add_player_to_score(player.player_name)
 
 func respawn_player(player: Player) -> void:
-	push_error("respawn_player not implemented")
 	var spawn_positions: Array = get_player_spawn_positions();
 	var spawn_index: int = rng.randi_range(0, spawn_positions.size() - 1);
 	player.global_position = spawn_positions[spawn_index];

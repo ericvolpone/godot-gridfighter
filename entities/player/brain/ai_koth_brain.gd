@@ -1,13 +1,13 @@
 class_name KothAIBrain extends Brain
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var koth_level: KothLevel;
+var koth_manager: KothManager;
 
-func _init(_koth_level: KothLevel) -> void:
-	koth_level = _koth_level;
+func _init(_koth_manager: KothManager) -> void:
+	koth_manager = _koth_manager;
 
 func get_movement_direction() -> Vector3:
-	var current_ring: KothRing = koth_level.current_ring;
+	var current_ring: KothRing = koth_manager.current_ring;
 	if(current_ring == null):
 		return Vector3.ZERO;
 

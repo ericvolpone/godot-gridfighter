@@ -1,4 +1,4 @@
-class_name SmallHill extends KothLevel
+class_name SmallHill extends Level
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

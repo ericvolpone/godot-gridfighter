@@ -19,14 +19,13 @@ func _ready() -> void:
 	add_child(hud)
 	hud.message_label.text = "Tutorial Criteria: " + get_tutorial_text()
 
-	call_deferred("_spawn_ai")
+	call_deferred("_spawn_ai_tutorial")
 
-func _spawn_ai() -> void:
+func _spawn_ai_tutorial() -> void:
 	var index: int = 1;
 	for ai_location: Vector3 in get_ai_spawn_locations():
 		var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index)
 		index += 1
-		print(" --- AI: " + str(ai))
 		ai.add_brain(ZeroBrain.new())
 		ai_chars[ai] = ai;
 
@@ -43,6 +42,11 @@ func handle_player_death(player: Player) -> void:
 	else:
 		ai_chars.erase(player)
 		player.queue_free()
+
+# TODO Bro just put these guys in the scene themselves lol
+func get_ai_spawn_locations() -> Array[Vector3]:
+	push_error("get_ai_spawn_locations not implemented")
+	return [];
 
 func get_tutorial_text() -> String:
 	push_error("Not Implemented")
