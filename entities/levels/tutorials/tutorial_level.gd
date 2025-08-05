@@ -24,9 +24,11 @@ func _ready() -> void:
 func _spawn_ai_tutorial() -> void:
 	var index: int = 1;
 	for ai_location: Vector3 in get_ai_spawn_locations():
-		var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index)
+		var ai: Player = mp_spawner.spawn({
+			"peer_id" : multiplayer.get_unique_id() + index,
+			"brain" : Brain.BrainType.ZERO
+		})
 		index += 1
-		ai.add_brain(ZeroBrain.new())
 		ai_chars[ai] = ai;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

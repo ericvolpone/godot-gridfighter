@@ -8,8 +8,9 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child() -> void:
-	get_player().is_blocking = true;
-	get_player().animator.play(Player.ANIM_BLOCK, .5);
+	var player: Player = get_player();
+	player.is_blocking = true;
+	player.play_anim(Player.ANIM_BLOCK, 0.3)
 
 func is_usable_child() -> bool:
 	return true;

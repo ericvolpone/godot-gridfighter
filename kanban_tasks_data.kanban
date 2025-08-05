@@ -22,7 +22,6 @@
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
 				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
-				"8c295a0f-9a05-4290-b072-34004865de8f",
 				"ad5b45f5-4d06-4d45-a8d3-b80e2b685152",
 				"106eca20-8516-43e5-8571-3f8c09ecb3e3"
 			]
@@ -49,7 +48,8 @@
 				"47520bfe-ea36-4858-be69-abd24b5ddde1",
 				"f4c37236-9046-4fe8-9229-b93516da8e6c",
 				"e553e134-3817-4b50-aaa8-e205a767e9ea",
-				"85e04777-9b47-4ed0-94ee-2a3e7fadbb4f"
+				"85e04777-9b47-4ed0-94ee-2a3e7fadbb4f",
+				"8c295a0f-9a05-4290-b072-34004865de8f"
 			]
 		}
 	],
@@ -217,7 +217,7 @@
 		},
 		{
 			"uuid": "8c295a0f-9a05-4290-b072-34004865de8f",
-			"title": "Bug: Something stops the player from being able to do input for some reason during chaos",
+			"title": "Bug: Looks like blocking breaks the player",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
