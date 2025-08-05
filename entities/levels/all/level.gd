@@ -59,35 +59,38 @@ func init_player(id: int, player_name: String) -> Player:
 	return player;
 
 func _configure_spawner() -> void:
-	mp_spawner.spawn_function = func(peer_id: int) -> Player:
+	mp_spawner.spawn_function = func(spawn_data: Dictionary) -> Player:
+		var peer_id: int = spawn_data["peer_id"]
 		var player: Player = init_player(peer_id, "Player" + str(peer_id))
 		player.name = str(peer_id)
+		player.set_multiplayer_authority(peer_id)
 		player_chars[player] = player
+		var brain_type: Brain.BrainType = spawn_data["brain"]
+		player.add_brain(Brain.new_brain_from_type_with_deps(brain_type, koth_manager))
 		scoreboard.add_player_to_score(player);
 		call_deferred("respawn_player", player)
 		return player
 	
 	if(multiplayer.is_server()):
-		var player: Player = mp_spawner.spawn(multiplayer.get_unique_id())
-		player.add_brain(PlayerBrain.new())
+		var player: Player = mp_spawner.spawn({"peer_id": multiplayer.get_unique_id(), "brain" : Brain.BrainType.PLAYER})
+
 		# 🔑 Spawn future connecting players
 		multiplayer.peer_connected.connect(func(peer_id: int) -> void:
-			var peer_player: Player = mp_spawner.spawn(peer_id)
-			peer_player.add_brain(PlayerBrain.new())
+			var peer_player: Player = mp_spawner.spawn({"peer_id": peer_id, "brain" : Brain.BrainType.PLAYER})
 		)
 	
-	if lobby_settings.ai_count > 0:
-		print("Have AI")
-		for index: int in lobby_settings.ai_count:
-			print("Spawning AI for index: " + str(index))
-			var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index + 1)
-			index += 1
-			if lobby_settings.is_koth:
-				ai.add_brain(KothAIBrain.new(koth_manager))
-			else:
-				ai.add_brain(ZeroBrain.new())
-			ai_chars[ai] = ai;
-			pass
+		if lobby_settings.ai_count > 0:
+			for index: int in lobby_settings.ai_count:
+				var brain_type: Brain.BrainType;
+				if lobby_settings.is_koth:
+					brain_type = Brain.BrainType.KOTH_AI
+				else:
+					brain_type = Brain.BrainType.ZERO
+				var ai: Player = mp_spawner.spawn({"peer_id": multiplayer.get_unique_id() + index + 5, "brain" : brain_type})
+				index += 1
+				
+				ai_chars[ai] = ai;
+				pass
 
 func get_match_type() -> MatchType:
 	push_error("You must define a MP Match Type")

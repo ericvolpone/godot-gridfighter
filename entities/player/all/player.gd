@@ -21,7 +21,7 @@ const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 
 var player_id: int;
 var player_name: String;
-var brain: Brain;
+@export var brain: Brain;
 
 # Menu Variables
 var is_in_menu: bool = false;
@@ -60,15 +60,16 @@ func _ready() -> void:
 	add_child(combat_action_3)
 	mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
 	
-	if(is_player_controlled):
+	if(is_player_controlled and is_multiplayer_authority()):
 		# TODO Probably put this elsewhere?
 		add_child(in_game_menu)
 		in_game_menu.hide()
 	else:
 		$BlueIndicatorCircle.queue_free();
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+# TODO See if we can delete
+#func _enter_tree() -> void:
+#	set_multiplayer_authority(name.to_int())
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("menu_open") and event.is_pressed():

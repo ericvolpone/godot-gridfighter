@@ -1,5 +1,22 @@
 class_name Brain extends Node
 
+enum BrainType {
+	ZERO,
+	KOTH_AI,
+	PLAYER
+}
+
+static func new_brain_from_type_with_deps(type: BrainType, koth_manager: KothManager) -> Brain:
+	match type:
+		BrainType.ZERO:
+			return ZeroBrain.new();
+		BrainType.KOTH_AI:
+			return KothAIBrain.with_manager(koth_manager);
+		BrainType.PLAYER:
+			return PlayerBrain.new();
+		_:
+			return ZeroBrain.new();
+
 func get_movement_direction() -> Vector3:
 	push_error("Implement get_xz_movement_direction in child brain");
 	return Vector3(0,0,0);
