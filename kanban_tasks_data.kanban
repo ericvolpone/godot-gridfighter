@@ -11,6 +11,8 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"f4c37236-9046-4fe8-9229-b93516da8e6c",
+				"cdc4d921-a45e-4144-9e2a-6025a19b1112",
 				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
 				"57813b5c-872a-400a-ada8-8a8b132ff073",
@@ -174,6 +176,20 @@
 		{
 			"uuid": "d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
 			"title": "MP: Get AI Working outside of tutorials",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "f4c37236-9046-4fe8-9229-b93516da8e6c",
+			"title": "Architecture: Pluggable respawn rules",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "cdc4d921-a45e-4144-9e2a-6025a19b1112",
+			"title": "Architecture: Pluggable game rules",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
