@@ -30,7 +30,8 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c"
+				"a9e48efe-caa8-4673-96f9-b3d92f5cb21c",
+				"e097320f-0bb4-4d0c-9850-def2b9d4ea18"
 			]
 		},
 		{
@@ -239,6 +240,13 @@
 		{
 			"uuid": "106eca20-8516-43e5-8571-3f8c09ecb3e3",
 			"title": "See if I can make an instance'd Level scene that other level scenes inherit",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "e097320f-0bb4-4d0c-9850-def2b9d4ea18",
+			"title": "Bug: Player gets stuck after being knocked down while punching.  Fix with Animation State logic instead of variables",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

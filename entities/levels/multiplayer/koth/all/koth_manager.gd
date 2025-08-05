@@ -46,7 +46,7 @@ func start_cycle() -> void:
 	if(is_multiplayer_authority()):
 		create_timer_for_next_hill()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	increment_koth_score()
 	
 	# Handle multiplayer ring syncing
@@ -79,6 +79,7 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 	var players_in_ring: Array = []
 
 	for player: Player in player_set:
+		# TODO Figure out if this logic is even needed...
 		var horizontal_distance: float = Vector2(
 			player.global_position.x - current_ring.global_position.x, 
 		 	player.global_position.z - current_ring.global_position.z).length();

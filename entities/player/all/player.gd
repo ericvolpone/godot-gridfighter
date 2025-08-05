@@ -113,9 +113,11 @@ func process_movement(delta: float) -> void:
 		velocity.z = knockback_velocity.z
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
+			print("Player " + player_name + " is standing back up")
 			is_standing_back_up = true;
 			play_anim(ANIM_IDLE, 0.5)
 		if knockback_timer <= 0.0:
+			print("Player " + player_name + " is no longer knocked")
 			is_knocked = false
 			is_standing_back_up = false
 			velocity = Vector3.ZERO

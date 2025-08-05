@@ -11,7 +11,7 @@ var score_label_by_player: Dictionary = {}
 #		add_player_to_score(player_name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for player_name: String in score_by_player:
 		var score: int = score_by_player[player_name]
 		var score_label: Label = score_label_by_player[player_name]

@@ -8,10 +8,6 @@ enum MatchType {
 	TUTORIAL = 4
 }
 
-# Export Variables
-@export var spawn_locations: Array[Node3D];
-@export var koth_manager: KothManager;
-
 # Packed Scenes
 var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
 
@@ -21,6 +17,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 # Multiplayer Variables
 @onready var mp_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var respawner: Respawner = $Respawner
+@onready var koth_manager: KothManager = $KothManager
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
@@ -72,11 +69,11 @@ func _configure_spawner() -> void:
 		return player
 	
 	if(multiplayer.is_server()):
-		var player: Player = mp_spawner.spawn({"peer_id": multiplayer.get_unique_id(), "brain" : Brain.BrainType.PLAYER})
+		mp_spawner.spawn({"peer_id": multiplayer.get_unique_id(), "brain" : Brain.BrainType.PLAYER})
 
 		# 🔑 Spawn future connecting players
 		multiplayer.peer_connected.connect(func(peer_id: int) -> void:
-			var peer_player: Player = mp_spawner.spawn({"peer_id": peer_id, "brain" : Brain.BrainType.PLAYER})
+			mp_spawner.spawn({"peer_id": peer_id, "brain" : Brain.BrainType.PLAYER})
 		)
 	
 		if lobby_settings.ai_count > 0:
