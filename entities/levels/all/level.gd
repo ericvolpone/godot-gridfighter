@@ -45,9 +45,6 @@ func init_player(id: int, player_name: String) -> Player:
 
 func _configure_spawner() -> void:
 	mp_spawner.spawn_function = func(peer_id: int) -> Player:
-
-
-		print("Spawning player for peer_id:", peer_id)
 		var player: Player = init_player(peer_id, "Player")
 		player.name = str(peer_id)
 		player_chars[player] = player
@@ -57,11 +54,9 @@ func _configure_spawner() -> void:
 	
 	if(multiplayer.is_server()):
 		var player: Player = mp_spawner.spawn(multiplayer.get_unique_id())
-		print("Player is here: " + player.name)
 		player.add_brain(PlayerBrain.new())
 		# 🔑 Spawn future connecting players
 		multiplayer.peer_connected.connect(func(peer_id: int) -> void:
-			print("New peer connected:", peer_id)
 			var peer_player: Player = mp_spawner.spawn(peer_id)
 			peer_player.add_brain(PlayerBrain.new())
 		)
