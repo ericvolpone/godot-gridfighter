@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcml2xb31ytjt"]
+[gd_scene load_steps=11 format=3 uid="uid://bcml2xb31ytjt"]
 
 [ext_resource type="Script" uid="uid://bqr5qkduod3sj" path="res://entities/levels/all/level.gd" id="1_btq12"]
+[ext_resource type="Script" uid="uid://bjrxkk5hawuqi" path="res://entities/levels/all/player_spawner.gd" id="2_quiwk"]
 [ext_resource type="Script" uid="uid://r5ngirohclty" path="res://entities/levels/multiplayer/koth/all/koth_manager.gd" id="2_rkb10"]
 [ext_resource type="PackedScene" uid="uid://bwfxvg52snmmn" path="res://entities/ui/scoreboard/scoreboard.tscn" id="3_quiwk"]
 [ext_resource type="Script" uid="uid://dgyka6dxbswed" path="res://entities/levels/multiplayer/all/respawner.gd" id="4_27bor"]
+[ext_resource type="Script" uid="uid://cry6vs4abvsk4" path="res://entities/levels/all/projectile_spawner.gd" id="4_mjkyc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mjkyc"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -43,8 +45,18 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.27391, 15.7015)
 fov = 50.0
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("respawner")]
 spawn_path = NodePath("..")
+script = ExtResource("2_quiwk")
+respawner = NodePath("../Respawner")
+
+[node name="Respawner" type="Node" parent="."]
+script = ExtResource("4_27bor")
+metadata/_custom_type_script = "uid://dgyka6dxbswed"
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+script = ExtResource("4_mjkyc")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_eus47")
@@ -54,7 +66,3 @@ script = ExtResource("2_rkb10")
 metadata/_custom_type_script = "uid://r5ngirohclty"
 
 [node name="Scoreboard" parent="." instance=ExtResource("3_quiwk")]
-
-[node name="Respawner" type="Node" parent="."]
-script = ExtResource("4_27bor")
-metadata/_custom_type_script = "uid://dgyka6dxbswed"

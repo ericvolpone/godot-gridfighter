@@ -24,7 +24,7 @@ func _ready() -> void:
 func _spawn_ai_tutorial() -> void:
 	var index: int = 1;
 	for ai_location: Vector3 in get_ai_spawn_locations():
-		var ai: Player = mp_spawner.spawn({
+		var ai: Player = player_spawner.spawn({
 			"peer_id" : multiplayer.get_unique_id() + index,
 			"brain" : Brain.BrainType.ZERO
 		})
@@ -73,6 +73,7 @@ func are_all_ais_gone() -> bool:
 func get_level_number() -> int:
 	push_error("Please define level number in child")
 	return 1;
+
 func get_next_level_number() -> int:
 	push_error("Please define next level number in child")
 	return 2
