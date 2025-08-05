@@ -160,6 +160,7 @@ func knock_back(direction: Vector3, strength: float, duration: float) -> void:
 		knockback_velocity = direction * strength
 		knockback_timer = duration
 		is_knocked = true
+		is_punching = false
 		play_anim(ANIM_FALL, 0.3)
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
