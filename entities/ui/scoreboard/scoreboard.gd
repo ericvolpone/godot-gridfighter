@@ -1,6 +1,6 @@
 class_name Scoreboard extends Control
 
-@onready var score_container: VSplitContainer = $VContainer/Scores
+@onready var score_container: VBoxContainer = $VContainer/Scores
 
 # Scoring Variables
 var score_by_player: Dictionary = {}
