@@ -32,6 +32,9 @@ func _ready() -> void:
 
 	for koth_ring: KothRing in koth_rings:
 		koth_ring.mark_inactive()
+	
+	koth_scoreboard = koth_scoreboard_scene.instantiate();
+	add_child(koth_scoreboard)
 
 func start_cycle() -> void:
 	if not is_enabled:
@@ -48,9 +51,6 @@ func start_cycle() -> void:
 		score_by_player[player.player_name] = 0
 	for ai: Player in level.ai_chars:
 		score_by_player[ai.player_name] = 0
-	
-	koth_scoreboard = koth_scoreboard_scene.instantiate();
-	add_child(koth_scoreboard)
 
 func _physics_process(delta: float) -> void:
 	increment_koth_score()

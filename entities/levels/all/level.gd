@@ -53,7 +53,7 @@ func init_player(id: int, player_name: String) -> Player:
 
 func _configure_spawner() -> void:
 	mp_spawner.spawn_function = func(peer_id: int) -> Player:
-		var player: Player = init_player(peer_id, "Player")
+		var player: Player = init_player(peer_id, "Player" + str(peer_id))
 		player.name = str(peer_id)
 		player_chars[player] = player
 		add_player_to_score(player);
@@ -70,8 +70,10 @@ func _configure_spawner() -> void:
 		)
 	
 	if lobby_settings.ai_count > 0:
-		for index: int in lobby_settings.ai_count - 1:
-			var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index)
+		print("Have AI")
+		for index: int in lobby_settings.ai_count:
+			print("Spawning AI for index: " + str(index))
+			var ai: Player = mp_spawner.spawn(multiplayer.get_unique_id() + index + 1)
 			index += 1
 			if lobby_settings.is_koth:
 				ai.add_brain(KothAIBrain.new(koth_manager))
@@ -85,22 +87,9 @@ func get_match_type() -> MatchType:
 	return MatchType.UNDEFINED;
 
 func handle_player_death(player: Player) -> void:
-	match get_match_type():
-		MatchType.KING_OF_THE_HILL:
-			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
-				respawn_player(player)
-			);
-		MatchType.DEATH_MATCH:
-			pass;
-		MatchType.ELIMINATION:
-			pass
-		_:
-			if(player.is_player_controlled):
-				player.global_position = get_player_spawn_positions()[0]
-			else:
-				ai_chars.erase(player)
-				player.queue_free();
-	
+	get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
+		respawn_player(player)
+	);
 
 # Generic Methods, override in levels
 func get_player_spawn_positions() -> Array[Vector3]:
