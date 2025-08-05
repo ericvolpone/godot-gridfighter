@@ -1,7 +1,7 @@
 class_name KothManager extends Node
 
 # Packed Scenes
-@onready var koth_scoreboard_scene: PackedScene = preload("res://entities/ui/scoreboard/koth_scoreboard.tscn")
+@onready var scoreboard_scene: PackedScene = preload("res://entities/ui/scoreboard/scoreboard.tscn")
 
 # Level Variables
 @onready var level: Level = get_parent();
@@ -9,7 +9,7 @@ var is_enabled: bool = false;
 
 # KOTH Variables
 @export var koth_rings: Array[KothRing];
-var koth_scoreboard: KothScoreboard;
+var scoreboard: Scoreboard;
 var seconds_for_each_ring: float = 6
 var seconds_between_rings: float = 1
 @onready var ring_index_count: int = koth_rings.size()
@@ -22,8 +22,6 @@ var time_until_next_score: float = Time.get_unix_time_from_system();
 # Utility
 var rng: RandomNumberGenerator = RandomNumberGenerator.new();
 
-# Scoring Variables
-var score_by_player: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,8 +31,8 @@ func _ready() -> void:
 	for koth_ring: KothRing in koth_rings:
 		koth_ring.mark_inactive()
 	
-	koth_scoreboard = koth_scoreboard_scene.instantiate();
-	add_child(koth_scoreboard)
+	scoreboard = scoreboard_scene.instantiate();
+	add_child(scoreboard)
 
 func start_cycle() -> void:
 	if not is_enabled:
@@ -46,11 +44,6 @@ func start_cycle() -> void:
 	# Only create the rings on the server
 	if(is_multiplayer_authority()):
 		create_timer_for_next_hill()
-
-	for player: Player in level.player_chars:
-		score_by_player[player.player_name] = 0
-	for ai: Player in level.ai_chars:
-		score_by_player[ai.player_name] = 0
 
 func _physics_process(delta: float) -> void:
 	increment_koth_score()
@@ -75,7 +68,7 @@ func increment_koth_score() -> void:
 			var players_in_ring: Array = get_players_in_current_ring(level.player_chars);
 			players_in_ring.append_array(get_players_in_current_ring(level.ai_chars));
 			for player: Player in players_in_ring:
-				score_by_player[player.player_name] += 1
+				scoreboard.score_by_player[player.player_name] += 1
 			
 			time_until_next_score = time_until_next_score + time_between_scoring
 

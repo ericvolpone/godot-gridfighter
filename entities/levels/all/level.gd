@@ -22,6 +22,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var mp_spawner: MultiplayerSpawner = $MultiplayerSpawner
 
 # Lobby Variables
+@onready var scoreboard: Scoreboard = $Scoreboard
 var player_chars: Dictionary = {}
 var ai_chars: Dictionary = {};
 var respawn_time: float = 3;
@@ -30,19 +31,24 @@ var lobby_settings: LobbySettings;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Init default settings
 	if not lobby_settings:
 		lobby_settings = LobbySettings.default();
 
+	# Enable Koth Manager
 	if lobby_settings.is_koth:
 		koth_manager.is_enabled = true;
+		koth_manager.scoreboard = scoreboard
 		koth_manager.start_cycle();
 
+	# Handle offline games
 	if multiplayer.multiplayer_peer == null:
 		var peer: MultiplayerPeer = OfflineMultiplayerPeer.new()
 		multiplayer.multiplayer_peer = peer
 		multiplayer.set_root_path("/")
 		print("Setup offline");
 
+	# Configured MP Spawners
 	call_deferred("_configure_spawner")
 
 func init_player(id: int, player_name: String) -> Player:
@@ -56,7 +62,7 @@ func _configure_spawner() -> void:
 		var player: Player = init_player(peer_id, "Player" + str(peer_id))
 		player.name = str(peer_id)
 		player_chars[player] = player
-		add_player_to_score(player);
+		scoreboard.add_player_to_score(player);
 		call_deferred("respawn_player", player)
 		return player
 	
@@ -97,11 +103,6 @@ func get_player_spawn_positions() -> Array[Vector3]:
 	return [
 		Vector3(0,0,0)
 		];
-
-# TODO Move score more generic
-func add_player_to_score(player: Player) -> void:
-	koth_manager.score_by_player[player.player_name] = 0;
-	koth_manager.koth_scoreboard.add_player_to_score(player.player_name)
 
 func respawn_player(player: Player) -> void:
 	var spawn_positions: Array = get_player_spawn_positions();
