@@ -19,6 +19,7 @@ func respawn_player(player: Player) -> void:
 			player.is_standing_back_up = false;
 			player.is_blocking = false;
 			player.is_punching = false;
+			player.velocity = Vector3.ZERO
 			# TODO Would be cool to freeze player in place for a bit
 			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
 				player.set_physics_process(true)
