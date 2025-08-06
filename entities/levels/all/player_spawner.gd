@@ -45,8 +45,7 @@ func _configure_player_spawner() -> void:
 				else:
 					brain_type = Brain.BrainType.ZERO
 				# TODO There's probably a better way to "pick" this peer id...
-				spawn({"peer_id": multiplayer.get_unique_id() + index + 5, "brain" : brain_type})
-				index += 1
+				spawn({"peer_id": multiplayer.get_unique_id(), "brain" : brain_type})
 
 func respawn_player(player: Player) -> void:
 	respawner.respawn_player(player)

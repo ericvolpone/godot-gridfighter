@@ -50,7 +50,7 @@ func handle_animation_signal() -> void:
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
 			print("CharacterBody")
 			var player_obj: Player = obj
-			if(player_obj.player_id == player.player_id or player_obj.is_blocking):
+			if(player_obj == player or player_obj.is_blocking):
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
