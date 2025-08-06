@@ -17,11 +17,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="VBoxLabels" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -47,8 +48,12 @@ text = "Power Ups:"
 layout_mode = 2
 text = "Power Up Spawn Rate:"
 
+[node name="MaxPlayerSpeedLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+layout_mode = 2
+text = "MaxPlayerSpeed:"
+
 [node name="VBoxValues" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -71,6 +76,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="PowerUpsRateEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+layout_mode = 2
+text = "10"
+alignment = 2
+max_length = 2
+virtual_keyboard_type = 2
+
+[node name="MaxPlayerSpeedEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
 layout_mode = 2
 text = "10"
 alignment = 2

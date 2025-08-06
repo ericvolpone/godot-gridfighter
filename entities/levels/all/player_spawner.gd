@@ -3,7 +3,7 @@ class_name PlayerSpawner extends MultiplayerSpawner
 var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
 
 @export var respawner: Respawner;
-
+var max_player_speed: float = 10;
 @onready var level: Level = get_parent()
 
 func _ready() -> void:
@@ -25,6 +25,7 @@ func _configure_player_spawner() -> void:
 		var brain_type: Brain.BrainType = spawn_data["brain"]
 		player.add_brain(Brain.new_brain_from_type_with_deps(brain_type, level.koth_manager))
 		player.brain.set_multiplayer_authority(player.get_multiplayer_authority())
+		player.max_player_speed = max_player_speed
 		level.scoreboard.add_player_to_score(player);
 		call_deferred("respawn_player", player)
 		return player

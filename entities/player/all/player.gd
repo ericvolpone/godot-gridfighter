@@ -30,7 +30,7 @@ var is_in_menu: bool = false;
 @export var starting_move_speed: float = 4.0;
 @onready var current_move_speed: float = starting_move_speed;
 var speed_boost_modifier: float = 0;
-var speed_boost_modifier_max: float = 4;
+var max_player_speed: float = 10;
 @export var jump_velocity: float = 4.5;
 var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
@@ -184,3 +184,6 @@ func apply_speed_boost(value: int) -> void:
 		return;
 	speed_boost_modifier += 1;
 	current_move_speed += 1;
+	
+	if current_move_speed >= max_player_speed:
+		current_move_speed = max_player_speed

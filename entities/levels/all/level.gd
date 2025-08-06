@@ -7,8 +7,8 @@ var player_scene: PackedScene = preload("res://entities/player/all/player.tscn")
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Multiplayer Variables
-@onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
-@onready var projectile_spawner: MultiplayerSpawner = $ProjectileSpawner
+@onready var player_spawner: PlayerSpawner = $PlayerSpawner
+@onready var projectile_spawner: ProjectileSpawner = $ProjectileSpawner
 @onready var respawner: Respawner = $Respawner
 @onready var koth_manager: KothManager = $KothManager
 @onready var power_up_spawner: PowerUpSpawner = $PowerUpSpawner
@@ -25,6 +25,8 @@ func _ready() -> void:
 	# Init default settings
 	if not lobby_settings:
 		lobby_settings = LobbySettings.default();
+
+	player_spawner.max_player_speed = lobby_settings.max_player_speed
 
 	# Enable Koth Manager
 	if lobby_settings.is_koth:
