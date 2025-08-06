@@ -17,7 +17,8 @@
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
-				"8b1209fc-0dd7-4903-8803-c1166dafdbc7"
+				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
+				"04865abb-c63e-4724-9aed-eefdffd2c712"
 			]
 		},
 		{
@@ -255,6 +256,13 @@
 			"uuid": "90ca2a99-392e-459f-b166-bb87eb0dfd5e",
 			"title": "Tutorials are broken, need to make them inherited scenes of level",
 			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "04865abb-c63e-4724-9aed-eefdffd2c712",
+			"title": "Random Despawn Bug during multiplayer: ",
+			"description": "E 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		}
