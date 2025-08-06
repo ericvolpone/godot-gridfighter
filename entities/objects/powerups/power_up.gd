@@ -19,5 +19,5 @@ func _on_body_entered(body: Node) -> void:
 		emit_signal("signal_power_up_applied", power_up_spawn_point)
 		queue_free();
 
-func apply_powerup(player: Player) -> void:
+func apply_powerup(_player: Player) -> void:
 	push_error("Define apply_powerup in the child");

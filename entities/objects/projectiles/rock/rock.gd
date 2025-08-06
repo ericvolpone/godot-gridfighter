@@ -22,13 +22,13 @@ func _on_body_entered(body: Node) -> void:
 		var impact_force: float = linear_velocity.length()
 		if impact_force > LOW_VELOCITY_THRESHOLD:
 			if(player.is_blocking):
-				var direction: Vector3 = (global_transform.origin - player.global_transform.origin).normalized()
+				var throw_direction: Vector3 = (global_transform.origin - player.global_transform.origin).normalized()
 				apply_central_force(direction * 10000);
 			else:
-				var direction: Vector3 = (player.global_transform.origin - global_transform.origin).normalized()
+				var throw_direction: Vector3 = (player.global_transform.origin - global_transform.origin).normalized()
 				# TODO debug what makes sense for clamp values and force here
 				var knockback_velocity: float = clamp(impact_force, LOW_VELOCITY_THRESHOLD, HIGH_VELOCITY_THRESHOLD);
-				player.knock_back(direction, knockback_velocity, 2.5)
+				player.knock_back(throw_direction, knockback_velocity, 2.5)
 
 func _physics_process(delta: float) -> void:
 	if(global_position.y < -5.0):

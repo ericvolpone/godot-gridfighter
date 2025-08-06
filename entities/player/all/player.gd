@@ -182,8 +182,8 @@ func is_mp_authority() -> bool:
 func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;
-	speed_boost_modifier += 1;
-	current_move_speed += 1;
+	speed_boost_modifier += value;
+	current_move_speed += value;
 	
 	if current_move_speed >= max_player_speed:
 		current_move_speed = max_player_speed
