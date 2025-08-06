@@ -6,10 +6,6 @@ class_name Scoreboard extends Control
 @export var score_by_player: Dictionary = {}
 var score_label_by_player: Dictionary = {}
 
-#func _ready() -> void:
-#	for player_name: String in score_by_player:
-#		add_player_to_score(player_name)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	for player_name: String in score_by_player:

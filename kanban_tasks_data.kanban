@@ -18,13 +18,17 @@
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"ff2406eb-38dc-43ef-996c-038402108c05",
 				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
-				"04865abb-c63e-4724-9aed-eefdffd2c712"
+				"04865abb-c63e-4724-9aed-eefdffd2c712",
+				"4e8c0a23-084c-4388-b413-99cabda9f1fc",
+				"20912649-7cee-476d-afa6-b7d17b2253d9"
 			]
 		},
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"df030f1e-5cc9-4d35-8572-f93f41809a47"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -263,6 +267,27 @@
 			"uuid": "04865abb-c63e-4724-9aed-eefdffd2c712",
 			"title": "Random Despawn Bug during multiplayer: ",
 			"description": "E 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "4e8c0a23-084c-4388-b413-99cabda9f1fc",
+			"title": "Bug: Score is showing the same player name",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "df030f1e-5cc9-4d35-8572-f93f41809a47",
+			"title": "Effects: Death explosion with better respawn timer",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "20912649-7cee-476d-afa6-b7d17b2253d9",
+			"title": "Effects: Punch Effect",
+			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		}

@@ -1,5 +1,7 @@
 class_name Level extends Node3D
 
+@onready var death_scene: PackedScene = preload("res://entities/effects/death/player_death.tscn")
+
 # Packed Scenes
 var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
 
@@ -47,4 +49,8 @@ func _ready() -> void:
 		print("Setup offline");
 
 func handle_player_death(player: Player) -> void:
+	var death: Node3D = death_scene.instantiate();
+	print("Adding death")
+	add_child(death)
+	death.global_position = player.global_position
 	respawner.respawn_player(player);
