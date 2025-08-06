@@ -2,7 +2,7 @@ class_name Respawner extends Node
 
 # Holds respawn points and if they are available for respawn
 @export var respawn_point_availability: Dictionary[RespawnPoint, bool]
-@export var respawn_time: float = 3;
+@export var respawn_time: float = 2;
 
 func respawn_player(player: Player) -> void:
 	var respawn_points: Array[RespawnPoint] = respawn_point_availability.keys()
@@ -13,8 +13,17 @@ func respawn_player(player: Player) -> void:
 			# Point is available, we can occupy and respawn
 			respawn_point_availability[respawn_point] = false;
 			player.global_position = respawn_point.global_position;
+			player.set_physics_process(false)
+			player.play_anim(Player.ANIM_IDLE)
+			player.is_knocked = false;
+			player.is_standing_back_up = false;
+			player.is_blocking = false;
+			player.is_punching = false;
 			# TODO Would be cool to freeze player in place for a bit
 			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
-				respawn_point_availability[respawn_point] = true;
+				player.set_physics_process(true)
+				get_tree().create_timer(1).timeout.connect(func() -> void:
+					respawn_point_availability[respawn_point] = true;
+				)
 			);
 			return;

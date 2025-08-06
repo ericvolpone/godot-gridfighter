@@ -91,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	process_movement(delta);
 	process_combat_actions();
 	
-	if(global_position.y <= -5):
+	if(global_position.y <= -8ssssssss):
 		level.handle_player_death(self)
 
 func has_control() -> bool:
