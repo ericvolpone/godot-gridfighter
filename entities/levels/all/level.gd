@@ -49,8 +49,10 @@ func _ready() -> void:
 		print("Setup offline");
 
 func handle_player_death(player: Player) -> void:
-	var death: Node3D = death_scene.instantiate();
-	print("Adding death")
+	var death: PlayerDeath = death_scene.instantiate();
+	death.signal_death_animation_complete.connect(func() -> void:
+		print("signal done")
+		)
 	add_child(death)
 	death.global_position = player.global_position
-	respawner.respawn_player(player);
+	respawner.respawn_player(player)
