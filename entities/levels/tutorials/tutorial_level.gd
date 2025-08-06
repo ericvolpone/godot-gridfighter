@@ -13,6 +13,7 @@ var ais_removed: int = 0;
 func _ready() -> void:
 	super._ready()
 	lobby_settings.ai_count = get_ai_count();
+	scoreboard.hide()
 
 	hud = hud_scene.instantiate()
 	add_child(hud)
