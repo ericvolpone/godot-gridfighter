@@ -15,7 +15,6 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
 var player_chars: Dictionary = {}
-var ai_chars: Dictionary = {}; # TODO Might not need this except in tutorials?
 var respawn_time: float = 3;
 var lobby_settings: LobbySettings;
 

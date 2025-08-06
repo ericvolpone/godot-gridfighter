@@ -67,7 +67,6 @@ func increment_koth_score() -> void:
 			current_ring.flash_ring()
 			# Give a point to everybody in the ring
 			var players_in_ring: Array = get_players_in_current_ring(level.player_chars);
-			players_in_ring.append_array(get_players_in_current_ring(level.ai_chars));
 			for player: Player in players_in_ring:
 				scoreboard.score_by_player[player.player_name] += 1
 			

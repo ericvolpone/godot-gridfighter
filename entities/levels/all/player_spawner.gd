@@ -43,12 +43,9 @@ func _configure_player_spawner() -> void:
 					brain_type = Brain.BrainType.KOTH_AI
 				else:
 					brain_type = Brain.BrainType.ZERO
-				var ai: Player = spawn({"peer_id": multiplayer.get_unique_id() + index + 5, "brain" : brain_type})
+				# TODO There's probably a better way to "pick" this peer id...
+				spawn({"peer_id": multiplayer.get_unique_id() + index + 5, "brain" : brain_type})
 				index += 1
-				
-				# TODO Might not need this
-				level.ai_chars[ai] = ai;
-				pass
 
 func respawn_player(player: Player) -> void:
 	respawner.respawn_player(player)
