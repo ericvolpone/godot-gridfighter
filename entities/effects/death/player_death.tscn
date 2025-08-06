@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxc3fhi5rl6ld"]
+[gd_scene load_steps=6 format=3 uid="uid://dxc3fhi5rl6ld"]
 
 [ext_resource type="Script" uid="uid://n461ouwipj3n" path="res://entities/effects/death/player_death.gd" id="1_jbdyn"]
 
@@ -9,12 +9,18 @@ inherit_velocity_ratio = 0.38
 direction = Vector3(0, 1, 0)
 spread = 3.172
 flatness = 0.098
-initial_velocity_min = 40.54
-initial_velocity_max = 63.9
+initial_velocity_min = 21.23
+initial_velocity_max = 44.59
 hue_variation_min = -0.21
 hue_variation_max = 0.26
 
-[sub_resource type="PrismMesh" id="PrismMesh_rtkoq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbdyn"]
+albedo_color = Color(0.00778005, 0.776778, 0.806625, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j711k"]
+material = SubResource("StandardMaterial3D_jbdyn")
+radius = 0.2
+height = 0.2
 
 [sub_resource type="Skin" id="Skin_qk5hc"]
 
@@ -24,15 +30,14 @@ script = ExtResource("1_jbdyn")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 50
-lifetime = 7.0
+lifetime = 4.0
 one_shot = true
 speed_scale = 2.42
-explosiveness = 0.55
-randomness = 0.11
+explosiveness = 0.64
 use_fixed_seed = true
 seed = 1941193095
 process_material = SubResource("ParticleProcessMaterial_j711k")
-draw_pass_1 = SubResource("PrismMesh_rtkoq")
+draw_pass_1 = SubResource("SphereMesh_j711k")
 draw_skin = SubResource("Skin_qk5hc")
 
 [connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]

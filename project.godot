@@ -23,7 +23,6 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
-window/size/mode=2
 
 [editor_plugins]
 
