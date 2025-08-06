@@ -1,7 +1,7 @@
 extends Control
 
 @onready var lobby_settings: LobbySettings = $LobbySettings
-@onready var ip_address_edit: LineEdit = $HBoxContainer/VBoxContainer/HBoxJoin/IPAddressEdit
+@onready var ip_address_edit: LineEdit = $HBoxContainer/VBoxContainer/IPAddressEdit
 
 func _on_mp_host_button_pressed() -> void:
 	lobby_settings.calculate_values()

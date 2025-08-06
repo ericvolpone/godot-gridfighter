@@ -10,7 +10,8 @@ const ANIM_PUNCH: String = "rockguy_anim_lib/RockGuy_Hook"
 const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 
 # Parent Level Accessor Nodes
-@onready var level: Level = get_parent();
+@onready var player_spawner: PlayerSpawner = get_parent()
+@onready var level: Level = player_spawner.get_parent();
 
 # Children Node Accessors
 @onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
@@ -28,6 +29,8 @@ var is_in_menu: bool = false;
 @export var is_player_controlled: bool;
 @export var starting_move_speed: float = 4.0;
 @onready var current_move_speed: float = starting_move_speed;
+var speed_boost_modifier: float = 0;
+var speed_boost_modifier_max: float = 4;
 @export var jump_velocity: float = 4.5;
 var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
@@ -174,3 +177,10 @@ func get_facing_direction() -> Vector3:
 
 func is_mp_authority() -> bool:
 	return is_multiplayer_authority() or brain is not PlayerBrain;
+
+@rpc("any_peer", "call_local", "reliable")
+func apply_speed_boost(value: int) -> void:
+	if not is_multiplayer_authority():
+		return;
+	speed_boost_modifier += 1;
+	current_move_speed += 1;

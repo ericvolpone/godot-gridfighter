@@ -11,6 +11,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var projectile_spawner: MultiplayerSpawner = $ProjectileSpawner
 @onready var respawner: Respawner = $Respawner
 @onready var koth_manager: KothManager = $KothManager
+@onready var power_up_spawner: PowerUpSpawner = $PowerUpSpawner
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
@@ -30,6 +31,11 @@ func _ready() -> void:
 		koth_manager.is_enabled = true;
 		koth_manager.scoreboard = scoreboard
 		koth_manager.start_cycle();
+
+	if lobby_settings.are_power_ups_enabled:
+		power_up_spawner.are_power_ups_enabled = true
+		power_up_spawner.spawn_time = lobby_settings.power_up_spawn_rate
+		power_up_spawner.start_cycle();
 
 	# Handle offline games
 	if multiplayer.multiplayer_peer == null:

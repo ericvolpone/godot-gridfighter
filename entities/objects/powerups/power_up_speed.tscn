@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpapc10cglnnk"]
+
+[ext_resource type="PackedScene" uid="uid://0qti3avt6und" path="res://entities/objects/powerups/power_up.tscn" id="1_x7t1v"]
+[ext_resource type="Script" uid="uid://dqcg12x4okour" path="res://power_up_speed.gd" id="2_kye2w"]
+[ext_resource type="SpriteFrames" uid="uid://cv5naikgwtjit" path="res://models/sprites/powerups/lightning.tres" id="3_0ggod"]
+
+[node name="PowerUpSpeed" instance=ExtResource("1_x7t1v")]
+script = ExtResource("2_kye2w")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." index="1"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+billboard = 1
+sprite_frames = ExtResource("3_0ggod")

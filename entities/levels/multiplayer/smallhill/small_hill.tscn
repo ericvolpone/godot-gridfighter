@@ -31,7 +31,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, 6.7103)
 [node name="RespawnPoint5" parent="Respawner" index="4" instance=ExtResource("3_51cky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, -6.93428)
 
-[node name="KothManager" parent="." index="7" node_paths=PackedStringArray("koth_rings")]
+[node name="PowerUpSpawner" parent="." index="6" node_paths=PackedStringArray("spawn_point_by_availability")]
+spawn_point_by_availability = {
+NodePath("PowerUpSpawnPoint"): true,
+NodePath("PowerUpSpawnPoint2"): true,
+NodePath("PowerUpSpawnPoint3"): true,
+NodePath("PowerUpSpawnPoint4"): true
+}
+spawn_time = 2.0
+
+[node name="PowerUpSpawnPoint" type="Node3D" parent="PowerUpSpawner" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911133, 0)
+
+[node name="PowerUpSpawnPoint2" type="Node3D" parent="PowerUpSpawner" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.69877, 0.73296, -0.153916)
+
+[node name="PowerUpSpawnPoint3" type="Node3D" parent="PowerUpSpawner" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86844, 0.920755, 0)
+
+[node name="PowerUpSpawnPoint4" type="Node3D" parent="PowerUpSpawner" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00392321, -0.00542304, 5.84162)
+
+[node name="Terrain" parent="." index="8" instance=ExtResource("2_ppjc2")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="KothManager" parent="." index="9" node_paths=PackedStringArray("koth_rings")]
 koth_rings = [NodePath("KothRing"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
 
 [node name="KothRing" parent="KothManager" index="0" instance=ExtResource("3_ppjc2")]
@@ -48,8 +72,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.92325, 0.71584, 0.25356)
 
 [node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("3_ppjc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39726, 0.740756, -0.391492)
-
-[node name="Terrain" parent="." index="8" instance=ExtResource("2_ppjc2")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
 [editable path="Terrain"]
