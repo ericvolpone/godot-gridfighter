@@ -7,28 +7,7 @@
 
 [node name="SmallHill" instance=ExtResource("1_3qiap")]
 
-[node name="KothManager" parent="." index="6" node_paths=PackedStringArray("koth_rings")]
-koth_rings = [NodePath("KothRing"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
-
-[node name="KothRing" parent="KothManager" index="0" instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.166043, 5.90023)
-
-[node name="KothRing2" parent="KothManager" index="1" instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97333, 0.954087, 0.952162)
-
-[node name="KothRing3" parent="KothManager" index="2" instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81209, -8.7776)
-
-[node name="KothRing4" parent="KothManager" index="3" instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.92325, 0.71584, 0.25356)
-
-[node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("3_ppjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39726, 0.740756, -0.391492)
-
-[node name="Terrain" parent="." index="8" instance=ExtResource("2_ppjc2")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-
-[node name="Respawner" parent="." index="9" node_paths=PackedStringArray("respawn_point_availability")]
+[node name="Respawner" parent="." index="4" node_paths=PackedStringArray("respawn_point_availability")]
 respawn_point_availability = {
 NodePath("RespawnPoint"): true,
 NodePath("RespawnPoint2"): true,
@@ -51,5 +30,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, 6.7103)
 
 [node name="RespawnPoint5" parent="Respawner" index="4" instance=ExtResource("3_51cky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, -6.93428)
+
+[node name="KothManager" parent="." index="7" node_paths=PackedStringArray("koth_rings")]
+koth_rings = [NodePath("KothRing"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
+
+[node name="KothRing" parent="KothManager" index="0" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.166043, 5.90023)
+
+[node name="KothRing2" parent="KothManager" index="1" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97333, 0.954087, 0.952162)
+
+[node name="KothRing3" parent="KothManager" index="2" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81209, -8.7776)
+
+[node name="KothRing4" parent="KothManager" index="3" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.92325, 0.71584, 0.25356)
+
+[node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("3_ppjc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39726, 0.740756, -0.391492)
+
+[node name="Terrain" parent="." index="8" instance=ExtResource("2_ppjc2")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
 [editable path="Terrain"]

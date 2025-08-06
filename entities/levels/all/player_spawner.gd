@@ -24,6 +24,7 @@ func _configure_player_spawner() -> void:
 		level.player_chars[player] = player
 		var brain_type: Brain.BrainType = spawn_data["brain"]
 		player.add_brain(Brain.new_brain_from_type_with_deps(brain_type, level.koth_manager))
+		player.brain.set_multiplayer_authority(player.get_multiplayer_authority())
 		level.scoreboard.add_player_to_score(player);
 		call_deferred("respawn_player", player)
 		return player

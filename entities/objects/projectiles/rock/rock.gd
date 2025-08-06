@@ -1,4 +1,4 @@
-class_name Rock extends RigidBody3D
+class_name Rock extends Projectile
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 

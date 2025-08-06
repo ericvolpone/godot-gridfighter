@@ -3,14 +3,12 @@ class_name PunchAction extends AbstractCombatAction
 var punch_strength: float = 3;
 
 func _ready() -> void:
-	get_player().animator.animation_finished.connect(_on_punch_animation_finished);
+	player.animator.animation_finished.connect(_on_punch_animation_finished);
 
 func get_cd_time() -> float:
 	return 1.0;
 
 func execute_child() -> void:
-	# Spawn a rock
-	var player: Player = get_player();
 	player.is_punching = true;
 	player.play_anim(Player.ANIM_PUNCH, 0.5);
 
@@ -18,9 +16,9 @@ func is_usable_child() -> bool:
 	return true;
 
 func handle_animation_signal() -> void:
-	var punch_origin: Vector3 = get_player().global_position
+	var punch_origin: Vector3 = player.global_position
 	punch_origin.y += .5; 
-	var forward_dir: Vector3 = get_player().get_facing_direction()  # forward in Godot
+	var forward_dir: Vector3 = player.get_facing_direction()  # forward in Godot
 
 	var punch_range: float = 2.0
 	var punch_radius: float = .3
@@ -52,7 +50,7 @@ func handle_animation_signal() -> void:
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
 			print("CharacterBody")
 			var player_obj: Player = obj
-			if(player_obj.player_id == get_player().player_id or player_obj.is_blocking):
+			if(player_obj.player_id == player.player_id or player_obj.is_blocking):
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
@@ -85,4 +83,4 @@ func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float 
 
 func _on_punch_animation_finished(anim_name: String) -> void:
 	if(Player.ANIM_PUNCH == anim_name):
-		get_player().is_punching = false;
+		player.is_punching = false;

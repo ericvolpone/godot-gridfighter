@@ -1,6 +1,6 @@
 class_name ProjectileSpawner extends MultiplayerSpawner
 
-var rock_scene: PackedScene = preload("res://entities/objects/combat/rock.tscn")
+var rock_scene: PackedScene = preload("res://entities/objects/projectiles/rock/rock.tscn")
 
 @onready var level: Level = get_parent();
 
@@ -10,7 +10,18 @@ func _ready() -> void:
 
 func _configure_projectile_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> Rock:
-		var peer_id: int = spawn_data["peer_id"]
 		var rock: Rock = rock_scene.instantiate();
-		rock.set_multiplayer_authority(peer_id)
+		var direction: Vector3 = spawn_data["direction"]
+		var spawn_location: Vector3 = spawn_data["spawn_location"]
+		var owner_peer_id: int = spawn_data["owner_peer_id"]
+		rock.set_multiplayer_authority(owner_peer_id)
+		
+		rock.call_deferred("initialize_from_spawn_data", spawn_data)
 		return rock
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn_projectile(spawn_data: Dictionary) -> void:
+	if not multiplayer.is_server():
+		return
+
+	spawn(spawn_data)

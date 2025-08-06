@@ -3,7 +3,7 @@ class_name Scoreboard extends Control
 @onready var score_container: VBoxContainer = $VContainer/Scores
 
 # Scoring Variables
-var score_by_player: Dictionary = {}
+@export var score_by_player: Dictionary = {}
 var score_label_by_player: Dictionary = {}
 
 #func _ready() -> void:

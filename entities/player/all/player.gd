@@ -16,9 +16,6 @@ const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 @onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
 @onready var mesh: RockGuy = $RockGuy;
 
-# Packed Scenes
-@onready var rock_scene: PackedScene = preload("res://entities/objects/combat/rock.tscn");
-
 var player_id: int;
 var player_name: String;
 @export var brain: Brain;
@@ -37,9 +34,9 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 # Combat Actions Data
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
-@onready var combat_action_1: AbstractCombatAction = ThrowRockAction.new()
-@onready var combat_action_2: AbstractCombatAction = BlockAction.new()
-@onready var combat_action_3: AbstractCombatAction = PunchAction.new()
+@onready var combat_action_1: ThrowRockAction = ThrowRockAction.new()
+@onready var combat_action_2: BlockAction = BlockAction.new()
+@onready var combat_action_3: PunchAction = PunchAction.new()
 
 # State variables
 @export var is_knocked: bool = false;
@@ -55,6 +52,10 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
 	
+	combat_action_1.set_multiplayer_authority(get_multiplayer_authority())
+	combat_action_2.set_multiplayer_authority(get_multiplayer_authority())
+	combat_action_3.set_multiplayer_authority(get_multiplayer_authority())
+	combat_action_1.projectile_spawner = level.projectile_spawner
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
@@ -113,11 +114,9 @@ func process_movement(delta: float) -> void:
 		velocity.z = knockback_velocity.z
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
-			print("Player " + player_name + " is standing back up")
 			is_standing_back_up = true;
 			play_anim(ANIM_IDLE, 0.5)
 		if knockback_timer <= 0.0:
-			print("Player " + player_name + " is no longer knocked")
 			is_knocked = false
 			is_standing_back_up = false
 			velocity = Vector3.ZERO
@@ -152,7 +151,6 @@ func add_brain(_brain: Brain) -> void:
 	brain = _brain;
 	if(_brain is PlayerBrain):
 		is_player_controlled = true;
-
 	add_child(brain);
 
 func knock_back(direction: Vector3, strength: float, duration: float) -> void:
