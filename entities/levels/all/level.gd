@@ -8,7 +8,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Multiplayer Variables
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
-@onready var projectile_spawner: MultiplayerSpawner = $ProjectileMPSpawner
+@onready var projectile_spawner: MultiplayerSpawner = $ProjectileSpawner
 @onready var respawner: Respawner = $Respawner
 @onready var koth_manager: KothManager = $KothManager
 

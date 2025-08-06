@@ -22,12 +22,8 @@ func _ready() -> void:
 			rock.apply_impulse(Vector3(-300, 0 , 300))
 	)
 
-func get_player_spawn_positions() -> Array[Vector3]:
-	return [Vector3(-1.5, 0, 1.5)];
-	
-# No AI, we are tossing a ball
-func get_ai_spawn_locations() -> Array:
-	return []
+func get_ai_count() -> int:
+	return 0;
 	
 func get_tutorial_text() -> String:
 	return "Dodge the rock!  Use F to block in place or move"
