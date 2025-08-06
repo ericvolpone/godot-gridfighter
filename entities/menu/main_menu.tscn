@@ -16,6 +16,7 @@ offset_right = 135.0
 offset_bottom = 451.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="MPHostButton" type="Button" parent="HBoxContainer/VBoxContainer"]
@@ -23,10 +24,18 @@ layout_mode = 2
 action_mode = 0
 text = "Host"
 
-[node name="MPJoinButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="HBoxJoin" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="MPJoinButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxJoin"]
 layout_mode = 2
 text = "Join
 "
+
+[node name="IPAddressEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxJoin"]
+layout_mode = 2
+placeholder_text = "IP Adress"
 
 [node name="TutorialButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -55,6 +64,6 @@ offset_right = 250.0
 offset_bottom = 351.0
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MPHostButton" to="." method="_on_mp_host_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/MPJoinButton" to="." method="_on_mp_join_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxJoin/MPJoinButton" to="." method="_on_mp_join_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

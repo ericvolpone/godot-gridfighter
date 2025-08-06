@@ -1,6 +1,7 @@
 extends Control
 
 @onready var lobby_settings: LobbySettings = $LobbySettings
+@onready var ip_address_edit: LineEdit = $HBoxContainer/VBoxContainer/HBoxJoin/IPAddressEdit
 
 func _on_mp_host_button_pressed() -> void:
 	lobby_settings.calculate_values()
@@ -10,6 +11,7 @@ func _on_mp_host_button_pressed() -> void:
 		multiplayer.multiplayer_peer = peer
 		while(peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED):
 			pass
+		print("Hosting server at:", IP.get_local_addresses())
 
 	var small_hill: Level = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn").instantiate();
 	small_hill.lobby_settings = lobby_settings
@@ -19,7 +21,8 @@ func _on_mp_host_button_pressed() -> void:
 
 func _on_mp_join_button_pressed() -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	peer.create_client("localhost", 9999)
+	var ip_address: String = ip_address_edit.text
+	peer.create_client(ip_address, 9999)
 	multiplayer.multiplayer_peer = peer
 
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
