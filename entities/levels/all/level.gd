@@ -49,10 +49,11 @@ func _ready() -> void:
 		print("Setup offline");
 
 func handle_player_death(player: Player) -> void:
-	var death: PlayerDeath = death_scene.instantiate();
-	death.signal_death_animation_complete.connect(func() -> void:
-		print("signal done")
-		)
-	add_child(death)
-	death.global_position = player.global_position
+	_spawn_death_explosion.rpc(player.global_position)
 	respawner.respawn_player(player)
+
+@rpc("call_local", "any_peer", "reliable")
+func _spawn_death_explosion(location: Vector3) -> void:
+	var death: PlayerDeath = death_scene.instantiate();
+	add_child(death)
+	death.global_position = location
