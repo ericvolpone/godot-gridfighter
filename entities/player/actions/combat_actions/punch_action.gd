@@ -1,7 +1,5 @@
 class_name PunchAction extends AbstractCombatAction
 
-var punch_strength: float = 3;
-
 func _ready() -> void:
 	player.animator.animation_finished.connect(_on_punch_animation_finished);
 
@@ -45,7 +43,7 @@ func handle_animation_signal() -> void:
 		if obj is RigidBody3D and obj.is_in_group(Groups.PUNCHABLE_RB):  # whitelist
 			print("RB3D")
 			var to_obj: Vector3 = (obj.global_position - global_position).normalized()
-			var force: Vector3 = to_obj * punch_strength * 50  # Tune force as needed
+			var force: Vector3 = to_obj * player.current_strength * 20  # Tune force as needed
 			obj.apply_central_impulse(force)
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
 			print("CharacterBody")
@@ -54,7 +52,7 @@ func handle_animation_signal() -> void:
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
-			player_obj.knock_back(force, punch_strength, 2.5)
+			player_obj.knock_back(force, player.current_strength, 2.5)
 
 func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float = 0.5) -> void:
 	var sphere_mesh: SphereMesh = SphereMesh.new()

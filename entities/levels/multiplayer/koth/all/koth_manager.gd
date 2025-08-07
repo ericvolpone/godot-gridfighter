@@ -68,7 +68,7 @@ func increment_koth_score() -> void:
 			# Give a point to everybody in the ring
 			var players_in_ring: Array = get_players_in_current_ring(level.player_chars);
 			for player: Player in players_in_ring:
-				scoreboard.score_by_player[player.player_name] += 1
+				scoreboard.update_player_score(player, 1)
 			
 			time_until_next_score = time_until_next_score + time_between_scoring
 
@@ -79,9 +79,9 @@ func get_players_in_current_ring(player_set: Dictionary) -> Array:
 
 	for player: Player in player_set:
 		# TODO Figure out if this logic is even needed...
-		var horizontal_distance: float = Vector2(
-			player.global_position.x - current_ring.global_position.x, 
-		 	player.global_position.z - current_ring.global_position.z).length();
+		#var horizontal_distance: float = Vector2(
+			#player.global_position.x - current_ring.global_position.x, 
+		 	#player.global_position.z - current_ring.global_position.z).length();
 		var to_player: Vector3 = player.global_position - current_ring.global_position
 		var distance: float = to_player.length()
 

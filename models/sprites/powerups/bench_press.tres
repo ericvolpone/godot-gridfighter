@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://iayvy8ovaflb"]
+
+[ext_resource type="Texture2D" uid="uid://drb8xyjigxvjw" path="res://models/sprites/powerups/bench_press.png" id="1_3xtl4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0i0b"]
+atlas = ExtResource("1_3xtl4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq2ug"]
+atlas = ExtResource("1_3xtl4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e5kk"]
+atlas = ExtResource("1_3xtl4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw4sd"]
+atlas = ExtResource("1_3xtl4")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0i0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq2ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e5kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw4sd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

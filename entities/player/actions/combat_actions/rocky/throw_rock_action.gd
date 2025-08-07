@@ -15,7 +15,7 @@ func execute_child() -> void:
 	var spawn_data: Dictionary = {
 		"direction": player.get_facing_direction(),
 		"spawn_location": spawn_location,
-		"force": 8,
+		"force": player.current_strength,
 		"owner_peer_id": player.get_multiplayer_authority()
 	}
 	projectile_spawner.spawn_projectile.rpc(spawn_data)

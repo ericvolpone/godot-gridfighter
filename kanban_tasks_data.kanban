@@ -11,16 +11,17 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"727a2d99-e87f-4939-9105-44fe844ef725",
+				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
+				"70036384-bc35-4b01-bcbf-dc61bd1ec212",
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
-				"ff2406eb-38dc-43ef-996c-038402108c05",
-				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
-				"04865abb-c63e-4724-9aed-eefdffd2c712",
-				"4e8c0a23-084c-4388-b413-99cabda9f1fc",
-				"20912649-7cee-476d-afa6-b7d17b2253d9"
+				"20912649-7cee-476d-afa6-b7d17b2253d9",
+				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
+				"f0bed60f-c96f-4fcf-9ae1-7c260456da24"
 			]
 		},
 		{
@@ -33,6 +34,9 @@
 			"title": "Done",
 			"tasks": [
 				"df030f1e-5cc9-4d35-8572-f93f41809a47",
+				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
+				"ff2406eb-38dc-43ef-996c-038402108c05",
+				"4e8c0a23-084c-4388-b413-99cabda9f1fc",
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
 				"5b6267b0-a5df-402e-83a6-2a218a5ee39a",
 				"ad5b45f5-4d06-4d45-a8d3-b80e2b685152",
@@ -82,7 +86,7 @@
 		},
 		{
 			"uuid": "c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
-			"title": "Cooldown UI for Player",
+			"title": "HUD: Abilities / Cooldowns",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
@@ -272,7 +276,7 @@
 		{
 			"uuid": "4e8c0a23-084c-4388-b413-99cabda9f1fc",
 			"title": "Bug: Score is showing the same player name",
-			"description": "",
+			"description": "Somethings actually a little complicated in the physics process here.  When I fixed it, it breaks on multiplayer peer spawn",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		},
@@ -286,6 +290,34 @@
 		{
 			"uuid": "20912649-7cee-476d-afa6-b7d17b2253d9",
 			"title": "Effects: Punch Effect",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "727a2d99-e87f-4939-9105-44fe844ef725",
+			"title": "Bug: Sometimes double score on death, particularly on AI",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
+			"title": "PlayTest: Ryans rock was knocking him down",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "f0bed60f-c96f-4fcf-9ae1-7c260456da24",
+			"title": "PlayTest: Roundhouse Kick",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "70036384-bc35-4b01-bcbf-dc61bd1ec212",
+			"title": "HUD: PowerUps",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

@@ -5,6 +5,11 @@ var power_up_spawn_point: Node3D;
 
 signal signal_power_up_applied
 
+enum Type {
+	SPEED,
+	STRENGTH
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite.play("default")
@@ -15,9 +20,9 @@ func _on_body_entered(body: Node) -> void:
 	if not is_multiplayer_authority(): return;
 
 	if body is Player:
-		apply_powerup(body as Player)
+		apply_power_up(body as Player)
 		emit_signal("signal_power_up_applied", power_up_spawn_point)
 		queue_free();
 
-func apply_powerup(_player: Player) -> void:
-	push_error("Define apply_powerup in the child");
+func apply_power_up(_player: Player) -> void:
+	push_error("Define apply_power_up in the child");

@@ -3,7 +3,7 @@ class_name Rock extends Projectile
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 
 const LOW_VELOCITY_THRESHOLD = 1.0;
-const HIGH_VELOCITY_THRESHOLD = 4.0;
+const HIGH_VELOCITY_THRESHOLD = 20.0;
 const TIME_FOR_LOW_VELOCITY_REMOVAL: float = 1.0;
 var time_under_removable_velocity: float = 0;
 
@@ -23,7 +23,7 @@ func _on_body_entered(body: Node) -> void:
 		if impact_force > LOW_VELOCITY_THRESHOLD:
 			if(player.is_blocking):
 				var throw_direction: Vector3 = (global_transform.origin - player.global_transform.origin).normalized()
-				apply_central_force(direction * 10000);
+				apply_central_force(throw_direction * 10000);
 			else:
 				var throw_direction: Vector3 = (player.global_transform.origin - global_transform.origin).normalized()
 				# TODO debug what makes sense for clamp values and force here

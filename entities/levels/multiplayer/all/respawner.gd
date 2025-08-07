@@ -5,6 +5,7 @@ class_name Respawner extends Node
 @export var respawn_time: float = 2;
 
 func respawn_player(player: Player) -> void:
+	player.is_respawning = true
 	var respawn_points: Array[RespawnPoint] = respawn_point_availability.keys()
 	respawn_points.shuffle()
 	
@@ -23,6 +24,7 @@ func respawn_player(player: Player) -> void:
 			# TODO Would be cool to freeze player in place for a bit
 			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
 				player.set_physics_process(true)
+				player.is_respawning = false;
 				get_tree().create_timer(1).timeout.connect(func() -> void:
 					respawn_point_availability[respawn_point] = true;
 				)

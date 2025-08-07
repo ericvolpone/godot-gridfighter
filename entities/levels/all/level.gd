@@ -29,6 +29,7 @@ func _ready() -> void:
 		lobby_settings = LobbySettings.default();
 
 	player_spawner.max_player_speed = lobby_settings.max_player_speed
+	player_spawner.max_player_strength = lobby_settings.max_player_strength
 
 	# Enable Koth Manager
 	if lobby_settings.is_koth:
@@ -39,6 +40,7 @@ func _ready() -> void:
 	if lobby_settings.are_power_ups_enabled:
 		power_up_spawner.are_power_ups_enabled = true
 		power_up_spawner.spawn_time = lobby_settings.power_up_spawn_rate
+		power_up_spawner.enabled_power_up_types = lobby_settings.enabled_power_ups
 		power_up_spawner.start_cycle();
 
 	# Handle offline games
@@ -49,7 +51,13 @@ func _ready() -> void:
 		print("Setup offline");
 
 func handle_player_death(player: Player) -> void:
+	if not multiplayer.is_server():
+		return
+
+	if player.is_respawning:
+		return
 	_spawn_death_explosion.rpc(player.global_position)
+	scoreboard.update_player_score(player, -5)
 	respawner.respawn_player(player)
 
 @rpc("call_local", "any_peer", "reliable")

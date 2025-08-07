@@ -31,6 +31,12 @@ var is_in_menu: bool = false;
 @onready var current_move_speed: float = starting_move_speed;
 var speed_boost_modifier: float = 0;
 var max_player_speed: float = 10;
+
+var starting_strength: float = 5;
+var current_strength: float = starting_strength;
+var current_strength_modifier: float = 0;
+var max_player_strength: float = 10;
+
 @export var jump_velocity: float = 4.5;
 var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
@@ -51,6 +57,7 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 @export var is_blocking: bool = false;
 @export var is_punching: bool = false;
 @export var is_walking: bool = false;
+@export var is_respawning: bool = false;
 
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
@@ -187,3 +194,13 @@ func apply_speed_boost(value: int) -> void:
 	
 	if current_move_speed >= max_player_speed:
 		current_move_speed = max_player_speed
+
+@rpc("any_peer", "call_local", "reliable")
+func apply_strength_boost(value: int) -> void:
+	if not is_multiplayer_authority():
+		return;
+	current_strength_modifier += value;
+	current_strength += value;
+	
+	if current_strength >= max_player_strength:
+		current_strength = max_player_strength

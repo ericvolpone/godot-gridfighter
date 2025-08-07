@@ -20,3 +20,14 @@ func add_player_to_score(player: Player) -> void:
 	score_label.text = player.player_name + ": " + str(score)
 	score_container.add_child(score_label)
 	score_label_by_player[player.player_name] = score_label
+
+func update_player_score(player: Player, amount: int) -> void:
+	_update_player_score_by_name.rpc(player.player_name, amount);
+
+@rpc("call_local", "any_peer", "reliable")
+func _update_player_score_by_name(player_name: String, amount: int) -> void:
+	if not is_multiplayer_authority():
+		return
+
+	print("Updating Score");
+	score_by_player[player_name] += amount
