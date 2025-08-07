@@ -11,6 +11,7 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"48d54ca5-6d46-4aff-a696-7d33c4fb3562",
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
@@ -318,6 +319,13 @@
 		{
 			"uuid": "70036384-bc35-4b01-bcbf-dc61bd1ec212",
 			"title": "HUD: PowerUps",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "48d54ca5-6d46-4aff-a696-7d33c4fb3562",
+			"title": "Bug: Multiplayer Peers are not always spawning teh same power up",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

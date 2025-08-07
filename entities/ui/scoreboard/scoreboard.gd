@@ -29,5 +29,5 @@ func _update_player_score_by_name(player_name: String, amount: int) -> void:
 	if not is_multiplayer_authority():
 		return
 
-	print("Updating Score");
+	print("Updating Score on client " + str(multiplayer.get_unique_id()));
 	score_by_player[player_name] += amount

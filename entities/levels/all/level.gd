@@ -51,9 +51,6 @@ func _ready() -> void:
 		print("Setup offline");
 
 func handle_player_death(player: Player) -> void:
-	if not multiplayer.is_server():
-		return
-
 	if player.is_respawning:
 		return
 	_spawn_death_explosion.rpc(player.global_position)
