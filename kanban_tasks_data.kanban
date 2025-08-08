@@ -305,7 +305,7 @@
 		{
 			"uuid": "cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 			"title": "PlayTest: Ryans rock was knocking him down",
-			"description": "",
+			"description": "I can verify this locally if the player has enough speed and is running in the direction they are throwing.  May be fixed with animation and speed modifications during throw, or just rework the rock action\n",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		},

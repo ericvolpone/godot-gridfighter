@@ -31,7 +31,7 @@ func create_timer_for_powerup() -> void:
 			var random_index: int = rng.randi_range(0, enabled_power_up_types.size() - 1)
 			var power_up_type: PowerUp.Type = enabled_power_up_types[random_index]
 			spawn({
-				"spawn_point" : spawn_point,
+				"spawn_point_path" : spawn_point.get_path(),
 				"power_up_type": power_up_type
 				});
 		create_timer_for_powerup()
@@ -42,10 +42,11 @@ func _configure_power_up_spawner() -> void:
 		var peer_id: int = get_multiplayer_authority()
 		var power_up: PowerUp = get_scene_for_type(spawn_data["power_up_type"]).instantiate();
 		power_up.set_multiplayer_authority(peer_id)
-		call_deferred("_spawn_power_up_at_point", power_up, spawn_data["spawn_point"])
+		call_deferred("_spawn_power_up_at_point", power_up, spawn_data["spawn_point_path"])
 		return power_up
 
-func _spawn_power_up_at_point(power_up: PowerUp, spawn_point: Node3D) -> void:
+func _spawn_power_up_at_point(power_up: PowerUp, spawn_point_path: NodePath) -> void:
+	var spawn_point: Node3D = get_node(spawn_point_path)
 	spawn_point_by_availability[spawn_point] = false
 	power_up.global_position = spawn_point.global_position
 	power_up.power_up_spawn_point = spawn_point
