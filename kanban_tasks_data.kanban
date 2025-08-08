@@ -22,7 +22,8 @@
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"06a50bae-370f-4f00-9a70-9c2de527ddb2",
-				"befba3fd-b6e3-479e-a9ba-d2fc031834d8"
+				"befba3fd-b6e3-479e-a9ba-d2fc031834d8",
+				"1b81778d-d91b-4d14-b893-78dfe5e7d299"
 			]
 		},
 		{
@@ -342,6 +343,13 @@
 		{
 			"uuid": "befba3fd-b6e3-479e-a9ba-d2fc031834d8",
 			"title": "HUD: Add keybinds to action abilities",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "1b81778d-d91b-4d14-b893-78dfe5e7d299",
+			"title": "Hazards: Implement a Hazards functionality (Jump Pad Base)",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
