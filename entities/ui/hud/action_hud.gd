@@ -7,8 +7,7 @@ class_name ActionHUD extends Control
 var action: CombatAction;
 
 func _ready() -> void:
-	var image: Image = Image.load_from_file(action.get_action_image_path())
-	var image_texture: ImageTexture = ImageTexture.create_from_image(image)
+	var image_texture: Resource = load(action.get_action_image_path())
 	action_image.texture = image_texture
 
 func _process(_delta: float) -> void:

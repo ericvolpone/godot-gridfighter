@@ -20,20 +20,21 @@
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
-				"f0bed60f-c96f-4fcf-9ae1-7c260456da24"
+				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
+				"06a50bae-370f-4f00-9a70-9c2de527ddb2",
+				"befba3fd-b6e3-479e-a9ba-d2fc031834d8"
 			]
 		},
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": [
-				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
 				"48d54ca5-6d46-4aff-a696-7d33c4fb3562",
 				"df030f1e-5cc9-4d35-8572-f93f41809a47",
 				"8b1209fc-0dd7-4903-8803-c1166dafdbc7",
@@ -327,6 +328,20 @@
 		{
 			"uuid": "48d54ca5-6d46-4aff-a696-7d33c4fb3562",
 			"title": "Bug: Multiplayer Peers are not always spawning teh same power up",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "06a50bae-370f-4f00-9a70-9c2de527ddb2",
+			"title": "Sprites: Create block and rock sprite for actions",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "befba3fd-b6e3-479e-a9ba-d2fc031834d8",
+			"title": "HUD: Add keybinds to action abilities",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

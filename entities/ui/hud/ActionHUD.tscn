@@ -11,10 +11,13 @@ subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_p8x6i"]
 font = SubResource("SystemFont_x1jlc")
-font_size = 50
-font_color = Color(0.928448, 0.637143, 1, 1)
+font_size = 64
+font_color = Color(0.980292, 0.891257, 0.861021, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="ActionHud" type="Control"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,15 +44,12 @@ texture = ExtResource("2_k3tnw")
 
 [node name="CoolDownText" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_top = -44.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "5"
