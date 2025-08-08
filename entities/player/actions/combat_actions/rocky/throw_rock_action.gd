@@ -1,4 +1,4 @@
-class_name ThrowRockAction extends AbstractCombatAction
+class_name ThrowRockAction extends CombatAction
 
 const rock_scene: PackedScene = preload("res://entities/objects/projectiles/rock/rock.tscn");
 

@@ -1,7 +1,10 @@
-class_name PunchAction extends AbstractCombatAction
+class_name PunchAction extends CombatAction
 
 func _ready() -> void:
 	player.animator.animation_finished.connect(_on_punch_animation_finished);
+
+func get_action_image_path() -> String:
+	return "res://models/sprites/hud/actions/punch.png";
 
 func get_cd_time() -> float:
 	return 1.0;

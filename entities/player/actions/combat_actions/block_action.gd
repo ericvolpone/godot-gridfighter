@@ -1,4 +1,4 @@
-class_name BlockAction extends AbstractCombatAction
+class_name BlockAction extends CombatAction
 
 func _ready() -> void:
 	player.animator.animation_finished.connect(_on_block_animation_finished);

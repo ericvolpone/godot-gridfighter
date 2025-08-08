@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://df0xcvko2he0t"]
+
+[ext_resource type="Script" uid="uid://co8dmpln5a4bu" path="res://entities/ui/hud/action_hud.gd" id="1_hayth"]
+[ext_resource type="Texture2D" uid="uid://cekcxn3aayu7" path="res://models/sprites/hud/actions/on_cooldown.png" id="2_k3tnw"]
+[ext_resource type="Texture2D" uid="uid://bupenveb4cfh8" path="res://models/sprites/hud/actions/punch.png" id="2_x1jlc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x1jlc"]
+
+[sub_resource type="SystemFont" id="SystemFont_x1jlc"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_p8x6i"]
+font = SubResource("SystemFont_x1jlc")
+font_size = 50
+font_color = Color(0.928448, 0.637143, 1, 1)
+
+[node name="ActionHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1536.0
+offset_bottom = -1136.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hayth")
+
+[node name="ActionImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_x1jlc")
+
+[node name="CoolDownOverlay" type="TextureRect" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_x1jlc")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_k3tnw")
+
+[node name="CoolDownText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+label_settings = SubResource("LabelSettings_p8x6i")
+horizontal_alignment = 1

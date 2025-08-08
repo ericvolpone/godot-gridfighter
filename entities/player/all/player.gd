@@ -9,6 +9,9 @@ const ANIM_FALL: String = "rockguy_anim_lib/RockGuy_FallingDown"
 const ANIM_PUNCH: String = "rockguy_anim_lib/RockGuy_Hook"
 const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 
+# HUD
+@onready var action_hud_container_scene: PackedScene = preload("res://entities/ui/hud/ActionHUDContainer.tscn")
+
 # Parent Level Accessor Nodes
 @onready var player_spawner: PlayerSpawner = get_parent()
 @onready var level: Level = player_spawner.get_parent();
@@ -69,6 +72,12 @@ func _ready() -> void:
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
+	
+	var action_hud_container: ActionHudContainer = action_hud_container_scene.instantiate()
+	add_child(action_hud_container);
+	action_hud_container.add_action(combat_action_1)
+	action_hud_container.add_action(combat_action_2)
+	action_hud_container.add_action(combat_action_3)
 	mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
 	
 	if(is_player_controlled and is_multiplayer_authority()):
