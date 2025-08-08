@@ -3,6 +3,9 @@ class_name BlockAction extends CombatAction
 func _ready() -> void:
 	player.animator.animation_finished.connect(_on_block_animation_finished);
 
+func get_action_image_path() -> String:
+	return "res://models/sprites/hud/actions/shield.png";
+
 # Interface Methods
 func get_cd_time() -> float:
 	return 5.0;

@@ -4,6 +4,9 @@ const rock_scene: PackedScene = preload("res://entities/objects/projectiles/rock
 
 var projectile_spawner: ProjectileSpawner;
 
+func get_action_image_path() -> String:
+	return "res://models/sprites/hud/actions/throw_rock.png";
+
 func get_cd_time() -> float:
 	return 3.0;
 

@@ -2,7 +2,7 @@ class_name ActionHudContainer extends Control
 
 @onready var action_hud_scene: PackedScene = preload("res://entities/ui/hud/ActionHUD.tscn")
 
-@onready var container: HBoxContainer = $HBoxContainer
+@onready var container: HBoxContainer = $MarginContainer/HBoxContainer
 
 var action_huds: Array[ActionHUD] = [];
 

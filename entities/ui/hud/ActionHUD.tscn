@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://df0xcvko2he0t"]
+[gd_scene load_steps=9 format=3 uid="uid://df0xcvko2he0t"]
 
 [ext_resource type="Script" uid="uid://co8dmpln5a4bu" path="res://entities/ui/hud/action_hud.gd" id="1_hayth"]
 [ext_resource type="Texture2D" uid="uid://cekcxn3aayu7" path="res://models/sprites/hud/actions/on_cooldown.png" id="2_k3tnw"]
+[ext_resource type="Shader" uid="uid://c03b6cuthddvd" path="res://entities/ui/hud/ActionHUD.gdshader" id="2_p8x6i"]
 [ext_resource type="Texture2D" uid="uid://bupenveb4cfh8" path="res://models/sprites/hud/actions/punch.png" id="2_x1jlc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olgid"]
+shader = ExtResource("2_p8x6i")
+shader_parameter/glow_color = Color(0.361311, 0.39859, 0.375898, 1)
+shader_parameter/glow_power = 0.2
+shader_parameter/alpha_threshold = 0.1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x1jlc"]
 
@@ -29,6 +36,7 @@ grow_vertical = 2
 script = ExtResource("1_hayth")
 
 [node name="ActionImage" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_olgid")
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
