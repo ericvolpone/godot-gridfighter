@@ -42,9 +42,6 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath("PowerUpSpawner:enabled_power_up_types")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("PowerUpSpawner:next_power_up_index")
-properties/6/spawn = true
-properties/6/replication_mode = 1
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_btq12")

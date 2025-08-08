@@ -5,7 +5,6 @@ class_name PowerUpSpawner extends MultiplayerSpawner
 @onready var power_up_strength_scene: PackedScene = preload("res://entities/objects/powerups/power_up_strength.tscn")
 
 @export var enabled_power_up_types: Array[PowerUp.Type] = []
-@export var next_power_up_index: int = 0;
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Holds respawn points and if they are available for respawn
@@ -29,18 +28,19 @@ func create_timer_for_powerup() -> void:
 	get_tree().create_timer(spawn_time).timeout.connect(func() -> void:
 		var spawn_point: Node3D = _find_random_available_spawn_point();
 		if spawn_point:
-			next_power_up_index = rng.randi_range(0, enabled_power_up_types.size() - 1)
-			spawn({"spawn_point" : spawn_point});
+			var random_index: int = rng.randi_range(0, enabled_power_up_types.size() - 1)
+			var power_up_type: PowerUp.Type = enabled_power_up_types[random_index]
+			spawn({
+				"spawn_point" : spawn_point,
+				"power_up_type": power_up_type
+				});
 		create_timer_for_powerup()
 		)
 
 func _configure_power_up_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> PowerUp:
-		# Needed to run client spawners before syncing of types happens...
-		if enabled_power_up_types.size() == 0:
-			return null
 		var peer_id: int = get_multiplayer_authority()
-		var power_up: PowerUp = get_scene_for_type(enabled_power_up_types[next_power_up_index]).instantiate();
+		var power_up: PowerUp = get_scene_for_type(spawn_data["power_up_type"]).instantiate();
 		power_up.set_multiplayer_authority(peer_id)
 		call_deferred("_spawn_power_up_at_point", power_up, spawn_data["spawn_point"])
 		return power_up

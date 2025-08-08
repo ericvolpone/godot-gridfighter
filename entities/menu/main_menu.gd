@@ -28,8 +28,10 @@ func _on_mp_join_button_pressed() -> void:
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 
 func _on_connected_to_server() -> void:
-	print("✅ Connected to server")
-	get_tree().change_scene_to_file("res://entities/levels/multiplayer/smallhill/small_hill.tscn")
+	var small_hill: Level = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn").instantiate();
+	get_tree().root.add_child(small_hill)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = small_hill
 
 func _on_tutorial_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://entities/levels/tutorials/tutorial_level_1.tscn")

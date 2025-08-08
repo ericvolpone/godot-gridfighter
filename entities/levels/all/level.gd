@@ -2,12 +2,6 @@ class_name Level extends Node3D
 
 @onready var death_scene: PackedScene = preload("res://entities/effects/death/player_death.tscn")
 
-# Packed Scenes
-var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
-
-# Utility Variables
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
 # Multiplayer Variables
 @onready var player_spawner: PlayerSpawner = $PlayerSpawner
 @onready var projectile_spawner: ProjectileSpawner = $ProjectileSpawner
@@ -17,10 +11,10 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
+# TODO: I can probably just like... do a groups check or something
 var player_chars: Dictionary = {}
-var respawn_time: float = 3;
+# TODO: It may clean things up to actually sync this some day
 var lobby_settings: LobbySettings;
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
