@@ -185,7 +185,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g2lxu"]
 material = SubResource("ShaderMaterial_i3vcw")
-size = Vector3(150, 1, 150)
+size = Vector3(200, 1, 200)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_btq12")
