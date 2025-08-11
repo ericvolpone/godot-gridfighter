@@ -62,7 +62,8 @@
 				"e097320f-0bb4-4d0c-9850-def2b9d4ea18",
 				"90ca2a99-392e-459f-b166-bb87eb0dfd5e",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
-				"106eca20-8516-43e5-8571-3f8c09ecb3e3"
+				"106eca20-8516-43e5-8571-3f8c09ecb3e3",
+				"5c23e109-339d-4e53-8151-7d7d1fb67f80"
 			]
 		}
 	],
@@ -350,6 +351,13 @@
 		{
 			"uuid": "1b81778d-d91b-4d14-b893-78dfe5e7d299",
 			"title": "Hazards: Implement a Hazards functionality (Jump Pad Base)",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "5c23e109-339d-4e53-8151-7d7d1fb67f80",
+			"title": "Get General Use Character Creation figured out",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
