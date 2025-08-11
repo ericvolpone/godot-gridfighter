@@ -3,11 +3,14 @@ extends CharacterBody3D
 
 class_name Player
 
-const ANIM_IDLE: String = "rockguy_anim_lib/RockGuy_Idle"
-const ANIM_RUN: String = "rockguy_anim_lib/RockGuy_Run"
-const ANIM_FALL: String = "rockguy_anim_lib/RockGuy_FallingDown"
-const ANIM_PUNCH: String = "rockguy_anim_lib/RockGuy_Hook"
-const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
+# Animation Data
+signal punch_frame;
+
+const ANIM_IDLE: String = "master_animations/Idle"
+const ANIM_RUN: String = "master_animations/Run"
+const ANIM_FALL: String = "master_animations/Fall"
+const ANIM_PUNCH: String = "master_animations/Punch"
+const ANIM_BLOCK: String = "master_animations/Block"
 
 # HUD
 @onready var action_hud_container_scene: PackedScene = preload("res://entities/ui/hud/ActionHUDContainer.tscn")
@@ -17,8 +20,8 @@ const ANIM_BLOCK: String = "rockguy_anim_lib/RockGuy_Block"
 @onready var level: Level = player_spawner.get_parent();
 
 # Children Node Accessors
-@onready var animator: AnimationPlayer = $RockGuy/AnimationPlayer;
-@onready var mesh: RockGuy = $RockGuy;
+@onready var animator: AnimationPlayer = $AnimationPlayer;
+@onready var mesh: Node3D = $MasterArmature;
 
 var player_id: int;
 var player_name: String;
@@ -78,7 +81,7 @@ func _ready() -> void:
 	action_hud_container.add_action(combat_action_1)
 	action_hud_container.add_action(combat_action_2)
 	action_hud_container.add_action(combat_action_3)
-	mesh.connect("punch_frame", combat_action_3.handle_animation_signal)
+	connect("punch_frame", combat_action_3.handle_animation_signal)
 	
 	if(is_player_controlled and is_multiplayer_authority()):
 		# TODO Probably put this elsewhere?
@@ -193,6 +196,10 @@ func get_facing_direction() -> Vector3:
 
 func is_mp_authority() -> bool:
 	return is_multiplayer_authority() or brain is not PlayerBrain;
+
+# Animation Signals
+func emit_punch_signal() -> void:
+	emit_signal("punch_frame")
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_speed_boost(value: int) -> void:

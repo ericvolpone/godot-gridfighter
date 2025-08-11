@@ -1,6 +1,6 @@
 class_name PlayerSpawner extends MultiplayerSpawner
 
-var player_scene: PackedScene = preload("res://entities/player/all/player.tscn");
+var player_scene: PackedScene = preload("res://entities/player/bolty/bolty.tscn")
 
 @export var respawner: Respawner;
 var max_player_speed: float = 10;
