@@ -49,9 +49,9 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 # Combat Actions Data
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
-@onready var combat_action_1: ThrowRockAction = ThrowRockAction.new()
-@onready var combat_action_2: BlockAction = BlockAction.new()
-@onready var combat_action_3: PunchAction = PunchAction.new()
+@onready var combat_action_1: PunchAction = PunchAction.new();
+@onready var combat_action_2: BlockAction = BlockAction.new();
+@onready var combat_action_3: CombatAction;
 
 # State variables
 @export var is_knocked: bool = false;
@@ -67,11 +67,15 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
-	
+
+	# Configure punch
 	combat_action_1.set_multiplayer_authority(get_multiplayer_authority())
+	connect("punch_frame", combat_action_1.handle_animation_signal)
+	# Configure block
 	combat_action_2.set_multiplayer_authority(get_multiplayer_authority())
+		# Have children initialize any special combat actions
+	_init_combat_actions()
 	combat_action_3.set_multiplayer_authority(get_multiplayer_authority())
-	combat_action_1.projectile_spawner = level.projectile_spawner
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
@@ -81,7 +85,6 @@ func _ready() -> void:
 	action_hud_container.add_action(combat_action_1)
 	action_hud_container.add_action(combat_action_2)
 	action_hud_container.add_action(combat_action_3)
-	connect("punch_frame", combat_action_3.handle_animation_signal)
 	
 	if(is_player_controlled and is_multiplayer_authority()):
 		# TODO Probably put this elsewhere?
@@ -220,3 +223,8 @@ func apply_strength_boost(value: int) -> void:
 	
 	if current_strength >= max_player_strength:
 		current_strength = max_player_strength
+
+# Interface Methods
+func _init_combat_actions() -> void:
+	push_error("Must implement _init_combat_actions in child")
+	return

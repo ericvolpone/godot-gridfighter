@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://ky3jjnaxjhi1"]
+[gd_scene load_steps=22 format=4 uid="uid://ky3jjnaxjhi1"]
 
 [ext_resource type="PackedScene" uid="uid://b2wyldslu3fnh" path="res://entities/player/all/player.tscn" id="1_0lexs"]
 [ext_resource type="PackedScene" uid="uid://dpmcauy7abwcf" path="res://models/rocky/rocky.glb" id="1_fff62"]
+[ext_resource type="Script" uid="uid://brqa7hgnd7251" path="res://entities/player/rocky/rocky.gd" id="2_u87cr"]
 [ext_resource type="Shader" uid="uid://dgfjacdta8ubk" path="res://models/shaders/toon.gdshader" id="3_u87cr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1q64o"]
@@ -2892,6 +2893,7 @@ _data = {
 }
 
 [node name="Rocky" instance=ExtResource("1_0lexs")]
+script = ExtResource("2_u87cr")
 
 [node name="Model" parent="." index="3" instance=ExtResource("1_fff62")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
