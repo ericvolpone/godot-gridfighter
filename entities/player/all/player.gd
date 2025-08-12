@@ -11,7 +11,13 @@ const ANIM_BLOCK: String = "master_animations/Block"
 
 # Hero Definitions
 const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres")
+const BOLTY_HERO_ID: int = BOLTY_HERO_DEF.hero_id;
 const ROCKY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/rocky/rocky.tres")
+const ROCKY_HERO_ID: int = ROCKY_HERO_DEF.hero_id;
+const HERO_DB: Dictionary[int, HeroDefinition] = {
+	BOLTY_HERO_ID : BOLTY_HERO_DEF,
+	ROCKY_HERO_ID : ROCKY_HERO_DEF
+}
 
 # HUD
 @onready var action_hud_container_scene: PackedScene = preload("res://entities/ui/hud/ActionHUDContainer.tscn")
@@ -55,8 +61,9 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
 
 # Hero Data
-@onready var hero_socket: Node3D = $HeroSocket
+var hero_socket: Node3D
 var hero: Hero;
+@export var current_hero_id: int = -1: set = _set_hero_id;
 
 # State variables
 @export var is_knocked: bool = false;
@@ -70,8 +77,12 @@ var hero: Hero;
 @export var is_walking: bool = false;
 @export var is_respawning: bool = false;
 
+func _enter_tree() -> void:
+	hero_socket = $HeroSocket
+
 func _ready() -> void:
-	change_hero(Player.BOLTY_HERO_DEF)
+	# TODO: Have them choose this
+	current_hero_id = BOLTY_HERO_ID
 	add_to_group(Groups.PLAYER)
 	animator = hero.animator
 	
@@ -87,6 +98,9 @@ func _ready() -> void:
 #	set_multiplayer_authority(name.to_int())
 
 func _input(event: InputEvent) -> void:
+	if not is_multiplayer_authority():
+		return;
+
 	if event.is_action("menu_open") and event.is_pressed():
 		if(is_in_menu):
 			is_in_menu = false
@@ -95,7 +109,7 @@ func _input(event: InputEvent) -> void:
 			is_in_menu = true
 			in_game_menu.show()
 	if event.is_action("change_hero"):
-		change_hero(Player.ROCKY_HERO_DEF)
+		current_hero_id = ROCKY_HERO_ID
 
 func _physics_process(delta: float) -> void:
 	if(animator.current_animation != current_animation):
@@ -171,14 +185,19 @@ func add_brain(_brain: Brain) -> void:
 
 func knock_back(direction: Vector3, strength: float) -> void:
 	if(!is_blocking and !is_knocked):
+		print("Knocking Back")
 		knockback_velocity = direction * strength
 		knockback_timer = 1.9 # Hardcoded because of animation time and standup time, should use signals
 		is_knocked = true
 		is_punching = false
 		play_anim(ANIM_FALL, 0.3)
+	else:
+		print("Can't knock")
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
+	if(animation_name == ANIM_FALL): print("trying to play")
 	if not is_mp_authority(): return;
+	if(animation_name == ANIM_FALL): print("is the MP authority, playing")
 	
 	animator.play(animation_name, blend_time)
 	current_animation = animation_name
@@ -211,24 +230,45 @@ func apply_strength_boost(value: int) -> void:
 	if current_strength >= max_player_strength:
 		current_strength = max_player_strength
 
-func change_hero(hero_definition: HeroDefinition) -> void:
+
+# Hero code
+func _set_hero_id(hero_id: int) -> void:
+	if current_hero_id == hero_id: return
+	current_hero_id = hero_id
+	if is_inside_tree():
+		change_hero(hero_id)  # runs on all peers when the value replicates
+
+# Clients call this to request a change. Server validates and sets hero_id.
+@rpc("any_peer","reliable")
+func rpc_request_change_hero(requested_id: int) -> void:
+	if not multiplayer.is_server(): return
+	if HERO_DB.has(requested_id):
+		# Setting hero_id on the server triggers replication via MultiplayerSynchronizer
+		_set_hero_id(requested_id)
+
+func change_hero(hero_id: int) -> void:
+	var hero_definition: HeroDefinition = HERO_DB[hero_id];
 	if hero:
 		hero.queue_free()
-		action_hud_container.queue_free()
+		if is_multiplayer_authority():
+			action_hud_container.queue_free()
 		await get_tree().process_frame
 	
 	var _hero := hero_definition.instantiate()
+	current_hero_id = hero_definition.hero_id
 	# keep world position/orientation stable via socket
 	hero_socket.add_child(_hero)
-	_hero.global_transform = hero_socket.global_transform
+	# TODO Do I need below line?
+	#_hero.global_transform = hero_socket.global_transform
 	hero = _hero
 	
-	hero.init_combat_actions()
-
-	action_hud_container = action_hud_container_scene.instantiate()
-	add_child(action_hud_container);
-	action_hud_container.add_action(hero.combat_action_1)
-	action_hud_container.add_action(hero.combat_action_2)
-	action_hud_container.add_action(hero.combat_action_3)
-	
 	animator = hero.animator
+	
+	if is_multiplayer_authority():
+		hero.init_combat_actions()
+
+		action_hud_container = action_hud_container_scene.instantiate()
+		add_child(action_hud_container);
+		action_hud_container.add_action(hero.combat_action_1)
+		action_hud_container.add_action(hero.combat_action_2)
+		action_hud_container.add_action(hero.combat_action_3)

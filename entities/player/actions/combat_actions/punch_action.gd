@@ -52,7 +52,9 @@ func handle_animation_signal() -> void:
 			print("CharacterBody")
 			var player_obj: Player = obj
 			if(player_obj == hero.player or player_obj.is_blocking):
+				print("Detecting self; Hero.Player: " + str(hero.player) + "; player_obj: " + str(player_obj))
 				continue
+			print("Knocking Back!")
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)

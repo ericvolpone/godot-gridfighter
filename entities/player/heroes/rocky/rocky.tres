@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ntk8c")
-id = 2
+hero_id = 1
 display_name = "Rocky"
 hero_scene = ExtResource("1_nq00h")
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"
