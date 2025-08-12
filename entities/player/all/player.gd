@@ -20,8 +20,8 @@ const ANIM_BLOCK: String = "master_animations/Block"
 @onready var level: Level = player_spawner.get_parent();
 
 # Children Node Accessors
-@onready var animator: AnimationPlayer = $AnimationPlayer;
-@onready var mesh: Node3D = $MasterArmature;
+@onready var animator: AnimationPlayer = $Model/AnimationPlayer;
+@onready var model: Node3D = $Model;
 
 var player_id: int;
 var player_name: String;
@@ -156,7 +156,7 @@ func process_movement(delta: float) -> void:
 			play_anim(ANIM_RUN, 0.3)
 			velocity.x = move_direction.x * current_move_speed * blocking_modifier
 			velocity.z = move_direction.z * current_move_speed * blocking_modifier
-			mesh.rotation.y = -atan2(-move_direction.x, move_direction.z)
+			model.rotation.y = -atan2(-move_direction.x, move_direction.z)
 		else:
 			play_anim(ANIM_IDLE, 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
@@ -192,7 +192,7 @@ func play_anim(animation_name: String, blend_time: float = 0) -> void:
 
 # Common physics functions
 func get_facing_direction() -> Vector3:
-	return mesh.global_transform.basis.z.normalized()
+	return model.global_transform.basis.z.normalized()
 
 func is_mp_authority() -> bool:
 	return is_multiplayer_authority() or brain is not PlayerBrain;

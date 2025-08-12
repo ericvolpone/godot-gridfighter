@@ -13,7 +13,7 @@ func get_cd_time() -> float:
 func execute_child() -> void:
 	if not player.is_multiplayer_authority(): return;
 
-	var spawn_location: Vector3 = player.global_position + (player.mesh.get_global_transform().basis.z.normalized()) + Vector3(0,1,0);
+	var spawn_location: Vector3 = player.global_position + (player.model.get_global_transform().basis.z.normalized()) + Vector3(0,1,0);
 	
 	var spawn_data: Dictionary = {
 		"direction": player.get_facing_direction(),

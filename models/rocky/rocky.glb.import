@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cwlndrhgm2p5c"
-path="res://.godot/imported/bolty.glb-b8df55a459118219aba56d6712bdd9ed.scn"
+uid="uid://dpmcauy7abwcf"
+path="res://.godot/imported/rocky.glb-1842eb56cc60bd6c990a4a42d48583d9.scn"
 
 [deps]
 
-source_file="res://models/bolty/bolty.glb"
-dest_files=["res://.godot/imported/bolty.glb-b8df55a459118219aba56d6712bdd9ed.scn"]
+source_file="res://models/rocky/rocky.glb"
+dest_files=["res://.godot/imported/rocky.glb-1842eb56cc60bd6c990a4a42d48583d9.scn"]
 
 [params]
 

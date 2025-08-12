@@ -1,6 +1,9 @@
 class_name Rock extends Projectile
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var shader_material: ShaderMaterial = mesh.get_active_material(0)
+@onready var original_albedo: Color = shader_material.get_shader_parameter("albedo_color")
+@onready var transparant_albedo: Color;
 
 const LOW_VELOCITY_THRESHOLD = 1.0;
 const HIGH_VELOCITY_THRESHOLD = 20.0;
@@ -14,6 +17,7 @@ func _ready() -> void:
 	add_to_group(Groups.PUNCHABLE_RB)
 	contact_monitor = true
 	max_contacts_reported = 4
+	transparant_albedo.a = .8;
 	self.body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node) -> void:
@@ -36,10 +40,10 @@ func _physics_process(delta: float) -> void:
 		
 	if is_slow_disappearing:
 		if(linear_velocity.length() > LOW_VELOCITY_THRESHOLD):
-			mesh.get_active_material(0).albedo_color.a = 1;
+			shader_material.set_shader_parameter("albedo_color", original_albedo);
 			time_under_removable_velocity = 0;
 		else:
-			mesh.get_active_material(0).albedo_color.a = .8; # Maybe some sin wave function here to blink
+			shader_material.set_shader_parameter("albedo_color", transparant_albedo);
 			time_under_removable_velocity += delta
 			if(time_under_removable_velocity >= TIME_FOR_LOW_VELOCITY_REMOVAL):
 				queue_free()

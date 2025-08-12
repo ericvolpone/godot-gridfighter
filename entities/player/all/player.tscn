@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=5 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
-[ext_resource type="PackedScene" uid="uid://c0amxhoe18fqr" path="res://entities/player/rocky/rock_guy.tscn" id="3_75vfm"]
 [ext_resource type="PackedScene" uid="uid://dp8abkasj7kyt" path="res://models/ui/indicators/BlueIndicatorCircle.glb" id="4_0owmy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
@@ -46,48 +45,8 @@ script = ExtResource("1_lvxji")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573687, 0)
 shape = SubResource("CapsuleShape3D_g2els")
 
-[node name="RockGuy" parent="." instance=ExtResource("3_75vfm")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-
-[node name="Skeleton3D" parent="RockGuy/Armature" index="0"]
-bones/0/position = Vector3(5.13203, -0.588784, -144.697)
-bones/0/rotation = Quaternion(-0.663867, -0.345714, 0.322371, 0.579517)
-bones/1/rotation = Quaternion(0.0966948, 0.0472435, 0.00245969, 0.994189)
-bones/2/rotation = Quaternion(0.0176023, 0.0103578, 0.00110793, 0.999791)
-bones/3/rotation = Quaternion(0.0175642, 0.0104291, 0.00108739, 0.999791)
-bones/4/position = Vector3(2.86102e-06, 56.7031, -2.61246e-06)
-bones/4/rotation = Quaternion(0.047141, 0.0483691, -0.0314475, 0.997221)
-bones/5/position = Vector3(0, 51.8576, -9.42927)
-bones/5/rotation = Quaternion(0.0124797, 0.183491, -0.0241552, 0.982645)
-bones/6/position = Vector3(-9.53674e-06, 163.889, -29.7999)
-bones/7/position = Vector3(56.9893, 38.4028, 0.478396)
-bones/7/rotation = Quaternion(0.704055, 0.315372, -0.513068, 0.376309)
-bones/8/position = Vector3(3.33545e-06, 119.517, -4.19846e-06)
-bones/8/rotation = Quaternion(0.309688, -0.252354, 0.0134858, 0.91664)
-bones/9/position = Vector3(1.38736e-06, 32.6089, 5.08914e-05)
-bones/9/rotation = Quaternion(-0.0310995, 0.178044, 0.735682, 0.652768)
-bones/10/position = Vector3(6.30645e-06, 65.1294, -1.18233e-06)
-bones/11/rotation = Quaternion(0.660208, -0.337382, 0.56358, 0.364248)
-bones/12/position = Vector3(7.87779e-06, 119.517, 1.60067e-05)
-bones/12/rotation = Quaternion(0.314344, -0.0139508, -0.386431, 0.866986)
-bones/13/position = Vector3(8.03668e-06, 32.0471, 1.69429e-05)
-bones/13/rotation = Quaternion(-0.0205815, -0.207496, -0.821106, 0.531326)
-bones/14/position = Vector3(-1.12025e-05, 64.9754, 4.54058e-06)
-bones/15/rotation = Quaternion(0.111346, 0.185029, 0.953771, -0.209015)
-bones/16/rotation = Quaternion(-0.385558, 0.0599824, -0.0407281, 0.919831)
-bones/17/rotation = Quaternion(0.682108, -0.238803, -0.0201519, 0.690866)
-bones/18/rotation = Quaternion(0.0995855, -0.00239068, -0.00417017, 0.995017)
-bones/20/rotation = Quaternion(-0.110459, 0.0337801, 0.964408, 0.237855)
-bones/21/rotation = Quaternion(-0.412096, -0.0952159, 0.0631151, 0.903951)
-bones/22/position = Vector3(4.25447e-06, 60.9728, 4.74975e-08)
-bones/22/rotation = Quaternion(0.824797, 0.197037, 0.0550274, 0.527123)
-bones/23/position = Vector3(-1.58059e-06, 16.3498, 3.6991e-07)
-bones/23/rotation = Quaternion(0.081554, 0.000384072, -0.00776123, 0.996639)
-
 [node name="BlueIndicatorCircle" parent="." instance=ExtResource("4_0owmy")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0870759, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d8ble")
-
-[editable path="RockGuy"]
