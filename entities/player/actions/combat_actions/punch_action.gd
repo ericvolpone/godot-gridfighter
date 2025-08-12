@@ -20,6 +20,9 @@ func handle_animation_signal() -> void:
 	var punch_origin: Vector3 = hero.player.global_position
 	punch_origin.y += .5; 
 	var forward_dir: Vector3 = hero.player.get_facing_direction()  # forward in Godot
+	
+	print("Punch_Origin: " + str(punch_origin))
+	print("Punch_Direction: " + str(forward_dir))
 
 	var punch_range: float = 2.0
 	var punch_radius: float = .3

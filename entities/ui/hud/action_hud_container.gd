@@ -1,4 +1,4 @@
-class_name ActionHudContainer extends Control
+class_name ActionHUDContainer extends Control
 
 @onready var action_hud_scene: PackedScene = preload("res://entities/ui/hud/ActionHUD.tscn")
 

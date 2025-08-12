@@ -12,6 +12,7 @@
 			"title": "Todo",
 			"tasks": [
 				"727a2d99-e87f-4939-9105-44fe844ef725",
+				"3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
@@ -63,7 +64,8 @@
 				"90ca2a99-392e-459f-b166-bb87eb0dfd5e",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
 				"106eca20-8516-43e5-8571-3f8c09ecb3e3",
-				"5c23e109-339d-4e53-8151-7d7d1fb67f80"
+				"5c23e109-339d-4e53-8151-7d7d1fb67f80",
+				"7ba07fc9-97ae-4260-8b2e-b081d4feab1e"
 			]
 		}
 	],
@@ -358,6 +360,20 @@
 		{
 			"uuid": "5c23e109-339d-4e53-8151-7d7d1fb67f80",
 			"title": "Get General Use Character Creation figured out",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "7ba07fc9-97ae-4260-8b2e-b081d4feab1e",
+			"title": "Hero switch works!",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
+			"title": "MP: Hero Switching switches bots on server",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

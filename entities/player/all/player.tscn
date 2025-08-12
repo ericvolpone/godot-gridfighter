@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dp8abkasj7kyt" path="res://models/ui/indicators/BlueIndicatorCircle.glb" id="4_0owmy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
-height = 1.27028
+radius = 0.8
+height = 2.6
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d8ble"]
 properties/0/path = NodePath(".:current_animation")
@@ -49,7 +50,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_lvxji")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573687, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 shape = SubResource("CapsuleShape3D_g2els")
 
 [node name="BlueIndicatorCircle" parent="." instance=ExtResource("4_0owmy")]

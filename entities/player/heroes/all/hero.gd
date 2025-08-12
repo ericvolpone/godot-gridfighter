@@ -3,25 +3,45 @@ class_name Hero extends Node3D
 # Animation Data
 signal punch_frame;
 
-@onready var player: Player = get_parent().get_parent();
+# HUD
+const HUD_PATH := "res://entities/ui/hud/ActionHUDContainer.tscn"
+
+
+@onready var player: Player = get_parent().get_parent()
 @onready var animator: AnimationPlayer = $AnimationPlayer;
 
-@onready var combat_action_1: PunchAction = PunchAction.new();
-@onready var combat_action_2: BlockAction = BlockAction.new();
-@onready var combat_action_3: CombatAction;
+# UI Variables
+var action_hud_container: ActionHUDContainer
+
+var combat_action_1: PunchAction = PunchAction.new();
+var combat_action_2: BlockAction = BlockAction.new();
+var combat_action_3: CombatAction;
 
 func init_combat_actions() -> void:
 		# Configure punch
 	_init_combat_actions()
-	combat_action_1.set_multiplayer_authority(player.get_multiplayer_authority())
+	combat_action_1.set_multiplayer_authority(get_multiplayer_authority())
 	connect("punch_frame", combat_action_1.handle_animation_signal)
 	# Configure block
-	combat_action_2.set_multiplayer_authority(player.get_multiplayer_authority())
-	combat_action_3.set_multiplayer_authority(player.get_multiplayer_authority())
+	combat_action_2.set_multiplayer_authority(get_multiplayer_authority())
+	combat_action_3.set_multiplayer_authority(get_multiplayer_authority())
 		# Have children initialize any special combat actions
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
+	
+	if is_multiplayer_authority():
+		# TODO It sucks that we couldnt figure out preload here
+		var hud_scene: PackedScene = load(HUD_PATH)
+		print("exists=", ResourceLoader.exists(HUD_PATH))
+		print("resource_path=", hud_scene.resource_path)
+		print("can_inst=", hud_scene and hud_scene.can_instantiate())
+		
+		action_hud_container = hud_scene.instantiate()
+		add_child(action_hud_container);
+		action_hud_container.add_action(combat_action_1)
+		action_hud_container.add_action(combat_action_2)
+		action_hud_container.add_action(combat_action_3)
 
 # Animation Signals
 func emit_punch_signal() -> void:

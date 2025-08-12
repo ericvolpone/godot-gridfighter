@@ -19,9 +19,6 @@ const HERO_DB: Dictionary[int, HeroDefinition] = {
 	ROCKY_HERO_ID : ROCKY_HERO_DEF
 }
 
-# HUD
-@onready var action_hud_container_scene: PackedScene = preload("res://entities/ui/hud/ActionHUDContainer.tscn")
-
 # Parent Level Accessor Nodes
 @onready var player_spawner: PlayerSpawner = get_parent()
 @onready var level: Level = player_spawner.get_parent();
@@ -34,8 +31,6 @@ var player_id: int;
 var player_name: String;
 @export var brain: Brain;
 
-# UI Variables
-var action_hud_container: ActionHudContainer
 
 # Menu Variables
 var is_in_menu: bool = false;
@@ -196,7 +191,7 @@ func knock_back(direction: Vector3, strength: float) -> void:
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
 	if(animation_name == ANIM_FALL): print("trying to play")
-	if not is_mp_authority(): return;
+	#if not is_mp_authority(): return;
 	if(animation_name == ANIM_FALL): print("is the MP authority, playing")
 	
 	animator.play(animation_name, blend_time)
@@ -250,25 +245,16 @@ func change_hero(hero_id: int) -> void:
 	var hero_definition: HeroDefinition = HERO_DB[hero_id];
 	if hero:
 		hero.queue_free()
-		if is_multiplayer_authority():
-			action_hud_container.queue_free()
 		await get_tree().process_frame
 	
 	var _hero := hero_definition.instantiate()
+	_hero.set_multiplayer_authority(get_multiplayer_authority())
 	current_hero_id = hero_definition.hero_id
 	# keep world position/orientation stable via socket
 	hero_socket.add_child(_hero)
 	# TODO Do I need below line?
 	#_hero.global_transform = hero_socket.global_transform
 	hero = _hero
-	
-	animator = hero.animator
-	
-	if is_multiplayer_authority():
-		hero.init_combat_actions()
+	hero.call_deferred("init_combat_actions")
 
-		action_hud_container = action_hud_container_scene.instantiate()
-		add_child(action_hud_container);
-		action_hud_container.add_action(hero.combat_action_1)
-		action_hud_container.add_action(hero.combat_action_2)
-		action_hud_container.add_action(hero.combat_action_3)
+	animator = hero.animator

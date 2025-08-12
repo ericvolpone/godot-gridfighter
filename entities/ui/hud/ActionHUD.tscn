@@ -23,7 +23,7 @@ font_color = Color(0.980292, 0.891257, 0.861021, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="ActionHud" type="Control"]
+[node name="ActionHUD" type="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 15

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bljqjo682pc1d" path="res://entities/ui/hud/action_hud_container.gd" id="1_75b11"]
 
-[node name="ActionHudContainer" type="Control"]
+[node name="ActionHUDContainer" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 3
