@@ -8,6 +8,7 @@ const ANIM_RUN: String = "master_animations/Run"
 const ANIM_FALL: String = "master_animations/Fall"
 const ANIM_PUNCH: String = "master_animations/Punch"
 const ANIM_BLOCK: String = "master_animations/Block"
+const ANIM_SHOUT: String = "master_animations/Shout"
 
 # Hero Definitions
 const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres")
@@ -68,6 +69,7 @@ var hero: Hero;
 @export var current_animation: String = ANIM_IDLE
 @export var current_animation_blend_time: float = 0.0
 @export var is_blocking: bool = false;
+@export var is_casting: bool = false;
 @export var is_punching: bool = false;
 @export var is_walking: bool = false;
 @export var is_respawning: bool = false;
@@ -130,8 +132,12 @@ func process_combat_actions() -> void:
 func process_movement(delta: float) -> void:
 	if not is_mp_authority(): return;
 	# Gravity
-	if not is_on_floor():
+	if is_casting:
+		velocity.y = 10*delta
+	elif not is_on_floor():
 		velocity += get_gravity() * delta
+
+
 	
 	if is_knocked:
 		knockback_velocity = knockback_velocity * (1 - delta);

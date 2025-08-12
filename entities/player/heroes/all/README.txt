@@ -15,3 +15,16 @@ Steps to create a new Hero
 		Make sure to update the animations library to a unique master anims
 	10. Punch frame currently needs to be set, this is a call method signal in the players emit_punch_frame
 	11. Character should just load!
+
+Steps to add Animation:
+	1. Go to Mixamo
+	2. Click Y-Bot
+	3. Find your animation, download it to FBX
+	4. Open up YBotPacked
+	5. Import into a new collection the FBX
+	6. Go to the Animation tab, create the new animation on YBot and name it and push to NLA Strip
+	7. Export to GLB
+	8. Import it into your file browser (can delete after I think), set master bone map and load it into a temp scene
+	9. Manage the animations on it, and load our master anim lib and copy it into that.
+	10. Save the master lib
+	11. Depending on the animation or bone map, you may have to go into the animation and delete some problem bones
