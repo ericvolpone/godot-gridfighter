@@ -1,4 +1,4 @@
-Steps to create a character:
+Steps to create a new Hero
 	
 	1. Create mesh in Blender
 	2. Upload mesh to Mixamo
@@ -9,7 +9,7 @@ Steps to create a character:
 		This can be done by going to that mesh and applying weights appropriate by vertex
 	
 	6. Import GLB into Godot
-	7. In the GLB, make sure we are setting Root Type to Node3D and name to Model
+	7. In the GLB, make sure we are setting Root Type to Hero and name to Hero Name
 	8. In the skeleton, choose the Mixamo BoneMap as bonemap and make sure bones are correct
 	9. Inherit player.tscn and drag your GLB in
 		Make sure to update the animations library to a unique master anims

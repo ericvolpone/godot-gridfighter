@@ -42,6 +42,7 @@ properties/10/spawn = true
 properties/10/replication_mode = 1
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_lvxji")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -53,3 +54,5 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0870759, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d8ble")
+
+[node name="HeroSocket" type="Node3D" parent="."]

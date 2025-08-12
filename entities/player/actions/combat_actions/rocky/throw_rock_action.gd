@@ -11,15 +11,15 @@ func get_cd_time() -> float:
 	return 3.0;
 
 func execute_child() -> void:
-	if not player.is_multiplayer_authority(): return;
+	if not hero.player.is_multiplayer_authority(): return;
 
-	var spawn_location: Vector3 = player.global_position + (player.model.get_global_transform().basis.z.normalized()) + Vector3(0,1,0);
+	var spawn_location: Vector3 = hero.player.global_position + (hero.player.model.get_global_transform().basis.z.normalized()) + Vector3(0,1,0);
 	
 	var spawn_data: Dictionary = {
-		"direction": player.get_facing_direction(),
+		"direction": hero.player.get_facing_direction(),
 		"spawn_location": spawn_location,
-		"force": player.current_strength,
-		"owner_peer_id": player.get_multiplayer_authority()
+		"force": hero.player.current_strength,
+		"owner_peer_id": hero.player.get_multiplayer_authority()
 	}
 	projectile_spawner.spawn_projectile.rpc(spawn_data)
 

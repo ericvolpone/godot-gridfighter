@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b0ykju3u77l46"
-path="res://.godot/imported/RockGuy.fbx-885cf259f156502c39b3d88d9d1a31cc.scn"
+uid="uid://dpmcauy7abwcf"
+path="res://.godot/imported/rocky.glb-5ba27df4a1c6d0282b15fc3298558086.scn"
 
 [deps]
 
-source_file="res://models/rockguy/RockGuy.fbx"
-dest_files=["res://.godot/imported/RockGuy.fbx-885cf259f156502c39b3d88d9d1a31cc.scn"]
+source_file="res://entities/player/heroes/rocky/rocky.glb"
+dest_files=["res://.godot/imported/rocky.glb-5ba27df4a1c6d0282b15fc3298558086.scn"]
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Hero"
+nodes/root_name="Hero"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -28,11 +28,16 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=true
+animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
-fbx/importer=0
-fbx/allow_geometry_helper_nodes=false
-fbx/embedded_image_handling=1
+_subresources={
+"nodes": {
+"PATH:MasterArmature/Skeleton3D": {
+"retarget/bone_map": Resource("res://models/master/Mixamo BoneMap.tres")
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

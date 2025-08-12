@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HeroDefinition" load_steps=3 format=3 uid="uid://6cltgrbw7n4n"]
+
+[ext_resource type="PackedScene" uid="uid://ymb8qvia5s6k" path="res://entities/player/heroes/rocky/rocky.tscn" id="1_nq00h"]
+[ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_ntk8c"]
+
+[resource]
+script = ExtResource("1_ntk8c")
+id = 2
+display_name = "Rocky"
+hero_scene = ExtResource("1_nq00h")
+metadata/_custom_type_script = "uid://mjrdfur8vhg8"

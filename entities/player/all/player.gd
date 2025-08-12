@@ -3,14 +3,15 @@ extends CharacterBody3D
 
 class_name Player
 
-# Animation Data
-signal punch_frame;
-
 const ANIM_IDLE: String = "master_animations/Idle"
 const ANIM_RUN: String = "master_animations/Run"
 const ANIM_FALL: String = "master_animations/Fall"
 const ANIM_PUNCH: String = "master_animations/Punch"
 const ANIM_BLOCK: String = "master_animations/Block"
+
+# Hero Definitions
+const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres")
+const ROCKY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/rocky/rocky.tres")
 
 # HUD
 @onready var action_hud_container_scene: PackedScene = preload("res://entities/ui/hud/ActionHUDContainer.tscn")
@@ -20,12 +21,15 @@ const ANIM_BLOCK: String = "master_animations/Block"
 @onready var level: Level = player_spawner.get_parent();
 
 # Children Node Accessors
-@onready var animator: AnimationPlayer = $Model/AnimationPlayer;
-@onready var model: Node3D = $Model;
+var animator: AnimationPlayer;
+@onready var model: Node3D = $HeroSocket;
 
 var player_id: int;
 var player_name: String;
 @export var brain: Brain;
+
+# UI Variables
+var action_hud_container: ActionHudContainer
 
 # Menu Variables
 var is_in_menu: bool = false;
@@ -49,9 +53,10 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 # Combat Actions Data
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
-@onready var combat_action_1: PunchAction = PunchAction.new();
-@onready var combat_action_2: BlockAction = BlockAction.new();
-@onready var combat_action_3: CombatAction;
+
+# Hero Data
+@onready var hero_socket: Node3D = $HeroSocket
+var hero: Hero;
 
 # State variables
 @export var is_knocked: bool = false;
@@ -66,25 +71,9 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 @export var is_respawning: bool = false;
 
 func _ready() -> void:
+	change_hero(Player.BOLTY_HERO_DEF)
 	add_to_group(Groups.PLAYER)
-
-	# Configure punch
-	combat_action_1.set_multiplayer_authority(get_multiplayer_authority())
-	connect("punch_frame", combat_action_1.handle_animation_signal)
-	# Configure block
-	combat_action_2.set_multiplayer_authority(get_multiplayer_authority())
-		# Have children initialize any special combat actions
-	_init_combat_actions()
-	combat_action_3.set_multiplayer_authority(get_multiplayer_authority())
-	add_child(combat_action_1)
-	add_child(combat_action_2)
-	add_child(combat_action_3)
-	
-	var action_hud_container: ActionHudContainer = action_hud_container_scene.instantiate()
-	add_child(action_hud_container);
-	action_hud_container.add_action(combat_action_1)
-	action_hud_container.add_action(combat_action_2)
-	action_hud_container.add_action(combat_action_3)
+	animator = hero.animator
 	
 	if(is_player_controlled and is_multiplayer_authority()):
 		# TODO Probably put this elsewhere?
@@ -105,6 +94,8 @@ func _input(event: InputEvent) -> void:
 		else:
 			is_in_menu = true
 			in_game_menu.show()
+	if event.is_action("change_hero"):
+		change_hero(Player.ROCKY_HERO_DEF)
 
 func _physics_process(delta: float) -> void:
 	if(animator.current_animation != current_animation):
@@ -120,12 +111,12 @@ func has_control() -> bool:
 	return !is_knocked and !is_blocking and !is_punching and !is_in_menu;
 
 func process_combat_actions() -> void:
-	if brain.should_use_combat_action_1() and combat_action_1.is_usable():
-		combat_action_1.execute()
-	elif brain.should_use_combat_action_2() and combat_action_2.is_usable():
-		combat_action_2.execute()
-	elif brain.should_use_combat_action_3() and combat_action_3.is_usable():
-		combat_action_3.execute()
+	if brain.should_use_combat_action_1() and hero.combat_action_1.is_usable():
+		hero.combat_action_1.execute()
+	elif brain.should_use_combat_action_2() and hero.combat_action_2.is_usable():
+		hero.combat_action_2.execute()
+	elif brain.should_use_combat_action_3() and hero.combat_action_3.is_usable():
+		hero.combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
 	if not is_mp_authority(): return;
@@ -200,10 +191,6 @@ func get_facing_direction() -> Vector3:
 func is_mp_authority() -> bool:
 	return is_multiplayer_authority() or brain is not PlayerBrain;
 
-# Animation Signals
-func emit_punch_signal() -> void:
-	emit_signal("punch_frame")
-
 @rpc("any_peer", "call_local", "reliable")
 func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():
@@ -224,7 +211,24 @@ func apply_strength_boost(value: int) -> void:
 	if current_strength >= max_player_strength:
 		current_strength = max_player_strength
 
-# Interface Methods
-func _init_combat_actions() -> void:
-	push_error("Must implement _init_combat_actions in child")
-	return
+func change_hero(hero_definition: HeroDefinition) -> void:
+	if hero:
+		hero.queue_free()
+		action_hud_container.queue_free()
+		await get_tree().process_frame
+	
+	var _hero := hero_definition.instantiate()
+	# keep world position/orientation stable via socket
+	hero_socket.add_child(_hero)
+	_hero.global_transform = hero_socket.global_transform
+	hero = _hero
+	
+	hero.init_combat_actions()
+
+	action_hud_container = action_hud_container_scene.instantiate()
+	add_child(action_hud_container);
+	action_hud_container.add_action(hero.combat_action_1)
+	action_hud_container.add_action(hero.combat_action_2)
+	action_hud_container.add_action(hero.combat_action_3)
+	
+	animator = hero.animator
