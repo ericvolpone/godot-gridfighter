@@ -58,7 +58,7 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 @export var is_standing_back_up: bool = false;
 @export var knockback_velocity: Vector3 = Vector3.ZERO;
 @export var knockback_timer: float = 0.0;
-@export var current_animation: String = "rockguy_anim_lib/RockGuy_Idle"
+@export var current_animation: String = ANIM_IDLE
 @export var current_animation_blend_time: float = 0.0
 @export var is_blocking: bool = false;
 @export var is_punching: bool = false;
@@ -175,10 +175,10 @@ func add_brain(_brain: Brain) -> void:
 		is_player_controlled = true;
 	add_child(brain);
 
-func knock_back(direction: Vector3, strength: float, duration: float) -> void:
+func knock_back(direction: Vector3, strength: float) -> void:
 	if(!is_blocking and !is_knocked):
 		knockback_velocity = direction * strength
-		knockback_timer = duration
+		knockback_timer = 1.9 # Hardcoded because of animation time and standup time, should use signals
 		is_knocked = true
 		is_punching = false
 		play_anim(ANIM_FALL, 0.3)
