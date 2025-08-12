@@ -4,6 +4,21 @@
 			"uuid": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"title": "Task",
 			"color": "70bafa"
+		},
+		{
+			"uuid": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"title": "Idea",
+			"color": "2cf53d"
+		},
+		{
+			"uuid": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"title": "Bug",
+			"color": "be2e0d"
+		},
+		{
+			"uuid": "108505be-2083-48d1-8416-c32e75dc04f3",
+			"title": "Readiness",
+			"color": "fafc2c"
 		}
 	],
 	"stages": [
@@ -14,16 +29,19 @@
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
+				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"70036384-bc35-4b01-bcbf-dc61bd1ec212",
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
-				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
-				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"befba3fd-b6e3-479e-a9ba-d2fc031834d8",
-				"1b81778d-d91b-4d14-b893-78dfe5e7d299"
+				"1b81778d-d91b-4d14-b893-78dfe5e7d299",
+				"6341628f-2ea7-439c-ab3b-bc62dac688bc",
+				"30d785bf-19cc-4702-a469-461c583e11ab",
+				"7b8e862a-d27a-4d53-b781-46df0be995da",
+				"3d45a235-cc80-4640-904a-8ff6e3b231f4"
 			]
 		},
 		{
@@ -277,7 +295,7 @@
 			"uuid": "04865abb-c63e-4724-9aed-eefdffd2c712",
 			"title": "Random Despawn Bug during multiplayer: ",
 			"description": "E 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
 			"steps": []
 		},
 		{
@@ -303,23 +321,16 @@
 		},
 		{
 			"uuid": "727a2d99-e87f-4939-9105-44fe844ef725",
-			"title": "Bug: Sometimes double score on death, particularly on AI",
+			"title": "Double Scoring Issue on MP With Bots",
 			"description": "",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
 			"steps": []
 		},
 		{
 			"uuid": "cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 			"title": "PlayTest: Ryans rock was knocking him down",
 			"description": "I can verify this locally if the player has enough speed and is running in the direction they are throwing.  May be fixed with animation and speed modifications during throw, or just rework the rock action\n",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
-			"steps": []
-		},
-		{
-			"uuid": "f0bed60f-c96f-4fcf-9ae1-7c260456da24",
-			"title": "PlayTest: Roundhouse Kick",
-			"description": "",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
 			"steps": []
 		},
 		{
@@ -354,7 +365,7 @@
 			"uuid": "1b81778d-d91b-4d14-b893-78dfe5e7d299",
 			"title": "Hazards: Implement a Hazards functionality (Jump Pad Base)",
 			"description": "",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
 			"steps": []
 		},
 		{
@@ -375,7 +386,35 @@
 			"uuid": "3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
 			"title": "MP: Hero Switching switches bots on server",
 			"description": "",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"steps": []
+		},
+		{
+			"uuid": "6341628f-2ea7-439c-ab3b-bc62dac688bc",
+			"title": "Bolty: Implement Lightning AOE?",
+			"description": "",
+			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"steps": []
+		},
+		{
+			"uuid": "30d785bf-19cc-4702-a469-461c583e11ab",
+			"title": "Heroes: Base Stats by Hero",
+			"description": "",
+			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"steps": []
+		},
+		{
+			"uuid": "3d45a235-cc80-4640-904a-8ff6e3b231f4",
+			"title": "Call Down, Signal Up",
+			"description": "",
+			"category": "108505be-2083-48d1-8416-c32e75dc04f3",
+			"steps": []
+		},
+		{
+			"uuid": "7b8e862a-d27a-4d53-b781-46df0be995da",
+			"title": "Hero Selection Screen",
+			"description": "",
+			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
 			"steps": []
 		}
 	],
