@@ -26,6 +26,7 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"7fed0018-cfde-4af2-b642-d6c553749f03",
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
@@ -414,6 +415,13 @@
 			"uuid": "7b8e862a-d27a-4d53-b781-46df0be995da",
 			"title": "Hero Selection Screen",
 			"description": "",
+			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"steps": []
+		},
+		{
+			"uuid": "7fed0018-cfde-4af2-b642-d6c553749f03",
+			"title": "Implement a better State Machine",
+			"description": "Description has my pseudo code for player and actions\n\nvars\n\tis_dead: bool\n\tis_respawning: bool\n\tglobal_cd_next_time: timestamp\n\t\n\tis_knocked: bool # maybe dont need this if we model channeling action as falling\n\tis_channeling: bool\n\tchanneling_action: action\n\t\tcan_be_knocked? # maybe this needs to be in a static Dict with some types for lookup for MP Sync\n\txz_velocity_override: override\n\ty_velocity_override: override\n\txz_speed_modifier: float\n\tis_animation_locked: bool\n\t\n\t\n\nActions\n\tCan Perform Input Action?\n\tNot Dead\n\tNot Respawning\n\tGlobal CD not on cooldown\n\tChannel CD not on cooldown\n\t\tPerhaps for channeling abilities, the global cooldown only reduces when channeling is done\n\tAction is usable?\n\t\nMovement\n\n\tidle = true\n\n\tif XZ Velocity Override?:\n\t\tApply XZ Velocity Override\n\t\tCould knockdown work here?  Probably!\n\telse if XZ Input enabled\n\t\tNot Respawning\n\t\tNot Dead\n\t\tNot knocked over -> could create XZ velocity override\n\t\tNot Blocking -> Block could create XZ velocity override\n\t\t\n\t\tIs XZ Input Pressed?\n\t\t\tIs XZ Speed or Anim Modified?\n\t\t\t\tStorm\n\t\t\t\t\tFraction Modifier\n\t\t\t\t\tLock Animation\n\t\t\t\tPunching\n\t\t\t\t\tFraction Modifier\n\t\t\t\t\tLock Animation\n\n\t\t\tperform modification to XZ Velocity on input\n\t\t\tPlay Animation if not locked\n\t\t\tidle = false\n\t\n\tif Y Override\n\t\tApply Y Velocity Override\n\telse if Y Input enabled\n\t\tOn the ground\n\t\tNot knocked over\n\t\tNot Blocking\n\t\tNot Dead\n\t\tNot Respawning\n\t\t\n\t\tis Y Jump Input Pressed?\n\t\t\tJump\n\telse if should be falling\n\t\tNot on the ground\n\t\t\n\t\tApply gravity\n\t\n\tif not lock_animation and idle = true\n\t\tplay idle\n\n\nAction impls:\n\tChannels\n\t\tLock anim\n\t\tLock Velocities or Modify velocities if applicable\n\t\tPlay anim\n\t\tWait for anim signal\n\t\tUnlock anim / velocities / modifiers\n\t\n\tGetting knocked back:\n\t\tIf channeling action is knockable AND not knocked AND not standing\n\t\t\tlock anim on fall\n\t\t\tapply knockback velocity overrides\n\t\t\tplay fall (this is a channeling action)\n\t\t\t\tor we keep the \"knockback\" logic in our process, we can try options",
 			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
 			"steps": []
 		}
