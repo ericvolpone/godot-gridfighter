@@ -3,6 +3,7 @@ class_name CombatAction extends Node3D
 const DEFAULT_CD: float = 5.0;
 const GLOBAL_CD: float = 0.5;
 
+var is_interuptable: bool = true;
 var cd_available_time: float = Time.get_unix_time_from_system()
 
 @onready var hero: Hero = get_parent();

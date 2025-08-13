@@ -1,7 +1,4 @@
-extends CharacterBody3D
-
-
-class_name Player
+class_name Player extends CharacterBody3D
 
 const ANIM_IDLE: String = "master_animations/Idle"
 const ANIM_RUN: String = "master_animations/Run"
@@ -54,7 +51,6 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 
 
 # Combat Actions Data
-@onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
 
 # Hero Data
 var hero_socket: Node3D
@@ -72,7 +68,20 @@ var hero: Hero;
 @export var is_casting: bool = false;
 @export var is_punching: bool = false;
 @export var is_walking: bool = false;
+
 @export var is_respawning: bool = false;
+@export var is_dead: bool = false;
+@onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
+@export var is_channeling: bool = false;
+@export var channeling_action: CombatAction;
+# This may not be... needed?  Actions might just need to tell us if they are interuptable or something
+@export var channeling_action_name: StringName;
+var xz_velocity_override: VelocityOverride;
+var xz_speed_modifier: float = 1;
+var y_velocity_override: VelocityOverride;
+var y_speed_modifier: float = 1;
+var is_animation_locked: bool = false;
+var is_immune_to_knockback: bool = false;
 
 func _enter_tree() -> void:
 	hero_socket = $HeroSocket
@@ -89,10 +98,6 @@ func _ready() -> void:
 		in_game_menu.hide()
 	else:
 		$BlueIndicatorCircle.queue_free();
-
-# TODO See if we can delete
-#func _enter_tree() -> void:
-#	set_multiplayer_authority(name.to_int())
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
@@ -119,7 +124,7 @@ func _physics_process(delta: float) -> void:
 		level.handle_player_death(self)
 
 func has_control() -> bool:
-	return !is_knocked and !is_blocking and !is_punching and !is_in_menu;
+	return !is_knocked and !is_channeling and !is_in_menu;
 
 func process_combat_actions() -> void:
 	if brain.should_use_combat_action_1() and hero.combat_action_1.is_usable():
@@ -130,19 +135,7 @@ func process_combat_actions() -> void:
 		hero.combat_action_3.execute()
 
 func process_movement(delta: float) -> void:
-	if not is_mp_authority(): return;
-	# Gravity
-	if is_casting:
-		velocity.y = 10*delta
-	elif not is_on_floor():
-		velocity += get_gravity() * delta
-
-
-	
 	if is_knocked:
-		knockback_velocity = knockback_velocity * (1 - delta);
-		velocity.x = knockback_velocity.x
-		velocity.z = knockback_velocity.z
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
 			is_standing_back_up = true;
@@ -150,32 +143,37 @@ func process_movement(delta: float) -> void:
 		if knockback_timer <= 0.0:
 			is_knocked = false
 			is_standing_back_up = false
+			xz_velocity_override = null
 			velocity = Vector3.ZERO
-		snapshot_velocity = velocity
-	elif has_control():
-		# Handle jump.
-		if brain.should_jump() and is_on_floor():
-			velocity.y = jump_velocity
-
+	
+	if xz_velocity_override:
+		velocity.x = xz_velocity_override.velocity.x
+		velocity.z = xz_velocity_override.velocity.z
+		xz_velocity_override.apply_acceleration(delta)
+	elif !is_respawning:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var move_direction: Vector3 = brain.get_movement_direction()
 		if move_direction != Vector3.ZERO:
-			var blocking_modifier: float = 0.2 if is_blocking else 1.0
-			play_anim(ANIM_RUN, 0.3)
-			velocity.x = move_direction.x * current_move_speed * blocking_modifier
-			velocity.z = move_direction.z * current_move_speed * blocking_modifier
+			if !is_channeling:
+				play_anim(ANIM_RUN, 0.3)
+			velocity.x = move_direction.x * current_move_speed * xz_speed_modifier
+			velocity.z = move_direction.z * current_move_speed * xz_speed_modifier
 			model.rotation.y = -atan2(-move_direction.x, move_direction.z)
 		else:
-			play_anim(ANIM_IDLE, 0.3)
+			if !is_channeling:
+				play_anim(ANIM_IDLE, 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
-		snapshot_velocity = velocity
-	elif is_blocking or is_punching:
-		velocity.x = snapshot_velocity.x * 0.3
-		velocity.z = snapshot_velocity.z * 0.3
-		
-	
+
+	if y_velocity_override:
+		velocity.y = y_velocity_override.velocity.y
+		y_velocity_override.apply_acceleration(delta)
+	elif not is_on_floor():
+		velocity += get_gravity() * delta
+	elif brain.should_jump() and is_on_floor():
+		velocity.y = jump_velocity
+
 	move_and_slide()
 
 func add_brain(_brain: Brain) -> void:
@@ -184,22 +182,30 @@ func add_brain(_brain: Brain) -> void:
 		is_player_controlled = true;
 	add_child(brain);
 
+func channel_action(_action: CombatAction) -> void:
+	is_channeling = true;
+	channeling_action = _action;
+	channeling_action_name = ActionDB.get_name_for_action(_action)
+
+func end_channel_action() -> void:
+	is_channeling = false;
+	channeling_action = null;
+	channeling_action_name = "";
+
 func knock_back(direction: Vector3, strength: float) -> void:
-	if(!is_blocking and !is_knocked):
+	if(!is_immune_to_knockback and !is_knocked):
 		print("Knocking Back")
-		knockback_velocity = direction * strength
-		knockback_timer = 1.9 # Hardcoded because of animation time and standup time, should use signals
+		xz_velocity_override = VelocityOverride.new((direction * strength), -.8)
+		velocity.y = (direction*strength).y
 		is_knocked = true
-		is_punching = false
+		knockback_timer = 1.9
+		if is_channeling:
+			end_channel_action()
 		play_anim(ANIM_FALL, 0.3)
 	else:
 		print("Can't knock")
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
-	if(animation_name == ANIM_FALL): print("trying to play")
-	#if not is_mp_authority(): return;
-	if(animation_name == ANIM_FALL): print("is the MP authority, playing")
-	
 	animator.play(animation_name, blend_time)
 	current_animation = animation_name
 	current_animation_blend_time = blend_time

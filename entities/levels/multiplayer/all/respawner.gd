@@ -18,6 +18,10 @@ func respawn_player(player: Player) -> void:
 			player.play_anim(Player.ANIM_IDLE)
 			player.is_knocked = false;
 			player.is_standing_back_up = false;
+			player.xz_velocity_override = null;
+			player.y_velocity_override = null;
+			player.xz_speed_modifier = 1
+			player.y_speed_modifier = 1;
 			player.is_blocking = false;
 			player.is_punching = false;
 			player.velocity = Vector3.ZERO

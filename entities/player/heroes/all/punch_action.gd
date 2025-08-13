@@ -10,6 +10,8 @@ func get_cd_time() -> float:
 	return 1.0;
 
 func execute_child() -> void:
+	hero.player.channel_action(self)
+	hero.player.xz_speed_modifier = 0.25
 	hero.player.is_punching = true;
 	hero.player.play_anim(Player.ANIM_PUNCH, 0.5);
 
@@ -20,9 +22,6 @@ func handle_animation_signal() -> void:
 	var punch_origin: Vector3 = hero.player.global_position
 	punch_origin.y += .5; 
 	var forward_dir: Vector3 = hero.player.get_facing_direction()  # forward in Godot
-	
-	print("Punch_Origin: " + str(punch_origin))
-	print("Punch_Direction: " + str(forward_dir))
 
 	var punch_range: float = 2.0
 	var punch_radius: float = .3
@@ -42,22 +41,16 @@ func handle_animation_signal() -> void:
 
 	for result: Dictionary in results:
 		var obj: Node3D = result.collider
-		print("Collision Detected: " + obj.name + ", " + obj.get_class())
-		print("Obj is player: " + str(obj.is_in_group(Groups.PLAYER)))
 		if obj == self:
 			continue
 		if obj is RigidBody3D and obj.is_in_group(Groups.PUNCHABLE_RB):  # whitelist
-			print("RB3D")
 			var to_obj: Vector3 = (obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * hero.player.current_strength * 20  # Tune force as needed
 			obj.apply_central_impulse(force)
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
-			print("CharacterBody")
 			var player_obj: Player = obj
 			if(player_obj == hero.player or player_obj.is_blocking):
-				print("Detecting self; Hero.Player: " + str(hero.player) + "; player_obj: " + str(player_obj))
 				continue
-			print("Knocking Back!")
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 10.0  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)
@@ -89,4 +82,6 @@ func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float 
 
 func _on_punch_animation_finished(anim_name: String) -> void:
 	if(Player.ANIM_PUNCH == anim_name):
+		hero.player.end_channel_action()
+		hero.player.xz_speed_modifier = 1.0
 		hero.player.is_punching = false;
