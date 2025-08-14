@@ -15,15 +15,15 @@ angle_max = 720.0
 direction = Vector3(0, 0, 0)
 spread = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_soyoa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whjjy"]
 render_priority = 0
 shader = ExtResource("1_njytn")
 shader_parameter/time_scale = 1.6
 shader_parameter/jaggedness = 8.0
 shader_parameter/core_width = 0.12
 
-[sub_resource type="QuadMesh" id="QuadMesh_5wcyy"]
-material = SubResource("ShaderMaterial_soyoa")
+[sub_resource type="QuadMesh" id="QuadMesh_soyoa"]
+material = SubResource("ShaderMaterial_whjjy")
 size = Vector2(0.2, 2)
 subdivide_width = 5
 
@@ -40,11 +40,12 @@ initial_velocity_max = 1.9
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njytn"]
 albedo_color = Color(0, 0.572549, 0.572549, 0.372549)
+billboard_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_whjjy"]
 material = SubResource("StandardMaterial3D_njytn")
 radius = 0.02
-height = 0.02
+height = 0.04
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_soyoa"]
 height = 5.0
@@ -60,7 +61,7 @@ preprocess = 0.5
 speed_scale = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_whjjy")
-draw_pass_1 = SubResource("QuadMesh_5wcyy")
+draw_pass_1 = SubResource("QuadMesh_soyoa")
 
 [node name="Rain" type="GPUParticles3D" parent="."]
 amount = 120
