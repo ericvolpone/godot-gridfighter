@@ -23,6 +23,8 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
+window/size/mode=2
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -93,3 +95,9 @@ change_hero={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":72,"key_label":0,"unicode":104,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="All"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Ability"
