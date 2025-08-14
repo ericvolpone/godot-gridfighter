@@ -268,5 +268,4 @@ func change_hero(hero_id: int) -> void:
 	#_hero.global_transform = hero_socket.global_transform
 	hero = _hero
 	hero.call_deferred("init_combat_actions")
-
 	animator = hero.animator
