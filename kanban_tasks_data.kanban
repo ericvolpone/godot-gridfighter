@@ -6,19 +6,19 @@
 			"color": "70bafa"
 		},
 		{
-			"uuid": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"uuid": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"title": "Idea",
-			"color": "2cf53d"
+			"color": "b69e13"
 		},
 		{
-			"uuid": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"uuid": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"title": "Bug",
-			"color": "be2e0d"
+			"color": "e0450c"
 		},
 		{
-			"uuid": "108505be-2083-48d1-8416-c32e75dc04f3",
-			"title": "Readiness",
-			"color": "fafc2c"
+			"uuid": "b0d0913a-18f9-4ac3-887f-603e53a50c00",
+			"title": "Optimizations",
+			"color": "16db3e"
 		}
 	],
 	"stages": [
@@ -27,21 +27,21 @@
 			"title": "Todo",
 			"tasks": [
 				"727a2d99-e87f-4939-9105-44fe844ef725",
-				"3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"70036384-bc35-4b01-bcbf-dc61bd1ec212",
+				"befba3fd-b6e3-479e-a9ba-d2fc031834d8",
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
+				"42e337e7-85b5-4b87-a033-f27039cc1972",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
-				"befba3fd-b6e3-479e-a9ba-d2fc031834d8",
+				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"1b81778d-d91b-4d14-b893-78dfe5e7d299",
-				"6341628f-2ea7-439c-ab3b-bc62dac688bc",
-				"30d785bf-19cc-4702-a469-461c583e11ab",
-				"7b8e862a-d27a-4d53-b781-46df0be995da",
-				"3d45a235-cc80-4640-904a-8ff6e3b231f4"
+				"408e7618-fcbb-4880-b868-f786f7273146",
+				"223b125d-4861-4a2d-9a9b-d965859f09e3",
+				"ba079f8a-7187-45b5-9956-ee082b9ed99d"
 			]
 		},
 		{
@@ -53,7 +53,6 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
-				"7fed0018-cfde-4af2-b642-d6c553749f03",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
 				"48d54ca5-6d46-4aff-a696-7d33c4fb3562",
 				"df030f1e-5cc9-4d35-8572-f93f41809a47",
@@ -62,6 +61,7 @@
 				"4e8c0a23-084c-4388-b413-99cabda9f1fc",
 				"06a50bae-370f-4f00-9a70-9c2de527ddb2",
 				"66f2a7d4-61c1-460c-91b5-19e6632b6f04",
+				"f63d0a2c-3564-4cf8-8e2a-2fa7b17c1653",
 				"5b6267b0-a5df-402e-83a6-2a218a5ee39a",
 				"ad5b45f5-4d06-4d45-a8d3-b80e2b685152",
 				"57813b5c-872a-400a-ada8-8a8b132ff073",
@@ -82,9 +82,7 @@
 				"e097320f-0bb4-4d0c-9850-def2b9d4ea18",
 				"90ca2a99-392e-459f-b166-bb87eb0dfd5e",
 				"d40d0dc3-7560-4e59-95ba-0d0e0dc641dc",
-				"106eca20-8516-43e5-8571-3f8c09ecb3e3",
-				"5c23e109-339d-4e53-8151-7d7d1fb67f80",
-				"7ba07fc9-97ae-4260-8b2e-b081d4feab1e"
+				"106eca20-8516-43e5-8571-3f8c09ecb3e3"
 			]
 		}
 	],
@@ -105,7 +103,7 @@
 		},
 		{
 			"uuid": "9704bd39-80af-44c1-8d66-5f5b5c56d103",
-			"title": "Flesh out Score UI",
+			"title": "HUD: Better Score UI",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
@@ -296,7 +294,7 @@
 			"uuid": "04865abb-c63e-4724-9aed-eefdffd2c712",
 			"title": "Random Despawn Bug during multiplayer: ",
 			"description": "E 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
-			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		},
 		{
@@ -322,16 +320,23 @@
 		},
 		{
 			"uuid": "727a2d99-e87f-4939-9105-44fe844ef725",
-			"title": "Double Scoring Issue on MP With Bots",
+			"title": "Bug: Sometimes double score on death, particularly on AI",
 			"description": "",
-			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		},
 		{
 			"uuid": "cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 			"title": "PlayTest: Ryans rock was knocking him down",
 			"description": "I can verify this locally if the player has enough speed and is running in the direction they are throwing.  May be fixed with animation and speed modifications during throw, or just rework the rock action\n",
-			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "f0bed60f-c96f-4fcf-9ae1-7c260456da24",
+			"title": "PlayTest: Roundhouse Kick",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"steps": []
 		},
 		{
@@ -364,65 +369,44 @@
 		},
 		{
 			"uuid": "1b81778d-d91b-4d14-b893-78dfe5e7d299",
-			"title": "Hazards: Implement a Hazards functionality (Jump Pad Base)",
+			"title": "Map Objects (Jump Pad)",
 			"description": "",
-			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"steps": []
 		},
 		{
-			"uuid": "5c23e109-339d-4e53-8151-7d7d1fb67f80",
-			"title": "Get General Use Character Creation figured out",
+			"uuid": "408e7618-fcbb-4880-b868-f786f7273146",
+			"title": "Player as RigidBody",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "ba079f8a-7187-45b5-9956-ee082b9ed99d",
+			"title": "Review Network Calls and ensure minimal types",
+			"description": "",
+			"category": "b0d0913a-18f9-4ac3-887f-603e53a50c00",
+			"steps": []
+		},
+		{
+			"uuid": "223b125d-4861-4a2d-9a9b-d965859f09e3",
+			"title": "Ice Character",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "f63d0a2c-3564-4cf8-8e2a-2fa7b17c1653",
+			"title": "Fast (Lightning?) Character",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "42e337e7-85b5-4b87-a033-f27039cc1972",
+			"title": "Change Hero UI / Clean Respawn",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
-			"steps": []
-		},
-		{
-			"uuid": "7ba07fc9-97ae-4260-8b2e-b081d4feab1e",
-			"title": "Hero switch works!",
-			"description": "",
-			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
-			"steps": []
-		},
-		{
-			"uuid": "3d8b1fb4-0b31-41df-ad2b-33fc6ec15fca",
-			"title": "MP: Hero Switching switches bots on server",
-			"description": "",
-			"category": "b2464c1f-0e2f-4c44-98e5-e7a276573074",
-			"steps": []
-		},
-		{
-			"uuid": "6341628f-2ea7-439c-ab3b-bc62dac688bc",
-			"title": "Bolty: Implement Lightning AOE?",
-			"description": "",
-			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
-			"steps": []
-		},
-		{
-			"uuid": "30d785bf-19cc-4702-a469-461c583e11ab",
-			"title": "Heroes: Base Stats by Hero",
-			"description": "",
-			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
-			"steps": []
-		},
-		{
-			"uuid": "3d45a235-cc80-4640-904a-8ff6e3b231f4",
-			"title": "Call Down, Signal Up",
-			"description": "",
-			"category": "108505be-2083-48d1-8416-c32e75dc04f3",
-			"steps": []
-		},
-		{
-			"uuid": "7b8e862a-d27a-4d53-b781-46df0be995da",
-			"title": "Hero Selection Screen",
-			"description": "",
-			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
-			"steps": []
-		},
-		{
-			"uuid": "7fed0018-cfde-4af2-b642-d6c553749f03",
-			"title": "Implement a better State Machine",
-			"description": "Description has my pseudo code for player and actions\n\nvars\n\tis_dead: bool\n\tis_respawning: bool\n\tglobal_cd_next_time: timestamp\n\t\n\tis_knocked: bool # maybe dont need this if we model channeling action as falling\n\tis_channeling: bool\n\tchanneling_action: action\n\t\tcan_be_knocked? # maybe this needs to be in a static Dict with some types for lookup for MP Sync\n\txz_velocity_override: override\n\ty_velocity_override: override\n\txz_speed_modifier: float\n\tis_animation_locked: bool\n\t\n\t\n\nActions\n\tCan Perform Input Action?\n\tNot Dead\n\tNot Respawning\n\tGlobal CD not on cooldown\n\tChannel CD not on cooldown\n\t\tPerhaps for channeling abilities, the global cooldown only reduces when channeling is done\n\tAction is usable?\n\t\nMovement\n\n\tidle = true\n\n\tif XZ Velocity Override?:\n\t\tApply XZ Velocity Override\n\t\tCould knockdown work here?  Probably!\n\telse if XZ Input enabled\n\t\tNot Respawning\n\t\tNot Dead\n\t\tNot knocked over -> could create XZ velocity override\n\t\tNot Blocking -> Block could create XZ velocity override\n\t\t\n\t\tIs XZ Input Pressed?\n\t\t\tIs XZ Speed or Anim Modified?\n\t\t\t\tStorm\n\t\t\t\t\tFraction Modifier\n\t\t\t\t\tLock Animation\n\t\t\t\tPunching\n\t\t\t\t\tFraction Modifier\n\t\t\t\t\tLock Animation\n\n\t\t\tperform modification to XZ Velocity on input\n\t\t\tPlay Animation if not locked\n\t\t\tidle = false\n\t\n\tif Y Override\n\t\tApply Y Velocity Override\n\telse if Y Input enabled\n\t\tOn the ground\n\t\tNot knocked over\n\t\tNot Blocking\n\t\tNot Dead\n\t\tNot Respawning\n\t\t\n\t\tis Y Jump Input Pressed?\n\t\t\tJump\n\telse if should be falling\n\t\tNot on the ground\n\t\t\n\t\tApply gravity\n\t\n\tif not lock_animation and idle = true\n\t\tplay idle\n\n\nAction impls:\n\tChannels\n\t\tLock anim\n\t\tLock Velocities or Modify velocities if applicable\n\t\tPlay anim\n\t\tWait for anim signal\n\t\tUnlock anim / velocities / modifiers\n\t\n\tGetting knocked back:\n\t\tIf channeling action is knockable AND not knocked AND not standing\n\t\t\tlock anim on fall\n\t\t\tapply knockback velocity overrides\n\t\t\tplay fall (this is a channeling action)\n\t\t\t\tor we keep the \"knockback\" logic in our process, we can try options",
-			"category": "22812e0e-dd95-450e-918d-c05ec67f3c52",
 			"steps": []
 		}
 	],
