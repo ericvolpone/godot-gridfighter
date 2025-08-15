@@ -9,6 +9,16 @@ float hash(vec2 p) {
     return fract(sin(dot(p, vec2(41.0, 289.0))) * 43758.5453);
 }
 
+void vertex() {
+    mat4 modified_model_view = VIEW_MATRIX * mat4(
+        INV_VIEW_MATRIX[0],
+        INV_VIEW_MATRIX[1],
+        INV_VIEW_MATRIX[2],
+        MODEL_MATRIX[3]
+    );
+    MODELVIEW_MATRIX = modified_model_view;
+}
+
 float noise(vec2 p){
     vec2 i = floor(p);
     vec2 f = fract(p);
