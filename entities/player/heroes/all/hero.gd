@@ -50,3 +50,7 @@ func emit_punch_signal() -> void:
 func _init_combat_actions() -> void:
 	push_error("Must implement _init_combat_actions in child")
 	return
+
+# Helpers
+func get_hero_id() -> int:
+	return definition.hero_id

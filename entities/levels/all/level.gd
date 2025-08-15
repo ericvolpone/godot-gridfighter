@@ -67,15 +67,16 @@ func _on_hero_locked_in(hero_id: int) -> void:
 func handle_player_death(player: Player) -> void:
 	if player.is_respawning:
 		return
+	print("Player is respawning")
 	_spawn_death_explosion.rpc(player.global_position)
 	scoreboard.update_player_score(player, -5)
 	
 	# Move to the next hero
 	# TODO hard coding hero IDs here, put in a registry
-	var next_hero_id: int = player.current_hero_id + 1
+	var next_hero_id: int = player.hero.definition.hero_id + 1
 	if next_hero_id > 1:
 		next_hero_id = 0
-	player.current_hero_id = next_hero_id
+	player.change_hero(next_hero_id)
 	
 	respawner.respawn_player(player)
 

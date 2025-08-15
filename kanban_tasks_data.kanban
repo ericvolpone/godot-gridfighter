@@ -26,6 +26,7 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"3bce0f90-ff7c-4948-9bd5-1edb45a95809",
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
@@ -48,15 +49,15 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": [
-				"ace2a334-f41e-450e-b6ca-1bd7351d00d3",
-				"1b52b03b-29fe-4c45-9f5e-8826428a83d9"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"86e84ed0-58d6-4319-aca0-8a66e997c9e3",
+				"ace2a334-f41e-450e-b6ca-1bd7351d00d3",
+				"1b52b03b-29fe-4c45-9f5e-8826428a83d9",
 				"42e337e7-85b5-4b87-a033-f27039cc1972",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
 				"48d54ca5-6d46-4aff-a696-7d33c4fb3562",
@@ -297,8 +298,8 @@
 		},
 		{
 			"uuid": "04865abb-c63e-4724-9aed-eefdffd2c712",
-			"title": "Random Despawn Bug during multiplayer: ",
-			"description": "E 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
+			"title": "MP Despawn: Rock errors on peer when rock falls off ledge",
+			"description": "Happens on client when rock falls off ledge lol\n\nE 0:00:34:857   on_despawn_receive: Condition \"!pinfo.recv_nodes.has(net_id)\" is true. Returning: ERR_UNAUTHORIZED\n  <C++ Source>  modules/multiplayer/scene_replication_interface.cpp:664 @ on_despawn_receive()\n",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		},
@@ -438,6 +439,20 @@
 		{
 			"uuid": "1b52b03b-29fe-4c45-9f5e-8826428a83d9",
 			"title": "MP Bug: Seems like a client sees other peers with 2 meshes",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "86e84ed0-58d6-4319-aca0-8a66e997c9e3",
+			"title": "MP: Playing with bots, the server for some reason can't spawn the host",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "3bce0f90-ff7c-4948-9bd5-1edb45a95809",
+			"title": "Storm CRASHES the game in MP",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

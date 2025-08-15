@@ -41,12 +41,15 @@ properties/9/replication_mode = 1
 properties/10/path = NodePath("HeroSocket:rotation")
 properties/10/spawn = true
 properties/10/replication_mode = 1
-properties/11/path = NodePath(".:current_hero_id")
+properties/11/path = NodePath(".:is_channeling")
 properties/11/spawn = true
 properties/11/replication_mode = 1
-properties/12/path = NodePath(".:is_channeling")
+properties/12/path = NodePath(".:is_respawning")
 properties/12/spawn = true
 properties/12/replication_mode = 1
+properties/13/path = NodePath(".:_current_hero_id")
+properties/13/spawn = true
+properties/13/replication_mode = 1
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

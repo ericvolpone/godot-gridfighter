@@ -58,7 +58,7 @@ var hero: Hero;
 # Maybe move "change hero" into the set function, exposing it is confusing
 # need this for multiplayer though
 var chosen_hero_id: int = 0;
-@export var current_hero_id: int = -1: set = _set_hero_id;
+@export var _current_hero_id: int = -1;
 
 # State variables
 @export var is_knocked: bool = false;
@@ -92,7 +92,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
 	# We're doing this nonsense so the player can ready up on time...
-	current_hero_id = chosen_hero_id
+	change_hero(chosen_hero_id)
 	animator = hero.animator
 	
 	if(is_player_controlled and is_multiplayer_authority()):
@@ -118,11 +118,14 @@ func _input(event: InputEvent) -> void:
 		pass
 
 func _physics_process(delta: float) -> void:
+	if _current_hero_id != hero.definition.hero_id:
+		change_hero(_current_hero_id)
 	if(animator.current_animation != current_animation):
 		animator.play(current_animation, current_animation_blend_time)
 
-	process_movement(delta);
-	process_combat_actions();
+	if is_multiplayer_authority():
+		process_movement(delta);
+		process_combat_actions();
 	
 	if(global_position.y <= -8):
 		level.handle_player_death(self)
@@ -241,23 +244,16 @@ func apply_strength_boost(value: int) -> void:
 	if current_strength >= max_player_strength:
 		current_strength = max_player_strength
 
-
-# Hero code
-func _set_hero_id(hero_id: int) -> void:
-	if current_hero_id == hero_id: return
-	current_hero_id = hero_id
-	if is_inside_tree():
-		change_hero(hero_id)  # runs on all peers when the value replicates
-
 # Clients call this to request a change. Server validates and sets hero_id.
 @rpc("any_peer","reliable")
 func rpc_request_change_hero(requested_id: int) -> void:
 	if not multiplayer.is_server(): return
 	if HERO_DB.has(requested_id):
 		# Setting hero_id on the server triggers replication via MultiplayerSynchronizer
-		_set_hero_id(requested_id)
+		change_hero(requested_id)
 
 func change_hero(hero_id: int) -> void:
+	_current_hero_id = hero_id
 	var hero_definition: HeroDefinition = HERO_DB[hero_id];
 	if hero:
 		hero.queue_free()
@@ -265,7 +261,6 @@ func change_hero(hero_id: int) -> void:
 	
 	var _hero := hero_definition.instantiate()
 	_hero.set_multiplayer_authority(get_multiplayer_authority())
-	current_hero_id = hero_definition.hero_id
 	# keep world position/orientation stable via socket
 	hero_socket.add_child(_hero)
 	# TODO Do I need below line?
