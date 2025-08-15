@@ -55,6 +55,8 @@ var snapshot_velocity: Vector3 = Vector3(0,0,0)
 # Hero Data
 var hero_socket: Node3D
 var hero: Hero;
+# Maybe move "change hero" into the set function, exposing it is confusing
+# need this for multiplayer though
 @export var current_hero_id: int = -1: set = _set_hero_id;
 
 # State variables
@@ -110,8 +112,9 @@ func _input(event: InputEvent) -> void:
 		else:
 			is_in_menu = true
 			in_game_menu.show()
+	# TODO Update this based on game mode
 	if event.is_action("change_hero"):
-		current_hero_id = ROCKY_HERO_ID
+		pass
 
 func _physics_process(delta: float) -> void:
 	if(animator.current_animation != current_animation):
