@@ -5,8 +5,8 @@ extends SubViewport
 
 @export_tool_button("Generate Sprite")
 var generate_sprite := func() -> void:
-	if not image_texture_name:
-		push_error("No PNG Name provided")
+	if not image_texture_name or image_texture_name.length() == 0:
+		push_error("No Texture Name provided")
 		return
 	var image: Image = get_texture().get_image()
 	var image_texture: ImageTexture = ImageTexture.create_from_image(image)
