@@ -12,13 +12,13 @@
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_kqgyu"]
+[sub_resource type="Sky" id="Sky_mjkyc"]
 sky_material = SubResource("ProceduralSkyMaterial_mjkyc")
 
 [sub_resource type="Environment" id="Environment_2bfne"]
 background_mode = 2
 background_energy_multiplier = 0.84
-sky = SubResource("Sky_kqgyu")
+sky = SubResource("Sky_mjkyc")
 tonemap_mode = 2
 glow_enabled = true
 glow_strength = 0.8
@@ -150,19 +150,19 @@ void fragment() {
 }
 "
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2bfne"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mjkyc"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eus47"]
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_2bfne")
+noise = SubResource("FastNoiseLite_mjkyc")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8tg4l"]
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_2bfne")
+noise = SubResource("FastNoiseLite_mjkyc")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3vcw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bfne"]
 render_priority = 0
 shader = SubResource("Shader_mjkyc")
 shader_parameter/albedo = Color(7.70092e-07, 0.615292, 0.615489, 1)
@@ -184,7 +184,7 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g2lxu"]
-material = SubResource("ShaderMaterial_i3vcw")
+material = SubResource("ShaderMaterial_2bfne")
 size = Vector3(200, 1, 200)
 
 [node name="Level" type="Node3D"]
