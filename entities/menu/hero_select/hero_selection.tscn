@@ -36,6 +36,7 @@ offset_left = -79.0
 offset_right = 79.0
 offset_bottom = 256.0
 grow_horizontal = 2
+action_mode = 0
 texture_normal = ExtResource("2_d1nio")
 texture_pressed = ExtResource("3_dknxu")
 texture_hover = ExtResource("3_dknxu")

@@ -6,18 +6,23 @@
 
 [node name="HeroSelectionMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("1_cb3cc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 1195.0
-offset_bottom = 520.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -298.0
+offset_right = 299.0
+offset_bottom = 256.0
+grow_horizontal = 2
 theme = ExtResource("1_cb3cc")
+alignment = 1
 
 [node name="BoltySelect" parent="HBoxContainer" instance=ExtResource("1_lmbx6")]
 layout_mode = 2
