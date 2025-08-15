@@ -454,7 +454,7 @@
 		},
 		{
 			"uuid": "3bce0f90-ff7c-4948-9bd5-1edb45a95809",
-			"title": "Storm not replicating across peers",
+			"title": "Storm not replicating across peers (and thus causing queue_free crash)",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
