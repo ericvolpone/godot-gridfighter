@@ -1,6 +1,6 @@
-extends Control
+class_name HeroSelectionMenu extends Control
 
-signal hero_chosen;
+signal hero_locked_in;
 
 var hero_selections: Array[HeroSelection];
 var selected_hero: HeroSelection;
@@ -21,4 +21,4 @@ func _ready() -> void:
 func _on_lock_button_pressed() -> void:
 	if not selected_hero:
 		return;
-	emit_signal(hero_chosen.get_name())
+	emit_signal(hero_locked_in.get_name(), selected_hero.hero_definition.hero_id)

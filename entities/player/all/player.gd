@@ -57,6 +57,7 @@ var hero_socket: Node3D
 var hero: Hero;
 # Maybe move "change hero" into the set function, exposing it is confusing
 # need this for multiplayer though
+var chosen_hero_id: int = 0;
 @export var current_hero_id: int = -1: set = _set_hero_id;
 
 # State variables
@@ -89,9 +90,9 @@ func _enter_tree() -> void:
 	hero_socket = $HeroSocket
 
 func _ready() -> void:
-	# TODO: Have them choose this
-	current_hero_id = BOLTY_HERO_ID
 	add_to_group(Groups.PLAYER)
+	# We're doing this nonsense so the player can ready up on time...
+	current_hero_id = chosen_hero_id
 	animator = hero.animator
 	
 	if(is_player_controlled and is_multiplayer_authority()):

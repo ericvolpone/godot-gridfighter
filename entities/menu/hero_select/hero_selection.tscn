@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0wixtx2mu6uf"]
+[gd_scene load_steps=4 format=3 uid="uid://b0wixtx2mu6uf"]
 
 [ext_resource type="Script" uid="uid://bcyoaq11b03q3" path="res://entities/menu/hero_select/hero_selection.gd" id="1_e3061"]
 [ext_resource type="Texture2D" uid="uid://dqiab4kf5k0sl" path="res://models/sprites/ui/hero_select_default.png" id="2_d1nio"]
-[ext_resource type="Resource" uid="uid://chf750dwm1v8f" path="res://entities/player/heroes/bolty/bolty.tres" id="2_wj4ed"]
 [ext_resource type="Texture2D" uid="uid://ph203wrpu15w" path="res://models/sprites/ui/hero_select_selected.png" id="3_dknxu"]
 
 [node name="HeroSelection" type="Control"]
@@ -18,7 +17,6 @@ grow_vertical = 2
 script = ExtResource("1_e3061")
 border_default = ExtResource("2_d1nio")
 border_selected = ExtResource("3_dknxu")
-hero_definition = ExtResource("2_wj4ed")
 
 [node name="HeroImage" type="TextureRect" parent="."]
 layout_mode = 1

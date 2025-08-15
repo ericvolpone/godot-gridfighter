@@ -1,5 +1,6 @@
 class_name Level extends Node3D
 
+var hero_selection_menu_scene: PackedScene
 @onready var death_scene: PackedScene = preload("res://entities/effects/death/player_death.tscn")
 
 # Multiplayer Variables
@@ -18,6 +19,8 @@ var lobby_settings: LobbySettings;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hero_selection_menu_scene = load("res://entities/menu/hero_select/hero_selection_menu.tscn")
+
 	# Init default settings
 	if not lobby_settings:
 		lobby_settings = LobbySettings.default();
@@ -43,6 +46,23 @@ func _ready() -> void:
 		multiplayer.multiplayer_peer = peer
 		multiplayer.set_root_path("/")
 		print("Setup offline");
+	
+	_show_hero_menu()
+
+func _show_hero_menu() -> void:
+	var hero_menu: HeroSelectionMenu = hero_selection_menu_scene.instantiate()
+	add_child(hero_menu)
+	hero_menu.hero_locked_in.connect(func(hero_id: int) -> void:
+		hero_menu.hide()
+		_on_hero_locked_in(hero_id)
+		)
+
+func _on_hero_locked_in(hero_id: int) -> void:
+	# Clients ask the server to spawn; server can call directly for its own peer.
+	if multiplayer.is_server():
+		player_spawner.request_spawn(hero_id)          # local call (server’s own player)
+	else:
+		player_spawner.rpc_id(1, "request_spawn", hero_id) # 1 = server peer id
 
 func handle_player_death(player: Player) -> void:
 	if player.is_respawning:

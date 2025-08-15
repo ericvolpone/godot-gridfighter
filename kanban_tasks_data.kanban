@@ -49,13 +49,15 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"42e337e7-85b5-4b87-a033-f27039cc1972"
+				"ace2a334-f41e-450e-b6ca-1bd7351d00d3",
+				"1b52b03b-29fe-4c45-9f5e-8826428a83d9"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"42e337e7-85b5-4b87-a033-f27039cc1972",
 				"c10e7218-a583-428d-a6cc-3eb1dfbc88ba",
 				"48d54ca5-6d46-4aff-a696-7d33c4fb3562",
 				"df030f1e-5cc9-4d35-8572-f93f41809a47",
@@ -424,6 +426,20 @@
 			"title": "Review TODOs",
 			"description": "",
 			"category": "b0d0913a-18f9-4ac3-887f-603e53a50c00",
+			"steps": []
+		},
+		{
+			"uuid": "ace2a334-f41e-450e-b6ca-1bd7351d00d3",
+			"title": "MP Hero: Run Animation not working across clients",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "1b52b03b-29fe-4c45-9f5e-8826428a83d9",
+			"title": "MP Bug: Seems like a client sees other peers with 2 meshes",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],
