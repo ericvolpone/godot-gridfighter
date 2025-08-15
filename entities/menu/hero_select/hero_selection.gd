@@ -6,5 +6,10 @@ class_name HeroSelection extends Control
 @onready var button: TextureButton = $Button
 @onready var hero_image: TextureRect = $HeroImage
 
+signal hero_selected;
+
 func _ready() -> void:
 	hero_image.texture = hero_definition.hero_portrait
+
+func _on_button_pressed() -> void:
+	emit_signal(hero_selected.get_name())

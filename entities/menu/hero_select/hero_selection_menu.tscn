@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://very7uobgrio"]
+[gd_scene load_steps=5 format=3 uid="uid://very7uobgrio"]
 
 [ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="1_cb3cc"]
 [ext_resource type="PackedScene" uid="uid://b0wixtx2mu6uf" path="res://entities/menu/hero_select/hero_selection.tscn" id="1_lmbx6"]
+[ext_resource type="Script" uid="uid://dtpimq824mich" path="res://entities/menu/hero_select/hero_selection_menu.gd" id="2_cb3cc"]
 [ext_resource type="Resource" uid="uid://6cltgrbw7n4n" path="res://entities/player/heroes/rocky/rocky.tres" id="3_wy3ok"]
 
 [node name="HeroSelectionMenu" type="Control"]
@@ -11,6 +12,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 theme = ExtResource("1_cb3cc")
+script = ExtResource("2_cb3cc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -30,3 +32,18 @@ layout_mode = 2
 [node name="RockySelect" parent="HBoxContainer" instance=ExtResource("1_lmbx6")]
 layout_mode = 2
 hero_definition = ExtResource("3_wy3ok")
+
+[node name="LockButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = 300.0
+offset_right = 53.0
+offset_bottom = 335.0
+grow_horizontal = 2
+disabled = true
+text = "Lock Hero In"
+
+[connection signal="pressed" from="LockButton" to="." method="_on_lock_button_pressed"]

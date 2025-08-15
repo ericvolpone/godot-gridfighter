@@ -40,3 +40,5 @@ action_mode = 0
 texture_normal = ExtResource("2_d1nio")
 texture_pressed = ExtResource("3_dknxu")
 texture_hover = ExtResource("3_dknxu")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
