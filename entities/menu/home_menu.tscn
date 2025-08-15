@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://cly568e1kmem5"]
 
-[ext_resource type="PackedScene" uid="uid://cyw3gro3ao66a" path="res://entities/menu/main_menu.tscn" id="1_py8lp"]
-[ext_resource type="PackedScene" uid="uid://ymb8qvia5s6k" path="res://entities/player/heroes/rocky/rocky.tscn" id="2_53o0w"]
-[ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="2_fiqdu"]
-[ext_resource type="PackedScene" uid="uid://br3qftaid5etj" path="res://entities/player/heroes/bolty/bolty.tscn" id="3_46kfh"]
+[ext_resource type="PackedScene" uid="uid://cyw3gro3ao66a" path="res://entities/menu/main_menu.tscn" id="1_rm2r3"]
+[ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="2_nkmt6"]
+[ext_resource type="PackedScene" uid="uid://ymb8qvia5s6k" path="res://entities/player/heroes/rocky/rocky.tscn" id="3_j3l5m"]
+[ext_resource type="PackedScene" uid="uid://br3qftaid5etj" path="res://entities/player/heroes/bolty/bolty.tscn" id="4_l13iv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fiqdu"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -185,10 +185,10 @@ mesh = SubResource("BoxMesh_fiqdu")
 
 [node name="Menu Layer" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" parent="Menu Layer" instance=ExtResource("1_py8lp")]
-theme = ExtResource("2_fiqdu")
+[node name="MainMenu" parent="Menu Layer" instance=ExtResource("1_rm2r3")]
+theme = ExtResource("2_nkmt6")
 
-[node name="Rocky" parent="." instance=ExtResource("2_53o0w")]
+[node name="Rocky" parent="." instance=ExtResource("3_j3l5m")]
 transform = Transform3D(0.997139, 0, 0.0755878, 0, 1, 0, -0.0755878, 0, 0.997139, 0.70788, 4.56874, 8.84277)
 script = null
 
@@ -252,7 +252,7 @@ bones/63/rotation = Quaternion(-6.552e-08, 1, 0.000117153, -0.00017768)
 [node name="AnimationPlayer" parent="Rocky" index="1"]
 autoplay = "master_animations/Idle"
 
-[node name="Bolty" parent="." instance=ExtResource("3_46kfh")]
+[node name="Bolty" parent="." instance=ExtResource("4_l13iv")]
 transform = Transform3D(0.997139, 0, 0.0755878, 0, 1, 0, -0.0755878, 0, 0.997139, 2.34363, 4.56874, 8.84277)
 script = null
 

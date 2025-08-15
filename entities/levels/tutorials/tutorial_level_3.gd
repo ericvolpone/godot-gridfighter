@@ -1,6 +1,6 @@
 extends TutorialLevel
 
-@onready var rock_scene: PackedScene = load("res://entities/objects/combat/rock.tscn")
+@onready var rock_scene: PackedScene = load("res://entities/objects/projectiles/rock/rock.tscn")
 var time_to_stay_alive: float = 6.0;
 
 func get_level_number() -> int:

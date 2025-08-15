@@ -36,7 +36,7 @@ void fragment(){
     float t = TIME * time_scale;
     vec2 p = UV;
     // Horizontal displacement that changes with y and time
-    float jag = (noise(vec2(p.y * jaggedness, t)) - 0.5) * 0.6;
+    float jag = (noise(vec2(p.y * jaggedness, t)) - 0.5) * .9;
     float x = abs(p.x - 0.5 + jag);         // distance from lightning “spine”
     // Thickness tapers toward ends:
     float width = core_width * (0.4 + 0.6 * (1.0 - abs(p.y - 0.5) * 2.0));
@@ -46,7 +46,7 @@ void fragment(){
     float halo = smoothstep(0.5, 0.0, x);
     float a = clamp(core + 0.35 * halo, 0.0, 1.0);
 
-    ALBEDO = vec3(1.0);
+    ALBEDO = vec3(.5, 1, .5);
     EMISSION = vec3(6.0) * a;
     ALPHA = a;
 }

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyw3gro3ao66a"]
+[gd_scene load_steps=4 format=3 uid="uid://cyw3gro3ao66a"]
 
+[ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="1_64tob"]
 [ext_resource type="Script" uid="uid://dqqy3pbtg4cnw" path="res://entities/menu/main_menu.gd" id="1_nl8w3"]
 [ext_resource type="PackedScene" uid="uid://cjg3t43c8vhb8" path="res://entities/menu/lobby_settings.tscn" id="2_scuuy"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_64tob")
 script = ExtResource("1_nl8w3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

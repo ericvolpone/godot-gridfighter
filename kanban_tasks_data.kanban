@@ -41,6 +41,7 @@
 				"1b81778d-d91b-4d14-b893-78dfe5e7d299",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
+				"6a735177-63a4-43f1-9d01-a8bdb0910bb5",
 				"ba079f8a-7187-45b5-9956-ee082b9ed99d"
 			]
 		},
@@ -407,6 +408,13 @@
 			"title": "Change Hero UI / Clean Respawn",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "6a735177-63a4-43f1-9d01-a8bdb0910bb5",
+			"title": "Fire Character",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"steps": []
 		}
 	],

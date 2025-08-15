@@ -24,7 +24,7 @@ func get_ai_count() -> int:
 	return 0;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 
 	if(!has_won and is_win_condition_met()):
 		has_won = true;
@@ -56,5 +56,5 @@ func get_next_level_number() -> int:
 	push_error("Please define next level number in child")
 	return 2
 
-func add_player_to_score(player: Player) -> void:
+func add_player_to_score(_player: Player) -> void:
 	pass;
