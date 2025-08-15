@@ -3,6 +3,9 @@ class_name HeroDefinition extends Resource
 @export var hero_id: int;
 @export var display_name: String;
 @export var hero_scene: PackedScene;
+@export var hero_portrait: ImageTexture
 
 func instantiate() -> Hero:
-	return hero_scene.instantiate() as Hero;
+	var hero: Hero = hero_scene.instantiate();
+	hero.definition = self
+	return hero;

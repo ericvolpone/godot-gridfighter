@@ -4,6 +4,7 @@
 
 [node name="Sprite Generator" type="SubViewport"]
 transparent_bg = true
+size = Vector2i(128, 256)
 script = ExtResource("1_t5qso")
 image_texture_name = "rocky_pose"
 

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="HeroDefinition" load_steps=3 format=3 uid="uid://6cltgrbw7n4n"]
+[gd_resource type="Resource" script_class="HeroDefinition" load_steps=4 format=3 uid="uid://6cltgrbw7n4n"]
 
 [ext_resource type="PackedScene" uid="uid://ymb8qvia5s6k" path="res://entities/player/heroes/rocky/rocky.tscn" id="1_nq00h"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_ntk8c"]
+[ext_resource type="Texture2D" uid="uid://db0itig16nji8" path="res://entities/player/heroes/rocky/rocky_pose.tres" id="1_p8otv"]
 
 [resource]
 script = ExtResource("1_ntk8c")
 hero_id = 1
 display_name = "Rocky"
 hero_scene = ExtResource("1_nq00h")
+hero_portrait = ExtResource("1_p8otv")
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

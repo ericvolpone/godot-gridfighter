@@ -3,6 +3,8 @@ class_name Hero extends Node3D
 # Animation Data
 signal punch_frame;
 
+var definition: HeroDefinition
+
 # HUD
 const HUD_PATH := "res://entities/ui/hud/ActionHUDContainer.tscn"
 

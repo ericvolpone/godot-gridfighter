@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://very7uobgrio"]
+
+[ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="1_cb3cc"]
+[ext_resource type="PackedScene" uid="uid://b0wixtx2mu6uf" path="res://entities/menu/hero_select/hero_selection.tscn" id="1_lmbx6"]
+[ext_resource type="Resource" uid="uid://6cltgrbw7n4n" path="res://entities/player/heroes/rocky/rocky.tres" id="3_wy3ok"]
+
+[node name="HeroSelectionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cb3cc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1195.0
+offset_bottom = 520.0
+theme = ExtResource("1_cb3cc")
+
+[node name="BoltySelect" parent="HBoxContainer" instance=ExtResource("1_lmbx6")]
+layout_mode = 2
+
+[node name="RockySelect" parent="HBoxContainer" instance=ExtResource("1_lmbx6")]
+layout_mode = 2
+hero_definition = ExtResource("3_wy3ok")
