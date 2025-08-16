@@ -5,7 +5,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ayjum"]
 height = 0.1
-radius = 0.9
+radius = 0.8
 
 [node name="JumpPad" type="Node3D"]
 script = ExtResource("1_ayjum")
@@ -13,7 +13,7 @@ script = ExtResource("1_ayjum")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47204, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419842, 0)
 shape = SubResource("CylinderShape3D_ayjum")
 
 [node name="JumpPad" parent="." instance=ExtResource("1_i4yri")]
