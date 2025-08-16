@@ -28,7 +28,8 @@ func is_usable_child() -> bool:
 
 func _on_storm_animation_finished(anim_name: String) -> void:
 	if(Player.ANIM_SHOUT == anim_name):
-		current_storm.queue_free()
+		if(current_storm):
+			current_storm.queue_free()
 		hero.player.end_channel_action()
 		hero.player.y_velocity_override = null
 		hero.player.xz_speed_modifier = 1;

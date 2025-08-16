@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://bunqrokhx5ye8"]
+[gd_scene load_steps=13 format=4 uid="uid://bunqrokhx5ye8"]
 
 [ext_resource type="PackedScene" uid="uid://bcml2xb31ytjt" path="res://entities/levels/all/level.tscn" id="1_3qiap"]
 [ext_resource type="PackedScene" uid="uid://onyasgeb8h0a" path="res://entities/levels/multiplayer/smallhill/SmallHill.glb" id="2_ppjc2"]
 [ext_resource type="PackedScene" uid="uid://h824idisfqu" path="res://entities/levels/multiplayer/all/RespawnPoint.tscn" id="3_51cky"]
 [ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="3_ppjc2"]
 [ext_resource type="Shader" uid="uid://cwkjyvacqo53r" path="res://models/shaders/grass.gdshader" id="4_51cky"]
+[ext_resource type="PackedScene" uid="uid://kp56rumeb5sc" path="res://entities/objects/map/jump_pad/JumpPad.tscn" id="6_b5mft"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_51cky"]
 
@@ -178,5 +179,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.92325, 0.71584, 0.25356)
 
 [node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("3_ppjc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39726, 0.740756, -0.391492)
+
+[node name="JumpPad" parent="." index="12" instance=ExtResource("6_b5mft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60891, -0.616653, 6.56219)
 
 [editable path="Terrain"]

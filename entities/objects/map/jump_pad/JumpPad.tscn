@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://kp56rumeb5sc"]
+
+[ext_resource type="Script" uid="uid://cpe3jxbyb3gvy" path="res://entities/objects/map/jump_pad/jump_pad.gd" id="1_ayjum"]
+[ext_resource type="PackedScene" uid="uid://cl4jaa5c3t2ga" path="res://entities/objects/map/jump_pad/jump_pad.glb" id="1_i4yri"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ayjum"]
+height = 0.1
+radius = 0.9
+
+[node name="JumpPad" type="Node3D"]
+script = ExtResource("1_ayjum")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47204, 0)
+shape = SubResource("CylinderShape3D_ayjum")
+
+[node name="JumpPad" parent="." instance=ExtResource("1_i4yri")]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="JumpPad"]
