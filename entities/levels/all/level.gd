@@ -9,6 +9,7 @@ var hero_selection_menu_scene: PackedScene
 @onready var respawner: Respawner = $Respawner
 @onready var koth_manager: KothManager = $KothManager
 @onready var power_up_spawner: PowerUpSpawner = $PowerUpSpawner
+@onready var aoe_spawner: AOESpawner = $AOESpawner
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard

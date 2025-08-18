@@ -1,4 +1,4 @@
 class_name Groups
 
-const PLAYER: String = "Player"
-const PUNCHABLE_RB: String = "PunchableRB"
+const PLAYER: StringName = "Player"
+const PUNCHABLE_RB: StringName = "PunchableRB"

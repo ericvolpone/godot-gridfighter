@@ -1,7 +1,8 @@
 class_name StormAction extends CombatAction
 
-var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningStorm.tscn")
-var current_storm: LightningStorm;
+const STORM_TTL: float = 4
+
+@onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func _ready() -> void:
 	hero.animator.animation_finished.connect(_on_storm_animation_finished);
@@ -14,10 +15,10 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child() -> void:
-	var storm: LightningStorm = storm_scene.instantiate();
-	current_storm = storm;
-	add_child(storm);
-	storm.position.y = hero.position.y - 1.5
+	aoe_spawner.spawn_aoe.rpc({
+		"owner_peer_id" : hero.player.player_id,
+		"aoe_ttl" : STORM_TTL
+	});
 	hero.player.channel_action(self)
 	hero.player.xz_speed_modifier = 0.25
 	hero.player.y_velocity_override = VelocityOverride.new(Vector3(0, 2, 0), -.75)
@@ -28,8 +29,6 @@ func is_usable_child() -> bool:
 
 func _on_storm_animation_finished(anim_name: String) -> void:
 	if(Player.ANIM_SHOUT == anim_name):
-		if(current_storm):
-			current_storm.queue_free()
 		hero.player.end_channel_action()
 		hero.player.y_velocity_override = null
 		hero.player.xz_speed_modifier = 1;
