@@ -113,7 +113,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			is_in_menu = true
 			in_game_menu.show()
-	# TODO Update this based on game mode
+
 	if event.is_action("change_hero"):
 		pass
 
@@ -261,10 +261,7 @@ func change_hero(hero_id: int) -> void:
 	
 	var _hero := hero_definition.instantiate()
 	_hero.set_multiplayer_authority(get_multiplayer_authority())
-	# keep world position/orientation stable via socket
 	hero_socket.add_child(_hero)
-	# TODO Do I need below line?
-	#_hero.global_transform = hero_socket.global_transform
 	hero = _hero
 	hero.call_deferred("init_combat_actions")
 	animator = hero.animator

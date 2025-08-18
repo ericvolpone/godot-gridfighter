@@ -1,8 +1,11 @@
 class_name AOE extends Node3D
 
+#region (Variables)
 var tracking_player: Player;
 var aoe_ttl: float
+#endregion
 
+#region (Functions)
 func get_area_3d() -> Area3D:
 	push_error("AOE Subclass must implement get_area_3d()")
 	return null;
@@ -25,3 +28,4 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 func _physics_process(_delta: float) -> void:
 	if tracking_player:
 		global_position = tracking_player.global_position
+#endregion
