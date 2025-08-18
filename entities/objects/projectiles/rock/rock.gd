@@ -35,6 +35,8 @@ func _on_body_entered(body: Node) -> void:
 				player.knock_back(throw_direction, knockback_velocity)
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
+
 	if(global_position.y < -5.0):
 		queue_free();
 	
