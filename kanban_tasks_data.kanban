@@ -35,6 +35,7 @@
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
+				"8145d6ff-bae1-4b80-a859-14f738577cce",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
@@ -463,6 +464,13 @@
 			"title": "Implement Regions and Export Groups in all scripts",
 			"description": "",
 			"category": "b0d0913a-18f9-4ac3-887f-603e53a50c00",
+			"steps": []
+		},
+		{
+			"uuid": "8145d6ff-bae1-4b80-a859-14f738577cce",
+			"title": "Figure out Ability System.  Dmg?  Status modifiers?",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"steps": []
 		}
 	],
