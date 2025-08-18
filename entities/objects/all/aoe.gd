@@ -11,7 +11,7 @@ func get_area_3d() -> Area3D:
 	return null;
 
 func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
-	var owner_peer_id: int = spawn_data["owner_peer_id"]
+	var owner_peer_id: String = spawn_data["owner_peer_id"]
 	var players: Array[Node] = get_tree().get_nodes_in_group(Groups.PLAYER)
 		
 	for player: Player in players:

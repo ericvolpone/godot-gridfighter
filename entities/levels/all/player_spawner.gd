@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func init_player(id: int, player_name: String) -> Player:
 	var player: Player = player_scene.instantiate();
-	player.player_id = id
+	player.player_id = str(id)
 	player.player_name = player_name
 	return player;
 
@@ -38,6 +38,8 @@ func _configure_player_spawner() -> void:
 		
 		if brain_type == Brain.BrainType.PLAYER:
 			_spawned_peers[peer_id] = true
+		else:
+			player.player_id = "AI_" + player.player_id
 		call_deferred("respawn_player", player)
 		return player
 	

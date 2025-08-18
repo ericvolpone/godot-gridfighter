@@ -25,7 +25,7 @@ const HERO_DB: Dictionary[int, HeroDefinition] = {
 var animator: AnimationPlayer;
 @onready var model: Node3D = $HeroSocket;
 
-var player_id: int;
+var player_id: String;
 var player_name: String;
 @export var brain: Brain;
 
