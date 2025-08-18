@@ -80,7 +80,7 @@ func handle_player_death(player: Player) -> void:
 	
 	respawner.respawn_player(player)
 
-@rpc("call_local", "any_peer", "reliable")
+@rpc("call_local", "any_peer", "unreliable")
 func _spawn_death_explosion(location: Vector3) -> void:
 	var death: PlayerDeath = death_scene.instantiate();
 	add_child(death)
