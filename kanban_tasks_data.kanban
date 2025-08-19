@@ -28,6 +28,8 @@
 			"tasks": [
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
+				"0bae085d-669d-4871-a621-c060669709f8",
+				"124b5209-a56e-46ce-9bbd-33ac4bca215a",
 				"57bbe3ae-b0a6-4f08-a031-62ef38cf81c8",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
@@ -42,6 +44,7 @@
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
 				"6a735177-63a4-43f1-9d01-a8bdb0910bb5",
+				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"236d2668-6a73-4681-9dd9-573d84bb982c",
 				"ba079f8a-7187-45b5-9956-ee082b9ed99d",
 				"0ad968a8-51fc-4547-a844-2d96b297137b"
@@ -501,6 +504,27 @@
 		{
 			"uuid": "764201a4-d89e-4960-a733-e62b5753713b",
 			"title": "Gust only pushes Host",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "6e9f2955-e08c-45c1-acbf-2bdda80b799e",
+			"title": "Move to entirely server authoritative physics",
+			"description": "Authoritative setup (TL;DR)\n\nAuthority/Ownership\n\nSpawn every CharacterBody3D on the server and leave its multiplayer authority = 1 (server).\n\nClients do not run movement/forces; they just send inputs and render/interpolate.\n\n# Character.gd\nextends CharacterBody3D\nclass_name NetCharacter\n\n@onready var sync: MultiplayerSynchronizer = $MultiplayerSynchronizer\n\nfunc _ready() -> void:\n    # Server is the authority for this node\n    set_multiplayer_authority(1)\n    # Interpolate on clients for smoothness\n    physics_interpolation_mode = Node3D.PHYSICS_INTERPOLATION_MODE_ON\n\n\nSynchronizer direction\n\nConfigure your MultiplayerSynchronizer so that only authority replicates (default).\n\nReplicate global_transform, velocity, and any animation state from server → clients.\n\nRemove any client → server transform replication you had.\n\nClients send input snapshots → server\n\nClients never set their transform; they send input. Use unreliable RPC at ~30Hz.\n\n# On the client (runs always), pack current input\n@rpc(\"any_peer\", \"unreliable\", \"call_local\")\nfunc send_input(seq: int, move: Vector2, jump: bool, cast_gust: bool) -> void:\n    # server receives; this stub exists on the server-side script\n    pass\n\n# Client-side sender (example)\nvar _seq := 0\nfunc _physics_process(_dt: float) -> void:\n    var move := Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"),\n                        Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\"))\n    var jump := Input.is_action_just_pressed(\"jump\")\n    var cast := Input.is_action_just_pressed(\"cast_gust\")\n    rpc_id(1, \"send_input\", _seq, move, jump, cast)\n    _seq += 1\n\n\nServer applies inputs, simulates, and replicates\n\nOnly the server’s _physics_process drives characters, applies gust forces, etc.\n\n# On the server (Character.gd attached to each player character)\nvar _pending_input: Array = []    # store last input(s) per peer\nvar _knockback: Vector3 = Vector3.ZERO\n\n@rpc(\"any_peer\", \"unreliable\", \"call_local\")\nfunc send_input(seq: int, move: Vector2, jump: bool, cast_gust: bool) -> void:\n    if not multiplayer.is_server():\n        return\n    # Trust but verify: make sure the sender owns this player slot\n    var sender := multiplayer.get_remote_sender_id()\n    if sender != player_peer_id:    # set when you spawn the character\n        return\n    _pending_input = [seq, move, jump, cast_gust]\n\nfunc _physics_process(dt: float) -> void:\n    if not multiplayer.is_server():\n        return\n\n    # Apply latest input\n    var move: Vector2 = Vector2.ZERO\n    var jump := false\n    var cast := false\n    if _pending_input.size() > 0:\n        move = _pending_input[1]\n        jump = _pending_input[2]\n        cast = _pending_input[3]\n\n    # Your movement (server-authoritative)\n    var wishdir := (global_basis.x * move.x + global_basis.z * move.y).normalized()\n    var speed := 8.0\n    velocity.x = wishdir.x * speed + _knockback.x\n    velocity.z = wishdir.z * speed + _knockback.z\n\n    if jump and is_on_floor():\n        velocity.y = 5.5\n\n    # decay knockback server-side\n    _knockback = _knockback.move_toward(Vector3.ZERO, 20.0 * dt)\n\n    move_and_slide()\n\n    if cast:\n        # Ask the game controller to spawn gust (server-side)\n        Game.gust_request(self)\n\n\nGust spawning, hits, and forces happen on the server\n\nServer spawns the AoE, runs Area3D monitoring and applies knockback to overlapped characters.\n\nThen it replicates only the results (transform/velocity) and triggers VFX RPCs so everyone sees it.\n\n# Server-only gust logic (simplified)\nfunc apply_gust(origin: Vector3, dir: Vector3, force: float, width: float, length: float) -> void:\n    for c in get_tree().get_nodes_in_group(\"players\"):\n        var to := c.global_transform.origin - origin\n        var along := to.project(dir)      # component along gust direction\n        var across := (to - along).length()\n        if along.length() <= length and across <= width:\n            # Knockback: add impulse server-side\n            c.add_knockback(dir * force + Vector3.UP * 1.0)\n\n# In Character.gd\nfunc add_knockback(impulse: Vector3) -> void:\n    if not multiplayer.is_server(): return\n    _knockback += impulse\n    # Optional: tell clients to play hit reaction animation/VFX\n    rpc_unreliable(\"play_gust_hit_vfx\")\n\n\nVFX replication\n\nEither spawn a server-owned VFX node via MultiplayerSpawner, or just broadcast an RPC like rpc_unreliable(\"spawn_gust_vfx\", xform, params) so each client spawns a local-only particle system (cheaper, identical look).\n\nWhy your current setup causes the symptom\n\nMultiplayerSynchronizer with per-client authority means only that peer’s machine runs the authoritative overlaps/areas for their own objects. When a gust happens on a non-host, that overlap/force logic isn’t happening on the machine that actually controls everyone’s transforms, so only the host (who is simulating) ever gets a real effect.\n\nSwitching to server-authoritative movement centralizes:\n\nCollision/overlap (Areas, get_overlapping_bodies())\n\nForces/knockback application\n\nTransform truth (server writes; clients read)\n\n…and your gust will affect every player consistently.\n\nCommon pitfalls (quick checks)\n\nStill sending transforms from clients? Remove/disable that in the Synchronizer. Only the server should replicate transforms.\n\nAuthority vs Owner: The node’s authority should be server (1). You can keep owner as the client for UI things, but physics and replication direction should come from authority.\n\nInterpolation: Turn on physics_interpolation_mode on visual nodes so client motion looks smooth between server updates.\n\nRPC validation: On the server, check multiplayer.get_remote_sender_id() before trusting input.\n\nAreas on clients: Turn off monitoring on clients (or just don’t rely on it). Do hit detection on the server only.\n\nIf you want, paste your current player spawn + synchronizer setup and I’ll mark the exact lines to flip so the server owns movement while you keep client-side prediction (totally optional) for responsiveness.",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "124b5209-a56e-46ce-9bbd-33ac4bca215a",
+			"title": "Casting Animation (For Gust at least)",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "0bae085d-669d-4871-a621-c060669709f8",
+			"title": "Gust spawn position should be in front of player",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

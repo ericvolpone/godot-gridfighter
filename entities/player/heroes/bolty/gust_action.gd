@@ -1,6 +1,6 @@
 class_name GustAction extends CombatAction
 
-const Gust_TTL: float = 20
+const Gust_TTL: float = 8
 
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
@@ -20,7 +20,7 @@ func execute_child() -> void:
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.GUST,
 		"aoe_ttl" : Gust_TTL,
-		# This doesn't seem to work haha
+		# TODO This doesn't seem to work haha
 		"spawn_position" : global_position + (spawn_direction * 30),
 		"spawn_direction" : spawn_direction
 	});
