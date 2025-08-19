@@ -6,6 +6,7 @@ const ANIM_FALL: String = "master_animations/Fall"
 const ANIM_PUNCH: String = "master_animations/Punch"
 const ANIM_BLOCK: String = "master_animations/Block"
 const ANIM_SHOUT: String = "master_animations/Shout"
+const ANIM_CAST: String = "master_animations/Cast"
 
 # Hero Definitions
 const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres")

@@ -29,9 +29,10 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 	if not is_tracking:
 		global_position = spawn_data["spawn_position"]
 		look_at(global_position - spawn_data["spawn_direction"])
+	else:
+		global_position = tracking_player.global_position
 
 	aoe_ttl = spawn_data["aoe_ttl"]
-	global_position = tracking_player.global_position
 	if multiplayer.is_server():
 		get_tree().create_timer(aoe_ttl).timeout.connect(
 			func() -> void: self.queue_free()
