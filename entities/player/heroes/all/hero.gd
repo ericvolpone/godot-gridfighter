@@ -18,6 +18,7 @@ var action_hud_container: ActionHUDContainer
 var combat_action_1: PunchAction = PunchAction.new();
 var combat_action_2: BlockAction = BlockAction.new();
 var combat_action_3: CombatAction;
+var combat_action_4: CombatAction;
 
 func init_combat_actions() -> void:
 		# Configure punch
@@ -31,6 +32,9 @@ func init_combat_actions() -> void:
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
+	if combat_action_4: 
+		combat_action_4.set_multiplayer_authority(get_multiplayer_authority())
+		add_child(combat_action_4)
 	
 	if is_multiplayer_authority():
 		# TODO It sucks that we couldnt figure out preload here
@@ -41,6 +45,8 @@ func init_combat_actions() -> void:
 		action_hud_container.add_action(combat_action_1)
 		action_hud_container.add_action(combat_action_2)
 		action_hud_container.add_action(combat_action_3)
+		if combat_action_4:
+			action_hud_container.add_action(combat_action_4)
 
 # Animation Signals
 func emit_punch_signal() -> void:

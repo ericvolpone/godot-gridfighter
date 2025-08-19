@@ -36,3 +36,7 @@ func should_use_combat_action_2() -> bool:
 func should_use_combat_action_3() -> bool:
 	push_error("Implement should_use_combat_action_3 in child brain");
 	return false;
+	
+func should_use_combat_action_4() -> bool:
+	push_error("Implement should_use_combat_action_4 in child brain");
+	return false;

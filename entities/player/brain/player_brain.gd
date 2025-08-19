@@ -18,3 +18,6 @@ func should_use_combat_action_2() -> bool:
 
 func should_use_combat_action_3() -> bool:
 	return is_multiplayer_authority() and Input.is_action_just_pressed("combat_3")
+
+func should_use_combat_action_4() -> bool:
+	return is_multiplayer_authority() and Input.is_action_just_pressed("combat_4")

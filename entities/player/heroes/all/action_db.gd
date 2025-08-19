@@ -7,6 +7,7 @@ const action_db: Dictionary[StringName, StringName] = {
 	
 	# Bolty
 	"StormAction" : "Storm",
+	"GustAction" : "Gust",
 	
 	# Rocky
 	"ThrowRockAction" : "ThrowRock"

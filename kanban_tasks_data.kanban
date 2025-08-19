@@ -29,7 +29,6 @@
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 				"57bbe3ae-b0a6-4f08-a031-62ef38cf81c8",
-				"c68ca7de-15b7-4ef7-9a39-6346b17d8390",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
 				"70036384-bc35-4b01-bcbf-dc61bd1ec212",
@@ -37,6 +36,7 @@
 				"7a1a4092-1142-45f9-8a22-d29ecd9d1c27",
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
+				"deb5fde0-a457-4a90-b440-960d01b7d500",
 				"8145d6ff-bae1-4b80-a859-14f738577cce",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"408e7618-fcbb-4880-b868-f786f7273146",
@@ -56,6 +56,8 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"764201a4-d89e-4960-a733-e62b5753713b",
+				"c68ca7de-15b7-4ef7-9a39-6346b17d8390",
 				"04865abb-c63e-4724-9aed-eefdffd2c712",
 				"3bce0f90-ff7c-4948-9bd5-1edb45a95809",
 				"1b81778d-d91b-4d14-b893-78dfe5e7d299",
@@ -487,6 +489,20 @@
 			"title": "Bolty: Gust Ability (4)",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "deb5fde0-a457-4a90-b440-960d01b7d500",
+			"title": "Block Ability: Make shield animation",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "764201a4-d89e-4960-a733-e62b5753713b",
+			"title": "Gust only pushes Host",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

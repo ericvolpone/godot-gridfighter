@@ -34,3 +34,6 @@ func should_use_combat_action_2() -> bool:
 
 func should_use_combat_action_3() -> bool:
 	return false;
+
+func should_use_combat_action_4() -> bool:
+	return false;

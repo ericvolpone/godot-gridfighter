@@ -1,6 +1,7 @@
 class_name AOESpawner extends MultiplayerSpawner
 
 var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningStorm.tscn")
+var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
 
 @onready var level: Level = get_parent();
 
@@ -10,9 +11,19 @@ func _ready() -> void:
 
 func _configure_aoe_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> AOE:
-		var storm: LightningStorm = storm_scene.instantiate()
-		storm.call_deferred("_initialize_from_spawn_data", spawn_data)
-		return storm;
+		var aoe_type: AOE.Type = spawn_data["aoe_type"]
+		match aoe_type:
+			AOE.Type.STORM:
+				var storm: LightningStorm = storm_scene.instantiate()
+				storm.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return storm;
+			AOE.Type.GUST:
+				var gust: Gust = gust_scene.instantiate()
+				gust.gust_direction = spawn_data["spawn_direction"]
+				gust.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return gust
+			_:
+				return null
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_aoe(spawn_data: Dictionary) -> AOE:

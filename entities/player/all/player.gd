@@ -140,6 +140,8 @@ func process_combat_actions() -> void:
 		hero.combat_action_2.execute()
 	elif brain.should_use_combat_action_3() and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
+	elif brain.should_use_combat_action_4() and hero.combat_action_4.is_usable():
+		hero.combat_action_4.execute()
 
 func process_movement(delta: float) -> void:
 	if is_knocked:

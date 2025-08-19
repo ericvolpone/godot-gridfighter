@@ -17,6 +17,7 @@ func get_cd_time() -> float:
 func execute_child() -> void:
 	aoe_spawner.spawn_aoe.rpc({
 		"owner_peer_id" : hero.player.player_id,
+		"aoe_type" : AOE.Type.STORM,
 		"aoe_ttl" : STORM_TTL
 	});
 	hero.player.channel_action(self)
