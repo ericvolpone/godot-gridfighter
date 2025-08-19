@@ -1,0 +1,23 @@
+Rocky (Earth)
+- Heavier (less knockback)
+- Slower Speed
+- Ability 1: Throw Rock (Projectile knockback that rolls and reflects physics)
+- Ability 2: Harden (becomes immune to effects and knockback for X seconds)
+
+Bolty (Storm)
+- Lighter (Less knockback)
+- Faster speed
+- Ability 1: Storm (periodically stuns in place heroes that are stuck in the lightning storm)
+- Ability 2: Wind Gust (Create a cone of wind that lasts for X seconds that pushes people with the wind, but doesnt knock back)
+
+Torchy (Fire)
+- Medium Weight (mid knockback)
+- Medium Speed
+- Ability 1: Fireball - Projectile that has gravity and, wherever it lands, has an explosion that, if it hits a player, the fire proc will be that it launches them up in the air and where they land they have to cool off, but they still have control of horizontal movement just slowed down
+- Ability 2: Ring of Fire - Fire effect that sits in a ring on the ground and causes a similar (maybe build up over time) fire launch effect (think mario when he lands in the lava)
+
+Slushy (Ice)
+- Medium Weight
+- Medium Speed
+- Ability 1: ice lance - fast projectile that severly slows down a hit players movement speed for X seconds
+- Ability 2: Spray ice, a cone effect that goes in front of the player and maybe sits on the ground.  Maybe the ice guy can skate on the ice quickly while it lasts and maybe other players slip out?
