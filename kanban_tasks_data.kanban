@@ -51,6 +51,7 @@
 			"title": "Doing",
 			"tasks": [
 				"efee6695-fdd5-4d32-bc5c-6885786af5af",
+				"933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"6b171716-74bf-4071-b41d-efe5d58c136a"
 			]
@@ -568,6 +569,13 @@
 			"title": "Host my own Noray",
 			"description": "https://www.youtube.com/watch?v=wZ4aHVfie2Q&ab_channel=curtjs",
 			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
+			"title": "Netfox: Change scene only on client connect, maybe have some loading screen in between",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		}
 	],
