@@ -26,6 +26,10 @@ offset_bottom = 101.0
 layout_mode = 2
 text = "Main Menu"
 
+[node name="CopyLobbyCodeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Copy Lobby Code"
+
 [node name="ExitGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Exit Game"
@@ -34,6 +38,14 @@ text = "Exit Game"
 layout_mode = 2
 text = "Back"
 
+[node name="LobbyCodeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -601.0
+offset_top = -401.0
+offset_right = -561.0
+offset_bottom = -382.0
+
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CopyLobbyCodeButton" to="." method="_on_copy_lobby_code_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

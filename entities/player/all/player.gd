@@ -33,7 +33,7 @@ var player_name: String;
 
 # Menu Variables
 var is_in_menu: bool = false;
-@onready var in_game_menu: Node = load("res://entities/menu/in_game_menu.tscn").instantiate();
+@onready var in_game_menu: InGameMenu = load("res://entities/menu/in_game_menu.tscn").instantiate();
 
 # Movement / Control variables
 @export var is_player_controlled: bool;
