@@ -224,9 +224,6 @@ func play_anim(animation_name: String, blend_time: float = 0) -> void:
 func get_facing_direction() -> Vector3:
 	return model.global_transform.basis.z.normalized()
 
-func is_mp_authority() -> bool:
-	return is_multiplayer_authority() or brain is not PlayerBrain;
-
 @rpc("any_peer", "call_local", "reliable")
 func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():

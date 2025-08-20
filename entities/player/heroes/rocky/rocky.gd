@@ -9,7 +9,7 @@ func _init_combat_actions() -> void:
 	cast_frame.connect(func() -> void:
 		combat_action_3._cast_frame_enact()
 		)
-	combat_action_4 = NullAction.new()
+	combat_action_4 = HardenAction.new()
 
 func _signal_cast_frame() -> void:
 	emit_signal(cast_frame.get_name())

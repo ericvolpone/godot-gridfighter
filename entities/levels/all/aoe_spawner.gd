@@ -2,6 +2,7 @@ class_name AOESpawner extends MultiplayerSpawner
 
 var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningStorm.tscn")
 var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
+var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")
 
 @onready var level: Level = get_parent();
 
@@ -22,6 +23,10 @@ func _configure_aoe_spawner() -> void:
 				gust.gust_direction = spawn_data["spawn_direction"]
 				gust.call_deferred("_initialize_from_spawn_data", spawn_data)
 				return gust
+			AOE.Type.HARDEN:
+				var harden: Harden = harden_scene.instantiate()
+				harden.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return harden
 			_:
 				return null
 

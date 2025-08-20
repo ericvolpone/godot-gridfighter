@@ -3,7 +3,8 @@ class_name AOE extends Node3D
 #region (Types)
 enum Type {
 	STORM,
-	GUST
+	GUST,
+	HARDEN
 }
 #endregion
 
@@ -37,8 +38,8 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 		get_tree().create_timer(aoe_ttl).timeout.connect(
 			func() -> void: self.queue_free()
 			)
-	
-	get_area_3d().monitoring = true;
+	if get_area_3d():
+		get_area_3d().monitoring = true;
 
 func _physics_process(_delta: float) -> void:
 	if is_tracking and tracking_player:

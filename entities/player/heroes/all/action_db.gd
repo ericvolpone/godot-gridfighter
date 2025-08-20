@@ -10,7 +10,8 @@ const action_db: Dictionary[StringName, StringName] = {
 	"GustAction" : "Gust",
 	
 	# Rocky
-	"ThrowRockAction" : "ThrowRock"
+	"ThrowRockAction" : "ThrowRock",
+	"HardenAction" : "Harden"
 }
 
 static func get_name_for_action(action: CombatAction) -> StringName:

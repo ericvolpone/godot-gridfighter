@@ -20,7 +20,7 @@ func execute_child() -> void:
 	if not hero.player.is_multiplayer_authority(): return;
 	
 	hero.player.channel_action(self)
-	hero.player.xz_velocity_override = VelocityOverride.new(Vector3.ZERO, 0)
+	hero.player.xz_speed_modifier = 0.1
 	hero.player.play_anim(Player.ANIM_CAST, 0.2)
 
 func _cast_frame_enact() -> void:
@@ -38,4 +38,4 @@ func _on_cast_animation_finished(anim_name: String) -> void:
 	# TODO This needs its own animation or internal signal
 	if(Player.ANIM_CAST == anim_name):
 		hero.player.end_channel_action()
-		hero.player.xz_velocity_override = null
+		hero.player.xz_speed_modifier = 1.0
