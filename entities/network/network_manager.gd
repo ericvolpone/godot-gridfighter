@@ -1,6 +1,7 @@
 extends Node
 
 signal noray_connected
+signal joined_server
 
 const NORAY_ADDRESS: String = "tomfol.io"
 const NORAY_PORT: int = 8890
@@ -73,10 +74,12 @@ func connect_to_server(address: String, port: int) -> Error:
 			return err
 		
 		multiplayer.multiplayer_peer = peer
-		
+		joined_server.emit()
 		return OK
 	else:
 		err = await PacketHandshake.over_enet(multiplayer.multiplayer_peer.host, address, port)
+		if err == OK:
+			joined_server.emit()
 	
 	return err
 	

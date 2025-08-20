@@ -28,6 +28,7 @@
 			"tasks": [
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
+				"f8d5efb6-5d44-4865-a908-b126ab972b61",
 				"2e1a6c7f-0abc-4061-93a0-3fd7c2c498ed",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
 				"9704bd39-80af-44c1-8d66-5f5b5c56d103",
@@ -51,7 +52,6 @@
 			"title": "Doing",
 			"tasks": [
 				"efee6695-fdd5-4d32-bc5c-6885786af5af",
-				"933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"6b171716-74bf-4071-b41d-efe5d58c136a"
 			]
@@ -60,6 +60,7 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
 				"6b6256bb-80da-419e-87fe-97f0e10f1033",
 				"57bbe3ae-b0a6-4f08-a031-62ef38cf81c8",
 				"8145d6ff-bae1-4b80-a859-14f738577cce",
@@ -574,6 +575,13 @@
 		{
 			"uuid": "933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
 			"title": "Netfox: Change scene only on client connect, maybe have some loading screen in between",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "f8d5efb6-5d44-4865-a908-b126ab972b61",
+			"title": "Loading screen in between Joining Online Game",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
