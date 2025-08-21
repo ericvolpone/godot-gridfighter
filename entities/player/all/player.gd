@@ -9,9 +9,9 @@ const ANIM_SHOUT: String = "master_animations/Shout"
 const ANIM_CAST: String = "master_animations/Cast"
 
 # Hero Definitions
-const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres")
+const BOLTY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/bolty/bolty.tres") as HeroDefinition
 const BOLTY_HERO_ID: int = BOLTY_HERO_DEF.hero_id;
-const ROCKY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/rocky/rocky.tres")
+const ROCKY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/rocky/rocky.tres") as HeroDefinition
 const ROCKY_HERO_ID: int = ROCKY_HERO_DEF.hero_id;
 const HERO_DB: Dictionary[int, HeroDefinition] = {
 	BOLTY_HERO_ID : BOLTY_HERO_DEF,
