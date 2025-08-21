@@ -38,7 +38,7 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 		get_tree().create_timer(aoe_ttl).timeout.connect(
 			func() -> void: self.queue_free()
 			)
-	if get_area_3d():
+	if get_area_3d() and is_multiplayer_authority():
 		get_area_3d().monitoring = true;
 
 func _physics_process(_delta: float) -> void:

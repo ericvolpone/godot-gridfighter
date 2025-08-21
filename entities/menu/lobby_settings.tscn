@@ -21,53 +21,65 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
-custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="VBoxLabels" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="AICountLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 0
 text = "Number of AI Bots:"
+vertical_alignment = 1
 
 [node name="OnlineGameLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Online Game:"
+vertical_alignment = 1
 
 [node name="KothLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "King of the Hill:"
+vertical_alignment = 1
 
 [node name="PowerUpsLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Power Ups:"
+vertical_alignment = 1
 
 [node name="PowerUpsRateLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Power Up Spawn Rate:"
+vertical_alignment = 1
 
 [node name="MaxPlayerSpeedLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "MaxPlayerSpeed:"
+vertical_alignment = 1
 
 [node name="MaxPlayerStrengthLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxLabels"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "MaxPlayerStength:"
+vertical_alignment = 1
 
 [node name="VBoxValues" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_horizontal = 2
 alignment = 1
 
 [node name="AICountEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "0"
 alignment = 2
@@ -75,15 +87,19 @@ max_length = 1
 virtual_keyboard_type = 2
 
 [node name="OnlineCheckbox" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="KothCheckbox" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="PowerUpsCheckbox" type="CheckButton" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="PowerUpsRateEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "10"
 alignment = 2
@@ -91,6 +107,7 @@ max_length = 2
 virtual_keyboard_type = 2
 
 [node name="MaxPlayerSpeedEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "10"
 alignment = 2
@@ -98,6 +115,7 @@ max_length = 2
 virtual_keyboard_type = 2
 
 [node name="MaxPlayerStrengthEdit" type="LineEdit" parent="PanelContainer/HBoxContainer/VBoxValues"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "10"
 alignment = 2
@@ -106,31 +124,81 @@ virtual_keyboard_type = 2
 
 [node name="PowerUpContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 301.0
-offset_top = 1.0
-offset_right = 341.0
-offset_bottom = 41.0
+offset_left = 36.0
+offset_top = 275.0
+offset_right = 240.0
+offset_bottom = 395.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PowerUpContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PowerUpContainer"]
 layout_mode = 2
 
-[node name="PowerUpIcons" type="VBoxContainer" parent="PowerUpContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PowerUpContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Power Ups"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerUpContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SpeedTexture" type="TextureRect" parent="PowerUpContainer/HBoxContainer/PowerUpIcons"]
+[node name="PowerUpIcons" type="VBoxContainer" parent="PowerUpContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedTexture" type="TextureRect" parent="PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpIcons"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture = ExtResource("2_eyr0l")
 
-[node name="StrengthTexture" type="TextureRect" parent="PowerUpContainer/HBoxContainer/PowerUpIcons"]
+[node name="StrengthTexture" type="TextureRect" parent="PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpIcons"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture = ExtResource("3_ddi3g")
 
-[node name="PowerUpButtons" type="VBoxContainer" parent="PowerUpContainer/HBoxContainer"]
+[node name="PowerUpButtons" type="VBoxContainer" parent="PowerUpContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="SpeedCheckBox" type="CheckButton" parent="PowerUpContainer/HBoxContainer/PowerUpButtons"]
+[node name="SpeedCheckBox" type="CheckButton" parent="PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpButtons"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="StrengthCheckBox" type="CheckButton" parent="PowerUpContainer/HBoxContainer/PowerUpButtons"]
+[node name="StrengthCheckBox" type="CheckButton" parent="PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpButtons"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+
+[node name="HostContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.01
+offset_left = 293.0
+offset_top = 7.0
+offset_right = 571.0
+offset_bottom = 15.0
+
+[node name="HostSettings" type="HBoxContainer" parent="HostContainer"]
+layout_mode = 2
+
+[node name="HostLabelsContainer" type="VBoxContainer" parent="HostContainer/HostSettings"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="HostTypeLabel" type="Label" parent="HostContainer/HostSettings/HostLabelsContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Host Type"
+vertical_alignment = 1
+
+[node name="HostValuesContainer" type="VBoxContainer" parent="HostContainer/HostSettings"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HostTypeItemList" type="ItemList" parent="HostContainer/HostSettings/HostValuesContainer"]
+custom_minimum_size = Vector2(160, 64)
+layout_mode = 2
+item_count = 2
+item_0/text = "Noray"
+item_1/text = "Local Host"
+
+[connection signal="item_selected" from="HostContainer/HostSettings/HostValuesContainer/HostTypeItemList" to="." method="_on_host_type_item_list_item_selected"]

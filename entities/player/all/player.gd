@@ -142,7 +142,8 @@ func process_combat_actions() -> void:
 		hero.combat_action_4.execute()
 
 func process_movement(delta: float) -> void:
-	
+	if is_respawning: return;
+
 	if is_knocked:
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
@@ -212,6 +213,8 @@ func end_channel_action() -> void:
 	channeling_action_name = "";
 
 func knock_back(direction: Vector3, strength: float) -> void:
+	if not is_multiplayer_authority(): return
+
 	if(!is_immune_to_knockback and !is_knocked):
 		print("Knocking Back")
 		xz_velocity_override = VelocityOverride.new((direction * strength), -.8)

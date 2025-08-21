@@ -16,42 +16,24 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:current_animation_blend_time")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath(".:is_knocked")
+properties/2/path = NodePath(".:_current_hero_id")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath(".:is_standing_back_up")
+properties/3/path = NodePath(".:is_knocked")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath(".:knockback_velocity")
+properties/4/path = NodePath(".:is_standing_back_up")
 properties/4/spawn = true
 properties/4/replication_mode = 1
-properties/5/path = NodePath(".:is_blocking")
+properties/5/path = NodePath(".:is_respawning")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath(".:is_punching")
+properties/6/path = NodePath(".:is_channeling")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath(".:position")
+properties/7/path = NodePath(".:knockback_timer")
 properties/7/spawn = true
 properties/7/replication_mode = 1
-properties/8/path = NodePath(".:rotation")
-properties/8/spawn = true
-properties/8/replication_mode = 1
-properties/9/path = NodePath("HeroSocket:position")
-properties/9/spawn = true
-properties/9/replication_mode = 1
-properties/10/path = NodePath("HeroSocket:rotation")
-properties/10/spawn = true
-properties/10/replication_mode = 1
-properties/11/path = NodePath(".:is_channeling")
-properties/11/spawn = true
-properties/11/replication_mode = 1
-properties/12/path = NodePath(".:is_respawning")
-properties/12/spawn = true
-properties/12/replication_mode = 1
-properties/13/path = NodePath(".:_current_hero_id")
-properties/13/spawn = true
-properties/13/replication_mode = 1
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -68,13 +50,17 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0870759, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_d8ble")
 
+[node name="MultiplayerSynchronizer2" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_d8ble")
+public_visibility = false
+
 [node name="HeroSocket" type="Node3D" parent="."]
 
 [node name="RollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", ":current_animation"])
+state_properties = Array[String]([":global_transform", ":velocity", ":current_animation", "HeroSocket:rotation"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 

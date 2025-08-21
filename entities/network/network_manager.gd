@@ -3,7 +3,7 @@ extends Node
 signal noray_connected
 signal joined_server
 
-const NORAY_ADDRESS: String = "172.232.162.19"
+const NORAY_ADDRESS: String = "tomfol.io"
 const NORAY_PORT: int = 8890
 
 var is_host: bool = false

@@ -28,6 +28,8 @@
 			"tasks": [
 				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
+				"2b325bca-f518-43ca-bef4-b21a6c511d95",
+				"16961235-6b17-4f9d-81e4-497752941654",
 				"f8d5efb6-5d44-4865-a908-b126ab972b61",
 				"2e1a6c7f-0abc-4061-93a0-3fd7c2c498ed",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
@@ -52,8 +54,6 @@
 			"title": "Doing",
 			"tasks": [
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
-				"b064afc4-64b0-402d-9b52-ded07b6d4c29",
-				"8134dd58-ee8c-49c5-8281-2251ea87fc54",
 				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
 				"4ea91736-bdaa-4ba6-b196-6731195e8716"
 			]
@@ -62,6 +62,9 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"384e247b-853d-4ce0-a5e7-26ecc8a38faa",
+				"8134dd58-ee8c-49c5-8281-2251ea87fc54",
+				"b064afc4-64b0-402d-9b52-ded07b6d4c29",
 				"efee6695-fdd5-4d32-bc5c-6885786af5af",
 				"6b171716-74bf-4071-b41d-efe5d58c136a",
 				"933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
@@ -614,6 +617,27 @@
 		{
 			"uuid": "4ea91736-bdaa-4ba6-b196-6731195e8716",
 			"title": "Netfox: Gust not pushing peers",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "384e247b-853d-4ce0-a5e7-26ecc8a38faa",
+			"title": "Noray: Don't connect to Noray / disconnect if using local host",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "2b325bca-f518-43ca-bef4-b21a6c511d95",
+			"title": "MP: Spawning sometimes respawns all players?",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "16961235-6b17-4f9d-81e4-497752941654",
+			"title": "MP: Joining a game doesn't immediately propagate all players locations",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

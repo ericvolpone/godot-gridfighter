@@ -14,7 +14,6 @@ func respawn_player(player: Player) -> void:
 			# Point is available, we can occupy and respawn
 			respawn_point_availability[respawn_point] = false;
 			player.global_position = respawn_point.global_position;
-			player.set_physics_process(false)
 			player.play_anim(Player.ANIM_IDLE)
 			player.is_knocked = false;
 			player.is_standing_back_up = false;
@@ -27,7 +26,6 @@ func respawn_player(player: Player) -> void:
 			player.velocity = Vector3.ZERO
 			
 			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
-				player.set_physics_process(true)
 				player.is_respawning = false;
 				get_tree().create_timer(1).timeout.connect(func() -> void:
 					respawn_point_availability[respawn_point] = true;

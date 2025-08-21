@@ -1,5 +1,6 @@
 class_name LobbySettings extends Control
 
+#region LobbySettings
 @onready var _ai_count_edit := $PanelContainer/HBoxContainer/VBoxValues/AICountEdit
 @onready var _online_checkbox := $PanelContainer/HBoxContainer/VBoxValues/OnlineCheckbox
 @onready var _koth_checkbox := $PanelContainer/HBoxContainer/VBoxValues/KothCheckbox
@@ -7,9 +8,17 @@ class_name LobbySettings extends Control
 @onready var _power_ups_rate_edit := $PanelContainer/HBoxContainer/VBoxValues/PowerUpsRateEdit
 @onready var _max_player_speed_edit := $PanelContainer/HBoxContainer/VBoxValues/MaxPlayerSpeedEdit
 @onready var _max_player_strength_edit := $PanelContainer/HBoxContainer/VBoxValues/MaxPlayerStrengthEdit
-@onready var _speed_power_up_checkbox := $PowerUpContainer/HBoxContainer/PowerUpButtons/SpeedCheckBox
-@onready var _strength_power_up_checkbox := $PowerUpContainer/HBoxContainer/PowerUpButtons/StrengthCheckBox
+@onready var _speed_power_up_checkbox := $PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpButtons/SpeedCheckBox
+@onready var _strength_power_up_checkbox := $PowerUpContainer/VBoxContainer/HBoxContainer/PowerUpButtons/StrengthCheckBox
 
+#endregion
+
+#region HostSettings
+@onready var host_container: PanelContainer = $HostContainer
+@onready var host_type_item_list: ItemList = $HostContainer/HostSettings/HostValuesContainer/HostTypeItemList
+#endregion
+
+#region LobbyVars
 var ai_count: int;
 var is_online: bool;
 var is_koth: bool;
@@ -19,6 +28,18 @@ var max_player_speed: float;
 var max_player_strength: float;
 var ai_brain: Brain;
 var enabled_power_ups: Array[PowerUp.Type] = [];
+#endregion
+
+#region HostVars
+enum HostType {
+	NORAY, LOCAL_HOST
+}
+const HOST_TYPES_BY_INDEX: Dictionary[int, HostType] = {
+	0: HostType.NORAY,
+	1: HostType.LOCAL_HOST
+}
+var host_type: HostType;
+#endregion
 
 func calculate_values() -> void:
 	ai_count = _ai_count_edit.text.to_int()
@@ -33,7 +54,6 @@ func calculate_values() -> void:
 	if _strength_power_up_checkbox.button_pressed:
 		enabled_power_ups.append(PowerUp.Type.STRENGTH)
 
-
 static func default() -> LobbySettings:
 	var settings: LobbySettings = LobbySettings.new();
 	settings.ai_count = 0;
@@ -43,3 +63,7 @@ static func default() -> LobbySettings:
 	settings.max_player_speed = 10;
 	settings.max_player_strength = 10;
 	return settings
+
+
+func _on_host_type_item_list_item_selected(index: int) -> void:
+	host_type = HOST_TYPES_BY_INDEX[index]
