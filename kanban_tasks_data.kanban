@@ -55,7 +55,8 @@
 			"tasks": [
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
-				"4ea91736-bdaa-4ba6-b196-6731195e8716"
+				"4ea91736-bdaa-4ba6-b196-6731195e8716",
+				"5347a881-e640-4169-8acb-efdece51c0b0"
 			]
 		},
 		{
@@ -609,7 +610,7 @@
 		},
 		{
 			"uuid": "4237ba00-551c-4dd5-8640-c617d5ead0ed",
-			"title": "Netfox: Can't Knock Back",
+			"title": "Netfox: KnockBack not syncing",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
@@ -638,6 +639,13 @@
 		{
 			"uuid": "16961235-6b17-4f9d-81e4-497752941654",
 			"title": "MP: Joining a game doesn't immediately propagate all players locations",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "5347a881-e640-4169-8acb-efdece51c0b0",
+			"title": "Netfox: Client death doesn't immediately propagate",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

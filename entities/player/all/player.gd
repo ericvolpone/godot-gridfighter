@@ -107,10 +107,13 @@ func _ready() -> void:
 	rollback_synchronizer.process_settings()
 
 func _physics_process(_delta: float) -> void:
-	if _current_hero_id != hero.definition.hero_id:
-		change_hero(_current_hero_id)
-	if(animator.current_animation != current_animation):
-		animator.play(current_animation, current_animation_blend_time)
+	if not is_multiplayer_authority():
+		if _current_hero_id != hero.definition.hero_id:
+			print("Hero is changing for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()))
+			change_hero(_current_hero_id)
+		if(animator.current_animation != current_animation):
+			print("Animation for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()) + " is changing to " + current_animation + " from " + animator.current_animation)
+			animator.play(current_animation, current_animation_blend_time)
 
 func has_control() -> bool:
 	return !is_knocked and !is_channeling and !is_in_menu;
@@ -145,11 +148,14 @@ func process_movement(delta: float) -> void:
 	if is_respawning: return;
 
 	if is_knocked:
+		print("Hero is knocked with time life: " + str(knockback_timer) + " and xz override: " + str(xz_velocity_override))
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
+			print("Standing back up")
 			is_standing_back_up = true;
 			play_anim(ANIM_IDLE, 0.5)
 		if knockback_timer <= 0.0:
+			print("Stood up!")
 			is_knocked = false
 			is_standing_back_up = false
 			xz_velocity_override = null
@@ -184,6 +190,9 @@ func process_movement(delta: float) -> void:
 	elif brain.jump_strength and is_on_floor():
 		velocity.y = jump_velocity * brain.jump_strength
 
+	move_and_slide_physics_factor()
+
+func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
 	move_and_slide()
 	velocity /= NetworkTime.physics_factor
@@ -216,7 +225,7 @@ func knock_back(direction: Vector3, strength: float) -> void:
 	if not is_multiplayer_authority(): return
 
 	if(!is_immune_to_knockback and !is_knocked):
-		print("Knocking Back")
+		print("Knocking Back player ", player_name, " on client: ", multiplayer.get_unique_id())
 		xz_velocity_override = VelocityOverride.new((direction * strength), -.8)
 		velocity.y = (direction*strength).y
 		is_knocked = true
@@ -228,6 +237,7 @@ func knock_back(direction: Vector3, strength: float) -> void:
 		print("Can't knock")
 
 func play_anim(animation_name: String, blend_time: float = 0) -> void:
+	if not animation_name == ANIM_IDLE: print("Playing " + animation_name)
 	animator.play(animation_name, blend_time)
 	current_animation = animation_name
 	current_animation_blend_time = blend_time

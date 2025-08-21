@@ -27,5 +27,5 @@ func _physics_process(delta: float) -> void:
 				gust_direction.y * delta * GUST_FORCE,
 				gust_direction.z * delta * GUST_FORCE
 			)
-			player.move_and_slide()
+			player.move_and_slide_physics_factor()
 			player.velocity = snapshot_velocity
