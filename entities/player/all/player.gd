@@ -25,10 +25,11 @@ const HERO_DB: Dictionary[int, HeroDefinition] = {
 # Children Node Accessors
 var animator: AnimationPlayer;
 @onready var model: Node3D = $HeroSocket;
+@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 
 var player_id: String;
 var player_name: String;
-@export var brain: Brain;
+@onready var brain: Brain = $Brain;
 
 
 # Menu Variables
@@ -96,18 +97,33 @@ func _ready() -> void:
 	change_hero(chosen_hero_id)
 	animator = hero.animator
 	
-	if(is_player_controlled and is_multiplayer_authority()):
+	if(is_player_controlled and brain.is_multiplayer_authority()):
 		# TODO Probably put this elsewhere?
 		add_child(in_game_menu)
 		in_game_menu.hide()
 	else:
 		$BlueIndicatorCircle.queue_free();
 
-func _input(event: InputEvent) -> void:
-	if not is_multiplayer_authority():
-		return;
+	rollback_synchronizer.process_settings()
 
-	if event.is_action("menu_open") and event.is_pressed():
+func _physics_process(_delta: float) -> void:
+	if _current_hero_id != hero.definition.hero_id:
+		change_hero(_current_hero_id)
+	if(animator.current_animation != current_animation):
+		animator.play(current_animation, current_animation_blend_time)
+
+func has_control() -> bool:
+	return !is_knocked and !is_channeling and !is_in_menu;
+
+func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
+	process_menu_input();
+	process_combat_actions();
+	process_movement(delta);
+	if is_multiplayer_authority() and global_position.y <= -8:
+		level.handle_player_death(self)
+
+func process_menu_input() -> void:
+	if brain.opening_in_game_menu:
 		if(is_in_menu):
 			is_in_menu = false
 			in_game_menu.hide()
@@ -115,36 +131,18 @@ func _input(event: InputEvent) -> void:
 			is_in_menu = true
 			in_game_menu.show()
 
-	if event.is_action("change_hero"):
-		pass
-
-func _physics_process(delta: float) -> void:
-	if _current_hero_id != hero.definition.hero_id:
-		change_hero(_current_hero_id)
-	if(animator.current_animation != current_animation):
-		animator.play(current_animation, current_animation_blend_time)
-
-	if is_multiplayer_authority():
-		process_movement(delta);
-		process_combat_actions();
-	
-	if(global_position.y <= -8):
-		level.handle_player_death(self)
-
-func has_control() -> bool:
-	return !is_knocked and !is_channeling and !is_in_menu;
-
 func process_combat_actions() -> void:
-	if brain.should_use_combat_action_1() and hero.combat_action_1.is_usable():
+	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
-	elif brain.should_use_combat_action_2() and hero.combat_action_2.is_usable():
+	elif brain.using_combat_action_2 and hero.combat_action_2.is_usable():
 		hero.combat_action_2.execute()
-	elif brain.should_use_combat_action_3() and hero.combat_action_3.is_usable():
+	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
-	elif brain.should_use_combat_action_4() and hero.combat_action_4.is_usable():
+	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
 		hero.combat_action_4.execute()
 
 func process_movement(delta: float) -> void:
+	
 	if is_knocked:
 		knockback_timer -= delta
 		if(knockback_timer <= 0.55 and !is_standing_back_up):
@@ -163,7 +161,7 @@ func process_movement(delta: float) -> void:
 	elif !is_respawning:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
-		var move_direction: Vector3 = brain.get_movement_direction()
+		var move_direction: Vector3 = brain.move_direction
 		if move_direction != Vector3.ZERO:
 			if !is_channeling:
 				play_anim(ANIM_RUN, 0.3)
@@ -176,21 +174,32 @@ func process_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
 
+	_force_update_is_on_floor()
 	if y_velocity_override:
 		velocity.y = y_velocity_override.velocity.y
 		y_velocity_override.apply_acceleration(delta)
 	elif not is_on_floor():
 		velocity += get_gravity() * delta
-	elif brain.should_jump() and is_on_floor():
-		velocity.y = jump_velocity
+	elif brain.jump_strength and is_on_floor():
+		velocity.y = jump_velocity * brain.jump_strength
 
+	velocity *= NetworkTime.physics_factor
 	move_and_slide()
+	velocity /= NetworkTime.physics_factor
 
-func add_brain(_brain: Brain) -> void:
-	brain = _brain;
+func _force_update_is_on_floor() -> void:
+	var old_velocity: Vector3 = velocity
+	velocity = Vector3.ZERO
+	move_and_slide()
+	velocity = old_velocity
+
+func add_brain(_brain: Brain, peer_id: int) -> void:
 	if(_brain is PlayerBrain):
+		_brain.set_multiplayer_authority(peer_id)
 		is_player_controlled = true;
-	add_child(brain);
+	brain = _brain;
+	brain.name = "Brain"
+	add_child(brain)
 
 func channel_action(_action: CombatAction) -> void:
 	is_channeling = true;
@@ -224,7 +233,6 @@ func play_anim(animation_name: String, blend_time: float = 0) -> void:
 func get_facing_direction() -> Vector3:
 	return model.global_transform.basis.z.normalized()
 
-@rpc("any_peer", "call_local", "reliable")
 func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;
@@ -234,7 +242,6 @@ func apply_speed_boost(value: int) -> void:
 	if current_move_speed >= max_player_speed:
 		current_move_speed = max_player_speed
 
-@rpc("any_peer", "call_local", "reliable")
 func apply_strength_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;
@@ -244,7 +251,6 @@ func apply_strength_boost(value: int) -> void:
 	if current_strength >= max_player_strength:
 		current_strength = max_player_strength
 
-# Clients call this to request a change. Server validates and sets hero_id.
 @rpc("any_peer","reliable")
 func rpc_request_change_hero(requested_id: int) -> void:
 	if not multiplayer.is_server(): return

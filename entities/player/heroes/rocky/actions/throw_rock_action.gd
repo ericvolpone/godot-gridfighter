@@ -17,13 +17,13 @@ func is_usable_child() -> bool:
 	return true;
 
 func execute_child() -> void:
-	if not hero.player.is_multiplayer_authority(): return;
-	
 	hero.player.channel_action(self)
 	hero.player.xz_speed_modifier = 0.1
 	hero.player.play_anim(Player.ANIM_CAST, 0.2)
 
 func _cast_frame_enact() -> void:
+	if not is_multiplayer_authority(): return
+
 	var spawn_location: Vector3 = hero.player.global_position + (hero.player.model.get_global_transform().basis.z.normalized()) + Vector3(0,1,0);
 	
 	var spawn_data: Dictionary = {
@@ -35,7 +35,8 @@ func _cast_frame_enact() -> void:
 	projectile_spawner.spawn_projectile.rpc(spawn_data)
 
 func _on_cast_animation_finished(anim_name: String) -> void:
-	# TODO This needs its own animation or internal signal
+	if not is_multiplayer_authority(): return
+	
 	if(Player.ANIM_CAST == anim_name):
 		hero.player.end_channel_action()
 		hero.player.xz_speed_modifier = 1.0

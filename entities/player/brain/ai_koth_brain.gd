@@ -8,32 +8,34 @@ static func with_manager(_koth_manager: KothManager) -> KothAIBrain:
 	brain.koth_manager = _koth_manager
 	return brain
 
-func get_movement_direction() -> Vector3:
+func gather_movement_direction() -> void:
 	var current_ring: KothRing = koth_manager.current_ring;
 	if(current_ring == null):
-		return Vector3.ZERO;
+		return;
 
 	var to_direction: Vector3 = current_ring.global_position - get_parent().global_position
 	to_direction.y = 0;
 	
 	if to_direction.length_squared() < 0.25:  # 0.5^2 to avoid sqrt
-		return Vector3.ZERO
+		return
 	
 	to_direction = to_direction.normalized();
 	
-	return to_direction;
+	move_direction = to_direction;
 
-func should_jump() -> bool:
-	return 0 == rng.randi_range(0, 20);
+func gather_jump() -> void:
+	if 0 == rng.randi_range(0, 20):
+		jump_strength = 1.0
 
-func should_use_combat_action_1() -> bool:
-	return 0 == rng.randi_range(0, 100);
+func gather_use_combat_action_1() -> void:
+	if 0 == rng.randi_range(0, 100):
+		using_combat_action_1 = true
 
-func should_use_combat_action_2() -> bool:
-	return false;
-
-func should_use_combat_action_3() -> bool:
-	return false;
-
-func should_use_combat_action_4() -> bool:
-	return false;
+func gather_use_combat_action_2() -> void:
+	pass;
+func gather_use_combat_action_3() -> void:
+	pass;
+func gather_use_combat_action_4() -> void:
+	pass;
+func gather_opening_in_game_menu() -> void:
+	pass

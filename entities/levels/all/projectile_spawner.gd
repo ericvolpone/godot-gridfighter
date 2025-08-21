@@ -11,8 +11,6 @@ func _ready() -> void:
 func _configure_projectile_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> Rock:
 		var rock: Rock = rock_scene.instantiate();
-		var owner_peer_id: int = spawn_data["owner_peer_id"]
-		rock.set_multiplayer_authority(owner_peer_id)
 		
 		rock.call_deferred("initialize_from_spawn_data", spawn_data)
 		return rock

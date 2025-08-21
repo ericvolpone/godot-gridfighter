@@ -16,10 +16,6 @@ func _physics_process(delta: float) -> void:
 		if body is Player:
 			var player: Player = body as Player
 
-			# If not the MP authority, skip
-			if not player.is_multiplayer_authority():
-				return
-
 			var snapshot_velocity: Vector3 = player.velocity
 			player.velocity = Vector3(
 				gust_direction.x * delta * GUST_FORCE,

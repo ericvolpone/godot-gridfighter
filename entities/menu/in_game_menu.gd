@@ -1,10 +1,10 @@
 class_name InGameMenu extends Control
 
-@onready var lobby_code_label: Label = $LobbyCodeLabel
+@onready var lobby_code_label: Label = $PanelContainer/LobbyCodeLabel
 
 func _ready() -> void:
 	print("Lobby Code: " + Noray.oid)
-	lobby_code_label.text = Noray.oid
+	lobby_code_label.text = "Lobby Code: " + Noray.oid
 
 func _on_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://entities/menu/home_menu.tscn")

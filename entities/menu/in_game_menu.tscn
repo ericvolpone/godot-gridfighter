@@ -38,12 +38,19 @@ text = "Exit Game"
 layout_mode = 2
 text = "Back"
 
-[node name="LobbyCodeLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = -601.0
-offset_top = -401.0
-offset_right = -561.0
-offset_bottom = -382.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = -400.0
+offset_right = 185.0
+offset_bottom = -365.0
+grow_horizontal = 2
+
+[node name="LobbyCodeLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CopyLobbyCodeButton" to="." method="_on_copy_lobby_code_button_pressed"]

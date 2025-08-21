@@ -69,6 +69,7 @@ func handle_player_death(player: Player) -> void:
 	if player.is_respawning:
 		return
 	print("Player is respawning")
+	player.is_respawning = true
 	_spawn_death_explosion.rpc(player.global_position)
 	scoreboard.update_player_score(player, -5)
 	

@@ -51,15 +51,19 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"efee6695-fdd5-4d32-bc5c-6885786af5af",
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
-				"6b171716-74bf-4071-b41d-efe5d58c136a"
+				"b064afc4-64b0-402d-9b52-ded07b6d4c29",
+				"8134dd58-ee8c-49c5-8281-2251ea87fc54",
+				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
+				"4ea91736-bdaa-4ba6-b196-6731195e8716"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"efee6695-fdd5-4d32-bc5c-6885786af5af",
+				"6b171716-74bf-4071-b41d-efe5d58c136a",
 				"933b4a19-12c3-4b8c-ba3d-45b5662fbadf",
 				"6b6256bb-80da-419e-87fe-97f0e10f1033",
 				"57bbe3ae-b0a6-4f08-a031-62ef38cf81c8",
@@ -584,6 +588,34 @@
 			"title": "Loading screen in between Joining Online Game",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "b064afc4-64b0-402d-9b52-ded07b6d4c29",
+			"title": "Netfox: Hitting rollback history limit consistently",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "8134dd58-ee8c-49c5-8281-2251ea87fc54",
+			"title": "Netfox: Respawn not working",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "4237ba00-551c-4dd5-8640-c617d5ead0ed",
+			"title": "Netfox: Can't Knock Back",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "4ea91736-bdaa-4ba6-b196-6731195e8716",
+			"title": "Netfox: Gust not pushing peers",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

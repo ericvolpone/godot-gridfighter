@@ -26,12 +26,10 @@ func _configure_player_spawner() -> void:
 		var hero_id: int = spawn_data.get("hero_id", 0)
 		player.name = str(peer_id)
 		player.chosen_hero_id = hero_id
-		player.set_multiplayer_authority(peer_id)
 		level.player_chars[player] = player
 		var brain_type: Brain.BrainType = spawn_data["brain"]
 		# Quick hack to get AI players working
-		player.add_brain(Brain.new_brain_from_type_with_deps(brain_type, level.koth_manager))
-		player.brain.set_multiplayer_authority(player.get_multiplayer_authority())
+		player.add_brain(Brain.new_brain_from_type_with_deps(brain_type, level.koth_manager), peer_id)
 		player.max_player_speed = max_player_speed
 		player.max_player_strength = max_player_strength
 		level.scoreboard.add_player_to_score(player);

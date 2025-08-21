@@ -39,9 +39,7 @@ func create_timer_for_powerup() -> void:
 
 func _configure_power_up_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> PowerUp:
-		var peer_id: int = get_multiplayer_authority()
 		var power_up: PowerUp = get_scene_for_type(spawn_data["power_up_type"]).instantiate();
-		power_up.set_multiplayer_authority(peer_id)
 		call_deferred("_spawn_power_up_at_point", power_up, spawn_data["spawn_point_path"])
 		return power_up
 

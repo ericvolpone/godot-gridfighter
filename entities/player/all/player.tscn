@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=7 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
 [ext_resource type="PackedScene" uid="uid://dp8abkasj7kyt" path="res://models/ui/indicators/BlueIndicatorCircle.glb" id="4_0owmy"]
+[ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="4_vak66"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.8
@@ -67,3 +69,17 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0870759, 0)
 replication_config = SubResource("SceneReplicationConfig_d8ble")
 
 [node name="HeroSocket" type="Node3D" parent="."]
+
+[node name="RollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("3_vak66")
+root = NodePath("..")
+enable_prediction = true
+state_properties = Array[String]([":global_transform", ":velocity", ":current_animation"])
+input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
+metadata/_custom_type_script = "uid://d350u8evihs1u"
+
+[node name="TickInterpolator" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("4_vak66")
+root = NodePath("..")
+properties = Array[String]([":global_transform", ":current_animation"])
+metadata/_custom_type_script = "uid://dour8fehaaugp"

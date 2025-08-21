@@ -23,20 +23,16 @@ var combat_action_4: CombatAction;
 func init_combat_actions() -> void:
 		# Configure punch
 	_init_combat_actions()
-	combat_action_1.set_multiplayer_authority(get_multiplayer_authority())
 	connect("punch_frame", combat_action_1.handle_animation_signal)
 	# Configure block
-	combat_action_2.set_multiplayer_authority(get_multiplayer_authority())
-	combat_action_3.set_multiplayer_authority(get_multiplayer_authority())
 		# Have children initialize any special combat actions
 	add_child(combat_action_1)
 	add_child(combat_action_2)
 	add_child(combat_action_3)
 	if combat_action_4: 
-		combat_action_4.set_multiplayer_authority(get_multiplayer_authority())
 		add_child(combat_action_4)
 	
-	if is_multiplayer_authority():
+	if player.brain.is_multiplayer_authority():
 		# TODO It sucks that we couldnt figure out preload here
 		var hud_scene: PackedScene = load(HUD_PATH)
 		
