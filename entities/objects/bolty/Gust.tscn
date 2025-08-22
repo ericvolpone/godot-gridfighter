@@ -43,3 +43,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Container/GustArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 3)
 shape = SubResource("CylinderShape3D_lrarj")
+
+[connection signal="body_entered" from="Container/GustArea" to="." method="_on_gust_area_body_entered"]
+[connection signal="body_exited" from="Container/GustArea" to="." method="_on_gust_area_body_exited"]

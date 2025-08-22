@@ -55,7 +55,6 @@
 			"tasks": [
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
-				"4ea91736-bdaa-4ba6-b196-6731195e8716",
 				"5347a881-e640-4169-8acb-efdece51c0b0"
 			]
 		},
@@ -63,6 +62,7 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"4ea91736-bdaa-4ba6-b196-6731195e8716",
 				"384e247b-853d-4ce0-a5e7-26ecc8a38faa",
 				"8134dd58-ee8c-49c5-8281-2251ea87fc54",
 				"b064afc4-64b0-402d-9b52-ded07b6d4c29",

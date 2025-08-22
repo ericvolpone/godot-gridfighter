@@ -88,6 +88,9 @@ var y_speed_modifier: float = 1;
 var is_animation_locked: bool = false;
 var is_immune_to_knockback: bool = false;
 
+# Testing Netfox
+var gust_total_direction: Vector3 = Vector3.ZERO
+
 func _enter_tree() -> void:
 	hero_socket = $HeroSocket
 
@@ -121,9 +124,17 @@ func has_control() -> bool:
 func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 	process_menu_input();
 	process_combat_actions();
+	process_gust(delta)
 	process_movement(delta);
 	if is_multiplayer_authority() and global_position.y <= -8:
 		level.handle_player_death(self)
+
+func process_gust(delta: float) -> void:
+	if gust_total_direction:
+		var snapshot_velocity: Vector3 = velocity
+		velocity = gust_total_direction * delta * 30
+		move_and_slide_physics_factor()
+		velocity = snapshot_velocity
 
 func process_menu_input() -> void:
 	if brain.opening_in_game_menu:
