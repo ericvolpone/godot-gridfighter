@@ -22,7 +22,6 @@ func respawn_player(player: Player) -> void:
 			player.xz_speed_modifier = 1
 			player.y_speed_modifier = 1;
 			player.is_blocking = false;
-			player.is_punching = false;
 			player.velocity = Vector3.ZERO
 			
 			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:

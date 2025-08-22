@@ -30,6 +30,7 @@
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
 				"2b325bca-f518-43ca-bef4-b21a6c511d95",
 				"16961235-6b17-4f9d-81e4-497752941654",
+				"788e604f-98a4-4326-aeaf-92c679aa7bbb",
 				"f8d5efb6-5d44-4865-a908-b126ab972b61",
 				"2e1a6c7f-0abc-4061-93a0-3fd7c2c498ed",
 				"c97abd51-cf6d-48f5-8a32-8501546227cf",
@@ -39,6 +40,7 @@
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
 				"deb5fde0-a457-4a90-b440-960d01b7d500",
+				"90becbb2-08ea-4ee4-b462-523d539da225",
 				"17c397ff-dffa-4575-929e-7509ac04743d",
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
 				"6a735177-63a4-43f1-9d01-a8bdb0910bb5",
@@ -55,13 +57,16 @@
 			"tasks": [
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
 				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
-				"5347a881-e640-4169-8acb-efdece51c0b0"
+				"5347a881-e640-4169-8acb-efdece51c0b0",
+				"7d291d54-1983-493b-84a2-f870d4456c50"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"bbbeea06-1d4f-4b01-9921-6fee0c54da18",
+				"97292e9a-59dc-4777-a13a-be265d63fdc7",
 				"4ea91736-bdaa-4ba6-b196-6731195e8716",
 				"384e247b-853d-4ce0-a5e7-26ecc8a38faa",
 				"8134dd58-ee8c-49c5-8281-2251ea87fc54",
@@ -648,6 +653,41 @@
 			"title": "Netfox: Client death doesn't immediately propagate",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "97292e9a-59dc-4777-a13a-be265d63fdc7",
+			"title": "Organize Player Variables",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "90becbb2-08ea-4ee4-b462-523d539da225",
+			"title": "Player.gd: Signal player death up to level?",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "788e604f-98a4-4326-aeaf-92c679aa7bbb",
+			"title": "Make InGameMenu a child in tree scene",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "7d291d54-1983-493b-84a2-f870d4456c50",
+			"title": "Netfox: Respawn is glitchy",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "bbbeea06-1d4f-4b01-9921-6fee0c54da18",
+			"title": "Organize Player.gd Functions",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		}
 	],

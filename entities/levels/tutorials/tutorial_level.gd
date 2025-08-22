@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 		get_tree().change_scene_to_packed(load(SCENE_PREFIX + str(get_next_level_number()) + SCENE_POSTFIX))
 
 func handle_player_death(player: Player) -> void:
-	if(player.is_player_controlled):
+	if not player.brain.is_ai():
 		player_spawner.respawn_player(player)
 	else:
 		ais_removed += 1

@@ -14,6 +14,9 @@ enum BrainType {
 	PLAYER
 }
 
+func is_ai() -> bool:
+	return self is not PlayerBrain
+
 static func new_brain_from_type_with_deps(type: BrainType, koth_manager: KothManager) -> Brain:
 	match type:
 		BrainType.ZERO:

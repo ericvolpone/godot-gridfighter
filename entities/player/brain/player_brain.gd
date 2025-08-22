@@ -26,7 +26,8 @@ func gather_movement_direction() -> void:
 	
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction: Vector3 = (get_parent().transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	move_direction = direction;
+	#move_direction = direction;
+	move_direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
 func gather_jump() -> void:
 	if not is_multiplayer_authority(): return;

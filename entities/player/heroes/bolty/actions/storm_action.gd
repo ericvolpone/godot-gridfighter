@@ -33,4 +33,3 @@ func _on_storm_animation_finished(anim_name: String) -> void:
 		hero.player.end_channel_action()
 		hero.player.y_velocity_override = null
 		hero.player.xz_speed_modifier = 1;
-		hero.player.is_casting = false;
