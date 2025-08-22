@@ -27,7 +27,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0870759, 0)
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", ":current_animation", ":current_animation_blend_time", ":_current_hero_id"])
+state_properties = Array[String]([":global_transform", ":velocity", ":_current_hero_id"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 

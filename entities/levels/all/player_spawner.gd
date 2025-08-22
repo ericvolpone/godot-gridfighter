@@ -41,14 +41,7 @@ func _configure_player_spawner() -> void:
 		call_deferred("respawn_player", player)
 		return player
 	
-	if(multiplayer.is_server()):
-		#spawn({"peer_id": multiplayer.get_unique_id(), "brain" : Brain.BrainType.PLAYER})
-#
-		## 🔑 Spawn future connecting players
-		#multiplayer.peer_connected.connect(func(peer_id: int) -> void:
-			#spawn({"peer_id": peer_id, "brain" : Brain.BrainType.PLAYER})
-		#)
-	
+	if(multiplayer.is_server()):	
 		if level.lobby_settings.ai_count > 0:
 			for index: int in level.lobby_settings.ai_count:
 				var brain_type: Brain.BrainType;

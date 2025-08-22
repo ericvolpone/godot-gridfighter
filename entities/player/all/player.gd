@@ -101,8 +101,6 @@ func _ready() -> void:
 	else:
 		$BlueIndicatorCircle.queue_free();
 
-	rollback_synchronizer.process_settings()
-
 func add_brain(_brain: Brain, peer_id: int) -> void:
 	if(_brain is PlayerBrain):
 		_brain.set_multiplayer_authority(peer_id)
@@ -125,25 +123,6 @@ func change_hero(hero_id: int) -> void:
 	animator = hero.animator
 
 	#endregion
-	#region Func:Native
-func _physics_process(_delta: float) -> void:
-	if not is_multiplayer_authority():
-		if _current_hero_id != hero.definition.hero_id:
-			print("Hero is changing for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()))
-			change_hero(_current_hero_id)
-		if(animator.current_animation != current_animation):
-			print("Animation for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()) + " is changing to " + current_animation + " from " + animator.current_animation)
-			animator.play(current_animation, current_animation_blend_time)
-
-func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
-	process_menu_input();
-	process_combat_actions();
-	process_gust(delta)
-	process_movement(delta);
-	if is_multiplayer_authority() and global_position.y <= -8:
-		level.handle_player_death(self)
-
-	#endregion
 	#region Func:Menu
 func process_menu_input() -> void:
 	if brain.opening_in_game_menu:
@@ -154,6 +133,27 @@ func process_menu_input() -> void:
 			is_in_menu = true
 			in_game_menu.show()
 	#endregion
+	#region Func:Native
+#func _physics_process(_delta: float) -> void:
+	#if not is_multiplayer_authority():
+		#if _current_hero_id != hero.definition.hero_id:
+			#print("Hero is changing for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()))
+			#change_hero(_current_hero_id)
+		#if(animator.current_animation != current_animation):
+			#print("Animation for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()) + " is changing to " + current_animation + " from " + animator.current_animation)
+			#animator.play(current_animation, current_animation_blend_time)
+
+func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
+	print("Rollback Global Position : ", global_position)
+	process_menu_input();
+	process_combat_actions();
+	process_gust(delta)
+	process_movement(delta);
+	if is_multiplayer_authority() and global_position.y <= -8:
+		level.handle_player_death(self)
+
+	#endregion
+
 	#region Movement
 func process_gust(delta: float) -> void:
 	if gust_total_direction:
