@@ -157,10 +157,7 @@ func process_menu_input() -> void:
 	#region Movement
 func process_gust(delta: float) -> void:
 	if gust_total_direction:
-		var snapshot_velocity: Vector3 = velocity
-		velocity = gust_total_direction * delta * 30
-		move_and_slide_physics_factor()
-		velocity = snapshot_velocity
+		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
 
 func process_combat_actions() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
@@ -226,10 +223,14 @@ func move_and_slide_physics_factor() -> void:
 	velocity /= NetworkTime.physics_factor
 
 func _force_update_is_on_floor() -> void:
+	_snapshot_and_apply_velocity(Vector3.ZERO)
+
+func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 	var old_velocity: Vector3 = velocity
-	velocity = Vector3.ZERO
-	move_and_slide()
+	velocity = velocity_to_apply
+	move_and_slide_physics_factor()
 	velocity = old_velocity
+
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
