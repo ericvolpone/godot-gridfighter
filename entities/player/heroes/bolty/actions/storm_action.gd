@@ -5,6 +5,8 @@ const STORM_TTL: float = 4
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func _ready() -> void:
+	if not is_multiplayer_authority(): return;
+
 	hero.animator.animation_finished.connect(_on_storm_animation_finished);
 
 func get_action_image_path() -> String:
@@ -29,6 +31,8 @@ func is_usable_child() -> bool:
 	return true;
 
 func _on_storm_animation_finished(anim_name: String) -> void:
+	if not is_multiplayer_authority(): return;
+
 	if(Player.ANIM_SHOUT == anim_name):
 		hero.player.end_channel_action()
 		hero.player.y_velocity_override = null

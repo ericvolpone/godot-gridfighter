@@ -5,6 +5,8 @@ const Gust_TTL: float = 8
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func _ready() -> void:
+	if not is_multiplayer_authority(): return;
+
 	hero.animator.animation_finished.connect(_on_gust_animation_finished);
 
 func get_action_image_path() -> String:
@@ -23,6 +25,8 @@ func is_usable_child() -> bool:
 	return true;
 
 func _cast_frame_enact() -> void:
+	if not is_multiplayer_authority(): return;
+
 	var spawn_direction: Vector3 = hero.player.get_facing_direction()
 	aoe_spawner.spawn_aoe.rpc({
 		"owner_peer_id" : hero.player.player_id,
@@ -34,7 +38,8 @@ func _cast_frame_enact() -> void:
 	});
 
 func _on_gust_animation_finished(anim_name: String) -> void:
-	# TODO This needs its own animation or internal signal
+	if not is_multiplayer_authority(): return;
+
 	if(Player.ANIM_CAST == anim_name):
 		hero.player.end_channel_action()
 		hero.player.xz_velocity_override = null

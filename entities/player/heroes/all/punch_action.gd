@@ -1,6 +1,8 @@
 class_name PunchAction extends CombatAction
 
 func _ready() -> void:
+	if not is_multiplayer_authority(): return;
+
 	hero.animator.animation_finished.connect(_on_punch_animation_finished);
 
 func get_action_image_path() -> String:
@@ -10,14 +12,17 @@ func get_cd_time() -> float:
 	return 1.0;
 
 func execute_child() -> void:
-	hero.player.channel_action(self)
-	hero.player.xz_speed_modifier = 0.25
-	hero.player.play_anim(Player.ANIM_PUNCH, 0.5);
+	print("Executing child for player: ", hero.player.player_name, " on MP ID: ", multiplayer.get_unique_id())
+	#hero.player.channel_action(self)
+	#hero.player.xz_speed_modifier = 0.25
+	#hero.player.play_anim(Player.ANIM_PUNCH, 0.5);
 
 func is_usable_child() -> bool:
 	return true;
 
 func handle_animation_signal() -> void:
+	if not is_multiplayer_authority(): return;
+
 	var punch_origin: Vector3 = hero.player.global_position
 	punch_origin.y += .5; 
 	var forward_dir: Vector3 = hero.player.get_facing_direction()  # forward in Godot
@@ -80,6 +85,8 @@ func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float 
 	mesh_instance.queue_free()
 
 func _on_punch_animation_finished(anim_name: String) -> void:
-	if(Player.ANIM_PUNCH == anim_name):
-		hero.player.end_channel_action()
-		hero.player.xz_speed_modifier = 1.0
+	if not is_multiplayer_authority(): return
+
+	#if(Player.ANIM_PUNCH == anim_name):
+		#hero.player.end_channel_action()
+		#hero.player.xz_speed_modifier = 1.0

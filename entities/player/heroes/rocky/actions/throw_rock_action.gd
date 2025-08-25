@@ -5,6 +5,8 @@ const rock_scene: PackedScene = preload("res://entities/objects/projectiles/rock
 var projectile_spawner: ProjectileSpawner;
 
 func _ready() -> void:
+	if not is_multiplayer_authority(): return;
+
 	hero.animator.animation_finished.connect(_on_cast_animation_finished);
 
 func get_action_image_path() -> String:

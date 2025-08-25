@@ -3,6 +3,7 @@ class_name Player extends CharacterBody3D
 	#region Var:Animation
 const ANIM_IDLE: StringName = "master_animations/Idle"
 const ANIM_RUN: StringName = "master_animations/Run"
+const ANIM_JUMP: StringName = "master_animations/Jump"
 const ANIM_FALL: StringName = "master_animations/Fall"
 const ANIM_PUNCH: StringName = "master_animations/Punch"
 const ANIM_BLOCK: StringName = "master_animations/Block"
@@ -25,6 +26,7 @@ const HERO_DB: Dictionary[int, HeroDefinition] = {
 @onready var player_spawner: PlayerSpawner = get_parent() # TODO Not really needed
 @onready var level: Level = player_spawner.get_parent(); # TODO Probably just signal this up
 @onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
+@onready var state_machine: RewindableStateMachine = $RewindableStateMachine
 	#endregion
 	#region Var:PlayerBaseAttributes
 var player_id: String;
@@ -76,10 +78,13 @@ var max_player_strength: float = 10;
 @export var is_standing_back_up: bool = false;
 @export var is_blocking: bool = false; # TODO Maybe can use channeling_action instead
 @export var is_respawning: bool = false;
-@export var is_channeling: bool = false;
+@export var is_channeling: bool = 0;
 @export var channeling_action: CombatAction;
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
 var is_immune_to_knockback: bool = false;
+	#endregion
+	#region Var:StateMachine
+	
 	#endregion
 #endregion
 
@@ -93,6 +98,8 @@ func _ready() -> void:
 	# We're doing this nonsense so the player can ready up on time...
 	change_hero(chosen_hero_id)
 	animator = hero.animator
+	state_machine.state = &"IdleState"
+	state_machine.on_display_state_changed.connect(_on_display_state_changed)
 	
 	if not brain.is_ai() and brain.is_multiplayer_authority():
 		# TODO Probably put this elsewhere?
@@ -100,12 +107,15 @@ func _ready() -> void:
 		in_game_menu.hide()
 	else:
 		$BlueIndicatorCircle.queue_free();
+	
+	rollback_synchronizer.process_settings()
 
 func add_brain(_brain: Brain, peer_id: int) -> void:
 	if(_brain is PlayerBrain):
 		_brain.set_multiplayer_authority(peer_id)
 	brain = _brain;
 	brain.name = "Brain"
+	print("Added Brain")
 	add_child(brain)
 
 func change_hero(hero_id: int) -> void:
@@ -134,27 +144,22 @@ func process_menu_input() -> void:
 			in_game_menu.show()
 	#endregion
 	#region Func:Native
-#func _physics_process(_delta: float) -> void:
-	#if not is_multiplayer_authority():
-		#if _current_hero_id != hero.definition.hero_id:
-			#print("Hero is changing for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()))
-			#change_hero(_current_hero_id)
-		#if(animator.current_animation != current_animation):
-			#print("Animation for player: " + player_name + " on client: " + str(multiplayer.get_unique_id()) + " is changing to " + current_animation + " from " + animator.current_animation)
-			#animator.play(current_animation, current_animation_blend_time)
 
 func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
-	print("Rollback Global Position : ", global_position)
+	_force_update_is_on_floor()
 	process_menu_input();
-	process_combat_actions();
+	#process_combat_actions();
 	process_gust(delta)
-	process_movement(delta);
+
 	if is_multiplayer_authority() and global_position.y <= -8:
 		level.handle_player_death(self)
 
 	#endregion
 
 	#region Movement
+
+func apply_gravity(delta: float) -> void:
+	velocity.y -= 9.8 * delta
 func process_gust(delta: float) -> void:
 	if gust_total_direction:
 		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
@@ -185,7 +190,7 @@ func process_movement(delta: float) -> void:
 			is_standing_back_up = false
 			xz_velocity_override = null
 			velocity = Vector3.ZERO
-	
+
 	if xz_velocity_override:
 		velocity.x = xz_velocity_override.velocity.x
 		velocity.z = xz_velocity_override.velocity.z
@@ -195,24 +200,25 @@ func process_movement(delta: float) -> void:
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var move_direction: Vector3 = brain.move_direction
 		if move_direction != Vector3.ZERO:
-			if !is_channeling:
+			if !is_channeling and is_on_floor():
 				play_anim(ANIM_RUN, 0.3)
 			velocity.x = move_direction.x * current_move_speed * xz_speed_modifier
 			velocity.z = move_direction.z * current_move_speed * xz_speed_modifier
 			rotation.y = -atan2(-move_direction.x, move_direction.z)
 		else:
-			if !is_channeling:
+			if !is_channeling and is_on_floor():
 				play_anim(ANIM_IDLE, 0.3)
 			velocity.x = move_toward(velocity.x, 0, current_move_speed)
 			velocity.z = move_toward(velocity.z, 0, current_move_speed)
 
-	_force_update_is_on_floor()
+
 	if y_velocity_override:
 		velocity.y = y_velocity_override.velocity.y
 		y_velocity_override.apply_acceleration(delta)
 	elif not is_on_floor():
 		velocity += get_gravity() * delta
 	elif brain.jump_strength and is_on_floor():
+		play_anim(ANIM_JUMP, 0.2)
 		velocity.y = jump_velocity * brain.jump_strength
 
 	move_and_slide_physics_factor()
@@ -261,6 +267,13 @@ func apply_strength_boost(value: int) -> void:
 
 #endregion
 	#region Func:Animation
+
+func _on_display_state_changed(old_state: RewindableState, new_state: RewindableState) -> void:
+	var animation_name: String = new_state.animation_name
+	if animation_name != "":
+		# print("Play animation %s" % animation_name)
+		animator.play(animation_name, 0.2)
+
 func play_anim(animation_name: StringName, blend_time: float = 0) -> void:
 	animator.play(animation_name, blend_time)
 	current_animation = animation_name
@@ -278,7 +291,6 @@ func end_channel_action() -> void:
 	#endregion
 	#region Func:ExternalAppliers
 func knock_back(direction: Vector3, strength: float) -> void:
-	if not is_multiplayer_authority(): return
 
 	if(!is_immune_to_knockback and !is_knocked):
 		print("Knocking Back player ", player_name, " on client: ", multiplayer.get_unique_id())

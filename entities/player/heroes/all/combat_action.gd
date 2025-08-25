@@ -27,6 +27,8 @@ func is_usable() -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func execute() -> void:
+	if not is_multiplayer_authority(): return
+
 	if !is_usable():
 		pass
 	
