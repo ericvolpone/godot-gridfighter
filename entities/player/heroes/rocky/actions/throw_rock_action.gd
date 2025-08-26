@@ -6,7 +6,9 @@ var projectile_spawner: ProjectileSpawner;
 
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
-
+	
+	is_action_state = true
+	action_state_string = "CastState"
 	hero.animator.animation_finished.connect(_on_cast_animation_finished);
 
 func get_action_image_path() -> String:

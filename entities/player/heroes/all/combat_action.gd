@@ -4,6 +4,8 @@ const DEFAULT_CD: float = 5.0;
 const GLOBAL_CD: float = 0.5;
 
 var is_interuptable: bool = true;
+var is_action_state: bool = false;
+var action_state_string: StringName;
 var cd_available_time: float = Time.get_unix_time_from_system()
 
 @onready var hero: Hero = get_parent();

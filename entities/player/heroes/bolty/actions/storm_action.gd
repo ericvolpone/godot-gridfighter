@@ -7,6 +7,9 @@ const STORM_TTL: float = 4
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
+	is_action_state = true;
+	action_state_string = "ShoutState"
+
 	hero.animator.animation_finished.connect(_on_storm_animation_finished);
 
 func get_action_image_path() -> String:

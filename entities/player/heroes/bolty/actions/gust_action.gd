@@ -7,6 +7,9 @@ const Gust_TTL: float = 8
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
+	is_action_state = true;
+	action_state_string = "CastState"
+
 	hero.animator.animation_finished.connect(_on_gust_animation_finished);
 
 func get_action_image_path() -> String:

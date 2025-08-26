@@ -79,3 +79,32 @@ xz_movement_modifier = 0.25
 animation_name = "master_animations/Punch"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
+[node name="BlockState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_3cock")
+state_time = 0.95
+can_move = false
+can_jump = false
+animation_name = "master_animations/Block"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
+[node name="CastState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_3cock")
+state_time = 0.75
+can_jump = false
+xz_movement_modifier = 0.25
+animation_name = "master_animations/Cast"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
+[node name="ShoutState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_3cock")
+state_time = 4.0
+can_jump = false
+xz_movement_modifier = 0.2
+y_velocity_override = 1.0
+y_velocity_override_acceleration = -0.2
+animation_name = "master_animations/Shout"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
