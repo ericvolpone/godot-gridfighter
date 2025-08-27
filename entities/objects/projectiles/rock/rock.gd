@@ -21,6 +21,8 @@ func _ready() -> void:
 	self.body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node) -> void:
+	if not is_multiplayer_authority(): return
+
 	if body is CharacterBody3D:
 		var player := body as Player
 		var impact_force: float = linear_velocity.length()

@@ -56,7 +56,6 @@
 			"title": "Doing",
 			"tasks": [
 				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
-				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
 				"5347a881-e640-4169-8acb-efdece51c0b0",
 				"7d291d54-1983-493b-84a2-f870d4456c50"
 			]
@@ -65,6 +64,8 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
+				"66079e55-0d39-4eaa-ae7c-129d011315e4",
 				"bbbeea06-1d4f-4b01-9921-6fee0c54da18",
 				"97292e9a-59dc-4777-a13a-be265d63fdc7",
 				"4ea91736-bdaa-4ba6-b196-6731195e8716",
@@ -615,7 +616,7 @@
 		},
 		{
 			"uuid": "4237ba00-551c-4dd5-8640-c617d5ead0ed",
-			"title": "Netfox: KnockBack not syncing",
+			"title": "Netfox: KnockBack state doesn't seem to be persisting?",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
@@ -688,6 +689,13 @@
 			"title": "Organize Player.gd Functions",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "66079e55-0d39-4eaa-ae7c-129d011315e4",
+			"title": "Lightning Storm not spawning even though gust is",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],
