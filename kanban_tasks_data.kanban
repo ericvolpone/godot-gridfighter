@@ -55,15 +55,15 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
-				"5347a881-e640-4169-8acb-efdece51c0b0",
-				"7d291d54-1983-493b-84a2-f870d4456c50"
+				"5347a881-e640-4169-8acb-efdece51c0b0"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"6e9f2955-e08c-45c1-acbf-2bdda80b799e",
+				"7d291d54-1983-493b-84a2-f870d4456c50",
 				"4237ba00-551c-4dd5-8640-c617d5ead0ed",
 				"66079e55-0d39-4eaa-ae7c-129d011315e4",
 				"bbbeea06-1d4f-4b01-9921-6fee0c54da18",
@@ -651,7 +651,7 @@
 		},
 		{
 			"uuid": "5347a881-e640-4169-8acb-efdece51c0b0",
-			"title": "Netfox: Client death doesn't immediately propagate",
+			"title": "Netfox: Hero Change - hero not changing on client during death",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

@@ -94,7 +94,7 @@ func _ready() -> void:
 	# We're doing this nonsense so the player can ready up on time...
 	change_hero(chosen_hero_id)
 	animator = hero.animator
-	state_machine.state = &"IdleState"
+	state_machine.state = &"RespawnState"
 	state_machine.on_display_state_changed.connect(_on_display_state_changed)
 	
 	if not brain.is_ai() and brain.is_multiplayer_authority():
@@ -114,6 +114,7 @@ func add_brain(_brain: Brain, peer_id: int) -> void:
 	print("Added Brain")
 	add_child(brain)
 
+@rpc("any_peer", "call_local", "reliable")
 func change_hero(hero_id: int) -> void:
 	_current_hero_id = hero_id
 	var hero_definition: HeroDefinition = HERO_DB[hero_id];
@@ -148,11 +149,9 @@ func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 	process_knock();
 	process_gust(delta)
 
-	#if(hero.get_hero_id() != _current_hero_id):
-		#change_hero(_current_hero_id)
-
 	if is_multiplayer_authority() and global_position.y <= -8:
 		level.handle_player_death(self)
+		state_machine.transition(&"RespawnState")
 
 	#endregion
 

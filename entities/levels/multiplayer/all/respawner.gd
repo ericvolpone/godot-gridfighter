@@ -5,7 +5,6 @@ class_name Respawner extends Node
 @export var respawn_time: float = 2;
 
 func respawn_player(player: Player) -> void:
-	print("Global Position 1: ", player.global_position)
 	player.is_respawning = true
 	var respawn_points: Array[RespawnPoint] = respawn_point_availability.keys()
 	respawn_points.shuffle()
@@ -27,10 +26,7 @@ func respawn_player(player: Player) -> void:
 			player.velocity = Vector3.ZERO
 			
 			print("Global Position 3: ", player.global_position)
-			get_tree().create_timer(respawn_time).timeout.connect(func() -> void:
-				player.is_respawning = false;
-				get_tree().create_timer(1).timeout.connect(func() -> void:
-					respawn_point_availability[respawn_point] = true;
-				)
-			);
+			get_tree().create_timer(respawn_time + 1).timeout.connect(func() -> void:
+				respawn_point_availability[respawn_point] = true;
+			)
 			return;

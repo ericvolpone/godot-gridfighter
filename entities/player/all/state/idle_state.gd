@@ -1,4 +1,4 @@
-extends MovementState
+class_name IdleState extends MovementState
 
 func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 	move_player(delta)

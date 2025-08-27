@@ -1,4 +1,4 @@
-extends ActionState
+class_name KnockedState extends ActionState
 
 func enter(_previous_state: RewindableState, _tick: int) -> void:
 	super.enter(_previous_state, _tick)

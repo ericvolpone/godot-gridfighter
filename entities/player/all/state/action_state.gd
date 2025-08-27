@@ -56,7 +56,7 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 	if horizontal_velocity:
 		player.velocity.x = horizontal_velocity.x
 		player.velocity.z = horizontal_velocity.z
-		player.rotation.y = -atan2(-input_dir.x, input_dir.z)
+		player.rotation.y = -atan2(-horizontal_velocity.x, horizontal_velocity.z)
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)

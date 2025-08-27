@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=15 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://8ysvdxmy1vnr" path="res://entities/player/all/state/fall_state.gd" id="9_o6siw"]
 [ext_resource type="Script" uid="uid://nvvaqfdybxph" path="res://entities/player/all/state/action_state.gd" id="10_3cock"]
 [ext_resource type="Script" uid="uid://dbncsmhq3p71b" path="res://entities/player/all/state/knocked_state.gd" id="11_x6u7t"]
+[ext_resource type="Script" uid="uid://dloeblieqj300" path="res://entities/player/all/state/respawn_state.gd" id="12_o6siw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.8
@@ -20,7 +21,7 @@ height = 2.6
 properties/0/path = NodePath(".:is_knocked")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath(".:_current_hero_id")
+properties/1/path = NodePath(".:is_respawning")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
@@ -131,3 +132,10 @@ y_velocity_override_acceleration = -9.8
 animation_name = "master_animations/Fall"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
+[node name="RespawnState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("12_o6siw")
+state_time = 3.0
+animation_name = "master_animations/Idle"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://usyufdtn83hc"
