@@ -17,7 +17,6 @@ func respawn_player(player: Player) -> void:
 			# Point is available, we can occupy and respawn
 			respawn_point_availability[respawn_point] = false;
 			player.global_position = respawn_point.global_position;
-			player.play_anim(Player.ANIM_IDLE)
 			player.is_knocked = false;
 			player.is_standing_back_up = false;
 			player.xz_velocity_override = null;

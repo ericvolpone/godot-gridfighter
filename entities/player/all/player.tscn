@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=14 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
@@ -10,10 +10,19 @@
 [ext_resource type="Script" uid="uid://cmniuauqah2g1" path="res://entities/player/all/state/jump_state.gd" id="8_x6u7t"]
 [ext_resource type="Script" uid="uid://8ysvdxmy1vnr" path="res://entities/player/all/state/fall_state.gd" id="9_o6siw"]
 [ext_resource type="Script" uid="uid://nvvaqfdybxph" path="res://entities/player/all/state/action_state.gd" id="10_3cock"]
+[ext_resource type="Script" uid="uid://dbncsmhq3p71b" path="res://entities/player/all/state/knocked_state.gd" id="11_x6u7t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.8
 height = 2.6
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x6u7t"]
+properties/0/path = NodePath(".:is_knocked")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:_current_hero_id")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -29,11 +38,14 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0870759, 0)
 
 [node name="HeroSocket" type="Node3D" parent="."]
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_x6u7t")
+
 [node name="RollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", ":current_animation", ":current_animation_blend_time", ":is_channeling", "RewindableStateMachine:state"])
+state_properties = Array[String]([":global_transform", ":velocity", "RewindableStateMachine:state"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 
@@ -106,5 +118,16 @@ xz_movement_modifier = 0.2
 y_velocity_override = 2.0
 y_velocity_override_acceleration = -0.5
 animation_name = "master_animations/Shout"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
+[node name="KnockedState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("11_x6u7t")
+state_time = 1.5
+can_move = false
+can_jump = false
+xz_velocity_override_acceleration = -0.3
+y_velocity_override_acceleration = -9.8
+animation_name = "master_animations/Fall"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
