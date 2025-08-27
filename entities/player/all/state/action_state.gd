@@ -19,7 +19,7 @@ var time_in_state: float;
 ## Acceleration for Y velocity override
 @export var y_velocity_override_acceleration: float;
 
-func enter(previous_state: RewindableState, tick: int) -> void:
+func enter(_previous_state: RewindableState, _tick: int) -> void:
 	time_in_state = 0;
 
 func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
@@ -41,7 +41,8 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		if not player.is_on_floor():
 			player.apply_gravity(delta)
 	else:
-		player.velocity.y = y_velocity_override
+		player.velocity.y = y_velocity_override + (y_velocity_override_acceleration * time_in_state)
+		print("Shouting velocity = ", str(player.velocity.y))
 
 	var horizontal_velocity: Vector3;
 	var input_dir : Vector3 = get_movement_input()
@@ -61,7 +62,4 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 
-	# https://foxssake.github.io/netfox/netfox/tutorials/rollback-caveats/#characterbody-velocity
-	player.velocity *= NetworkTime.physics_factor
-	player.move_and_slide()
-	player.velocity /= NetworkTime.physics_factor
+	player.move_and_slide_physics_factor()

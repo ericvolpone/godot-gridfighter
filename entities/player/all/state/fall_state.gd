@@ -37,7 +37,4 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 
-	# https://foxssake.github.io/netfox/netfox/tutorials/rollback-caveats/#characterbody-velocity
-	player.velocity *= NetworkTime.physics_factor
-	player.move_and_slide()
-	player.velocity /= NetworkTime.physics_factor
+	player.move_and_slide_physics_factor()

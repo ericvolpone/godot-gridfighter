@@ -10,7 +10,7 @@ func _ready() -> void:
 	is_action_state = true;
 	action_state_string = "CastState"
 
-	hero.animator.animation_finished.connect(_on_gust_animation_finished);
+	#hero.animator.animation_finished.connect(_on_gust_animation_finished);
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/gust.png";
@@ -20,9 +20,10 @@ func get_cd_time() -> float:
 	return 8.0;
 
 func execute_child() -> void:
-	hero.player.channel_action(self)
-	hero.player.xz_velocity_override = VelocityOverride.new(Vector3.ZERO, 0)
-	hero.player.play_anim(Player.ANIM_CAST, 0.2)
+	pass
+	#hero.player.channel_action(self)
+	#hero.player.xz_velocity_override = VelocityOverride.new(Vector3.ZERO, 0)
+	#hero.player.play_anim(Player.ANIM_CAST, 0.2)
 
 func is_usable_child() -> bool:
 	return true;
@@ -40,9 +41,9 @@ func _cast_frame_enact() -> void:
 		"spawn_direction" : spawn_direction
 	});
 
-func _on_gust_animation_finished(anim_name: String) -> void:
-	if not is_multiplayer_authority(): return;
-
-	if(Player.ANIM_CAST == anim_name):
-		hero.player.end_channel_action()
-		hero.player.xz_velocity_override = null
+#func _on_gust_animation_finished(anim_name: String) -> void:
+	#if not is_multiplayer_authority(): return;
+#
+	#if(Player.ANIM_CAST == anim_name):
+		#hero.player.end_channel_action()
+		#hero.player.xz_velocity_override = null

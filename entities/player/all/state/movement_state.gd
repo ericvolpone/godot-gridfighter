@@ -7,7 +7,7 @@ class_name MovementState  extends RewindableState
 @onready var player_input: Brain = player.brain
 
 # Default movement, override as needed
-func move_player(delta: float, speed: float = player.current_move_speed) -> void:
+func move_player(_delta: float, _speed: float = player.current_move_speed) -> void:
 	player.velocity *= NetworkTime.physics_factor
 	player.move_and_slide()
 	player.velocity /= NetworkTime.physics_factor

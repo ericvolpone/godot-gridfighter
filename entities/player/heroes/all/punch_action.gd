@@ -3,7 +3,7 @@ class_name PunchAction extends CombatAction
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
-	hero.animator.animation_finished.connect(_on_punch_animation_finished);
+	#hero.animator.animation_finished.connect(_on_punch_animation_finished);
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/punch.png";
@@ -84,8 +84,8 @@ func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float 
 	await get_tree().create_timer(duration).timeout
 	mesh_instance.queue_free()
 
-func _on_punch_animation_finished(anim_name: String) -> void:
-	if not is_multiplayer_authority(): return
+#func _on_punch_animation_finished(anim_name: String) -> void:
+	#if not is_multiplayer_authority(): return
 
 	#if(Player.ANIM_PUNCH == anim_name):
 		#hero.player.end_channel_action()

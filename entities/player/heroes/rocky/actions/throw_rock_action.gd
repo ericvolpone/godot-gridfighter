@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 	is_action_state = true
 	action_state_string = "CastState"
-	hero.animator.animation_finished.connect(_on_cast_animation_finished);
+	#hero.animator.animation_finished.connect(_on_cast_animation_finished);
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/throw_rock.png";
@@ -21,9 +21,10 @@ func is_usable_child() -> bool:
 	return true;
 
 func execute_child() -> void:
-	hero.player.channel_action(self)
-	hero.player.xz_speed_modifier = 0.1
-	hero.player.play_anim(Player.ANIM_CAST, 0.2)
+	pass
+	#hero.player.channel_action(self)
+	#hero.player.xz_speed_modifier = 0.1
+	#hero.player.play_anim(Player.ANIM_CAST, 0.2)
 
 func _cast_frame_enact() -> void:
 	if not is_multiplayer_authority(): return
@@ -38,9 +39,9 @@ func _cast_frame_enact() -> void:
 	}
 	projectile_spawner.spawn_projectile.rpc(spawn_data)
 
-func _on_cast_animation_finished(anim_name: String) -> void:
-	if not is_multiplayer_authority(): return
+#func _on_cast_animation_finished(anim_name: String) -> void:
+	#if not is_multiplayer_authority(): return
 	
-	if(Player.ANIM_CAST == anim_name):
-		hero.player.end_channel_action()
-		hero.player.xz_speed_modifier = 1.0
+	#if(Player.ANIM_CAST == anim_name):
+		#hero.player.end_channel_action()
+		#hero.player.xz_speed_modifier = 1.0

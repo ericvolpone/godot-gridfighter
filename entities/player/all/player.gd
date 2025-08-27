@@ -268,7 +268,7 @@ func apply_strength_boost(value: int) -> void:
 #endregion
 	#region Func:Animation
 
-func _on_display_state_changed(old_state: RewindableState, new_state: RewindableState) -> void:
+func _on_display_state_changed(_old_state: RewindableState, new_state: RewindableState) -> void:
 	var animation_name: String = new_state.animation_name
 	if animation_name != "":
 		# print("Play animation %s" % animation_name)

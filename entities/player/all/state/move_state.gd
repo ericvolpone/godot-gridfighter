@@ -21,7 +21,7 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 	else:
 		state_machine.transition(&"FallState")
 
-func move_player(delta: float, speed: float = player.current_move_speed) -> void:
+func move_player(_delta: float, speed: float = player.current_move_speed) -> void:
 	var input_dir : Vector3 = get_movement_input()
 	
 	# Based on https://github.com/godotengine/godot-demo-projects/blob/4.2-31d1c0c/3d/platformer/player/player.gd#L65
@@ -38,7 +38,4 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 
-	# https://foxssake.github.io/netfox/netfox/tutorials/rollback-caveats/#characterbody-velocity
-	player.velocity *= NetworkTime.physics_factor
-	player.move_and_slide()
-	player.velocity /= NetworkTime.physics_factor
+	player.move_and_slide_physics_factor()

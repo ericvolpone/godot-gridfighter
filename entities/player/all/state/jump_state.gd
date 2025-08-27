@@ -1,6 +1,6 @@
 class_name JumpState extends MovementState
 
-func enter(previous_state: RewindableState, tick: int) -> void:
+func enter(_previous_state: RewindableState, _tick: int) -> void:
 	player.velocity.y = player.jump_velocity
 
 func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
@@ -20,7 +20,7 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 		state_machine.transition(&"FallState")
 
 
-func move_player(delta: float, speed: float = player.current_move_speed) -> void:
+func move_player(_delta: float, speed: float = player.current_move_speed) -> void:
 	var input_dir : Vector3 = get_movement_input()
 	
 	var position_target: Vector3 = input_dir * speed
@@ -36,7 +36,4 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 
-	# https://foxssake.github.io/netfox/netfox/tutorials/rollback-caveats/#characterbody-velocity
-	player.velocity *= NetworkTime.physics_factor
-	player.move_and_slide()
-	player.velocity /= NetworkTime.physics_factor
+	player.move_and_slide_physics_factor()
