@@ -11,7 +11,7 @@ size = Vector3(20, 20, 1)
 [node name="BridgeLevel" instance=ExtResource("1_xn6dq")]
 
 [node name="Camera3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 12.2739, 15.7015)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 11.7196, 15.7015)
 
 [node name="Respawner" parent="." index="4" node_paths=PackedStringArray("respawn_point_availability")]
 respawn_point_availability = {
