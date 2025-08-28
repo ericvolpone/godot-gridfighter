@@ -40,7 +40,8 @@ var hero: Hero;
 # Maybe move "change hero" into the set function, exposing it is confusing
 # need this for multiplayer though
 var chosen_hero_id: int = 0;
-@export var _current_hero_id: int = -1;
+## current_hero_id is used to change the hero.  It is synchronized in the RBS so call this instead of _change_hero
+@export var current_hero_id: int = -1: set = _change_hero;
 	#endregion
 	#region Var:Menu
 # TODO Make this default in scene and disable if brain not multiplayer authority (have a task)
@@ -91,7 +92,10 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
 	# We're doing this nonsense so the player can ready up on time...
-	change_hero(chosen_hero_id)
+	
+	if current_hero_id == -1:
+		current_hero_id = (chosen_hero_id)
+
 	animator = hero.animator
 	state_machine.state = &"RespawnState"
 	state_machine.on_display_state_changed.connect(_on_display_state_changed)
@@ -112,19 +116,20 @@ func add_brain(_brain: Brain, peer_id: int) -> void:
 	brain.name = "Brain"
 	add_child(brain)
 
-@rpc("authority", "call_local", "reliable")
-func change_hero(hero_id: int) -> void:
-	print("Changin hero to ", str(hero_id), " for player ", player_name, " on client: ", multiplayer.get_unique_id())
-	_current_hero_id = hero_id
+## Private function associated with the setter of "current_hero_id", use
+## current_hero_id instead of this function to change hero
+func _change_hero(hero_id: int) -> void:
+	if current_hero_id == hero_id:
+		return
+	current_hero_id = hero_id
+
 	var hero_definition: HeroDefinition = HERO_DB[hero_id];
 	if hero:
 		hero.queue_free()
-		await get_tree().process_frame
 	
-	var _hero := hero_definition.instantiate()
-	#_hero.set_multiplayer_authority(get_multiplayer_authority())
-	hero_socket.add_child(_hero)
-	hero = _hero
+	hero = hero_definition.instantiate()
+	hero_socket.add_child(hero)
+	hero = hero
 	hero.call_deferred("init_combat_actions")
 	animator = hero.animator
 
@@ -153,7 +158,6 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 		respawn_tick = tick
 	
 	if tick == respawn_tick:
-		print("found respawn tick: ", tick, " on client: ", multiplayer.get_unique_id())
 		level.handle_player_death(self)
 
 	#endregion
