@@ -51,7 +51,7 @@ func handle_animation_signal() -> void:
 			if(player_obj == hero.player or player_obj.is_blocking):
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
-			var force: Vector3 = to_obj * 10.0  # Tune force as needed
+			var force: Vector3 = to_obj * 2  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)
 
 func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float = 0.5) -> void:

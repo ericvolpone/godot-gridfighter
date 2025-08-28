@@ -53,7 +53,7 @@ metadata/_custom_type_script = "uid://d350u8evihs1u"
 [node name="TickInterpolator" type="Node" parent="." node_paths=PackedStringArray("root")]
 script = ExtResource("4_vak66")
 root = NodePath("..")
-properties = Array[String]([":global_transform", ":current_animation"])
+properties = Array[String]([":global_transform"])
 metadata/_custom_type_script = "uid://dour8fehaaugp"
 
 [node name="RewindableStateMachine" type="Node" parent="."]
@@ -117,7 +117,7 @@ state_time = 4.0
 can_jump = false
 xz_movement_modifier = 0.2
 y_velocity_override = 2.0
-y_velocity_override_acceleration = -0.5
+is_y_velocity_override_decellerating = true
 animation_name = "master_animations/Shout"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
@@ -127,15 +127,13 @@ script = ExtResource("11_x6u7t")
 state_time = 1.5
 can_move = false
 can_jump = false
-xz_velocity_override_acceleration = -0.3
-y_velocity_override_acceleration = -9.8
+is_xz_velocity_override_decellerating = true
 animation_name = "master_animations/Fall"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
 
 [node name="RespawnState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("12_o6siw")
-state_time = 3.0
 animation_name = "master_animations/Idle"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://usyufdtn83hc"

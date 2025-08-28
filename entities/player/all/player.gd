@@ -49,12 +49,8 @@ var is_in_menu: bool = false;
 	#endregion
 	#region Var:PlayerStats
 		#region Var:PlayerStats:Modifiers
-var xz_velocity_override: VelocityOverride;
-var xz_speed_modifier: float = 1;
-var y_velocity_override: VelocityOverride;
-var y_speed_modifier: float = 1;
-
 var gust_total_direction: Vector3 = Vector3.ZERO
+var jump_pad_velocity: Vector3 = Vector3.ZERO
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -74,10 +70,13 @@ var max_player_strength: float = 10;
 	#region Var:State
 @export var is_knocked: bool = false;
 @export var is_standing_back_up: bool = false;
-@export var is_blocking: bool = false; # TODO Maybe can use channeling_action instead
+@export var is_blocking: bool = false;
 @export var is_respawning: bool = false;
 @onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
 var is_immune_to_knockback: bool = false;
+	#endregion
+	#region Var:Netfox
+var respawn_tick: int = -1;
 	#endregion
 	#region Var:StateMachine
 	
@@ -111,11 +110,11 @@ func add_brain(_brain: Brain, peer_id: int) -> void:
 		_brain.set_multiplayer_authority(peer_id)
 	brain = _brain;
 	brain.name = "Brain"
-	print("Added Brain")
 	add_child(brain)
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func change_hero(hero_id: int) -> void:
+	print("Changin hero to ", str(hero_id), " for player ", player_name, " on client: ", multiplayer.get_unique_id())
 	_current_hero_id = hero_id
 	var hero_definition: HeroDefinition = HERO_DB[hero_id];
 	if hero:
@@ -142,45 +141,35 @@ func process_menu_input() -> void:
 	#endregion
 	#region Func:Native
 
-func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
+func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	_force_update_is_on_floor()
 	process_menu_input();
 	process_combat_actions_state();
 	process_knock();
-	process_gust(delta)
+	process_external_movers(delta)
 
-	if is_multiplayer_authority() and global_position.y <= -8:
+	if global_position.y <= -8 and tick > respawn_tick and is_fresh:
+		is_respawning = true
+		respawn_tick = tick
+		is_respawning = true
+	
+	if tick == respawn_tick:
+		print("found respawn tick: ", tick, " on client: ", multiplayer.get_unique_id())
 		level.handle_player_death(self)
-		state_machine.transition(&"RespawnState")
 
 	#endregion
 
 	#region Movement
-
 func process_knock() -> void:
 	if(is_knocked and state_machine.state != &"KnockedState"):
 		state_machine.transition(&"KnockedState")
 func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
-func process_gust(delta: float) -> void:
+func process_external_movers(delta: float) -> void:
 	if gust_total_direction:
 		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
-
-func process_combat_actions_state() -> void:
-	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
-		hero.combat_action_1.execute()
-		state_machine.transition(&"PunchState")
-	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
-		hero.combat_action_2.execute()
-		state_machine.transition(&"BlockState")
-	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
-		hero.combat_action_3.execute()
-		if hero.combat_action_3.is_action_state:
-			state_machine.transition(hero.combat_action_3.action_state_string)
-	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
-		hero.combat_action_4.execute()
-		if hero.combat_action_4.is_action_state:
-			state_machine.transition(hero.combat_action_4.action_state_string)
+	if jump_pad_velocity:
+		velocity.y = jump_pad_velocity.y
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
@@ -198,15 +187,21 @@ func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 
 	#endregion
 	#region Func:Actions
-func process_combat_actions() -> void:
+func process_combat_actions_state() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
-	elif brain.using_combat_action_2 and hero.combat_action_2.is_usable():
+		state_machine.transition(&"PunchState")
+	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
 		hero.combat_action_2.execute()
+		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
+		if hero.combat_action_3.is_action_state:
+			state_machine.transition(hero.combat_action_3.action_state_string)
 	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
 		hero.combat_action_4.execute()
+		if hero.combat_action_4.is_action_state:
+			state_machine.transition(hero.combat_action_4.action_state_string)
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
@@ -257,11 +252,6 @@ func knock_back(direction: Vector3, strength: float) -> void:
 
 	#endregion
 	#region Func:Unused?
-@rpc("any_peer","reliable")
-func rpc_request_change_hero(requested_id: int) -> void:
-	if not multiplayer.is_server(): return
-	if HERO_DB.has(requested_id):
-		# Setting hero_id on the server triggers replication via MultiplayerSynchronizer
-		change_hero(requested_id)
+
 	#endregion
 #endregion

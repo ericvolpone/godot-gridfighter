@@ -49,7 +49,6 @@ func _spawn_power_up_at_point(power_up: PowerUp, spawn_point_path: NodePath) -> 
 	power_up.global_position = spawn_point.global_position
 	power_up.power_up_spawn_point = spawn_point
 	power_up.signal_power_up_applied.connect(func(_spawn_point: Node3D) -> void:
-		print("Spawn point now available");
 		spawn_point_by_availability[_spawn_point] = true;
 		)
 

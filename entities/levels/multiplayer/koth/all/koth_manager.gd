@@ -37,7 +37,6 @@ func _ready() -> void:
 
 func start_cycle() -> void:
 	if not is_enabled:
-		print("Not Enabled");
 		set_process(false);
 		set_physics_process(false);
 		return;

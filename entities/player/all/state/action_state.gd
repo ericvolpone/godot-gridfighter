@@ -12,12 +12,12 @@ var state_time_start: float;
 @export var xz_movement_modifier: float = 1.0;
 ## Speed for XZ velocity override (Y will always be 0)
 @export var xz_velocity_override: Vector3;
-## Acceleration for XZ velocity override
-@export var xz_velocity_override_acceleration: float;
+## Will the velocity override decelerate to 0?
+@export var is_xz_velocity_override_decellerating: bool;
 ## Speed for Y velocity override
 @export var y_velocity_override: float;
-## Acceleration for Y velocity override
-@export var y_velocity_override_acceleration: float;
+## Will the velocity override decelerate to 0?
+@export var is_y_velocity_override_decellerating: bool;
 
 func enter(_previous_state: RewindableState, _tick: int) -> void:
 	state_time_start = NetworkTime.time;
@@ -40,13 +40,18 @@ func move_player(delta: float, speed: float = player.current_move_speed) -> void
 		if not player.is_on_floor():
 			player.apply_gravity(delta)
 	else:
-		player.velocity.y = y_velocity_override + (y_velocity_override_acceleration * (NetworkTime.time - state_time_start))
+		var deceleration: float = 0
+		if is_y_velocity_override_decellerating:
+			deceleration = (NetworkTime.time - state_time_start) / state_time
+		player.velocity.y = y_velocity_override * (1 - deceleration)
 
 	var horizontal_velocity: Vector3;
 	var input_dir : Vector3 = get_movement_input()
 	if xz_velocity_override:
-		var acceleration: float = clamp((xz_velocity_override_acceleration * (NetworkTime.time - state_time_start)), -1, 0)
-		horizontal_velocity = xz_velocity_override * (1 + acceleration)
+		var deceleration: float = 0
+		if is_xz_velocity_override_decellerating:
+			deceleration = (NetworkTime.time - state_time_start) / state_time
+		horizontal_velocity = xz_velocity_override * (1 - deceleration)
 	elif can_move:
 		var position_target: Vector3 = input_dir * speed
 		horizontal_velocity = position_target * xz_movement_modifier

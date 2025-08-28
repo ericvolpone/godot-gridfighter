@@ -3,6 +3,9 @@ extends Control
 @onready var lobby_settings: LobbySettings = $LobbySettings
 @onready var ip_address_edit: LineEdit = $HBoxContainer/VBoxContainer/IPAddressEdit
 
+var small_hill_scene: PackedScene = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn")
+var bridge_scene: PackedScene = load("res://entities/levels/multiplayer/bridge_level/bridge_level.tscn")
+
 func _on_mp_host_button_pressed() -> void:
 	lobby_settings.calculate_values()
 	if lobby_settings.is_online:
@@ -22,7 +25,7 @@ func _on_mp_host_button_pressed() -> void:
 				print("Host Type must be selected to host a game")
 				return
 
-	var small_hill: Level = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn").instantiate();
+	var small_hill: Level = bridge_scene.instantiate();
 	small_hill.lobby_settings = lobby_settings
 	get_tree().root.add_child(small_hill)
 	get_tree().current_scene.queue_free()
@@ -47,7 +50,7 @@ func _on_mp_join_button_pressed() -> void:
 
 func _on_joined_server() -> void:
 	print("Joined server")
-	var small_hill: Level = load("res://entities/levels/multiplayer/smallhill/small_hill.tscn").instantiate();
+	var small_hill: Level = bridge_scene.instantiate();
 	get_tree().root.add_child(small_hill)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = small_hill

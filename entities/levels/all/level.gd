@@ -66,8 +66,6 @@ func _on_hero_locked_in(hero_id: int) -> void:
 		player_spawner.rpc_id(1, "request_spawn", hero_id) # 1 = server peer id
 
 func handle_player_death(player: Player) -> void:
-	if not is_multiplayer_authority(): return
-	
 	_spawn_death_explosion.rpc(player.global_position)
 	scoreboard.update_player_score(player, -5)
 	
@@ -76,11 +74,13 @@ func handle_player_death(player: Player) -> void:
 	var next_hero_id: int = player.hero.definition.hero_id + 1
 	if next_hero_id > 1:
 		next_hero_id = 0
+	print("Handling player death on client: ", multiplayer.get_unique_id(), " and next hero id: ", next_hero_id)
+
 	player.change_hero.rpc(next_hero_id)
 	respawner.respawn_player(player)
 	player.state_machine.transition(&"RespawnState")
 
-@rpc("call_local", "any_peer", "unreliable")
+@rpc("call_local", "authority", "unreliable")
 func _spawn_death_explosion(location: Vector3) -> void:
 	var death: PlayerDeath = death_scene.instantiate();
 	add_child(death)
