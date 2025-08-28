@@ -1,14 +1,14 @@
 class_name Respawner extends Node
 
 # Holds respawn points and if they are available for respawn
-@export var respawn_point_availability: Dictionary[RespawnPoint, bool]
+@export var respawn_point_availability: Dictionary[Marker3D, bool]
 @export var respawn_time: float = 2;
 
 func respawn_player(player: Player) -> void:
-	var respawn_points: Array[RespawnPoint] = respawn_point_availability.keys()
+	var respawn_points: Array[Marker3D] = respawn_point_availability.keys()
 	respawn_points.shuffle()
 	
-	for respawn_point: RespawnPoint in respawn_points:
+	for respawn_point: Marker3D in respawn_points:
 		if respawn_point_availability[respawn_point]:
 			# Point is available, we can occupy and respawn
 			respawn_point_availability[respawn_point] = false;

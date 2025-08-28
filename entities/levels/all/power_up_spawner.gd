@@ -8,7 +8,7 @@ class_name PowerUpSpawner extends MultiplayerSpawner
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Holds respawn points and if they are available for respawn
-@export var spawn_point_by_availability: Dictionary[Node3D, bool]
+@export var spawn_point_by_availability: Dictionary[Marker3D, bool]
 @export var spawn_time: float = 10;
 @export var are_power_ups_enabled: bool = false;
 @onready var max_active_power_ups: int = spawn_point_by_availability.keys().size();
@@ -44,19 +44,19 @@ func _configure_power_up_spawner() -> void:
 		return power_up
 
 func _spawn_power_up_at_point(power_up: PowerUp, spawn_point_path: NodePath) -> void:
-	var spawn_point: Node3D = get_node(spawn_point_path)
+	var spawn_point: Marker3D = get_node(spawn_point_path)
 	spawn_point_by_availability[spawn_point] = false
 	power_up.global_position = spawn_point.global_position
 	power_up.power_up_spawn_point = spawn_point
-	power_up.signal_power_up_applied.connect(func(_spawn_point: Node3D) -> void:
+	power_up.signal_power_up_applied.connect(func(_spawn_point: Marker3D) -> void:
 		spawn_point_by_availability[_spawn_point] = true;
 		)
 
-func _find_random_available_spawn_point() -> Node3D:
-	var spawn_points: Array[Node3D] = spawn_point_by_availability.keys();
+func _find_random_available_spawn_point() -> Marker3D:
+	var spawn_points: Array[Marker3D] = spawn_point_by_availability.keys();
 	spawn_points.shuffle()
 	
-	for spawn_point: Node3D in spawn_points:
+	for spawn_point: Marker3D in spawn_points:
 		if spawn_point_by_availability[spawn_point]:
 			return spawn_point;
 	

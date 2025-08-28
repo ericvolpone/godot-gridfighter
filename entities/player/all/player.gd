@@ -250,7 +250,7 @@ func knock_back(direction: Vector3, strength: float) -> void:
 	if(!is_immune_to_knockback and not is_knocked):
 		var knocked_state: ActionState = $RewindableStateMachine/KnockedState
 		knocked_state.xz_velocity_override = direction * strength
-		knocked_state.y_velocity_override = (direction*strength).y
+		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
 
 	#endregion
