@@ -66,6 +66,7 @@ func _on_hero_locked_in(hero_id: int) -> void:
 		player_spawner.rpc_id(1, "request_spawn", hero_id) # 1 = server peer id
 
 func handle_player_death(player: Player) -> void:
+	if not is_multiplayer_authority(): return
 	_spawn_death_explosion.rpc(player.global_position)
 	scoreboard.update_player_score(player, -5)
 	

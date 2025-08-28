@@ -151,7 +151,6 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	if global_position.y <= -8 and tick > respawn_tick and is_fresh:
 		is_respawning = true
 		respawn_tick = tick
-		is_respawning = true
 	
 	if tick == respawn_tick:
 		print("found respawn tick: ", tick, " on client: ", multiplayer.get_unique_id())
