@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=10 format=3 uid="uid://cetodgfjvpoew"]
 
-[ext_resource type="FontFile" uid="uid://c0ndt4ieq5rjp" path="res://resources/ui/Super Duty - Demo.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://bq8hsa71e6r5n" path="res://resources/ui/SupplyCenterFont/Supply Center.ttf" id="1_vwsj4"]
 
 [sub_resource type="StyleBoxFlat" id="23"]
 content_margin_left = 12.0
@@ -102,12 +102,12 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="FontVariation" id="2"]
-base_font = ExtResource("1")
+base_font = ExtResource("1_vwsj4")
 
 [resource]
 resource_name = "PastelPlay_LavenderPlus"
 default_font = SubResource("2")
-default_font_size = 18
+default_font_size = 16
 Button/colors/font_color = Color(0.965, 0.969, 0.984, 1)
 Button/colors/font_disabled_color = Color(0.352831, 0.40446, 0.484606, 1)
 Button/styles/disabled = SubResource("23")

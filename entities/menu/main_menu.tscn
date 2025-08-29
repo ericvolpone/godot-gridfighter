@@ -49,12 +49,13 @@ text = "Quit"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 238.0
-offset_top = 67.0
-offset_right = 376.0
-offset_bottom = 90.0
+offset_left = 14.0
+offset_top = 15.0
+offset_right = 225.0
+offset_bottom = 44.0
 scale = Vector2(2.79386, 2.69021)
-text = "KING OF THE HILL"
+theme_override_font_sizes/font_size = 20
+text = "Rocky Royale"
 
 [node name="LobbySettings" parent="." instance=ExtResource("2_scuuy")]
 layout_mode = 1

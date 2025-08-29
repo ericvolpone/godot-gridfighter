@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cly568e1kmem5"]
+[gd_scene load_steps=13 format=3 uid="uid://cly568e1kmem5"]
 
 [ext_resource type="PackedScene" uid="uid://cyw3gro3ao66a" path="res://entities/menu/main_menu.tscn" id="1_rm2r3"]
-[ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="2_nkmt6"]
 [ext_resource type="PackedScene" uid="uid://ymb8qvia5s6k" path="res://entities/player/heroes/rocky/rocky.tscn" id="3_j3l5m"]
 [ext_resource type="PackedScene" uid="uid://br3qftaid5etj" path="res://entities/player/heroes/bolty/bolty.tscn" id="4_l13iv"]
 
@@ -186,7 +185,6 @@ mesh = SubResource("BoxMesh_fiqdu")
 [node name="Menu Layer" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="Menu Layer" instance=ExtResource("1_rm2r3")]
-theme = ExtResource("2_nkmt6")
 
 [node name="Rocky" parent="." instance=ExtResource("3_j3l5m")]
 transform = Transform3D(0.997139, 0, 0.0755878, 0, 1, 0, -0.0755878, 0, 0.997139, 0.70788, 4.56874, 8.84277)
@@ -227,7 +225,6 @@ bones/34/rotation = Quaternion(0.0940356, -0.770882, -0.0843592, 0.624325)
 bones/35/rotation = Quaternion(-0.123248, 0.0329744, -0.0223926, 0.991575)
 bones/36/rotation = Quaternion(-0.0709213, -0.780325, -0.169375, 0.597809)
 bones/37/rotation = Quaternion(-0.119775, 0.0805813, 0.194075, 0.970307)
-bones/38/scale = Vector3(1.00002, 1, 0.999984)
 bones/39/rotation = Quaternion(0.104177, 0.00922806, -0.048173, 0.993349)
 bones/40/rotation = Quaternion(0.337142, -2.75671e-06, 0.0274643, 0.941053)
 bones/41/rotation = Quaternion(0.237422, -1.95205e-06, 0.0193408, 0.971214)
@@ -291,7 +288,6 @@ bones/34/rotation = Quaternion(0.0940356, -0.770882, -0.0843592, 0.624325)
 bones/35/rotation = Quaternion(-0.123248, 0.0329744, -0.0223926, 0.991575)
 bones/36/rotation = Quaternion(-0.0709213, -0.780325, -0.169375, 0.597809)
 bones/37/rotation = Quaternion(-0.119775, 0.0805813, 0.194075, 0.970307)
-bones/38/scale = Vector3(1.00002, 1, 0.999984)
 bones/39/rotation = Quaternion(0.104177, 0.00922806, -0.048173, 0.993349)
 bones/40/rotation = Quaternion(0.337142, -2.75671e-06, 0.0274643, 0.941053)
 bones/41/rotation = Quaternion(0.237422, -1.95205e-06, 0.0193408, 0.971214)

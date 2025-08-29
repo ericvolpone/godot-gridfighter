@@ -1,6 +1,6 @@
 class_name PowerUp extends Area3D
 
-@onready var sprite: AnimatedSprite3D = $Sprite
+@onready var sprite: AnimatedSprite3D = $SpriteContainer/Sprite
 var power_up_spawn_point: Node3D;
 
 signal signal_power_up_applied

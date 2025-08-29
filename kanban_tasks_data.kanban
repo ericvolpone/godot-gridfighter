@@ -26,7 +26,7 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"727a2d99-e87f-4939-9105-44fe844ef725",
+				"891e1fe7-0371-4f73-9609-128045e6b021",
 				"788e604f-98a4-4326-aeaf-92c679aa7bbb",
 				"f8d5efb6-5d44-4865-a908-b126ab972b61",
 				"2e1a6c7f-0abc-4061-93a0-3fd7c2c498ed",
@@ -56,6 +56,7 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"727a2d99-e87f-4939-9105-44fe844ef725",
 				"17c397ff-dffa-4575-929e-7509ac04743d",
 				"90becbb2-08ea-4ee4-b462-523d539da225",
 				"cc873263-3ab1-4f9c-bdf6-15ce6a4b33f9",
@@ -703,6 +704,13 @@
 			"title": "Use NetworkTime for action cooldowns",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "891e1fe7-0371-4f73-9609-128045e6b021",
+			"title": "Bots: Every bot seems to duplicate Score and Death Explosions",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],
