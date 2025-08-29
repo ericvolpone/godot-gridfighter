@@ -27,6 +27,7 @@
 			"title": "Todo",
 			"tasks": [
 				"891e1fe7-0371-4f73-9609-128045e6b021",
+				"65532763-67e3-498b-8fe5-042820b441d1",
 				"788e604f-98a4-4326-aeaf-92c679aa7bbb",
 				"f8d5efb6-5d44-4865-a908-b126ab972b61",
 				"2e1a6c7f-0abc-4061-93a0-3fd7c2c498ed",
@@ -709,6 +710,13 @@
 		{
 			"uuid": "891e1fe7-0371-4f73-9609-128045e6b021",
 			"title": "Bots: Every bot seems to duplicate Score and Death Explosions",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "65532763-67e3-498b-8fe5-042820b441d1",
+			"title": "Tracking AOEs: Should disappear on death",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

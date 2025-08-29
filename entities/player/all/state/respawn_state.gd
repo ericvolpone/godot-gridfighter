@@ -15,6 +15,6 @@ func exit(_next_state: RewindableState, _tick: int) -> void:
 	player.velocity = Vector3.ZERO
 	player.is_respawning = false
 
-func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
+func tick(_delta: float, _tick: int, _is_fresh: bool) -> void:
 	if state_time_start + state_time <= NetworkTime.time:
 		state_machine.transition(&"IdleState")

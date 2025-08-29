@@ -96,6 +96,7 @@ script = ExtResource("1_whjjy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
 [node name="LightningArcs" type="GPUParticles3D" parent="Container"]
+cast_shadow = 0
 amount = 16
 lifetime = 0.5
 preprocess = 0.5

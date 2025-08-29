@@ -29,6 +29,7 @@ height = 0.2
 script = ExtResource("1_jbdyn")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 emitting = false
 amount = 100
 lifetime = 4.0

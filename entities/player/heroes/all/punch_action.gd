@@ -1,5 +1,7 @@
 class_name PunchAction extends CombatAction
 
+var punch_effect_scene: PackedScene = preload("res://entities/effects/punch_effect.tscn")
+
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
@@ -25,7 +27,9 @@ func handle_animation_signal() -> void:
 	var punch_range: float = 2.0
 	var punch_radius: float = .3
 	var punch_position: Vector3 = punch_origin + forward_dir * (punch_range * 0.5)
-	draw_debug_sphere(punch_position, punch_radius)
+	
+	_spawn_particle_effect.rpc(punch_position)
+	
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 
 	var sphere: SphereShape3D = SphereShape3D.new()
@@ -54,27 +58,8 @@ func handle_animation_signal() -> void:
 			var force: Vector3 = to_obj * 2  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)
 
-func draw_debug_sphere(sphere_position: Vector3, radius: float, duration: float = 0.5) -> void:
-	var sphere_mesh: SphereMesh = SphereMesh.new()
-	sphere_mesh.radius = radius
-	sphere_mesh.height = radius * 2.0
-	sphere_mesh.radial_segments = 8
-	sphere_mesh.rings = 4
-
-	var material: StandardMaterial3D = StandardMaterial3D.new()
-	material.albedo_color = Color(1.0, 0.0, 0.0, 0.5)  # Red semi-transparent
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-
-	var mesh_instance: MeshInstance3D = MeshInstance3D.new()
-	mesh_instance.mesh = sphere_mesh
-	mesh_instance.material_override = material
-	mesh_instance.global_position = sphere_position
-	mesh_instance.scale = Vector3.ONE * 1.0  # optional if you want scaling
-
-	get_tree().current_scene.add_child(mesh_instance)
-
-	# Remove it after some time
-	mesh_instance.set_physics_process(false)
-	await get_tree().create_timer(duration).timeout
-	mesh_instance.queue_free()
+@rpc("call_local", "authority", "unreliable")
+func _spawn_particle_effect(location: Vector3) -> void:
+	var punch_effect: PunchEffect = punch_effect_scene.instantiate();
+	add_child(punch_effect)
+	punch_effect.global_position = location

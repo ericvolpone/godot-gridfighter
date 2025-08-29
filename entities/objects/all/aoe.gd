@@ -2,6 +2,7 @@ class_name AOE extends Node3D
 
 #region (Types)
 enum Type {
+	PUNCH_EFFECT,
 	STORM,
 	GUST,
 	HARDEN

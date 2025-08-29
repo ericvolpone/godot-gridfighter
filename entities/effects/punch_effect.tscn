@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://baj0j2aj0r87a"]
+
+[ext_resource type="Script" uid="uid://ceobdprmmxtlg" path="res://entities/effects/punch_effect.gd" id="1_2knk8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_swwsm"]
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2knk8"]
+transparency = 1
+albedo_color = Color(0.556953, 0.556953, 0.556953, 0.517647)
+emission_enabled = true
+emission = Color(0.783134, 0.213065, 0.20907, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_x31eb"]
+material = SubResource("StandardMaterial3D_2knk8")
+radius = 0.025
+height = 0.05
+
+[node name="PunchEffect" type="Node3D"]
+script = ExtResource("1_2knk8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 12
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_swwsm")
+draw_pass_1 = SubResource("SphereMesh_x31eb")
+
+[connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]
