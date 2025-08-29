@@ -46,4 +46,7 @@ func _physics_process(_delta: float) -> void:
 	if is_tracking and tracking_player:
 		global_position = tracking_player.global_position
 
+func apply_effect(player: Player, delta: float) -> void:
+	pass
+
 #endregion

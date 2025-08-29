@@ -52,6 +52,9 @@ var is_in_menu: bool = false;
 		#region Var:PlayerStats:Modifiers
 var gust_total_direction: Vector3 = Vector3.ZERO
 var jump_pad_velocity: Vector3 = Vector3.ZERO
+var colliding_aoes: Dictionary[AOE, bool] = {}
+
+var shock_value: float = 0;
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -151,7 +154,8 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	process_menu_input();
 	process_combat_actions_state();
 	process_knock();
-	process_external_movers(delta)
+	process_external_modifiers(delta)
+	process_status_effects();
 
 	if global_position.y <= -8 and tick > respawn_tick and is_fresh:
 		is_respawning = true
@@ -166,13 +170,26 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 func process_knock() -> void:
 	if(is_knocked and state_machine.state != &"KnockedState"):
 		state_machine.transition(&"KnockedState")
+
 func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
-func process_external_movers(delta: float) -> void:
+
+func process_external_modifiers(delta: float) -> void:
 	if gust_total_direction:
 		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
 	if jump_pad_velocity:
 		velocity.y = jump_pad_velocity.y
+	
+	# Process colliding AOEs
+	for aoe: AOE in colliding_aoes.keys():
+		aoe.apply_effect(self, delta);
+
+func process_status_effects() -> void:
+	if shock_value > 3:
+		# TODO Make sure this is syncing correctly and actually
+		# do a shock effect!
+		print("Player: ", player_name, " is shocked!")
+		shock_value = 0
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
