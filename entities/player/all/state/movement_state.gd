@@ -20,7 +20,6 @@ func force_update_is_on_floor() -> void:
 	player.velocity = old_velocity
 
 func get_movement_input() -> Vector3:
-	print ("Checking for movement input")
 	return player_input.move_direction
 
 func get_jump() -> float:

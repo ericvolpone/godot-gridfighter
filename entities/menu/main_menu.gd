@@ -24,6 +24,10 @@ func _on_mp_host_button_pressed() -> void:
 			_:
 				print("Host Type must be selected to host a game")
 				return
+	else:
+		var peer: OfflineMultiplayerPeer = OfflineMultiplayerPeer.new()
+		multiplayer.multiplayer_peer = peer;
+		print("Hosting an offline game")
 
 	var small_hill: Level = bridge_scene.instantiate();
 	small_hill.lobby_settings = lobby_settings
@@ -54,7 +58,6 @@ func _on_joined_server() -> void:
 	get_tree().root.add_child(small_hill)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = small_hill
-	#NetworkManager.joined_server.disconnect(_on_joined_server)
 
 func _on_tutorial_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://entities/levels/tutorials/tutorial_level_1.tscn")

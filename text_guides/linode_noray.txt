@@ -1,0 +1,32 @@
+Noray Setup in Linode
+
+https://cloud.linode.com/linodes  Create Linode 
+- Region close to where your traffic will be
+- I chose Shared Nano (cheapest option)
+- Give your linode a Label (name)
+- Give it a password for SSH
+- Create a firewall
+	- SSH on 22: Accept IPv4 and IPv6
+	- Registration on 8890, 8891: Accept IPv4 and IPv6
+	- Registrar on 8809, 49152-51200: Accept IPv4 and IPv6
+
+Once Linode is running, get dependencies…
+
+- SSH into Linode IP with password created in step 1
+- `mkdir Nora`
+- `git clone https://github.com/foxssake/noray.git`
+- Install Node Version Manager:
+	- `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+- Activate NVM: `source ~/.bashrc`
+	- Install Node: `nvm install --lts`
+- Install PNPM: `npm install -g pnpm@latest-10`
+
+Now that you have depencies, configure Noray.
+Noray’s installation docs likely take over from here.. but just in case
+
+- Copy and paste this file into your noray directly as .env
+	- https://github.com/foxssake/noray/blob/main/.env.example
+- `pnpm install` to get all noray dependencies
+- `pnpm start` to run the server
+
+Now in your Godot game’s code, just change your “tomfol.io” to your Linode’s public IP address
