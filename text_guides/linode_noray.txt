@@ -30,3 +30,8 @@ Noray’s installation docs likely take over from here.. but just in case
 - `pnpm start` to run the server
 
 Now in your Godot game’s code, just change your “tomfol.io” to your Linode’s public IP address
+
+For future proofing, go into Images in Linode and capture the image of your noray Linode.
+This way, if you lose or delete your linode, you can restore it via the image
+Or you could use scaling with that image to scale up and down based on traffic with some
+load balancer / domain if you have one.
