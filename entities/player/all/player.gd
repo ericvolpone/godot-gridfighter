@@ -187,6 +187,11 @@ func process_external_modifiers(delta: float) -> void:
 func process_status_effects() -> void:
 	if shock_value > 3:
 		shock_value = 0
+		level.status_effect_spawner.spawn_effect.rpc({
+			"owner_player_id" : player_id,
+			"effect_ttl" : .75,
+			"effect_type" : StatusEffect.Type.SHOCKED
+		})
 		state_machine.transition(&"ShockedState")
 
 func move_and_slide_physics_factor() -> void:

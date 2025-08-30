@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=18 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://dloeblieqj300" path="res://entities/player/all/state/respawn_state.gd" id="12_o6siw"]
 [ext_resource type="Material" uid="uid://bgxx5v3oh5tmu" path="res://resources/materials/mat_transparent.tres" id="13_gurk5"]
 [ext_resource type="Script" uid="uid://bek2jfukllxlf" path="res://entities/player/all/state/status_effect_state.gd" id="13_tictr"]
-[ext_resource type="PackedScene" uid="uid://hb7qxm3idmsj" path="res://entities/effects/statuses/shocked_effect.tscn" id="14_273dw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.8
@@ -147,7 +146,6 @@ metadata/_custom_type_script = "uid://usyufdtn83hc"
 
 [node name="ShockedState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("13_tictr")
-status_scene = ExtResource("14_273dw")
 state_time = 0.75
 can_move = false
 can_jump = false
