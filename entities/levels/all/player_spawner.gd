@@ -37,7 +37,7 @@ func _configure_player_spawner() -> void:
 		if brain_type == Brain.BrainType.PLAYER:
 			_spawned_peers[peer_id] = true
 		else:
-			player.player_id = "AI_" + player.player_id
+			player.player_id = "AI_" + player.player_name
 		call_deferred("respawn_player", player)
 		return player
 	
