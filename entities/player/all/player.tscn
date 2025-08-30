@@ -53,7 +53,7 @@ replication_config = SubResource("SceneReplicationConfig_x6u7t")
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", "RewindableStateMachine:state", ":current_hero_id"])
+state_properties = Array[String]([":global_transform", ":velocity", "RewindableStateMachine:state", ":current_hero_id", ":shock_value"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 
@@ -157,5 +157,3 @@ metadata/_custom_type_script = "uid://bek2jfukllxlf"
 
 [node name="Shadow" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_o6siw")
-
-[node name="ShockedEffect" parent="." instance=ExtResource("14_273dw")]

@@ -1,21 +1,21 @@
 [gd_scene load_steps=6 format=3 uid="uid://hb7qxm3idmsj"]
 
-[ext_resource type="Script" uid="uid://cr7fr6gf1ib3w" path="res://entities/effects/statuses/shocked_effect.gd" id="1_0f6ch"]
+[ext_resource type="Script" uid="uid://dvg7vs2inc1yt" path="res://entities/effects/statuses/status_effect.gd" id="1_0f6ch"]
 [ext_resource type="Shader" uid="uid://cuv1u0dcbf0xv" path="res://entities/objects/bolty/LightningArcs.gdshader" id="1_ovxf7"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0f6ch"]
-particle_flag_align_y = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 2.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 0.8
-emission_ring_cone_angle = 90.0
+emission_ring_cone_angle = 80.0
+velocity_pivot = Vector3(0, 1, 0)
 direction = Vector3(0, 0, 0)
 spread = 180.0
 flatness = 1.0
-orbit_velocity_min = 100.0
-orbit_velocity_max = 100.0
+radial_velocity_min = -0.500022
+radial_velocity_max = -2.23517e-05
 gravity = Vector3(0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whjjy"]
@@ -32,17 +32,16 @@ subdivide_width = 5
 
 [node name="ShockedEffect" type="Node3D"]
 script = ExtResource("1_0f6ch")
+metadata/_custom_type_script = "uid://dvg7vs2inc1yt"
 
-[node name="ShockEffects" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 cast_shadow = 0
-emitting = false
-amount = 16
-lifetime = 0.75
-one_shot = true
+amount = 20
+lifetime = 0.5
+explosiveness = 0.36
+randomness = 1.0
 local_coords = true
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_0f6ch")
 draw_pass_1 = SubResource("QuadMesh_hhc1c")
-
-[connection signal="finished" from="ShockEffects" to="." method="_on_gpu_particles_3d_finished"]

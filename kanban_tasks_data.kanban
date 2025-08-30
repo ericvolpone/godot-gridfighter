@@ -725,7 +725,7 @@
 		},
 		{
 			"uuid": "f81e570b-775f-4833-b44d-2f7544a0cd89",
-			"title": "ShockedState Not working",
+			"title": "Status Effects not spawning on clients",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
