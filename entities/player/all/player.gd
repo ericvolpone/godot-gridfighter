@@ -32,8 +32,8 @@ var player_name: String;
 @onready var level: Level = player_spawner.get_parent(); # TODO Probably just signal this up
 @onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 @onready var state_machine: RewindableStateMachine = $RewindableStateMachine
-
-	#endregion
+@onready var ring_indicator: CSGCylinder3D = $RingIndicator
+#endregion
 	#region Var:Hero
 @onready var hero_socket: Node3D = $HeroSocket
 var hero: Hero;
@@ -107,8 +107,8 @@ func _ready() -> void:
 		# TODO Probably put this elsewhere?
 		add_child(in_game_menu)
 		in_game_menu.hide()
-	else:
-		$BlueIndicatorCircle.queue_free();
+		ring_indicator.material_override = ring_indicator.material.duplicate()
+		$RingIndicator.material_override.albedo_color = Color.DEEP_SKY_BLUE
 	
 	rollback_synchronizer.process_settings()
 

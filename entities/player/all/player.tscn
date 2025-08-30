@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=20 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
-[ext_resource type="PackedScene" uid="uid://dp8abkasj7kyt" path="res://models/ui/indicators/BlueIndicatorCircle.glb" id="4_0owmy"]
 [ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="4_vak66"]
 [ext_resource type="Script" uid="uid://byrgwv2o7hstx" path="res://addons/netfox.extras/state-machine/rewindable-state-machine.gd" id="5_jue3x"]
 [ext_resource type="Script" uid="uid://pramj1xpklgw" path="res://entities/player/all/state/move_state.gd" id="6_qwx3q"]
@@ -31,6 +30,24 @@ properties/1/replication_mode = 1
 material = ExtResource("13_gurk5")
 height = 0.001
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gurk5"]
+noise_type = 5
+seed = 2
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g2ike"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_gurk5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gurk5"]
+albedo_color = Color(0.806697, 0.100879, 0.181326, 1)
+albedo_texture = SubResource("NoiseTexture2D_g2ike")
+metallic_specular = 0.45
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.01
+
 [node name="Player_CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 3
@@ -39,9 +56,6 @@ script = ExtResource("1_lvxji")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 shape = SubResource("CapsuleShape3D_g2els")
-
-[node name="BlueIndicatorCircle" parent="." instance=ExtResource("4_0owmy")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0870759, 0)
 
 [node name="HeroSocket" type="Node3D" parent="."]
 
@@ -156,3 +170,14 @@ metadata/_custom_type_script = "uid://bek2jfukllxlf"
 
 [node name="Shadow" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_o6siw")
+
+[node name="RingIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16536, 0)
+radius = 0.75
+height = 0.001
+material = SubResource("StandardMaterial3D_gurk5")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RingIndicator"]
+operation = 2
+radius = 0.65
+height = 0.001
