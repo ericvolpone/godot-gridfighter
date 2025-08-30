@@ -51,7 +51,9 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"f81e570b-775f-4833-b44d-2f7544a0cd89"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -717,6 +719,13 @@
 		{
 			"uuid": "65532763-67e3-498b-8fe5-042820b441d1",
 			"title": "Tracking AOEs: Should disappear on death",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "f81e570b-775f-4833-b44d-2f7544a0cd89",
+			"title": "ShockedState Not working",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

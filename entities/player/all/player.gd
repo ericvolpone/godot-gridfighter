@@ -186,10 +186,9 @@ func process_external_modifiers(delta: float) -> void:
 
 func process_status_effects() -> void:
 	if shock_value > 3:
-		# TODO Make sure this is syncing correctly and actually
-		# do a shock effect!
-		print("Player: ", player_name, " is shocked!")
+		print("Entering Shocked State")
 		shock_value = 0
+		state_machine.transition(&"ShockedState")
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor

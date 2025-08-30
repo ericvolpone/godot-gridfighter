@@ -5,7 +5,9 @@ enum Type {
 	PUNCH_EFFECT,
 	STORM,
 	GUST,
-	HARDEN
+	HARDEN,
+
+	SHOCKED_EFFECT
 }
 #endregion
 
