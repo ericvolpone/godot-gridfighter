@@ -60,6 +60,7 @@ metadata/_custom_type_script = "uid://d350u8evihs1u"
 script = ExtResource("4_vak66")
 root = NodePath("..")
 properties = Array[String]([":global_transform"])
+record_first_state = false
 metadata/_custom_type_script = "uid://dour8fehaaugp"
 
 [node name="RewindableStateMachine" type="Node" parent="."]
