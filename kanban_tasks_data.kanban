@@ -51,7 +51,9 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"b7010605-79ba-4abc-ab7b-e4501792d581"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -725,6 +727,13 @@
 		{
 			"uuid": "f81e570b-775f-4833-b44d-2f7544a0cd89",
 			"title": "Status Effects not spawning on clients",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "b7010605-79ba-4abc-ab7b-e4501792d581",
+			"title": "PunchEffect RPC Issues?",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
