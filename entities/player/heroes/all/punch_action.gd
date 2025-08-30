@@ -58,7 +58,7 @@ func handle_animation_signal() -> void:
 			var force: Vector3 = to_obj * 2  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)
 
-@rpc("call_local", "authority", "unreliable")
+@rpc("call_local", "any_peer", "unreliable")
 func _spawn_particle_effect(location: Vector3) -> void:
 	var punch_effect: PunchEffect = punch_effect_scene.instantiate();
 	add_child(punch_effect)

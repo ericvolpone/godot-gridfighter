@@ -21,6 +21,8 @@ var combat_action_3: CombatAction;
 var combat_action_4: CombatAction;
 
 func init_combat_actions() -> void:
+	combat_action_1.name = "PunchAction"
+	combat_action_2.name = "BlockAction"
 		# Configure punch
 	_init_combat_actions()
 	connect("punch_frame", combat_action_1.handle_animation_signal)
