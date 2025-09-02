@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="HeroDefinition" load_steps=4 format=3 uid="uid://chf750dwm1v8f"]
 
-[ext_resource type="PackedScene" uid="uid://br3qftaid5etj" path="res://entities/player/heroes/bolty/bolty.tscn" id="1_eyvdq"]
 [ext_resource type="Texture2D" uid="uid://bowwiycjtkc3u" path="res://entities/player/heroes/bolty/bolty_pose.tres" id="1_gjbsa"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_p8lxt"]
+[ext_resource type="PackedScene" uid="uid://4avtnanx5no5" path="res://entities/player/heroes/bolty/bolty2.tscn" id="2_gjbsa"]
 
 [resource]
 script = ExtResource("1_p8lxt")
 hero_id = 0
 display_name = "Bolty"
-hero_scene = ExtResource("1_eyvdq")
+hero_scene = ExtResource("2_gjbsa")
 hero_portrait = ExtResource("1_gjbsa")
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

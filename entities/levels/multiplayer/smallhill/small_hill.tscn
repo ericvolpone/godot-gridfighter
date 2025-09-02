@@ -93,15 +93,6 @@ size = Vector3(20, 20, 1)
 
 [node name="SmallHill" instance=ExtResource("1_3qiap")]
 
-[node name="Respawner" parent="." index="4" node_paths=PackedStringArray("respawn_point_availability")]
-respawn_point_availability = {
-NodePath("RespawnPoint"): true,
-NodePath("RespawnPoint2"): true,
-NodePath("RespawnPoint3"): true,
-NodePath("RespawnPoint4"): true,
-NodePath("RespawnPoint5"): true
-}
-
 [node name="RespawnPoint" parent="Respawner" index="0" instance=ExtResource("3_51cky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, 0)
 
@@ -117,13 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, 6.7103)
 [node name="RespawnPoint5" parent="Respawner" index="4" instance=ExtResource("3_51cky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64613, -6.93428)
 
-[node name="PowerUpSpawner" parent="." index="6" node_paths=PackedStringArray("spawn_point_by_availability")]
-spawn_point_by_availability = {
-NodePath("PowerUpSpawnPoint"): true,
-NodePath("PowerUpSpawnPoint2"): true,
-NodePath("PowerUpSpawnPoint3"): true,
-NodePath("PowerUpSpawnPoint4"): true
-}
+[node name="PowerUpSpawner" parent="." index="6"]
 spawn_time = 2.0
 
 [node name="PowerUpSpawnPoint" type="Node3D" parent="PowerUpSpawner" index="0"]
@@ -162,7 +147,7 @@ shape = SubResource("BoxShape3D_3qiap")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
 shape = SubResource("BoxShape3D_3qiap")
 
-[node name="KothManager" parent="." index="10" node_paths=PackedStringArray("koth_rings")]
+[node name="KothManager" parent="." index="11" node_paths=PackedStringArray("koth_rings")]
 koth_rings = [NodePath("KothRing"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
 
 [node name="KothRing" parent="KothManager" index="0" instance=ExtResource("3_ppjc2")]
