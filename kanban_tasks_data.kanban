@@ -38,7 +38,8 @@
 				"c7e2d7db-baff-4a38-8f8e-dc29f1a49c39",
 				"deb5fde0-a457-4a90-b440-960d01b7d500",
 				"2e93210f-3e93-4e3c-8004-858b13519cab",
-				"223b125d-4861-4a2d-9a9b-d965859f09e3",
+				"d102234a-b98f-4934-9696-8c4a60c177bb",
+				"7d2b472b-17ff-45b4-97b5-d047152458e8",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"ab646cd2-0613-4d7c-809e-8f530232c23a",
@@ -51,13 +52,15 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"6a735177-63a4-43f1-9d01-a8bdb0910bb5"
+				"223b125d-4861-4a2d-9a9b-d965859f09e3",
+				"967dc3db-f588-4329-b671-4ac19a978e2e"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"6a735177-63a4-43f1-9d01-a8bdb0910bb5",
 				"a112ffe0-6f28-4a40-a6bb-6a669563bdc8",
 				"20912649-7cee-476d-afa6-b7d17b2253d9",
 				"26b0c739-8d1e-4fdf-95c5-79be62185bc4",
@@ -760,6 +763,27 @@
 			"title": "Rocky Animations busted",
 			"description": "Had to set bone map",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "d102234a-b98f-4934-9696-8c4a60c177bb",
+			"title": "Completely revamp how the action HUD looks, make it cooler",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "967dc3db-f588-4329-b671-4ac19a978e2e",
+			"title": "Slushy: Cold Spray Action",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "7d2b472b-17ff-45b4-97b5-d047152458e8",
+			"title": "Pull Strength and Speed into each hero, reset on respawn",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []
 		}
 	],

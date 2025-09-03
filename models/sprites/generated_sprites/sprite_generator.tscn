@@ -1,43 +1,43 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3q5xfq420adu"]
 
 [ext_resource type="Script" uid="uid://btg4sym1t4itf" path="res://models/sprites/generated_sprites/sprite_generator.gd" id="1_t5qso"]
-[ext_resource type="PackedScene" uid="uid://ckjbatnwkkis5" path="res://entities/player/heroes/slushy/slushy.tscn" id="2_a7l3b"]
+[ext_resource type="PackedScene" uid="uid://dp1ys4gb4ccvb" path="res://entities/player/heroes/torchy/torchy.tscn" id="2_a7l3b"]
 
 [node name="Sprite Generator" type="SubViewport"]
 transparent_bg = true
 size = Vector2i(128, 256)
 script = ExtResource("1_t5qso")
-image_texture_name = "slushy_pose"
+image_texture_name = "torchy_pose"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0248675, 1.36728, 2.11326)
 
-[node name="Slushy" parent="." instance=ExtResource("2_a7l3b")]
-transform = Transform3D(0.828852, 0, -0.559468, 0, 1, 0, 0.559468, 0, 0.828852, 0, 0, 0)
+[node name="Torchy" parent="." instance=ExtResource("2_a7l3b")]
+transform = Transform3D(0.986633, -0.150486, 0.0625279, 0.0931472, 0.83563, 0.541338, -0.133714, -0.528277, 0.838477, 0.445285, 0, 0.609184)
 
-[node name="GeneralSkeleton" parent="Slushy/Armature" index="0"]
-bones/0/position = Vector3(0.00413177, 0.538956, -0.000464124)
-bones/0/rotation = Quaternion(-0.0253807, 0.163615, -0.0198711, 0.985997)
-bones/1/rotation = Quaternion(0.00594055, 0.0281293, -0.0142544, 0.999485)
-bones/2/rotation = Quaternion(0.0111668, 0.0539245, -0.0148906, 0.998372)
-bones/3/rotation = Quaternion(0.0113398, 0.0538814, -0.0148126, 0.998373)
-bones/4/rotation = Quaternion(0.411761, 0.507865, 0.641119, -0.401861)
-bones/5/rotation = Quaternion(0.0639822, 0.927429, -0.245437, -0.27485)
-bones/6/rotation = Quaternion(0.480696, -0.61056, 0.480696, 0.4063)
-bones/7/rotation = Quaternion(0.0320318, 0.575676, 0.0490536, 0.815577)
-bones/8/rotation = Quaternion(0.013956, -0.0443838, 0.0263491, 0.99857)
-bones/9/rotation = Quaternion(-0.0420674, -0.185299, -0.0139404, 0.981682)
-bones/11/rotation = Quaternion(0.373701, -0.606372, -0.438844, -0.547793)
-bones/12/rotation = Quaternion(-0.387895, 0.914653, 0.0541651, -0.100069)
-bones/13/rotation = Quaternion(0.458158, 0.627143, -0.458158, 0.43229)
-bones/14/rotation = Quaternion(0.00935395, -0.674711, -0.127232, 0.726973)
-bones/15/rotation = Quaternion(-0.0123741, 0.246662, 0.954863, -0.165049)
-bones/16/rotation = Quaternion(0.0311411, 0.918959, -0.389856, -0.050574)
-bones/17/rotation = Quaternion(-0.114027, 0.632236, -0.76549, 0.0360755)
-bones/18/rotation = Quaternion(-3.42443e-08, 0.996126, 0.0879384, 4.432e-08)
-bones/19/rotation = Quaternion(-0.125053, 0.10468, 0.979429, 0.118842)
-bones/20/rotation = Quaternion(-0.0453343, 0.93185, -0.352404, 0.0735597)
-bones/21/rotation = Quaternion(6.80164e-05, 0.532947, -0.836025, -0.1305)
-bones/22/rotation = Quaternion(7.68853e-09, 0.999441, 0.0334484, 7.58975e-09)
+[node name="GeneralSkeleton" parent="Torchy/Armature" index="0"]
+bones/0/position = Vector3(0, 0.590576, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/4/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/5/rotation = Quaternion(0, 1, 0, 0)
+bones/6/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/7/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/8/rotation = Quaternion(0, 0, 0, 1)
+bones/9/rotation = Quaternion(0, 0, 0, 1)
+bones/11/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/12/rotation = Quaternion(0, 1, 0, 0)
+bones/13/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/14/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/15/rotation = Quaternion(0, 0, 1, 0)
+bones/16/rotation = Quaternion(0, 1, 0, 0)
+bones/17/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/18/rotation = Quaternion(0, 1, 0, 0)
+bones/19/rotation = Quaternion(0, 0, 1, 0)
+bones/20/rotation = Quaternion(0, 1, 0, 0)
+bones/21/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/22/rotation = Quaternion(0, 1, 0, 0)
 
-[editable path="Slushy"]
+[editable path="Torchy"]

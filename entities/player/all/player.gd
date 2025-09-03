@@ -19,10 +19,13 @@ const ROCKY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/roc
 const ROCKY_HERO_ID: int = ROCKY_HERO_DEF.hero_id;
 const SLUSHY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/slushy/slushy.tres") as HeroDefinition
 const SLUSHY_HERO_ID: int = SLUSHY_HERO_DEF.hero_id;
+const TORCHY_HERO_DEF: HeroDefinition = preload("res://entities/player/heroes/torchy/torchy.tres") as HeroDefinition
+const TORCHY_HERO_ID: int = TORCHY_HERO_DEF.hero_id;
 const HERO_DB: Dictionary[int, HeroDefinition] = {
 	BOLTY_HERO_ID : BOLTY_HERO_DEF,
 	ROCKY_HERO_ID : ROCKY_HERO_DEF,
-	SLUSHY_HERO_ID : SLUSHY_HERO_DEF
+	SLUSHY_HERO_ID : SLUSHY_HERO_DEF,
+	TORCHY_HERO_ID : TORCHY_HERO_DEF
 }
 	#endregion
 	#region Var:PlayerBaseAttributes
