@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_ntk8c"]
 [ext_resource type="Texture2D" uid="uid://db0itig16nji8" path="res://entities/player/heroes/rocky/rocky_pose.tres" id="1_p8otv"]
-[ext_resource type="PackedScene" uid="uid://bu3mut5a5jrd0" path="res://entities/player/heroes/rocky/rocky2.tscn" id="2_p8otv"]
+[ext_resource type="PackedScene" uid="uid://bu3mut5a5jrd0" path="res://entities/player/heroes/rocky/rocky.tscn" id="2_p8otv"]
 
 [resource]
 script = ExtResource("1_ntk8c")

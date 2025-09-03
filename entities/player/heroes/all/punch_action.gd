@@ -25,7 +25,7 @@ func handle_animation_signal() -> void:
 	var forward_dir: Vector3 = hero.player.get_facing_direction()  # forward in Godot
 
 	var punch_range: float = 2.0
-	var punch_radius: float = .3
+	var punch_radius: float = .5
 	var punch_position: Vector3 = punch_origin + forward_dir * (punch_range * 0.5)
 	
 	_spawn_particle_effect.rpc(punch_position)
