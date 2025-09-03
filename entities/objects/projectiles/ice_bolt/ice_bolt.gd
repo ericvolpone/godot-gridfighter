@@ -1,12 +1,7 @@
 class_name IceBolt extends Projectile
 
 const ORBIT_SPEED_DEG = 120
-
-@onready var mesh: MeshInstance3D = $MeshInstance3D
 @onready var snow_container: MultiMeshInstance3D = $SnowContainer
-
-var is_slow_disappearing: bool = true;
-
 
 func _ready() -> void:
 	add_to_group(Groups.PUNCHABLE_RB)
