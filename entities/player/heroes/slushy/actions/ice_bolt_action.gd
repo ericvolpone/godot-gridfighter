@@ -23,7 +23,7 @@ func execute_child() -> void:
 func _cast_frame_enact() -> void:
 	if not is_multiplayer_authority(): return
 
-	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0,1,0);
+	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0, .5, 0)
 	
 	# TODO Maybe make speed adjustable by power ups?
 	var spawn_data: Dictionary = {

@@ -1,6 +1,9 @@
 class_name IceBolt extends Projectile
 
+const ORBIT_SPEED_DEG = 120
+
 @onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var snow_container: MultiMeshInstance3D = $SnowContainer
 
 var is_slow_disappearing: bool = true;
 
@@ -10,6 +13,9 @@ func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 	self.body_entered.connect(_on_body_entered)
+
+func _process(delta: float) -> void:
+	snow_container.rotate_z(deg_to_rad(ORBIT_SPEED_DEG * delta))
 
 func _on_body_entered(body: Node) -> void:
 	if not is_multiplayer_authority(): return
