@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqc53hofhg24s"]
+[gd_scene load_steps=7 format=3 uid="uid://bqc53hofhg24s"]
 
 [ext_resource type="PackedScene" uid="uid://bcml2xb31ytjt" path="res://entities/levels/all/level.tscn" id="1_xo1qd"]
 [ext_resource type="PackedScene" uid="uid://bpj3uaoftqg0c" path="res://entities/levels/multiplayer/thepit/ThePit.glb" id="2_2ce12"]
 [ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="2_esk4g"]
 [ext_resource type="PackedScene" uid="uid://kp56rumeb5sc" path="res://entities/objects/map/jump_pad/JumpPad.tscn" id="4_ccax0"]
+[ext_resource type="PackedScene" uid="uid://d3xw7r6n54dxy" path="res://entities/objects/map/moving_platforms/moving_platform.tscn" id="5_esk4g"]
+
+[sub_resource type="Curve3D" id="Curve3D_esk4g"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.176117, 0.197265, 0.602219, 0, 0, 0, 0, 0, 0, -4.59857, 0.0511982, 0.691892),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="ThePit" instance=ExtResource("1_xo1qd")]
 
@@ -84,3 +93,7 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 
 [node name="JumpPad" parent="ThePit" index="1" instance=ExtResource("4_ccax0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21648, -0.02, -5.99365)
+
+[node name="MovingPlatform" parent="ThePit" index="2" instance=ExtResource("5_esk4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.94674, 0.295318, -0.158043)
+curve = SubResource("Curve3D_esk4g")

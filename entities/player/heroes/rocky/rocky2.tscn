@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu3mut5a5jrd0"]
+[gd_scene load_steps=3 format=3 uid="uid://bu3mut5a5jrd0"]
 
 [ext_resource type="PackedScene" uid="uid://m3cahi5j8g5g" path="res://models/heroes/white/BaseHeroWhite.glb" id="1_jdlyc"]
-[ext_resource type="Script" uid="uid://brqa7hgnd7251" path="res://entities/player/heroes/rocky/rocky.gd" id="2_ndvip"]
 [ext_resource type="AnimationLibrary" uid="uid://bwy38fb5mbie8" path="res://models/master/master_animations.res" id="2_pteth"]
 
 [node name="Rocky" instance=ExtResource("1_jdlyc")]
-script = ExtResource("2_ndvip")
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
 bones/0/position = Vector3(-0.0143934, 0.531673, 0.0144472)

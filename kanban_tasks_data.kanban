@@ -26,6 +26,8 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"a112ffe0-6f28-4a40-a6bb-6a669563bdc8",
+				"26b0c739-8d1e-4fdf-95c5-79be62185bc4",
 				"891e1fe7-0371-4f73-9609-128045e6b021",
 				"65532763-67e3-498b-8fe5-042820b441d1",
 				"788e604f-98a4-4326-aeaf-92c679aa7bbb",
@@ -743,6 +745,20 @@
 			"title": "Art Styles: I like the players, find map materials that match",
 			"description": "",
 			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "26b0c739-8d1e-4fdf-95c5-79be62185bc4",
+			"title": "Stairs: Level collision messed up on platforms",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "a112ffe0-6f28-4a40-a6bb-6a669563bdc8",
+			"title": "Rocky Animations busted",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

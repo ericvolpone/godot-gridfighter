@@ -5,6 +5,7 @@ extends Control
 
 var bridge_scene: PackedScene = load("res://entities/levels/multiplayer/bridge_level/bridge_level.tscn")
 var the_pit_scene: PackedScene = load("res://entities/levels/multiplayer/thepit/the_pit.tscn")
+var the_stairs_scene: PackedScene = load("res://entities/levels/multiplayer/stairs/the_stairs.tscn")
 
 func _on_mp_host_button_pressed() -> void:
 	lobby_settings.calculate_values()
