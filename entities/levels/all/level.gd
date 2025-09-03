@@ -70,7 +70,7 @@ func handle_player_death(player: Player) -> void:
 	# Move to the next hero
 	# TODO hard coding hero IDs here, put in a registry
 	var next_hero_id: int = player.current_hero_id + 1
-	if next_hero_id > 1:
+	if next_hero_id > 2:
 		next_hero_id = 0
 
 	player.current_hero_id = next_hero_id

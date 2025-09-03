@@ -64,6 +64,11 @@ offset_top = 351.0
 offset_right = 250.0
 offset_bottom = 351.0
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MPHostButton" to="." method="_on_mp_host_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MPJoinButton" to="." method="_on_mp_join_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]

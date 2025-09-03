@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cly568e1kmem5"]
+[gd_scene load_steps=14 format=3 uid="uid://cly568e1kmem5"]
 
 [ext_resource type="PackedScene" uid="uid://cyw3gro3ao66a" path="res://entities/menu/main_menu.tscn" id="1_rm2r3"]
 [ext_resource type="PackedScene" uid="uid://bu3mut5a5jrd0" path="res://entities/player/heroes/rocky/rocky.tscn" id="2_wr481"]
 [ext_resource type="PackedScene" uid="uid://4avtnanx5no5" path="res://entities/player/heroes/bolty/bolty.tscn" id="3_rm2r3"]
+[ext_resource type="PackedScene" uid="uid://ckjbatnwkkis5" path="res://entities/player/heroes/slushy/slushy.tscn" id="4_rm2r3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fiqdu"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -187,9 +188,13 @@ mesh = SubResource("BoxMesh_fiqdu")
 [node name="MainMenu" parent="Menu Layer" instance=ExtResource("1_rm2r3")]
 
 [node name="Rocky" parent="." instance=ExtResource("2_wr481")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474856, 4.06689, 8.77753)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.067, 8.778)
 script = null
 
 [node name="Bolty" parent="." instance=ExtResource("3_rm2r3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28, 4.0532, 8.69163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.067, 8.778)
+script = null
+
+[node name="Slushy" parent="." instance=ExtResource("4_rm2r3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4.067, 8.778)
 script = null

@@ -1,7 +1,5 @@
 class_name ThrowRockAction extends CombatAction
 
-const rock_scene: PackedScene = preload("res://entities/objects/projectiles/rock/rock.tscn");
-
 var projectile_spawner: ProjectileSpawner;
 
 func _ready() -> void:
@@ -28,6 +26,7 @@ func _cast_frame_enact() -> void:
 	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0,1,0);
 	
 	var spawn_data: Dictionary = {
+		"projectile_type": Projectile.Type.ROCK,
 		"direction": hero.player.get_facing_direction(),
 		"spawn_location": spawn_location,
 		"force": hero.player.current_strength,
