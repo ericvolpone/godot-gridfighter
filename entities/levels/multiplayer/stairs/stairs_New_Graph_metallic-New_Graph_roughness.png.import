@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bspb08b02av4h"
-path.s3tc="res://.godot/imported/the_stairs_New_Graph_emissive.jpg-f102d6e0cfd65f0daef0519de9782558.s3tc.ctex"
+uid="uid://cyo5w6fmn5hhw"
+path.s3tc="res://.godot/imported/stairs_New_Graph_metallic-New_Graph_roughness.png-0d27ceefc86f46dab0c9bd015a1b31d5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b389c369087d6a42708846b622b92dbe"
+"md5": "407a0b2e3687c70509699455dd897c95"
 }
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_New_Graph_emissive.jpg"
-dest_files=["res://.godot/imported/the_stairs_New_Graph_emissive.jpg-f102d6e0cfd65f0daef0519de9782558.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_New_Graph_metallic-New_Graph_roughness.png"
+dest_files=["res://.godot/imported/stairs_New_Graph_metallic-New_Graph_roughness.png-0d27ceefc86f46dab0c9bd015a1b31d5.s3tc.ctex"]
 
 [params]
 

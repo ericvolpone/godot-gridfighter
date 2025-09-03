@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yijbydlciyuo"
-path.s3tc="res://.godot/imported/the_stairs_grained black plastic_BaseColor.jpg-9307b39b0007e124cadd6aa2023d5b09.s3tc.ctex"
+uid="uid://c8frvexkpukfk"
+path.s3tc="res://.godot/imported/stairs_grained black plastic_BaseColor.jpg-d31e4568e7007a6d236bf19585516408.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_grained black plastic_BaseColor.jpg"
-dest_files=["res://.godot/imported/the_stairs_grained black plastic_BaseColor.jpg-9307b39b0007e124cadd6aa2023d5b09.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_grained black plastic_BaseColor.jpg"
+dest_files=["res://.godot/imported/stairs_grained black plastic_BaseColor.jpg-d31e4568e7007a6d236bf19585516408.s3tc.ctex"]
 
 [params]
 

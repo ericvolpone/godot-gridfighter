@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpi68ajvcugwh"
-path.s3tc="res://.godot/imported/the_stairs_New_Graph_basecolor.jpg-3cf368e993ac28e8fbfce4f9fd604136.s3tc.ctex"
+uid="uid://beawqx5ulgrgt"
+path.s3tc="res://.godot/imported/stairs_tile black balck and white_1K_Albedo.jpg-29c07c2fb3ac211cf0dd5df603f89997.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "9401eac6df896c6432680e20ca3b869d"
+"md5": "e12bc484a02b5c28ff929ab658dc731d"
 }
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_New_Graph_basecolor.jpg"
-dest_files=["res://.godot/imported/the_stairs_New_Graph_basecolor.jpg-3cf368e993ac28e8fbfce4f9fd604136.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_tile black balck and white_1K_Albedo.jpg"
+dest_files=["res://.godot/imported/stairs_tile black balck and white_1K_Albedo.jpg-29c07c2fb3ac211cf0dd5df603f89997.s3tc.ctex"]
 
 [params]
 

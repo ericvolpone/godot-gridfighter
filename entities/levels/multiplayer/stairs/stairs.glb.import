@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kmd61cmmu1h7"
-path="res://.godot/imported/the_stairs.glb-82ad8c40a62c5b42d0228cc79e0e0c2b.scn"
+uid="uid://ii2xhtag4o0h"
+path="res://.godot/imported/stairs.glb-11c17bed648f5a1930be1bd85b2973e5.scn"
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs.glb"
-dest_files=["res://.godot/imported/the_stairs.glb-82ad8c40a62c5b42d0228cc79e0e0c2b.scn"]
+source_file="res://entities/levels/multiplayer/stairs/stairs.glb"
+dest_files=["res://.godot/imported/stairs.glb-11c17bed648f5a1930be1bd85b2973e5.scn"]
 
 [params]
 

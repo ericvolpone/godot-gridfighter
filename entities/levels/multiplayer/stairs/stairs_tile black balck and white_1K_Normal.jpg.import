@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lriofxlasv7r"
-path.s3tc="res://.godot/imported/the_stairs_New_Graph_normal.jpg-e2d76c4da634f446441502353ac835a0.s3tc.ctex"
+uid="uid://bio28ba87k5cm"
+path.s3tc="res://.godot/imported/stairs_tile black balck and white_1K_Normal.jpg-a599abd8a401c76fc2b82f59ff063877.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b5f8d03fe5ab52f29b98ec2f69334f7d"
+"md5": "8db26f81535fb61ceb995acb08ce977c"
 }
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_New_Graph_normal.jpg"
-dest_files=["res://.godot/imported/the_stairs_New_Graph_normal.jpg-e2d76c4da634f446441502353ac835a0.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_tile black balck and white_1K_Normal.jpg"
+dest_files=["res://.godot/imported/stairs_tile black balck and white_1K_Normal.jpg-a599abd8a401c76fc2b82f59ff063877.s3tc.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://entities/levels/multiplayer/stairs/the_stairs_New_Graph_normal.jpg"
+roughness/src_normal="res://entities/levels/multiplayer/stairs/stairs_tile black balck and white_1K_Normal.jpg"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

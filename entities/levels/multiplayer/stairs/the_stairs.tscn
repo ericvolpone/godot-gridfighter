@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1ggj7mftxrtw"]
+[gd_scene load_steps=10 format=3 uid="uid://c2uhgyveatwq4"]
 
 [ext_resource type="PackedScene" uid="uid://bcml2xb31ytjt" path="res://entities/levels/all/level.tscn" id="1_3gytd"]
-[ext_resource type="PackedScene" uid="uid://kmd61cmmu1h7" path="res://entities/levels/multiplayer/stairs/the_stairs.glb" id="2_01on7"]
 [ext_resource type="PackedScene" uid="uid://bumiv1b53rviu" path="res://entities/levels/multiplayer/koth/all/koth_ring.tscn" id="2_xbqhk"]
+[ext_resource type="PackedScene" uid="uid://ii2xhtag4o0h" path="res://entities/levels/multiplayer/stairs/stairs.glb" id="3_01on7"]
 
 [sub_resource type="Shader" id="Shader_mjkyc"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
@@ -191,40 +191,40 @@ NodePath("PowerUpSpawn5"): true
 }
 
 [node name="PowerUpSpawn1" type="Marker3D" parent="PowerUpSpawner" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.82455, 0.8, 2.73877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24844, 1.32512, 2.94141)
 
 [node name="PowerUpSpawn2" type="Marker3D" parent="PowerUpSpawner" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2158, 0.4, 2.32311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.69302, 1.32512, 2.94918)
 
 [node name="PowerUpSpawn3" type="Marker3D" parent="PowerUpSpawner" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00573, 2.88397, -4.88994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.41458, 3.63666, -2.65266)
 
 [node name="PowerUpSpawn4" type="Marker3D" parent="PowerUpSpawner" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46946, 3.2, -3.86694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.091, 3.58203, -2.98007)
 
 [node name="PowerUpSpawn5" type="Marker3D" parent="PowerUpSpawner" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054872, 5.66244e-07, 4.88836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0517113, -5.66244e-07, 4.9691)
 
 [node name="KothManager" parent="." index="10" node_paths=PackedStringArray("koth_rings")]
 koth_rings = [NodePath("KothRing1"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
 
 [node name="KothRing1" parent="KothManager" index="0" instance=ExtResource("2_xbqhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0240293, 0, 4.12343)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00977206, 0, 4.16158)
 
 [node name="KothRing2" parent="KothManager" index="1" instance=ExtResource("2_xbqhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.71878, 2.4, -1.70953)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58656, 2.92512, -0.995571)
 
 [node name="KothRing3" parent="KothManager" index="2" instance=ExtResource("2_xbqhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25891, 2.01345, -2.63675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.825, 2.82888, -1.24224)
 
 [node name="KothRing4" parent="KothManager" index="3" instance=ExtResource("2_xbqhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114641, 4.8, -8.3626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740322, 5.26667, -6.39718)
 
 [node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("2_xbqhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0265393, 0.999999, -8.63879)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00967121, 1, -8.49483)
 
 [node name="WaterFloor" parent="." index="12"]
 mesh = SubResource("BoxMesh_3gytd")
 
-[node name="Terrain" parent="." index="13" instance=ExtResource("2_01on7")]
+[node name="Terrain" parent="." index="13" instance=ExtResource("3_01on7")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)

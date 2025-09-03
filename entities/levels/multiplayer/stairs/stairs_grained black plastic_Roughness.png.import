@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deoyjn7nnjn4n"
-path.s3tc="res://.godot/imported/the_stairs_grained black plastic_Roughness.png-d48f327cff79ca6055a21052755c3807.s3tc.ctex"
+uid="uid://bxxpsp0ycstsj"
+path.s3tc="res://.godot/imported/stairs_grained black plastic_Roughness.png-622dd9407edb1c3ea75bc503d1daf9ef.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_grained black plastic_Roughness.png"
-dest_files=["res://.godot/imported/the_stairs_grained black plastic_Roughness.png-d48f327cff79ca6055a21052755c3807.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_grained black plastic_Roughness.png"
+dest_files=["res://.godot/imported/stairs_grained black plastic_Roughness.png-622dd9407edb1c3ea75bc503d1daf9ef.s3tc.ctex"]
 
 [params]
 

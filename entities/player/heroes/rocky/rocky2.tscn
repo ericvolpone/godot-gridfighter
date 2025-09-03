@@ -6,17 +6,17 @@
 [node name="Rocky" instance=ExtResource("1_jdlyc")]
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
-bones/0/position = Vector3(-0.0143934, 0.531673, 0.0144472)
-bones/0/rotation = Quaternion(0.050798, -0.423145, 0.0471672, 0.903407)
-bones/1/rotation = Quaternion(0.095161, 0.0245378, -0.0181432, 0.994994)
+bones/0/position = Vector3(0.00153769, 0.691478, 0.00453834)
+bones/0/rotation = Quaternion(-0.00506072, 0.0762539, -0.0177094, 0.996918)
+bones/1/rotation = Quaternion(0.0123987, -0.00434577, -0.00364476, 0.999907)
 bones/2/rotation = Quaternion(0.0512973, 0.047626, -0.0384821, 0.996805)
 bones/3/rotation = Quaternion(-0.0518541, 0.0548475, -0.0272023, 0.996776)
 bones/4/rotation = Quaternion(0.497682, 0.590022, 0.503671, -0.387947)
 bones/5/rotation = Quaternion(0.0186027, 0.917348, -0.386673, 0.092797)
 bones/6/rotation = Quaternion(0.104256, -0.787408, -0.236813, 0.559498)
 bones/7/rotation = Quaternion(0.0589026, 0.719939, 0.0242341, 0.691108)
-bones/8/rotation = Quaternion(0.0199692, 0.081651, -0.00065545, 0.996461)
-bones/9/rotation = Quaternion(-0.04161, 0.199433, -0.037356, 0.978315)
+bones/8/rotation = Quaternion(-0.000171424, -0.00637799, 0.0326013, 0.999448)
+bones/9/rotation = Quaternion(-0.122927, 0.0284133, -0.117036, 0.985081)
 bones/11/rotation = Quaternion(0.48594, -0.64804, -0.474213, -0.345007)
 bones/12/rotation = Quaternion(0.29598, 0.843243, -0.438511, -0.0951056)
 bones/13/rotation = Quaternion(0.209577, 0.713037, 0.350435, 0.569957)

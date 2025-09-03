@@ -30,7 +30,7 @@ func _on_mp_host_button_pressed() -> void:
 		multiplayer.multiplayer_peer = peer;
 		print("Hosting an offline game")
 
-	var level: Level = the_pit_scene.instantiate();
+	var level: Level = the_stairs_scene.instantiate();
 	level.lobby_settings = lobby_settings
 	get_tree().root.add_child(level)
 	get_tree().current_scene.queue_free()
@@ -55,7 +55,7 @@ func _on_mp_join_button_pressed() -> void:
 
 func _on_joined_server() -> void:
 	print("Joined server")
-	var level: Level = the_pit_scene.instantiate();
+	var level: Level = the_stairs_scene.instantiate();
 	get_tree().root.add_child(level)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = level

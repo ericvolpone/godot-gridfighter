@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6o6few16jv2y"
-path.s3tc="res://.godot/imported/the_stairs_grained black plastic_Normal.jpg-43c769b82244f1a2b6b01e803aee4de9.s3tc.ctex"
+uid="uid://bdgg0nnicw45"
+path.s3tc="res://.godot/imported/stairs_grained black plastic_Normal.jpg-865260b3ce2e3681ac19429b9aa7caa8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_grained black plastic_Normal.jpg"
-dest_files=["res://.godot/imported/the_stairs_grained black plastic_Normal.jpg-43c769b82244f1a2b6b01e803aee4de9.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_grained black plastic_Normal.jpg"
+dest_files=["res://.godot/imported/stairs_grained black plastic_Normal.jpg-865260b3ce2e3681ac19429b9aa7caa8.s3tc.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://entities/levels/multiplayer/stairs/the_stairs_grained black plastic_Normal.jpg"
+roughness/src_normal="res://entities/levels/multiplayer/stairs/stairs_grained black plastic_Normal.jpg"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

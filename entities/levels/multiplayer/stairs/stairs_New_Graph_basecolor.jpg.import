@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb6wxuwjksxlm"
-path.s3tc="res://.godot/imported/the_stairs_T_LeadedGlass_R-leaded-glass_smoothness.png-3e05c857cb41e63f90b1b9b9f3ef56e9.s3tc.ctex"
+uid="uid://cjihmewgmyiqk"
+path.s3tc="res://.godot/imported/stairs_New_Graph_basecolor.jpg-09cfc764a976f20beb908378aa4c54f9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "321c73e1a0b65554b08294bdbdff49c1"
+"md5": "9401eac6df896c6432680e20ca3b869d"
 }
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_T_LeadedGlass_R-leaded-glass_smoothness.png"
-dest_files=["res://.godot/imported/the_stairs_T_LeadedGlass_R-leaded-glass_smoothness.png-3e05c857cb41e63f90b1b9b9f3ef56e9.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_New_Graph_basecolor.jpg"
+dest_files=["res://.godot/imported/stairs_New_Graph_basecolor.jpg-09cfc764a976f20beb908378aa4c54f9.s3tc.ctex"]
 
 [params]
 

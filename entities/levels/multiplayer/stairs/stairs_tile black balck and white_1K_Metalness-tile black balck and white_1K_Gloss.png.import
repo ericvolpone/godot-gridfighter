@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhwpb08wku6uk"
-path.s3tc="res://.godot/imported/the_stairs_New_Graph_metallic-New_Graph_roughness.png-be2be608a8cfedfbcc18da3f5ebdf39a.s3tc.ctex"
+uid="uid://caqiapr0a44fd"
+path.s3tc="res://.godot/imported/stairs_tile black balck and white_1K_Metalness-tile black balck and white_1K_Gloss.png-d32063c0e174d1aac6e600e3cf713a8e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "407a0b2e3687c70509699455dd897c95"
+"md5": "f559423880687cff9566b42b917ba6e9"
 }
 
 [deps]
 
-source_file="res://entities/levels/multiplayer/stairs/the_stairs_New_Graph_metallic-New_Graph_roughness.png"
-dest_files=["res://.godot/imported/the_stairs_New_Graph_metallic-New_Graph_roughness.png-be2be608a8cfedfbcc18da3f5ebdf39a.s3tc.ctex"]
+source_file="res://entities/levels/multiplayer/stairs/stairs_tile black balck and white_1K_Metalness-tile black balck and white_1K_Gloss.png"
+dest_files=["res://.godot/imported/stairs_tile black balck and white_1K_Metalness-tile black balck and white_1K_Gloss.png-d32063c0e174d1aac6e600e3cf713a8e.s3tc.ctex"]
 
 [params]
 
