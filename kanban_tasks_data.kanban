@@ -40,6 +40,7 @@
 				"2e93210f-3e93-4e3c-8004-858b13519cab",
 				"d102234a-b98f-4934-9696-8c4a60c177bb",
 				"7d2b472b-17ff-45b4-97b5-d047152458e8",
+				"aff81dcc-8cab-4ffc-8327-c25ef012536a",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"ab646cd2-0613-4d7c-809e-8f530232c23a",
@@ -53,7 +54,8 @@
 			"title": "Doing",
 			"tasks": [
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
-				"967dc3db-f588-4329-b671-4ac19a978e2e"
+				"967dc3db-f588-4329-b671-4ac19a978e2e",
+				"e709f4dd-b33d-4c0c-b4d2-16184f8ab123"
 			]
 		},
 		{
@@ -782,6 +784,20 @@
 		{
 			"uuid": "7d2b472b-17ff-45b4-97b5-d047152458e8",
 			"title": "Pull Strength and Speed into each hero, reset on respawn",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "aff81dcc-8cab-4ffc-8327-c25ef012536a",
+			"title": "Tick Aware Projectiles",
+			"description": "https://github.com/foxssake/netfox/blob/main/examples/forest-brawl/scripts/bomb-projectile.gd\n",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "e709f4dd-b33d-4c0c-b4d2-16184f8ab123",
+			"title": "Frozen status effect on Freeze.",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

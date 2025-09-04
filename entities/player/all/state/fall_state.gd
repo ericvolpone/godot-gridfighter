@@ -13,7 +13,7 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 		elif get_jump():
 			state_machine.transition(&"JumpState")
 
-func move_player(delta: float, speed: float = player.current_move_speed) -> void:
+func move_player(delta: float, speed: float = player.movement_speed()) -> void:
 	player.apply_gravity(delta)
 	var input_dir : Vector3 = get_movement_input()
 	var position_target: Vector3 = input_dir * speed

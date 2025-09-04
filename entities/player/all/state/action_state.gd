@@ -35,7 +35,7 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 		else:
 			state_machine.transition(&"FallState")
 
-func move_player(delta: float, speed: float = player.current_move_speed) -> void:
+func move_player(delta: float, speed: float = player.movement_speed()) -> void:
 	if not y_velocity_override:
 		if not player.is_on_floor():
 			player.apply_gravity(delta)

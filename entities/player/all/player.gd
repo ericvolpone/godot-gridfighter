@@ -60,7 +60,12 @@ var gust_total_direction: Vector3 = Vector3.ZERO
 var jump_pad_velocity: Vector3 = Vector3.ZERO
 var colliding_aoes: Dictionary[AOE, bool] = {}
 
+		#endregion
+		#region Var:PlayerStats:StatusEffects
 var shock_value: float = 0;
+var is_frozen: bool = false;
+var frozen_time_remaining: float = 0;
+const FROZEN_SLOW_MODIFIER: float = .5;
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -68,6 +73,7 @@ var jump_velocity: float = 4.5;
 var starting_move_speed: float = 4.0;
 var current_move_speed: float = starting_move_speed;
 var speed_boost_modifier: float = 0;
+var slow_modifier: float = 0;
 var max_player_speed: float = 10;
 		#endregion
 		#region Var:PlayerStats:Strength
@@ -161,7 +167,7 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	process_combat_actions_state();
 	process_knock();
 	process_external_modifiers(delta)
-	process_status_effects();
+	process_status_effects(delta);
 
 	if global_position.y <= -8 and tick > respawn_tick and is_fresh:
 		is_respawning = true
@@ -173,6 +179,9 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	#endregion
 
 	#region Movement
+func movement_speed() -> float:
+	return current_move_speed * (1 - slow_modifier)
+
 func process_knock() -> void:
 	if(is_knocked and state_machine.state != &"KnockedState"):
 		state_machine.transition(&"KnockedState")
@@ -181,6 +190,7 @@ func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
 
 func process_external_modifiers(delta: float) -> void:
+	# TODO Move gust into Colliding AOEs
 	if gust_total_direction:
 		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
 	if jump_pad_velocity:
@@ -190,7 +200,8 @@ func process_external_modifiers(delta: float) -> void:
 	for aoe: AOE in colliding_aoes.keys():
 		aoe.apply_effect(self, delta);
 
-func process_status_effects() -> void:
+func process_status_effects(delta: float) -> void:
+	# SHOCKED
 	if shock_value > 3:
 		shock_value = 0
 		level.status_effect_spawner.spawn_effect.rpc({
@@ -199,6 +210,14 @@ func process_status_effects() -> void:
 			"effect_type" : StatusEffect.Type.SHOCKED
 		})
 		state_machine.transition(&"ShockedState")
+	
+	# FROZEN
+	if is_frozen:
+		frozen_time_remaining -= delta
+		if frozen_time_remaining <= 0:
+			frozen_time_remaining = 0
+			is_frozen = false;
+			slow_modifier -= FROZEN_SLOW_MODIFIER;
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
@@ -268,9 +287,6 @@ func _on_display_state_changed(_old_state: RewindableState, new_state: Rewindabl
 		animator.play(animation_name, 0.2)
 
 	#endregion
-	#region Func:Actions
-
-	#endregion
 	#region Func:ExternalAppliers
 func knock_back(direction: Vector3, strength: float) -> void:
 	if(!is_immune_to_knockback and not is_knocked):
@@ -278,6 +294,13 @@ func knock_back(direction: Vector3, strength: float) -> void:
 		knocked_state.xz_velocity_override = direction * strength
 		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
+
+func freeze(duration: float) -> void:
+	if not is_frozen:
+		#TODO Some sort of frozen effect on the player, maybe a tracking status effect
+		is_frozen = true;
+		slow_modifier += FROZEN_SLOW_MODIFIER
+	frozen_time_remaining += duration
 
 	#endregion
 	#region Func:Unused?
