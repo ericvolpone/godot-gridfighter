@@ -28,10 +28,11 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 	global_position = tracking_player.global_position
 
 	effect_ttl = spawn_data["effect_ttl"]
-	if multiplayer.is_server():
-		get_tree().create_timer(effect_ttl).timeout.connect(
-			func() -> void: self.queue_free()
-			)
+	if effect_ttl > 0:
+		if multiplayer.is_server():
+			get_tree().create_timer(effect_ttl).timeout.connect(
+				func() -> void: self.queue_free()
+				)
 
 func _physics_process(_delta: float) -> void:
 	global_position = tracking_player.global_position

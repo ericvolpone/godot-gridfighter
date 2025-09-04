@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce7ayaeyk1ata"]
+
+[ext_resource type="Script" uid="uid://dvg7vs2inc1yt" path="res://entities/effects/statuses/status_effect.gd" id="1_503yy"]
+[ext_resource type="Shader" uid="uid://drdientl6baxc" path="res://entities/effects/statuses/frozen_effect.gdshader" id="2_2i8oo"]
+[ext_resource type="Texture2D" uid="uid://bjtdbpx74mycp" path="res://resources/textures/Ice003_1K-PNG/Ice003_1K-PNG_Color.png" id="2_6bpks"]
+[ext_resource type="Texture2D" uid="uid://cgmceul0rbymk" path="res://resources/textures/Ice003_1K-PNG/Ice003_1K-PNG_NormalDX.png" id="3_503yy"]
+[ext_resource type="Texture2D" uid="uid://c5muvq5d878hf" path="res://resources/textures/Ice002_1K-PNG/Ice002_1K-PNG_Color.png" id="4_iggp0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bpks"]
+render_priority = 0
+shader = ExtResource("2_2i8oo")
+shader_parameter/over_texture = ExtResource("2_6bpks")
+shader_parameter/under_texture = ExtResource("4_iggp0")
+shader_parameter/surface_normalmap = ExtResource("3_503yy")
+shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/depth = 0.1
+shader_parameter/normal_depth = 1.0
+shader_parameter/roughness = 0.147
+shader_parameter/metallic = 0.0
+shader_parameter/refractive_index = 0.41
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_503yy"]
+material = SubResource("ShaderMaterial_6bpks")
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.3
+
+[node name="FrozenEffect" type="Node3D"]
+script = ExtResource("1_503yy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_503yy")

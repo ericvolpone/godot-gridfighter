@@ -65,6 +65,7 @@ var colliding_aoes: Dictionary[AOE, bool] = {}
 var shock_value: float = 0;
 var is_frozen: bool = false;
 var frozen_time_remaining: float = 0;
+var frozen_effect: StatusEffect = null;
 const FROZEN_SLOW_MODIFIER: float = .5;
 		#endregion
 		#region Var:PlayerStats:Movement
@@ -215,6 +216,9 @@ func process_status_effects(delta: float) -> void:
 	if is_frozen:
 		frozen_time_remaining -= delta
 		if frozen_time_remaining <= 0:
+			if frozen_effect:
+				frozen_effect.queue_free()
+				frozen_effect = null;
 			frozen_time_remaining = 0
 			is_frozen = false;
 			slow_modifier -= FROZEN_SLOW_MODIFIER;
@@ -297,6 +301,12 @@ func knock_back(direction: Vector3, strength: float) -> void:
 
 func freeze(duration: float) -> void:
 	if not is_frozen:
+		# TODO This isn't working lol
+		#frozen_effect = level.status_effect_spawner.spawn({
+			#"owner_player_id" : player_id,
+			#"effect_ttl" : -1,
+			#"effect_type" : StatusEffect.Type.FROZEN
+		#})
 		#TODO Some sort of frozen effect on the player, maybe a tracking status effect
 		is_frozen = true;
 		slow_modifier += FROZEN_SLOW_MODIFIER
