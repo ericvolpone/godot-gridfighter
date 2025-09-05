@@ -1,21 +1,19 @@
 class_name Blizzard extends AOE
 
-@onready var storm_area: Area3D = $Container/BlizzardArea
+@onready var blizzard_area: Area3D = $Container/BlizzardArea
 
 func _init() -> void:
-	is_tracking = true;
+	is_tracking = false;
 
 func get_area_3d() -> Area3D:
-	return storm_area;
+	return blizzard_area;
 
-# TODO: Figure out how to do "Shocks".  Likely adding some
-# data to the player that adds a shock value to them each tick
-func _on_storm_area_body_entered(body: Node3D) -> void:
+func _on_blizzard_area_body_entered(body: Node3D) -> void:
 	var player: Player = body as Player
 	if player != tracking_player:
 		player.colliding_aoes.set(self, true)
 
-func _on_storm_area_body_exited(body: Node3D) -> void:
+func _on_blizzard_area_body_exited(body: Node3D) -> void:
 	var player: Player = body as Player
 	if player != tracking_player:
 		player.colliding_aoes.erase(self)

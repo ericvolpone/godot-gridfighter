@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ke52m2splqgp"]
+[gd_scene load_steps=16 format=3 uid="uid://ke52m2splqgp"]
 
 [ext_resource type="Shader" uid="uid://cuv1u0dcbf0xv" path="res://entities/objects/bolty/LightningArcs.gdshader" id="1_njytn"]
 [ext_resource type="Script" uid="uid://ba61s5q4xi6pj" path="res://entities/objects/bolty/lightning_storm.gd" id="1_whjjy"]
@@ -89,6 +89,18 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_whjjy")
 size = Vector2(0.15, 0.1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_soyoa"]
+transparency = 1
+albedo_color = Color(0.780392, 0.760784, 0.333333, 0.117647)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5wcyy"]
+material = SubResource("StandardMaterial3D_soyoa")
+top_radius = 1.5
+bottom_radius = 3.0
+height = 5.0
+cap_top = false
+cap_bottom = false
+
 [node name="LightningStorm" type="Node3D"]
 script = ExtResource("1_whjjy")
 
@@ -128,6 +140,9 @@ lifetime = 0.5
 preprocess = 0.5
 process_material = SubResource("ParticleProcessMaterial_soyoa")
 draw_pass_1 = SubResource("QuadMesh_5wcyy")
+
+[node name="Border" type="MeshInstance3D" parent="Container"]
+mesh = SubResource("CylinderMesh_5wcyy")
 
 [connection signal="body_entered" from="Container/StormArea" to="." method="_on_storm_area_body_entered"]
 [connection signal="body_exited" from="Container/StormArea" to="." method="_on_storm_area_body_exited"]

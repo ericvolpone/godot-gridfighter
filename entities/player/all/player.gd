@@ -66,10 +66,14 @@ var shock_value: float = 0;
 
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;
+var cold_effect: StatusEffect = null
 const COLD_SLOW_MODIFIER: float = .5;
 
+var is_frozen: bool = false;
 var freeze_value: float = 0;
+var freeze_time_remaining: float = 0;
 var frozen_effect: StatusEffect = null;
+const FREEZE_SLOW_MODIFIER: float = 1;
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -184,7 +188,8 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 
 	#region Movement
 func movement_speed() -> float:
-	return current_move_speed * (1 - slow_modifier)
+	var modifier: float = clampf(slow_modifier, 0, 1)
+	return current_move_speed * (1 - modifier)
 
 func process_knock() -> void:
 	if(is_knocked and state_machine.state != &"KnockedState"):
@@ -215,11 +220,20 @@ func process_status_effects(delta: float) -> void:
 		})
 		state_machine.transition(&"ShockedState")
 	
-	# FROZEN
+	# COLD
 	if is_cold:
 		cold_time_remaining -= delta
 		if cold_time_remaining <= 0:
-			unfreeze()
+			remove_cold()
+	
+	# FROZEN
+	if is_frozen:
+		freeze_time_remaining -= delta
+		if freeze_time_remaining <= 0:
+			remove_freeze()
+	elif freeze_value > 3:
+		freeze_value = 0;
+		apply_freeze(2)
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
@@ -297,27 +311,49 @@ func knock_back(direction: Vector3, strength: float) -> void:
 		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
 
-func freeze(duration: float) -> void:
+func apply_cold(duration: float) -> void:
 	if not is_cold:
+		
 		# TODO This isn't working lol
+		cold_effect = level.status_effect_spawner.spawn({
+			"owner_player_id" : player_id,
+			"effect_ttl" : -1,
+			"effect_type" : StatusEffect.Type.COLD
+		})
+		is_cold = true;
+		slow_modifier += COLD_SLOW_MODIFIER
+	cold_time_remaining += duration
+
+func apply_freeze(duration: float) -> void:
+	if not is_frozen:
 		frozen_effect = level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
 			"effect_ttl" : -1,
 			"effect_type" : StatusEffect.Type.FROZEN
 		})
-		#TODO Some sort of frozen effect on the player, maybe a tracking status effect
-		is_cold = true;
-		slow_modifier += COLD_SLOW_MODIFIER
-	cold_time_remaining += duration
-func unfreeze() -> void:
+		is_frozen = true;
+		slow_modifier += FREEZE_SLOW_MODIFIER
+	freeze_time_remaining += duration
+
+func remove_cold() -> void:
+	if cold_effect:
+		if is_multiplayer_authority():
+			# Only the MP authority can despawn
+			cold_effect.queue_free()
+		cold_effect = null;
+	cold_time_remaining = 0
+	is_cold = false;
+	slow_modifier -= COLD_SLOW_MODIFIER;
+
+func remove_freeze() -> void:
 	if frozen_effect:
 		if is_multiplayer_authority():
 			# Only the MP authority can despawn
 			frozen_effect.queue_free()
 		frozen_effect = null;
-	cold_time_remaining = 0
-	is_cold = false;
-	slow_modifier -= COLD_SLOW_MODIFIER;
+	freeze_time_remaining = 0
+	is_frozen = false;
+	slow_modifier -= FREEZE_SLOW_MODIFIER;
 
 	#endregion
 	#region Func:Unused?

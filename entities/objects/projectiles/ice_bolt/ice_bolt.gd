@@ -1,7 +1,7 @@
 class_name IceBolt extends Projectile
 
 const ORBIT_SPEED_DEG = 120
-const FREEZE_DURATION = 10.0;
+const COLD_DURATION = 5.0;
 @onready var snow_container: MultiMeshInstance3D = $SnowContainer
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _on_body_entered(body: Node) -> void:
 			# If they are blocking, remove
 			queue_free()
 		else:
-			player.freeze(FREEZE_DURATION)
+			player.apply_cold(COLD_DURATION)
 			queue_free();
 	else:
 		# TODO Maybe shatter animation

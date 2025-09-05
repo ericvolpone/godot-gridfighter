@@ -17,8 +17,8 @@ func respawn_player(player: Player) -> void:
 			player.is_standing_back_up = false;
 			player.is_blocking = false;
 			player.velocity = Vector3.ZERO
-			if player.is_frozen:
-				player.unfreeze()
+			if player.is_cold:
+				player.remove_cold()
 			
 			get_tree().create_timer(respawn_time + 1).timeout.connect(func() -> void:
 				respawn_point_availability[respawn_point] = true;

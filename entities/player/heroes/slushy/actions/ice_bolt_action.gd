@@ -30,7 +30,7 @@ func _cast_frame_enact() -> void:
 		"projectile_type" : Projectile.Type.ICE_BOLT,
 		"direction": hero.player.get_facing_direction(),
 		"spawn_location": spawn_location,
-		"speed": 8,
+		"speed": 12,
 		"owner_peer_id": hero.player.get_multiplayer_authority()
 	}
 	projectile_spawner.spawn_projectile.rpc(spawn_data)

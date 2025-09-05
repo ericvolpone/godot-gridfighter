@@ -3,6 +3,7 @@ class_name AOESpawner extends MultiplayerSpawner
 #region Var:Abilities
 var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningStorm.tscn")
 var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
+var blizzard_scene: PackedScene = preload("res://entities/objects/slushy/blizzard.tscn")
 var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")
 #endregion
 
@@ -30,6 +31,10 @@ func _configure_aoe_spawner() -> void:
 				gust.gust_direction = spawn_data["spawn_direction"]
 				gust.call_deferred("_initialize_from_spawn_data", spawn_data)
 				return gust
+			AOE.Type.BLIZZARD:
+				var blizzard: Blizzard = blizzard_scene.instantiate()
+				blizzard.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return blizzard
 			AOE.Type.HARDEN:
 				var harden: Harden = harden_scene.instantiate()
 				harden.call_deferred("_initialize_from_spawn_data", spawn_data)

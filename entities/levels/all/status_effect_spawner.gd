@@ -3,6 +3,7 @@ class_name StatusEffectSpawner extends MultiplayerSpawner
 #region Var:Effects
 var shocked_effect_scene: PackedScene = preload("res://entities/effects/statuses/shocked_effect.tscn")
 var frozen_effect_scene: PackedScene = preload("res://entities/effects/statuses/frozen_effect.tscn")
+var cold_effect_scene: PackedScene = preload("res://entities/effects/statuses/cold_effect.tscn")
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,9 @@ func _configure_status_effect_spawner() -> void:
 				effect = shocked_effect_scene.instantiate()
 			StatusEffect.Type.FROZEN:
 				effect = frozen_effect_scene.instantiate()
+			StatusEffect.Type.COLD:
+				effect = cold_effect_scene.instantiate()
+			
 			_:
 				effect = null
 		

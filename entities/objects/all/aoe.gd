@@ -6,8 +6,7 @@ enum Type {
 	STORM,
 	GUST,
 	HARDEN,
-
-	SHOCKED_EFFECT
+	BLIZZARD
 }
 #endregion
 
