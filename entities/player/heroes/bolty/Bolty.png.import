@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnqqkcnbvc8va"
-path="res://.godot/imported/Torchy.png-a15aea70786b8b4f79f05dc010119094.ctex"
+uid="uid://ceh4qlj4fjwnd"
+path="res://.godot/imported/Bolty.png-664bf631483ff98bdc75cfaaf3a7617d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hero_names/Torchy.png"
-dest_files=["res://.godot/imported/Torchy.png-a15aea70786b8b4f79f05dc010119094.ctex"]
+source_file="res://entities/player/heroes/bolty/Bolty.png"
+dest_files=["res://.godot/imported/Bolty.png-664bf631483ff98bdc75cfaaf3a7617d.ctex"]
 
 [params]
 

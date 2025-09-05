@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="HeroDefinition" load_steps=4 format=3 uid="uid://5y4np8jmywh"]
+[gd_resource type="Resource" script_class="HeroDefinition" load_steps=5 format=3 uid="uid://5y4np8jmywh"]
 
+[ext_resource type="Texture2D" uid="uid://cnqqkcnbvc8va" path="res://entities/player/heroes/torchy/Torchy.png" id="1_1yebu"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_48kmd"]
 [ext_resource type="Texture2D" uid="uid://c374ivnugmx8s" path="res://entities/player/heroes/torchy/torchy_pose.tres" id="1_fvx8t"]
 [ext_resource type="PackedScene" uid="uid://dp1ys4gb4ccvb" path="res://entities/player/heroes/torchy/torchy.tscn" id="2_1yebu"]
@@ -10,4 +11,5 @@ hero_id = 3
 display_name = "Torchy"
 hero_scene = ExtResource("2_1yebu")
 hero_portrait = ExtResource("1_fvx8t")
+hero_name = ExtResource("1_1yebu")
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

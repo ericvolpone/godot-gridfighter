@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="HeroDefinition" load_steps=4 format=3 uid="uid://c621nq137mg0u"]
+[gd_resource type="Resource" script_class="HeroDefinition" load_steps=5 format=3 uid="uid://c621nq137mg0u"]
 
 [ext_resource type="PackedScene" uid="uid://ckjbatnwkkis5" path="res://entities/player/heroes/slushy/slushy.tscn" id="1_4duy5"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_eyqts"]
 [ext_resource type="Texture2D" uid="uid://b6c0p0ea74m0y" path="res://entities/player/heroes/slushy/slushy_pose.tres" id="1_k4ty5"]
+[ext_resource type="Texture2D" uid="uid://c4mp07nkw6xae" path="res://entities/player/heroes/slushy/Slushy.png" id="1_tnpht"]
 
 [resource]
 script = ExtResource("1_eyqts")
@@ -10,4 +11,5 @@ hero_id = 2
 display_name = "Slushy"
 hero_scene = ExtResource("1_4duy5")
 hero_portrait = ExtResource("1_k4ty5")
+hero_name = ExtResource("1_tnpht")
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

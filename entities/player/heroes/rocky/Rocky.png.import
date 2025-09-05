@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4mp07nkw6xae"
-path="res://.godot/imported/Slushy.png-82292588fe683f56f9b2866a70a4b0d6.ctex"
+uid="uid://cyhyguquvp6rw"
+path="res://.godot/imported/Rocky.png-7a44cd6e3b593d251bc1d7ae7b18bd47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hero_names/Slushy.png"
-dest_files=["res://.godot/imported/Slushy.png-82292588fe683f56f9b2866a70a4b0d6.ctex"]
+source_file="res://entities/player/heroes/rocky/Rocky.png"
+dest_files=["res://.godot/imported/Rocky.png-7a44cd6e3b593d251bc1d7ae7b18bd47.ctex"]
 
 [params]
 
