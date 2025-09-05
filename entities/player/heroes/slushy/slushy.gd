@@ -10,8 +10,9 @@ func _init_combat_actions() -> void:
 	cast_frame.connect(func() -> void:
 		combat_action_3._cast_frame_enact()
 		)
-	combat_action_4 = GustAction.new()
-	combat_action_4.name = "GustAction"
+	combat_action_4 = IceSprayAction.new()
+	combat_action_4.ice_manager = player.level.ice_manager
+	combat_action_4.name = "IceSprayAction"
 
 func _signal_cast_frame() -> void:
 	emit_signal(cast_frame.get_name())

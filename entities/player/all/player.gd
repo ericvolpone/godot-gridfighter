@@ -63,10 +63,13 @@ var colliding_aoes: Dictionary[AOE, bool] = {}
 		#endregion
 		#region Var:PlayerStats:StatusEffects
 var shock_value: float = 0;
-var is_frozen: bool = false;
-var frozen_time_remaining: float = 0;
+
+var is_cold: bool = false;
+var cold_time_remaining: float = 0;
+const COLD_SLOW_MODIFIER: float = .5;
+
+var freeze_value: float = 0;
 var frozen_effect: StatusEffect = null;
-const FROZEN_SLOW_MODIFIER: float = .5;
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -213,9 +216,9 @@ func process_status_effects(delta: float) -> void:
 		state_machine.transition(&"ShockedState")
 	
 	# FROZEN
-	if is_frozen:
-		frozen_time_remaining -= delta
-		if frozen_time_remaining <= 0:
+	if is_cold:
+		cold_time_remaining -= delta
+		if cold_time_remaining <= 0:
 			unfreeze()
 
 func move_and_slide_physics_factor() -> void:
@@ -295,7 +298,7 @@ func knock_back(direction: Vector3, strength: float) -> void:
 		is_knocked = true
 
 func freeze(duration: float) -> void:
-	if not is_frozen:
+	if not is_cold:
 		# TODO This isn't working lol
 		frozen_effect = level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
@@ -303,18 +306,18 @@ func freeze(duration: float) -> void:
 			"effect_type" : StatusEffect.Type.FROZEN
 		})
 		#TODO Some sort of frozen effect on the player, maybe a tracking status effect
-		is_frozen = true;
-		slow_modifier += FROZEN_SLOW_MODIFIER
-	frozen_time_remaining += duration
+		is_cold = true;
+		slow_modifier += COLD_SLOW_MODIFIER
+	cold_time_remaining += duration
 func unfreeze() -> void:
 	if frozen_effect:
 		if is_multiplayer_authority():
 			# Only the MP authority can despawn
 			frozen_effect.queue_free()
 		frozen_effect = null;
-	frozen_time_remaining = 0
-	is_frozen = false;
-	slow_modifier -= FROZEN_SLOW_MODIFIER;
+	cold_time_remaining = 0
+	is_cold = false;
+	slow_modifier -= COLD_SLOW_MODIFIER;
 
 	#endregion
 	#region Func:Unused?

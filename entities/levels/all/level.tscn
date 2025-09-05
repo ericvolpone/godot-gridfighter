@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bcml2xb31ytjt"]
+[gd_scene load_steps=25 format=3 uid="uid://bcml2xb31ytjt"]
 
 [ext_resource type="Script" uid="uid://bqr5qkduod3sj" path="res://entities/levels/all/level.gd" id="1_btq12"]
 [ext_resource type="Script" uid="uid://bjrxkk5hawuqi" path="res://entities/levels/all/player_spawner.gd" id="2_quiwk"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" uid="uid://cqxvu8yj5bdg2" path="res://entities/levels/all/aoe_spawner.gd" id="6_eus47"]
 [ext_resource type="Theme" uid="uid://cetodgfjvpoew" path="res://resources/ui/lavender_soda.tres" id="8_2bfne"]
 [ext_resource type="Script" uid="uid://3bdiqen17rc8" path="res://entities/levels/all/status_effect_spawner.gd" id="10_8tg4l"]
+[ext_resource type="Script" uid="uid://blhmvtagswvqm" path="res://entities/levels/all/ice_manager.gd" id="11_i3vcw"]
+[ext_resource type="Texture2D" uid="uid://c5muvq5d878hf" path="res://resources/textures/Ice002_1K-PNG/Ice002_1K-PNG_Color.png" id="12_m7q7j"]
+[ext_resource type="Texture2D" uid="uid://bb0oiy5cptbqo" path="res://resources/textures/Ice002_1K-PNG/Ice002_1K-PNG_NormalGL.png" id="13_fv24u"]
+[ext_resource type="Texture2D" uid="uid://dlpnqeuo462nv" path="res://resources/textures/Ice002_1K-PNG/Ice002_1K-PNG_Roughness.png" id="14_vudr3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mjkyc"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -234,3 +238,10 @@ theme = ExtResource("8_2bfne")
 [node name="WaterFloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -41.2345)
 mesh = SubResource("BoxMesh_g2lxu")
+
+[node name="IceManager" type="Node3D" parent="."]
+script = ExtResource("11_i3vcw")
+decal_albedo = ExtResource("12_m7q7j")
+decal_normal = ExtResource("13_fv24u")
+decal_orm = ExtResource("14_vudr3")
+metadata/_custom_type_script = "uid://blhmvtagswvqm"
