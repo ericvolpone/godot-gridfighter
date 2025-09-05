@@ -12,17 +12,17 @@ shader = ExtResource("2_2i8oo")
 shader_parameter/over_texture = ExtResource("2_6bpks")
 shader_parameter/under_texture = ExtResource("4_iggp0")
 shader_parameter/surface_normalmap = ExtResource("3_503yy")
-shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/top_color = Color(0, 0.690196, 0.945098, 1)
 shader_parameter/depth = 0.1
 shader_parameter/normal_depth = 1.0
-shader_parameter/roughness = 0.147
-shader_parameter/metallic = 0.0
-shader_parameter/refractive_index = 0.41
+shader_parameter/roughness = 0.0
+shader_parameter/metallic = 0.75
+shader_parameter/refractive_index = 0.1
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_503yy"]
 material = SubResource("ShaderMaterial_6bpks")
-top_radius = 0.6
-bottom_radius = 0.6
+top_radius = 0.4
+bottom_radius = 0.4
 height = 0.3
 
 [node name="FrozenEffect" type="Node3D"]

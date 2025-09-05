@@ -216,12 +216,7 @@ func process_status_effects(delta: float) -> void:
 	if is_frozen:
 		frozen_time_remaining -= delta
 		if frozen_time_remaining <= 0:
-			if frozen_effect:
-				frozen_effect.queue_free()
-				frozen_effect = null;
-			frozen_time_remaining = 0
-			is_frozen = false;
-			slow_modifier -= FROZEN_SLOW_MODIFIER;
+			unfreeze()
 
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
@@ -302,15 +297,24 @@ func knock_back(direction: Vector3, strength: float) -> void:
 func freeze(duration: float) -> void:
 	if not is_frozen:
 		# TODO This isn't working lol
-		#frozen_effect = level.status_effect_spawner.spawn({
-			#"owner_player_id" : player_id,
-			#"effect_ttl" : -1,
-			#"effect_type" : StatusEffect.Type.FROZEN
-		#})
+		frozen_effect = level.status_effect_spawner.spawn({
+			"owner_player_id" : player_id,
+			"effect_ttl" : -1,
+			"effect_type" : StatusEffect.Type.FROZEN
+		})
 		#TODO Some sort of frozen effect on the player, maybe a tracking status effect
 		is_frozen = true;
 		slow_modifier += FROZEN_SLOW_MODIFIER
 	frozen_time_remaining += duration
+func unfreeze() -> void:
+	if frozen_effect:
+		if is_multiplayer_authority():
+			# Only the MP authority can despawn
+			frozen_effect.queue_free()
+		frozen_effect = null;
+	frozen_time_remaining = 0
+	is_frozen = false;
+	slow_modifier -= FROZEN_SLOW_MODIFIER;
 
 	#endregion
 	#region Func:Unused?

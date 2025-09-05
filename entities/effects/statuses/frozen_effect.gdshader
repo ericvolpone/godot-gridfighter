@@ -44,10 +44,10 @@ void fragment(){
 	vec3 normal = texture(surface_normalmap, UV).xyz * 2.0 - 1.0;
 	NORMAL_MAP = texture(surface_normalmap, UV).xyz;
 	NORMAL_MAP_DEPTH = normal_depth;
-	
+
 	vec3 refraction;
 	vec3 rd = normalize(p - ro - normal * refractive_index) * depth;
-	
+
 	vec3 over_color = texture(over_texture, UV).rgb;
 	vec3 color = blendOverlay(over_color, top_color.rgb);
 	vec2 offset = rd.xz;
