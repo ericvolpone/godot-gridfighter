@@ -1,4 +1,4 @@
-class_name IceBoltAction extends CombatAction
+class_name FireballAction extends CombatAction
 
 var projectile_spawner: ProjectileSpawner;
 
@@ -9,7 +9,7 @@ func _ready() -> void:
 	action_state_string = "CastState"
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/generated/IceBoltActionIcon.png";
+	return "res://models/sprites/hud/actions/generated/FireballActionIcon.png";
 
 func get_cd_time() -> float:
 	return 3.0;
@@ -27,7 +27,7 @@ func _cast_frame_enact() -> void:
 	
 	# TODO Maybe make speed adjustable by power ups?
 	var spawn_data: Dictionary = {
-		"projectile_type" : Projectile.Type.ICE_BOLT,
+		"projectile_type" : Projectile.Type.FIREBALL,
 		"direction": hero.player.get_facing_direction(),
 		"spawn_location": spawn_location,
 		"speed": 12,

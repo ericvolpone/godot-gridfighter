@@ -11,7 +11,7 @@ func _ready() -> void:
 	action_state_string = "ShoutState"
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/storm.png";
+	return "res://models/sprites/hud/actions/generated/LightningStormActionIcon.png";
 
 # Interface Methods
 func get_cd_time() -> float:

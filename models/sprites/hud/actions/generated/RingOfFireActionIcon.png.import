@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cekcxn3aayu7"
-path="res://.godot/imported/on_cooldown.png-baf4c71216966d45355dd563dbd46ae3.ctex"
+uid="uid://cfrrko3drou55"
+path="res://.godot/imported/RingOfFireActionIcon.png-aa9e0b180ce71ba447c06860a77e973d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/on_cooldown.png"
-dest_files=["res://.godot/imported/on_cooldown.png-baf4c71216966d45355dd563dbd46ae3.ctex"]
+source_file="res://models/sprites/hud/actions/generated/RingOfFireActionIcon.png"
+dest_files=["res://.godot/imported/RingOfFireActionIcon.png-aa9e0b180ce71ba447c06860a77e973d.ctex"]
 
 [params]
 

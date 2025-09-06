@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b73udwbam5ip3"
-path="res://.godot/imported/Woody.png-fe8b568619108e3f428b621fdbc1b2af.ctex"
+uid="uid://dagrw1l6hg5b8"
+path="res://.godot/imported/RootWallActionIcon.png-8ee05876f86d68457ef89b2dc4ce4f97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hero_names/Woody.png"
-dest_files=["res://.godot/imported/Woody.png-fe8b568619108e3f428b621fdbc1b2af.ctex"]
+source_file="res://models/sprites/hud/actions/generated/RootWallActionIcon.png"
+dest_files=["res://.godot/imported/RootWallActionIcon.png-8ee05876f86d68457ef89b2dc4ce4f97.ctex"]
 
 [params]
 

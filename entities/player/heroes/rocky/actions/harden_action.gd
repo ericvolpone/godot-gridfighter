@@ -5,7 +5,7 @@ const HARDEN_TTL: float = 4
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/harden.png";
+	return "res://models/sprites/hud/actions/generated/HardenActionIcon.png";
 
 # Interface Methods
 func get_cd_time() -> float:

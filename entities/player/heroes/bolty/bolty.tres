@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroDefinition" load_steps=5 format=3 uid="uid://chf750dwm1v8f"]
 
 [ext_resource type="Texture2D" uid="uid://ceh4qlj4fjwnd" path="res://entities/player/heroes/bolty/Bolty.png" id="1_7ywcc"]
-[ext_resource type="Texture2D" uid="uid://bk5cfsnalnjps" path="res://entities/player/heroes/bolty/bolty_pose.tres" id="1_gjbsa"]
+[ext_resource type="Texture2D" uid="uid://cxbyj2stakfnv" path="res://entities/player/heroes/bolty/bolty_pose.tres" id="1_gjbsa"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_p8lxt"]
 [ext_resource type="PackedScene" uid="uid://5mey2f6r7bob" path="res://entities/player/heroes/bolty/bolty.tscn" id="2_gjbsa"]
 

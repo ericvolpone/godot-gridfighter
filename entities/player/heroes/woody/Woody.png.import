@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwhqge7kxybqk"
-path="res://.godot/imported/harden.png-72a8ca7e586975e7565547f8788c6d64.ctex"
+uid="uid://b73udwbam5ip3"
+path="res://.godot/imported/Woody.png-602524535b1e990f547f8a472d602c66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/harden.png"
-dest_files=["res://.godot/imported/harden.png-72a8ca7e586975e7565547f8788c6d64.ctex"]
+source_file="res://entities/player/heroes/woody/Woody.png"
+dest_files=["res://.godot/imported/Woody.png-602524535b1e990f547f8a472d602c66.ctex"]
 
 [params]
 

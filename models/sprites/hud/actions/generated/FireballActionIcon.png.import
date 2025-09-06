@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ihd1emggq5bs"
-path="res://.godot/imported/throw_rock.png-8cceb621139049f4538971c0576929fe.ctex"
+uid="uid://0lc042rok2a6"
+path="res://.godot/imported/FireballActionIcon.png-5ffdd17c6af4da69673fb09ba54442d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/throw_rock.png"
-dest_files=["res://.godot/imported/throw_rock.png-8cceb621139049f4538971c0576929fe.ctex"]
+source_file="res://models/sprites/hud/actions/generated/FireballActionIcon.png"
+dest_files=["res://.godot/imported/FireballActionIcon.png-5ffdd17c6af4da69673fb09ba54442d1.ctex"]
 
 [params]
 

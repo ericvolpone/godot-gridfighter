@@ -2,7 +2,8 @@ class_name Projectile extends RigidBody3D
 
 enum Type {
 	ROCK,
-	ICE_BOLT
+	ICE_BOLT,
+	FIREBALL
 }
 
 var direction: Vector3 = Vector3.ZERO
@@ -30,13 +31,3 @@ func _apply_initial_velocity() -> void:
 
 func _apply_initial_force() -> void:
 	apply_impulse(direction * force)
-
-func get_scene_for_type(type: Type) -> String:
-	match type:
-		Type.ROCK:
-			return "res://entities/objects/projectiles/rock/rock.tscn";
-		Type.ICE_BOLT:
-			return "";
-		_:
-			push_error("Cannot get scene for unmapped projectile type: " + str(type))
-			return ""

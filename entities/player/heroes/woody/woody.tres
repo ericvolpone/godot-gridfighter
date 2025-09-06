@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HeroDefinition" load_steps=5 format=3 uid="uid://dlipikm6oabe7"]
+
+[ext_resource type="PackedScene" uid="uid://diojur2e68imi" path="res://entities/player/heroes/woody/woody.tscn" id="1_06gbu"]
+[ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_kl17f"]
+[ext_resource type="Texture2D" uid="uid://b73udwbam5ip3" path="res://entities/player/heroes/woody/Woody.png" id="1_yl655"]
+[ext_resource type="Texture2D" uid="uid://bqf3lo8ldi12h" path="res://entities/player/heroes/woody/woody_pose.tres" id="2_p31cy"]
+
+[resource]
+script = ExtResource("1_kl17f")
+hero_id = 4
+display_name = "Woody"
+hero_scene = ExtResource("1_06gbu")
+hero_portrait = ExtResource("2_p31cy")
+hero_name = ExtResource("1_yl655")
+metadata/_custom_type_script = "uid://mjrdfur8vhg8"

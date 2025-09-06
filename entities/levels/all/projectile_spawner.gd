@@ -21,8 +21,8 @@ func _configure_projectile_spawner() -> void:
 				projectile = ice_bolt_scene.instantiate();
 			_:
 				push_error("Undefined Projectile Type: ", projectile_type);
-		
-		projectile.call_deferred("initialize_from_spawn_data", spawn_data)
+		if projectile:
+			projectile.call_deferred("initialize_from_spawn_data", spawn_data)
 		return projectile
 
 @rpc("any_peer", "call_local", "reliable")

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://uq4qn3vqcddf" path="res://entities/player/heroes/slushy/slushy.tscn" id="1_4duy5"]
 [ext_resource type="Script" uid="uid://mjrdfur8vhg8" path="res://entities/player/heroes/all/hero_definition.gd" id="1_eyqts"]
-[ext_resource type="Texture2D" uid="uid://b6c0p0ea74m0y" path="res://entities/player/heroes/slushy/slushy_pose.tres" id="1_k4ty5"]
+[ext_resource type="Texture2D" uid="uid://c65312tdujnoe" path="res://entities/player/heroes/slushy/slushy_pose.tres" id="1_k4ty5"]
 [ext_resource type="Texture2D" uid="uid://c4mp07nkw6xae" path="res://entities/player/heroes/slushy/Slushy.png" id="1_tnpht"]
 
 [resource]

@@ -1,11 +1,13 @@
 class_name Woody extends Hero
 
+signal cast_frame
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+# Interface Methods
+func _init_combat_actions() -> void:
+	combat_action_3 = ThornTrapAction.new()
+	combat_action_3.name = "ThornTrapAction"
+	combat_action_4 = RootWallAction.new()
+	combat_action_4.name = "RootWallAction"
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _signal_cast_frame() -> void:
+	emit_signal(cast_frame.get_name())

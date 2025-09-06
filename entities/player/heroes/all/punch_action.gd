@@ -6,7 +6,7 @@ func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/punch.png";
+	return "res://models/sprites/hud/actions/generated/PunchActionIcon.png";
 
 func get_cd_time() -> float:
 	return 1.0;

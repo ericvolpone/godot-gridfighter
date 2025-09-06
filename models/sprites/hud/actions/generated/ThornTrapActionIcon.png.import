@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bupenveb4cfh8"
-path="res://.godot/imported/punch.png-1816cf618c55f4f37d7749116c261764.ctex"
+uid="uid://b0fuhc5e225h6"
+path="res://.godot/imported/ThornTrapActionIcon.png-8fa9c17edee1d7ba3f32ebb053a47991.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/punch.png"
-dest_files=["res://.godot/imported/punch.png-1816cf618c55f4f37d7749116c261764.ctex"]
+source_file="res://models/sprites/hud/actions/generated/ThornTrapActionIcon.png"
+dest_files=["res://.godot/imported/ThornTrapActionIcon.png-8fa9c17edee1d7ba3f32ebb053a47991.ctex"]
 
 [params]
 

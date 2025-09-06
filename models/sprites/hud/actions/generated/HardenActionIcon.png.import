@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ofpknceiaju"
-path="res://.godot/imported/storm.png-ac688b256d2d9224c84e751f27f8f789.ctex"
+uid="uid://bxrlho6q7ussd"
+path="res://.godot/imported/HardenActionIcon.png-f86a3b9ba6cbb34f468cf16fe2faa3c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/storm.png"
-dest_files=["res://.godot/imported/storm.png-ac688b256d2d9224c84e751f27f8f789.ctex"]
+source_file="res://models/sprites/hud/actions/generated/HardenActionIcon.png"
+dest_files=["res://.godot/imported/HardenActionIcon.png-f86a3b9ba6cbb34f468cf16fe2faa3c8.ctex"]
 
 [params]
 

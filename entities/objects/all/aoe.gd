@@ -6,7 +6,8 @@ enum Type {
 	STORM,
 	GUST,
 	HARDEN,
-	BLIZZARD
+	BLIZZARD,
+	RING_OF_FIRE
 }
 #endregion
 

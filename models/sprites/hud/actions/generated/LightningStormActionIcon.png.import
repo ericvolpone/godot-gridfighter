@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0kcw1q866uos"
-path="res://.godot/imported/gust.png-5f60dfaf32ae433e4c9555da7aada733.ctex"
+uid="uid://bnx6mdvxlb1rw"
+path="res://.godot/imported/LightningStormActionIcon.png-959e8203ef624dbffc69a121c99f95bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/gust.png"
-dest_files=["res://.godot/imported/gust.png-5f60dfaf32ae433e4c9555da7aada733.ctex"]
+source_file="res://models/sprites/hud/actions/generated/LightningStormActionIcon.png"
+dest_files=["res://.godot/imported/LightningStormActionIcon.png-959e8203ef624dbffc69a121c99f95bc.ctex"]
 
 [params]
 

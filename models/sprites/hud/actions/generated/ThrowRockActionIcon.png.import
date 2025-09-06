@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://frd7112ykxvk"
-path="res://.godot/imported/shield.png-c08d44f8006367c8e98767d4082b4c9c.ctex"
+uid="uid://cbc40td4q34wr"
+path="res://.godot/imported/ThrowRockActionIcon.png-0e9cd6df8ab91eca881750d308c6a1e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/sprites/hud/actions/shield.png"
-dest_files=["res://.godot/imported/shield.png-c08d44f8006367c8e98767d4082b4c9c.ctex"]
+source_file="res://models/sprites/hud/actions/generated/ThrowRockActionIcon.png"
+dest_files=["res://.godot/imported/ThrowRockActionIcon.png-0e9cd6df8ab91eca881750d308c6a1e7.ctex"]
 
 [params]
 

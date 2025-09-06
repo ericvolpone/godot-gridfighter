@@ -8,7 +8,7 @@ func _ready() -> void:
 	if not is_multiplayer_authority(): return;
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/storm.png";
+	return "res://models/sprites/hud/actions/generated/BlizzardActionIcon.png";
 
 # Interface Methods
 func get_cd_time() -> float:

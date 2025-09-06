@@ -9,7 +9,7 @@ func _ready() -> void:
 	action_state_string = "CastState"
 
 func get_action_image_path() -> String:
-	return "res://models/sprites/hud/actions/throw_rock.png";
+	return "res://models/sprites/hud/actions/generated/ThrowRockActionIcon.png";
 
 func get_cd_time() -> float:
 	return 3.0;
