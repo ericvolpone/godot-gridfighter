@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckjbatnwkkis5"]
+[gd_scene load_steps=3 format=3 uid="uid://uq4qn3vqcddf"]
 
-[ext_resource type="PackedScene" uid="uid://blhlyi2345tx4" path="res://models/heroes/blue/BaseHeroBlue.glb" id="1_bc37n"]
+[ext_resource type="PackedScene" uid="uid://bnr2q1m6gn8be" path="res://models/heroes/slushy/Slushy.glb" id="1_bc37n"]
 [ext_resource type="AnimationLibrary" uid="uid://bwy38fb5mbie8" path="res://models/master/master_animations.res" id="2_p6wsp"]
-[ext_resource type="Script" uid="uid://v5qv3eyuit6n" path="res://entities/player/heroes/slushy/slushy.gd" id="2_sx8j6"]
 
 [node name="Slushy" instance=ExtResource("1_bc37n")]
-script = ExtResource("2_sx8j6")
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
 bones/0/position = Vector3(0.000457171, 0.588698, -0.000447726)

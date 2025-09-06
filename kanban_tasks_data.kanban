@@ -53,7 +53,8 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"223b125d-4861-4a2d-9a9b-d965859f09e3"
+				"223b125d-4861-4a2d-9a9b-d965859f09e3",
+				"fe0ea389-8224-4b69-89c2-9928f0a4224d"
 			]
 		},
 		{
@@ -806,6 +807,13 @@
 		{
 			"uuid": "82726aec-877b-4d2f-9585-e5da7640aa49",
 			"title": "Setup a \"Status Effect\" holder that can hold status effects in a row",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "fe0ea389-8224-4b69-89c2-9928f0a4224d",
+			"title": "Redo Screenshots of Heroes",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp1ys4gb4ccvb"]
+[gd_scene load_steps=3 format=3 uid="uid://5renjtem4vsk"]
 
-[ext_resource type="PackedScene" uid="uid://7eckopgv75o6" path="res://models/heroes/red/BaseHeroRed.glb" id="1_4u3o1"]
+[ext_resource type="PackedScene" uid="uid://7eckopgv75o6" path="res://models/heroes/torchy/BaseHeroRed.glb" id="1_4u3o1"]
 [ext_resource type="AnimationLibrary" uid="uid://bwy38fb5mbie8" path="res://models/master/master_animations.res" id="2_j2mfi"]
-[ext_resource type="Script" uid="uid://ccsbuc7yyjhcy" path="res://entities/player/heroes/torchy/torchy.gd" id="2_vjv8i"]
 
 [node name="Torchy" instance=ExtResource("1_4u3o1")]
-script = ExtResource("2_vjv8i")
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
 bones/0/position = Vector3(0.000457171, 0.588698, -0.000447726)

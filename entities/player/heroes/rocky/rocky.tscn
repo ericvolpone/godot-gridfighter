@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu3mut5a5jrd0"]
+[gd_scene load_steps=3 format=3 uid="uid://jc5dgxhpbdb"]
 
-[ext_resource type="PackedScene" uid="uid://m3cahi5j8g5g" path="res://models/heroes/white/BaseHeroWhite.glb" id="1_i70xs"]
+[ext_resource type="PackedScene" uid="uid://b6vursr43i5q4" path="res://models/heroes/rocky/Rocky.glb" id="1_i70xs"]
 [ext_resource type="AnimationLibrary" uid="uid://bwy38fb5mbie8" path="res://models/master/master_animations.res" id="3_285vw"]
 
 [node name="Rocky" instance=ExtResource("1_i70xs")]
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
-bones/0/position = Vector3(0.000571464, 0.735873, -0.000559658)
+bones/0/position = Vector3(0.000457171, 0.588698, -0.000447726)
 bones/0/rotation = Quaternion(-0.00810176, -0.00776218, -0.0117575, 0.999868)
 bones/1/rotation = Quaternion(0.00933706, -0.00190895, -0.0147418, 0.999846)
 bones/2/rotation = Quaternion(-0.0335236, 0.000614303, -0.000890529, 0.999437)

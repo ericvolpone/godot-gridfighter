@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://diojur2e68imi"]
+
+[ext_resource type="PackedScene" uid="uid://dvq1a2gupbwdl" path="res://models/heroes/woody/Woody.glb" id="1_d5kin"]
+[ext_resource type="AnimationLibrary" uid="uid://bwy38fb5mbie8" path="res://models/master/master_animations.res" id="2_leg6m"]
+
+[node name="Woody" instance=ExtResource("1_d5kin")]
+
+[node name="GeneralSkeleton" parent="Armature" index="0"]
+bones/0/position = Vector3(0.000571464, 0.735873, -0.000559658)
+bones/0/rotation = Quaternion(-0.00810176, -0.00776218, -0.0117575, 0.999868)
+bones/1/rotation = Quaternion(0.00933706, -0.00190895, -0.0147418, 0.999846)
+bones/2/rotation = Quaternion(-0.0335236, 0.000614303, -0.000890529, 0.999437)
+bones/3/rotation = Quaternion(-0.0335231, 0.000662435, -0.000906971, 0.999437)
+bones/4/rotation = Quaternion(0.584264, 0.380652, 0.568961, -0.435916)
+bones/5/rotation = Quaternion(0.076007, 0.862123, -0.469312, -0.17525)
+bones/6/rotation = Quaternion(0.0543819, -0.705008, 0.0543818, 0.705017)
+bones/7/rotation = Quaternion(0.0221144, 0.70868, 0.00227156, 0.705179)
+bones/8/rotation = Quaternion(-0.0234346, -0.00266439, -0.00376822, 0.999715)
+bones/9/rotation = Quaternion(-0.0671947, -0.0499876, -0.0791347, 0.99334)
+bones/11/rotation = Quaternion(0.565836, -0.407358, -0.544348, -0.466449)
+bones/12/rotation = Quaternion(0.0586498, 0.826292, -0.560179, 0.000508256)
+bones/13/rotation = Quaternion(0.0885714, 0.701545, -0.0885715, 0.70153)
+bones/14/rotation = Quaternion(0.0940356, -0.770882, -0.0843592, 0.624325)
+bones/15/rotation = Quaternion(0.0670644, 0.0498178, 0.995906, -0.0345348)
+bones/16/rotation = Quaternion(-0.0208729, 0.988625, -0.147947, 0.0172157)
+bones/17/rotation = Quaternion(-0.0397239, 0.649623, -0.757965, 0.043594)
+bones/18/rotation = Quaternion(9.38426e-09, 1, -1.19209e-07, -1.66282e-08)
+bones/19/rotation = Quaternion(-0.0971588, 0.00297504, 0.994328, 0.0431655)
+bones/20/rotation = Quaternion(0.0204734, 0.994442, -0.0865031, -0.0564241)
+bones/21/rotation = Quaternion(0.0505959, 0.678707, -0.730533, -0.0558397)
+bones/22/rotation = Quaternion(-6.552e-08, 1, 0.000117153, -0.00017768)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"master_animations": ExtResource("2_leg6m")
+}
+autoplay = "master_animations/Idle"

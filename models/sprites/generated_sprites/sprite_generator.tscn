@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3q5xfq420adu"]
 
 [ext_resource type="Script" uid="uid://btg4sym1t4itf" path="res://models/sprites/generated_sprites/sprite_generator.gd" id="1_t5qso"]
-[ext_resource type="PackedScene" uid="uid://dp1ys4gb4ccvb" path="res://entities/player/heroes/torchy/torchy.tscn" id="2_a7l3b"]
+[ext_resource type="PackedScene" uid="uid://5renjtem4vsk" path="res://entities/player/heroes/torchy/torchy.tscn" id="2_a7l3b"]
 
 [node name="Sprite Generator" type="SubViewport"]
 transparent_bg = true
