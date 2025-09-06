@@ -12,7 +12,6 @@ shader_parameter/alpha_threshold = 0.1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x1jlc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k3tnw"]
-load_path = "res://.godot/imported/on_cooldown.png-baf4c71216966d45355dd563dbd46ae3.ctex"
 
 [sub_resource type="SystemFont" id="SystemFont_x1jlc"]
 subpixel_positioning = 0
