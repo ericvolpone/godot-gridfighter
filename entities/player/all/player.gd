@@ -66,6 +66,7 @@ var colliding_aoes: Dictionary[AOE, bool] = {}
 		#endregion
 		#region Var:PlayerStats:StatusEffects
 var shock_value: float = 0;
+var burn_value: float = 0;
 
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;

@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w142t"]
 render_priority = 0
 shader = ExtResource("1_egawj")
-shader_parameter/Fireball_Head_Color = Color(1.5, 0.3, 0.3, 1)
+shader_parameter/Fireball_Head_Color = Color(2, 0.8, 0.2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kp0mt"]
 
@@ -31,7 +31,7 @@ blend_shape_mode = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1g1h"]
 render_priority = 0
 shader = ExtResource("2_w142t")
-shader_parameter/InnerColor = Color(2, 0.6, 0, 1)
+shader_parameter/InnerColor = Color(3, 0.6, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_5uprk"]
 
@@ -51,7 +51,7 @@ mesh = SubResource("ArrayMesh_y08qn")
 skeleton = NodePath("")
 
 [node name="Ball" type="MeshInstance3D" parent="Fireball"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0.0643285)
 material_override = SubResource("ShaderMaterial_w1g1h")
 mesh = SubResource("SphereMesh_5uprk")
 skeleton = NodePath("../..")
