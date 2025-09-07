@@ -53,15 +53,15 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": [
-				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
-				"649e10e6-97ff-4aaf-9a8b-306695da6489"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
+				"bcfbfb4b-bca4-4f95-a813-866286acdd15",
+				"649e10e6-97ff-4aaf-9a8b-306695da6489",
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
 				"967dc3db-f588-4329-b671-4ac19a978e2e",
 				"ab646cd2-0613-4d7c-809e-8f530232c23a",
@@ -830,6 +830,13 @@
 		{
 			"uuid": "82564fcb-9035-4cc7-b91b-413224a519f8",
 			"title": "Torchy: Ring of Fire Ability",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "bcfbfb4b-bca4-4f95-a813-866286acdd15",
+			"title": "Burnt status effect",
 			"description": "",
 			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
 			"steps": []

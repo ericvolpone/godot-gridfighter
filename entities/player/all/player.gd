@@ -223,6 +223,14 @@ func process_status_effects(delta: float) -> void:
 			"effect_type" : StatusEffect.Type.SHOCKED
 		})
 		state_machine.transition(&"ShockedState")
+	if burn_value > 5:
+		burn_value = 0
+		level.status_effect_spawner.spawn_effect.rpc({
+			"owner_player_id" : player_id,
+			"effect_ttl" : 1.9,
+			"effect_type" : StatusEffect.Type.BURNT
+		})
+		state_machine.transition(&"BurntState")
 	
 	# COLD
 	if is_cold:

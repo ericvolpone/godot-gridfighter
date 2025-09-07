@@ -14,8 +14,7 @@ func _on_body_entered(body: Node) -> void:
 			# If they are blocking, remove
 			queue_free()
 		else:
-			# TODO Apply Burn
-			#player.apply_cold(COLD_DURATION)
+			player.burn_value += 6
 			queue_free();
 	else:
 		queue_free()

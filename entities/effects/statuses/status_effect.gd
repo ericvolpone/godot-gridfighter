@@ -12,7 +12,7 @@ var effect_ttl: float;
 
 enum Type {
 	SHOCKED,
-	BURNED,
+	BURNT,
 	COLD,
 	FROZEN,
 	ROOTED
