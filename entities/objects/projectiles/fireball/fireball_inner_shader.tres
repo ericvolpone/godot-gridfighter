@@ -1,0 +1,39 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://bon4k3u5jihhq"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_67yar"]
+parameter_name = "InnerColor"
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_q8xen"]
+default_input_values = [2, true, 3, 4.0]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 InnerColor : source_color;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = InnerColor;
+
+
+// Fresnel:3
+	float n_in3p3 = 4.00000;
+	float n_out3p0 = pow(clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_in3p3);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-405.219, 42.3653)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_67yar")
+nodes/fragment/2/position = Vector2(-489.544, 221.52)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFresnel_q8xen")
+nodes/fragment/3/position = Vector2(-500, 780)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 1)

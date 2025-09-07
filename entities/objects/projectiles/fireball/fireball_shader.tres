@@ -1,0 +1,133 @@
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://dpw7tkxmwgwio"]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_0xpq6"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_g70dc"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_1i62p"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.4, 1)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_0xpq6"]
+parameter_name = "Fireball_Head_Color"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xpq6"]
+noise_type = 0
+fractal_type = 2
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g70dc"]
+noise = SubResource("FastNoiseLite_0xpq6")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_g70dc"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_g70dc")
+
+[sub_resource type="Gradient" id="Gradient_g70dc"]
+offsets = PackedFloat32Array(0.506399, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1i62p"]
+gradient = SubResource("Gradient_g70dc")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_uow20"]
+expanded_output_ports = [0]
+texture = SubResource("GradientTexture2D_1i62p")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_hst5v"]
+output_port_for_preview = 0
+operator = 1
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_3ol8b"]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_wr2n2"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled;
+
+uniform vec4 Fireball_Head_Color : source_color;
+uniform sampler2D tex_frg_4;
+uniform sampler2D tex_frg_5 : source_color;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Fireball_Head_Color;
+
+
+// Input:12
+	float n_out12p0 = TIME;
+
+
+// VectorOp:13
+	vec2 n_in13p1 = vec2(0.40000, 1.00000);
+	vec2 n_out13p0 = vec2(n_out12p0) * n_in13p1;
+
+
+// UVFunc:11
+	vec2 n_in11p1 = vec2(1.00000, 1.00000);
+	vec2 n_out11p0 = n_out13p0 * n_in11p1 + UV;
+
+
+// UVFunc:8
+	vec2 n_in8p1 = vec2(1.00000, 1.00000);
+	vec2 n_in8p2 = vec2(0.00000, 0.00000);
+	vec2 n_out8p0 = n_in8p2 * n_in8p1 + n_out11p0;
+
+
+// Texture2D:4
+	vec4 n_out4p0 = texture(tex_frg_4, n_out8p0);
+	float n_out4p1 = n_out4p0.r;
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_frg_5, UV);
+	float n_out5p1 = n_out5p0.r;
+
+
+// FloatOp:6
+	float n_out6p0 = n_out4p1 - n_out5p1;
+
+
+// Clamp:7
+	float n_in7p1 = 0.00000;
+	float n_in7p2 = 1.00000;
+	float n_out7p0 = clamp(n_out6p0, n_in7p1, n_in7p2);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out7p0;
+
+
+}
+"
+graph_offset = Vector2(-929.342, -134.69)
+modes/cull = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_0xpq6")
+nodes/fragment/2/position = Vector2(-480, -160)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_g70dc")
+nodes/fragment/4/position = Vector2(-980, 40)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_uow20")
+nodes/fragment/5/position = Vector2(-1000, 860)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_hst5v")
+nodes/fragment/6/position = Vector2(-420, 680)
+nodes/fragment/7/node = SubResource("VisualShaderNodeClamp_3ol8b")
+nodes/fragment/7/position = Vector2(-40, 680)
+nodes/fragment/8/node = SubResource("VisualShaderNodeUVFunc_wr2n2")
+nodes/fragment/8/position = Vector2(-1660, 120)
+nodes/fragment/11/node = SubResource("VisualShaderNodeUVFunc_0xpq6")
+nodes/fragment/11/position = Vector2(-2200, 100)
+nodes/fragment/12/node = SubResource("VisualShaderNodeInput_g70dc")
+nodes/fragment/12/position = Vector2(-3380, 180)
+nodes/fragment/13/node = SubResource("VisualShaderNodeVectorOp_1i62p")
+nodes/fragment/13/position = Vector2(-2720, 120)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 1, 6, 0, 5, 1, 6, 1, 6, 0, 7, 0, 7, 0, 0, 1, 8, 0, 4, 0, 11, 0, 8, 0, 12, 0, 13, 0, 13, 0, 11, 2)

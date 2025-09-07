@@ -12,6 +12,12 @@ signal hero_selected;
 func _ready() -> void:
 	hero_image.texture = hero_definition.hero_portrait
 	name_image.texture = hero_definition.hero_name
+	var name_size: Vector2 = name_image.texture.get_size()
+	var aspect_ratio: int = name_size.x / 134
+	
+	name_image.size = name_size / aspect_ratio 
+	name_image.position.x -= name_image.size.x / 2
+	name_image.position.y -= name_image.size.y
 
 
 func _on_button_pressed() -> void:
