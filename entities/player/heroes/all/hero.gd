@@ -37,7 +37,6 @@ func init_combat_actions() -> void:
 	if player.brain.is_multiplayer_authority():
 		# TODO It sucks that we couldnt figure out preload here
 		var hud_scene: PackedScene = load(HUD_PATH)
-		
 		action_hud_container = hud_scene.instantiate()
 		add_child(action_hud_container);
 		action_hud_container.add_action(combat_action_1)

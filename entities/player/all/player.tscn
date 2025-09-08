@@ -52,11 +52,6 @@ emission_energy_multiplier = 0.01
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 3
 script = ExtResource("1_lvxji")
-current_hero_id = null
-is_knocked = null
-is_standing_back_up = null
-is_blocking = null
-is_respawning = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)

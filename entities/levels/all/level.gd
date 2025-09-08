@@ -3,6 +3,9 @@ class_name Level extends Node3D
 var hero_selection_menu_scene: PackedScene
 @onready var death_scene: PackedScene = preload("res://entities/effects/death/player_death.tscn")
 
+# HUD
+@onready var hud_layer: CanvasLayer = $HudLayer
+
 # Multiplayer Variables
 @onready var player_spawner: PlayerSpawner = $PlayerSpawner
 @onready var projectile_spawner: ProjectileSpawner = $ProjectileSpawner
@@ -13,7 +16,7 @@ var hero_selection_menu_scene: PackedScene
 @onready var status_effect_spawner: StatusEffectSpawner = $StatusEffectSpawner
 
 # Lobby Variables
-@onready var scoreboard: Scoreboard = $Scoreboard
+@onready var scoreboard: Scoreboard = $HudLayer/Scoreboard
 # TODO: I can probably just like... do a groups check or something
 var player_chars: Dictionary = {}
 # TODO: It may clean things up to actually sync this some day

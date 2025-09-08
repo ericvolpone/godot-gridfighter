@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://df0xcvko2he0t"]
+[gd_scene load_steps=6 format=3 uid="uid://df0xcvko2he0t"]
 
 [ext_resource type="Script" uid="uid://co8dmpln5a4bu" path="res://entities/ui/hud/action_hud.gd" id="1_hayth"]
 [ext_resource type="Shader" uid="uid://c03b6cuthddvd" path="res://entities/ui/hud/ActionHUD.gdshader" id="2_p8x6i"]
@@ -8,10 +8,6 @@ shader = ExtResource("2_p8x6i")
 shader_parameter/glow_color = Color(0.361311, 0.39859, 0.375898, 1)
 shader_parameter/glow_power = 0.2
 shader_parameter/alpha_threshold = 0.1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x1jlc"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k3tnw"]
 
 [sub_resource type="SystemFont" id="SystemFont_x1jlc"]
 subpixel_positioning = 0
@@ -24,7 +20,7 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="ActionHUD" type="Control"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,18 +34,10 @@ script = ExtResource("1_hayth")
 [node name="ActionImage" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_olgid")
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 96.0
+offset_bottom = 96.0
 expand_mode = 3
 stretch_mode = 4
-
-[node name="CoolDownOverlay" type="TextureRect" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_x1jlc")
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("CompressedTexture2D_k3tnw")
 
 [node name="CoolDownText" type="Label" parent="."]
 layout_mode = 1

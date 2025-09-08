@@ -281,7 +281,8 @@ func process_combat_actions_state() -> void:
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
-	return !is_knocked and !is_in_menu;
+	var control_states: Array[StringName] = [&"MoveState", &"IdleState", &"JumpState", &"FallState"]
+	return !is_knocked and !is_in_menu and state_machine.state in control_states;
 
 func get_facing_direction() -> Vector3:
 	return global_transform.basis.z.normalized()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cly568e1kmem5"]
+[gd_scene load_steps=18 format=3 uid="uid://cly568e1kmem5"]
 
 [ext_resource type="PackedScene" uid="uid://cyw3gro3ao66a" path="res://entities/menu/main_menu.tscn" id="1_rm2r3"]
 [ext_resource type="PackedScene" uid="uid://jc5dgxhpbdb" path="res://entities/player/heroes/rocky/rocky.tscn" id="2_wr481"]
@@ -166,13 +166,20 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 material = SubResource("ShaderMaterial_i3vcw")
 size = Vector3(200, 1, 200)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3l5m"]
+albedo_color = Color(0.0705882, 0.0666667, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l13iv"]
+material = SubResource("StandardMaterial3D_j3l5m")
+size = Vector3(8, 0.5, 1)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4loll")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.931693, -0.353442, -0.0838303, 0.0747269, -0.412337, 0.907961, -0.355478, 0.839677, 0.410583, 0, 0, 0)
+transform = Transform3D(-0.931693, -0.353442, -0.0838302, -0.163924, 0.203154, 0.965328, -0.324157, 0.913131, -0.247214, 0, 0, 0)
 light_color = Color(0.999697, 0.823163, 0.880265, 1)
 light_energy = 0.8
 shadow_enabled = true
@@ -190,21 +197,26 @@ mesh = SubResource("BoxMesh_fiqdu")
 [node name="MainMenu" parent="Menu Layer" instance=ExtResource("1_rm2r3")]
 
 [node name="Rocky" parent="." instance=ExtResource("2_wr481")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97022, 4.067, 8.778)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97, 4, 8.778)
 script = null
 
 [node name="Bolty" parent="." instance=ExtResource("3_rm2r3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47022, 4.067, 8.778)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47, 4, 8.778)
 script = null
 
 [node name="Slushy" parent="." instance=ExtResource("4_rm2r3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0297767, 4.067, 8.778)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 4, 8.778)
 script = null
 
 [node name="Torchy" parent="." instance=ExtResource("5_nkmt6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52978, 4.067, 8.778)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53, 4, 8.778)
 script = null
 
 [node name="Woody" parent="." instance=ExtResource("6_j3l5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02978, 4.067, 8.778)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.03, 4, 8.778)
 script = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 8.81696)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_l13iv")

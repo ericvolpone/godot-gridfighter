@@ -1,7 +1,6 @@
 class_name ActionHUD extends Control
 
 @onready var action_image: TextureRect = $ActionImage
-@onready var cooldown_overlay: TextureRect = $CoolDownOverlay
 @onready var cooldown_text: Label = $CoolDownText
 
 var action: CombatAction;
@@ -12,9 +11,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if action.is_on_cooldown():
-		cooldown_overlay.visible = true;
 		var cooldown_time: int = action.get_remaining_cooldown_time_in_secs()
 		cooldown_text.text = str(cooldown_time)
 	else:
-		cooldown_overlay.visible = false;
 		cooldown_text.text = ""
