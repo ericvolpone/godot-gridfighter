@@ -31,7 +31,7 @@ func _configure_status_effect_spawner() -> void:
 				effect = null
 		
 		if effect:
-			effect.call_deferred("_initialize_from_spawn_data", spawn_data)
+			effect.spawn_data = spawn_data;
 		
 		return effect
 

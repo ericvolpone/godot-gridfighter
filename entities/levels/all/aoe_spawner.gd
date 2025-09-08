@@ -23,35 +23,28 @@ func _ready() -> void:
 func _configure_aoe_spawner() -> void:
 	spawn_function = func(spawn_data: Dictionary) -> AOE:
 		var aoe_type: AOE.Type = spawn_data["aoe_type"]
+		var aoe: AOE;
 		match aoe_type:
 			AOE.Type.STORM:
-				var storm: LightningStorm = storm_scene.instantiate()
-				storm.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return storm;
+				aoe = storm_scene.instantiate()
 			AOE.Type.GUST:
-				var gust: Gust = gust_scene.instantiate()
-				gust.gust_direction = spawn_data["spawn_direction"]
-				gust.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return gust
+				aoe = gust_scene.instantiate()
+				aoe.gust_direction = spawn_data["spawn_direction"]
 			AOE.Type.BLIZZARD:
-				var blizzard: Blizzard = blizzard_scene.instantiate()
-				blizzard.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return blizzard
+				aoe = blizzard_scene.instantiate()
 			AOE.Type.HARDEN:
-				var harden: Harden = harden_scene.instantiate()
-				harden.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return harden
+				aoe = harden_scene.instantiate()
 			AOE.Type.THORN_TRAP:
-				var thorn_trap: ThornTrap = thorn_trap_scene.instantiate()
-				thorn_trap.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return thorn_trap
+				aoe = thorn_trap_scene.instantiate()
 			AOE.Type.BUSH:
-				var bush: Bush = bush_scene.instantiate()
-				bush.is_growing = true
-				bush.call_deferred("_initialize_from_spawn_data", spawn_data)
-				return bush
+				aoe = bush_scene.instantiate()
+				aoe.is_growing = true
 			_:
-				return null
+				pass
+		
+		if aoe:
+			aoe.spawn_data = spawn_data
+		return aoe;
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_aoe(spawn_data: Dictionary) -> AOE:

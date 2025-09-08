@@ -150,10 +150,10 @@ size = Vector3(200, 1, 200)
 
 [node name="TheStairs" instance=ExtResource("1_3gytd")]
 
-[node name="Camera3D" parent="." index="3"]
+[node name="Camera3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -0.328421, 10.1192, 13.488)
 
-[node name="Respawner" parent="." index="5" node_paths=PackedStringArray("respawn_point_availability")]
+[node name="Respawner" parent="." index="4" node_paths=PackedStringArray("respawn_point_availability")]
 respawn_point_availability = {
 NodePath("RespawnPoint1"): true,
 NodePath("RespawnPoint2"): true,
@@ -181,7 +181,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168531, 2, -4.45904)
 [node name="RespawnPoint6" type="Marker3D" parent="Respawner" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154953, 2, 3.46314)
 
-[node name="PowerUpSpawner" parent="." index="7" node_paths=PackedStringArray("spawn_point_by_availability")]
+[node name="PowerUpSpawner" parent="." index="6" node_paths=PackedStringArray("spawn_point_by_availability")]
 spawn_point_by_availability = {
 NodePath("PowerUpSpawn1"): true,
 NodePath("PowerUpSpawn2"): true,
@@ -205,7 +205,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.091, 3.58203, -2.98007)
 [node name="PowerUpSpawn5" type="Marker3D" parent="PowerUpSpawner" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0517113, -5.66244e-07, 4.9691)
 
-[node name="KothManager" parent="." index="11" node_paths=PackedStringArray("koth_rings")]
+[node name="KothManager" parent="." index="10" node_paths=PackedStringArray("koth_rings")]
 koth_rings = [NodePath("KothRing1"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4"), NodePath("KothRing5")]
 
 [node name="KothRing1" parent="KothManager" index="0" instance=ExtResource("2_xbqhk")]
@@ -223,7 +223,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.740322, 5.26667, -6.39718)
 [node name="KothRing5" parent="KothManager" index="4" instance=ExtResource("2_xbqhk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00967121, 1, -8.49483)
 
-[node name="WaterFloor" parent="." index="12"]
+[node name="WaterFloor" parent="." index="11"]
 mesh = SubResource("BoxMesh_3gytd")
 
 [node name="Terrain" parent="." index="13" instance=ExtResource("3_01on7")]

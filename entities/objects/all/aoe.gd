@@ -17,6 +17,7 @@ enum Type {
 var owning_player: Player;
 var aoe_ttl: float
 var is_tracking: bool;
+var spawn_data: Dictionary;
 #endregion
 
 #region (Functions)
@@ -24,7 +25,11 @@ func get_area_3d() -> Area3D:
 	push_error("AOE Subclass must implement get_area_3d()")
 	return null;
 
-func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
+func _ready() -> void:
+	_initialize_from_spawn_data()
+	NetworkTime.on_tick.connect(_tick)
+
+func _initialize_from_spawn_data() -> void:
 	var owner_peer_id: String = spawn_data["owner_peer_id"]
 	var players: Array[Node] = get_tree().get_nodes_in_group(Groups.PLAYER)
 
@@ -39,16 +44,17 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 		global_position = owning_player.global_position
 
 	aoe_ttl = spawn_data["aoe_ttl"]
-	if multiplayer.is_server():
-		get_tree().create_timer(aoe_ttl).timeout.connect(
-			func() -> void: self.queue_free()
-			)
+
 	if get_area_3d() and is_multiplayer_authority():
 		get_area_3d().monitoring = true;
 
-func _physics_process(_delta: float) -> void:
+func _tick(delta: float, _tick: int) -> void:
 	if is_tracking and owning_player:
 		global_position = owning_player.global_position
+	
+	aoe_ttl -= delta
+	if aoe_ttl <= 0 and is_multiplayer_authority():
+		queue_free()
 
 func apply_effect(_player: Player, _delta: float) -> void:
 	pass

@@ -12,6 +12,7 @@ class_name StatusEffect extends Node3D
 
 var tracking_player: Player;
 var effect_ttl: float;
+var spawn_data: Dictionary;
 
 enum Type {
 	SHOCKED,
@@ -23,21 +24,23 @@ enum Type {
 
 func _ready() -> void:
 	effect_sprite.texture = status_effect_image
+	_initialize_from_spawn_data()
+	NetworkTime.on_tick.connect(_tick)
 
-func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
+func _initialize_from_spawn_data() -> void:
 	var owner_player_id: String = spawn_data["owner_player_id"]
 	var players: Array[Node] = get_tree().get_nodes_in_group(Groups.PLAYER)
 
 	for player: Player in players:
 		if player.player_id == owner_player_id:
 			tracking_player = player
-			reparent(player)
 			break
 	global_position = tracking_player.global_position
 
 	effect_ttl = spawn_data["effect_ttl"]
-	if effect_ttl > 0:
-		if multiplayer.is_server():
-			get_tree().create_timer(effect_ttl).timeout.connect(
-				func() -> void: self.queue_free()
-				)
+
+func _tick(delta: float, _tick: int) -> void:
+	global_position = tracking_player.global_position
+	effect_ttl -= delta
+	if effect_ttl <= 0 and is_multiplayer_authority():
+		queue_free()

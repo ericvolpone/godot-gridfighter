@@ -26,8 +26,6 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
-				"58eb4bbb-1253-4cac-bec9-0883c9b2beaf",
-				"07f4227d-f003-430b-8ab8-5bca23a10654",
 				"891e1fe7-0371-4f73-9609-128045e6b021",
 				"65532763-67e3-498b-8fe5-042820b441d1",
 				"82726aec-877b-4d2f-9585-e5da7640aa49",
@@ -57,13 +55,18 @@
 			"title": "Doing",
 			"tasks": [
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
-				"fe0ea389-8224-4b69-89c2-9928f0a4224d"
+				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
+				"44af2190-a756-4119-87e5-65fa654d7b3f",
+				"fa716395-6400-4b4b-9ab9-c7db09808206",
+				"b79fcc3d-0878-448b-9637-26c409229432"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"07f4227d-f003-430b-8ab8-5bca23a10654",
+				"58eb4bbb-1253-4cac-bec9-0883c9b2beaf",
 				"963c7b40-d485-4d69-882e-f718c69be5ba",
 				"967dc3db-f588-4329-b671-4ac19a978e2e",
 				"ab646cd2-0613-4d7c-809e-8f530232c23a",
@@ -846,6 +849,27 @@
 		{
 			"uuid": "07f4227d-f003-430b-8ab8-5bca23a10654",
 			"title": "Status effects not removing on client",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "44af2190-a756-4119-87e5-65fa654d7b3f",
+			"title": "Woody Abilities spawning in middle",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "fa716395-6400-4b4b-9ab9-c7db09808206",
+			"title": "Glitchy Movement on XZ / Y override in states",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "b79fcc3d-0878-448b-9637-26c409229432",
+			"title": "Need to name Hero for RPC punch action!",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
