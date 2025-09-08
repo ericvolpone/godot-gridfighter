@@ -122,9 +122,7 @@ func _enter_tree() -> void:
 	hero_socket = $HeroSocket
 
 func _ready() -> void:
-	add_to_group(Groups.PLAYER)
-	# We're doing this nonsense so the player can ready up on time...
-	
+	# Set current_hero_id to chosen hero in case player is not spawned yet
 	if current_hero_id == -1:
 		current_hero_id = (chosen_hero_id)
 
@@ -337,44 +335,40 @@ func knock_back(direction: Vector3, strength: float) -> void:
 
 func apply_cold(duration: float) -> void:
 	if not is_cold:
-		
-		# TODO This isn't working lol
-		cold_effect = level.status_effect_spawner.spawn({
+		level.status_effect_spawner.spawn_effect.rpc({
 			"owner_player_id" : player_id,
-			"effect_ttl" : -1,
+			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.COLD
 		})
 		is_cold = true;
 		slow_modifier += COLD_SLOW_MODIFIER
-	cold_time_remaining += duration
+	cold_time_remaining = duration
 
 func apply_freeze(duration: float) -> void:
 	if not is_frozen:
-		frozen_effect = level.status_effect_spawner.spawn({
+		level.status_effect_spawner.spawn_effect.rpc({
 			"owner_player_id" : player_id,
-			"effect_ttl" : -1,
+			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.FROZEN
 		})
 		is_frozen = true;
 		slow_modifier += FREEZE_SLOW_MODIFIER
-	freeze_time_remaining += duration
+	freeze_time_remaining = duration
 
 func apply_root(duration: float) -> void:
 	if not is_rooted:
-		rooted_effect = level.status_effect_spawner.spawn({
+		level.status_effect_spawner.spawn_effect.rpc({
 			"owner_player_id" : player_id,
-			"effect_ttl" : -1,
+			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.ROOTED
 		})
 		is_rooted = true;
 		slow_modifier += ROOT_SLOW_MODIFIER
-	root_time_remaining += duration
+	root_time_remaining = duration
 
 func remove_cold() -> void:
 	if cold_effect:
-		if is_multiplayer_authority():
-			# Only the MP authority can despawn
-			cold_effect.queue_free()
+		cold_effect.queue_free()
 		cold_effect = null;
 	cold_time_remaining = 0
 	is_cold = false;
@@ -382,9 +376,7 @@ func remove_cold() -> void:
 
 func remove_freeze() -> void:
 	if frozen_effect:
-		if is_multiplayer_authority():
-			# Only the MP authority can despawn
-			frozen_effect.queue_free()
+		frozen_effect.queue_free()
 		frozen_effect = null;
 	freeze_time_remaining = 0
 	is_frozen = false;
@@ -392,9 +384,7 @@ func remove_freeze() -> void:
 
 func remove_root() -> void:
 	if rooted_effect:
-		if is_multiplayer_authority():
-			# Only the MP authority can despawn
-			rooted_effect.queue_free()
+		rooted_effect.queue_free()
 		rooted_effect = null;
 	root_time_remaining = 0
 	is_rooted = false;

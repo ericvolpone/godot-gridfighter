@@ -182,11 +182,6 @@ size = Vector3(200, 1, 200)
 script = ExtResource("1_btq12")
 metadata/_custom_type_script = "uid://bqr5qkduod3sj"
 
-[node name="HudLayer" type="CanvasLayer" parent="."]
-
-[node name="Scoreboard" parent="HudLayer" instance=ExtResource("3_quiwk")]
-theme = ExtResource("8_2bfne")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2bfne")
 
@@ -236,3 +231,6 @@ metadata/_custom_type_script = "uid://r5ngirohclty"
 [node name="WaterFloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -41.2345)
 mesh = SubResource("BoxMesh_g2lxu")
+
+[node name="Scoreboard" parent="." instance=ExtResource("3_quiwk")]
+theme = ExtResource("8_2bfne")

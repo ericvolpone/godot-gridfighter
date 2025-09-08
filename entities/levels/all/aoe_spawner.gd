@@ -6,6 +6,7 @@ var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
 var blizzard_scene: PackedScene = preload("res://entities/objects/slushy/blizzard.tscn")
 var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")
 var thorn_trap_scene: PackedScene = preload("res://entities/player/heroes/woody/action/thorn_trap/thorn_trap.tscn")
+var bush_scene: PackedScene = preload("res://entities/objects/map/environment/bush.tscn")
 #endregion
 
 #region Var:Effects
@@ -44,6 +45,11 @@ func _configure_aoe_spawner() -> void:
 				var thorn_trap: ThornTrap = thorn_trap_scene.instantiate()
 				thorn_trap.call_deferred("_initialize_from_spawn_data", spawn_data)
 				return thorn_trap
+			AOE.Type.BUSH:
+				var bush: Bush = bush_scene.instantiate()
+				bush.is_growing = true
+				bush.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return bush
 			_:
 				return null
 

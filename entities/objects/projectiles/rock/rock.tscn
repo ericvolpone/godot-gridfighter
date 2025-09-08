@@ -20,7 +20,7 @@ properties/1/path = NodePath(".:linear_velocity")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Rock_RigidBody3D" type="RigidBody3D"]
+[node name="Rock_RigidBody3D" type="RigidBody3D" groups=["PunchableRB"]]
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_t8sxr")
 script = ExtResource("1_2dker")

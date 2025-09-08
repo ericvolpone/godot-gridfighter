@@ -8,7 +8,8 @@ enum Type {
 	HARDEN,
 	BLIZZARD,
 	RING_OF_FIRE,
-	THORN_TRAP
+	THORN_TRAP,
+	BUSH
 }
 #endregion
 

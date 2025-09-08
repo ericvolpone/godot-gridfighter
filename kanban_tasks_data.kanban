@@ -26,6 +26,8 @@
 			"uuid": "63c1f58a-5e38-4a72-98d8-44ab4fae8431",
 			"title": "Todo",
 			"tasks": [
+				"58eb4bbb-1253-4cac-bec9-0883c9b2beaf",
+				"07f4227d-f003-430b-8ab8-5bca23a10654",
 				"891e1fe7-0371-4f73-9609-128045e6b021",
 				"65532763-67e3-498b-8fe5-042820b441d1",
 				"82726aec-877b-4d2f-9585-e5da7640aa49",
@@ -832,6 +834,20 @@
 			"title": "Woody: Implement Wall",
 			"description": "",
 			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "58eb4bbb-1253-4cac-bec9-0883c9b2beaf",
+			"title": "Status Effects bugged when client applies",
+			"description": "Cannot call method 'get_nodes_in_group' on a null value.",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "07f4227d-f003-430b-8ab8-5bca23a10654",
+			"title": "Status effects not removing on client",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

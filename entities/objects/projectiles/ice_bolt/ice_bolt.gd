@@ -5,7 +5,6 @@ const COLD_DURATION = 5.0;
 @onready var snow_container: MultiMeshInstance3D = $SnowContainer
 
 func _ready() -> void:
-	add_to_group(Groups.PUNCHABLE_RB)
 	contact_monitor = true
 	max_contacts_reported = 4
 	self.body_entered.connect(_on_body_entered)
