@@ -5,6 +5,7 @@ var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningSt
 var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
 var blizzard_scene: PackedScene = preload("res://entities/objects/slushy/blizzard.tscn")
 var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")
+var thorn_trap_scene: PackedScene = preload("res://entities/player/heroes/woody/action/thorn_trap/thorn_trap.tscn")
 #endregion
 
 #region Var:Effects
@@ -39,6 +40,10 @@ func _configure_aoe_spawner() -> void:
 				var harden: Harden = harden_scene.instantiate()
 				harden.call_deferred("_initialize_from_spawn_data", spawn_data)
 				return harden
+			AOE.Type.THORN_TRAP:
+				var thorn_trap: ThornTrap = thorn_trap_scene.instantiate()
+				thorn_trap.call_deferred("_initialize_from_spawn_data", spawn_data)
+				return thorn_trap
 			_:
 				return null
 

@@ -7,6 +7,9 @@ class_name StatusEffect extends Node3D
 	#"effect_type" : Type.SHOCKED
 #}
 
+@export var status_effect_image: Texture2D
+@onready var effect_sprite: Sprite3D = $Sprite3D
+
 var tracking_player: Player;
 var effect_ttl: float;
 
@@ -17,6 +20,9 @@ enum Type {
 	FROZEN,
 	ROOTED
 }
+
+func _ready() -> void:
+	effect_sprite.texture = status_effect_image
 
 func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 	var owner_player_id: String = spawn_data["owner_player_id"]

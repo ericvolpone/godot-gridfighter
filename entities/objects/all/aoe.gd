@@ -7,12 +7,13 @@ enum Type {
 	GUST,
 	HARDEN,
 	BLIZZARD,
-	RING_OF_FIRE
+	RING_OF_FIRE,
+	THORN_TRAP
 }
 #endregion
 
 #region (Variables)
-var tracking_player: Player;
+var owning_player: Player;
 var aoe_ttl: float
 var is_tracking: bool;
 #endregion
@@ -28,13 +29,13 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 
 	for player: Player in players:
 		if player.player_id == owner_peer_id:
-			tracking_player = player
+			owning_player = player
 			break
 	if not is_tracking:
 		global_position = spawn_data["spawn_position"]
 		look_at(global_position - spawn_data["spawn_direction"])
 	else:
-		global_position = tracking_player.global_position
+		global_position = owning_player.global_position
 
 	aoe_ttl = spawn_data["aoe_ttl"]
 	if multiplayer.is_server():
@@ -45,8 +46,8 @@ func _initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 		get_area_3d().monitoring = true;
 
 func _physics_process(_delta: float) -> void:
-	if is_tracking and tracking_player:
-		global_position = tracking_player.global_position
+	if is_tracking and owning_player:
+		global_position = owning_player.global_position
 
 func apply_effect(_player: Player, _delta: float) -> void:
 	pass

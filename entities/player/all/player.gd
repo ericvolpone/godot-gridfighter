@@ -78,6 +78,11 @@ var freeze_value: float = 0;
 var freeze_time_remaining: float = 0;
 var frozen_effect: StatusEffect = null;
 const FREEZE_SLOW_MODIFIER: float = 1;
+
+var is_rooted: bool = false;
+var root_time_remaining: float = 0;
+var rooted_effect: StatusEffect = null;
+const ROOT_SLOW_MODIFIER: float = .9;
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -247,6 +252,12 @@ func process_status_effects(delta: float) -> void:
 		freeze_value = 0;
 		apply_freeze(2)
 
+	# FROZEN
+	if is_rooted:
+		root_time_remaining -= delta
+		if root_time_remaining <= 0:
+			remove_root()
+
 func move_and_slide_physics_factor() -> void:
 	velocity *= NetworkTime.physics_factor
 	move_and_slide()
@@ -348,6 +359,17 @@ func apply_freeze(duration: float) -> void:
 		slow_modifier += FREEZE_SLOW_MODIFIER
 	freeze_time_remaining += duration
 
+func apply_root(duration: float) -> void:
+	if not is_rooted:
+		rooted_effect = level.status_effect_spawner.spawn({
+			"owner_player_id" : player_id,
+			"effect_ttl" : -1,
+			"effect_type" : StatusEffect.Type.ROOTED
+		})
+		is_rooted = true;
+		slow_modifier += ROOT_SLOW_MODIFIER
+	root_time_remaining += duration
+
 func remove_cold() -> void:
 	if cold_effect:
 		if is_multiplayer_authority():
@@ -367,6 +389,16 @@ func remove_freeze() -> void:
 	freeze_time_remaining = 0
 	is_frozen = false;
 	slow_modifier -= FREEZE_SLOW_MODIFIER;
+
+func remove_root() -> void:
+	if rooted_effect:
+		if is_multiplayer_authority():
+			# Only the MP authority can despawn
+			rooted_effect.queue_free()
+		rooted_effect = null;
+	root_time_remaining = 0
+	is_rooted = false;
+	slow_modifier -= ROOT_SLOW_MODIFIER;
 
 	#endregion
 	#region Func:Unused?
