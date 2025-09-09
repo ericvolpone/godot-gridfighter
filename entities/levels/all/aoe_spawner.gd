@@ -1,7 +1,7 @@
 class_name AOESpawner extends MultiplayerSpawner
 
 #region Var:Abilities
-var storm_scene: PackedScene = preload("res://entities/objects/bolty/LightningStorm.tscn")
+var storm_scene: PackedScene = preload("res://entities/objects/bolty/lightning_storm.tscn")
 var gust_scene: PackedScene = preload("res://entities/objects/bolty/gust.tscn")
 var blizzard_scene: PackedScene = preload("res://entities/objects/slushy/blizzard.tscn")
 var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")

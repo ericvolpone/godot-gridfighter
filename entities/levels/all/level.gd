@@ -13,6 +13,7 @@ var hero_selection_menu_scene: PackedScene
 @onready var power_up_spawner: PowerUpSpawner = $PowerUpSpawner
 @onready var aoe_spawner: AOESpawner = $AOESpawner
 @onready var status_effect_spawner: StatusEffectSpawner = $StatusEffectSpawner
+@onready var particle_effect_spawner: ParticleEffectSpawner = $ParticleEffectSpawner
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard

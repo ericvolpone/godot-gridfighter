@@ -5,9 +5,6 @@ class_name ThornTrap extends AOE
 func _init() -> void:
 	is_tracking = false;
 
-func _ready() -> void:
-	pass
-
 func get_area_3d() -> Area3D:
 	return area_3d;
 

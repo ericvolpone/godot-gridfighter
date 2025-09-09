@@ -20,6 +20,9 @@ var combat_action_2: BlockAction = BlockAction.new();
 var combat_action_3: CombatAction;
 var combat_action_4: CombatAction;
 
+func _ready() -> void:
+	name = definition.display_name
+
 func init_combat_actions() -> void:
 	combat_action_1.name = "PunchAction"
 	combat_action_2.name = "BlockAction"

@@ -1,4 +1,4 @@
-class_name RootWallAction extends CombatAction
+class_name BushAction extends CombatAction
 
 const BUSH_TTL: float = 10;
 

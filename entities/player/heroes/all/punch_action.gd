@@ -1,6 +1,6 @@
 class_name PunchAction extends CombatAction
 
-var punch_effect_scene: PackedScene = preload("res://entities/effects/punch_effect.tscn")
+@onready var particle_effect_spawner: ParticleEffectSpawner = hero.player.level.particle_effect_spawner
 
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
@@ -28,7 +28,10 @@ func handle_animation_signal() -> void:
 	var punch_radius: float = .5
 	var punch_position: Vector3 = punch_origin + forward_dir * (punch_range * 0.5)
 	
-	_spawn_particle_effect.rpc(punch_position)
+	particle_effect_spawner.spawn_effect.rpc({
+		"effect_type" : ParticleEffect.Type.PUNCH,
+		"spawn_position" : punch_position
+	})
 	
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 
@@ -57,9 +60,3 @@ func handle_animation_signal() -> void:
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 2  # Tune force as needed
 			player_obj.knock_back(force, hero.player.current_strength)
-
-@rpc("call_local", "any_peer", "unreliable")
-func _spawn_particle_effect(location: Vector3) -> void:
-	var punch_effect: PunchEffect = punch_effect_scene.instantiate();
-	add_child(punch_effect)
-	punch_effect.global_position = location

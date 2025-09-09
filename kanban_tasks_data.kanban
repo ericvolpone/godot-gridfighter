@@ -55,16 +55,17 @@
 			"title": "Doing",
 			"tasks": [
 				"223b125d-4861-4a2d-9a9b-d965859f09e3",
-				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
-				"44af2190-a756-4119-87e5-65fa654d7b3f",
 				"fa716395-6400-4b4b-9ab9-c7db09808206",
-				"b79fcc3d-0878-448b-9637-26c409229432"
+				"16c59b02-2803-4eeb-83aa-56fe65c7280e"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"44af2190-a756-4119-87e5-65fa654d7b3f",
+				"b79fcc3d-0878-448b-9637-26c409229432",
+				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
 				"07f4227d-f003-430b-8ab8-5bca23a10654",
 				"58eb4bbb-1253-4cac-bec9-0883c9b2beaf",
 				"963c7b40-d485-4d69-882e-f718c69be5ba",
@@ -870,6 +871,13 @@
 		{
 			"uuid": "b79fcc3d-0878-448b-9637-26c409229432",
 			"title": "Need to name Hero for RPC punch action!",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "16c59b02-2803-4eeb-83aa-56fe65c7280e",
+			"title": "Both status effect and player.gd tryign to remove status effects",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

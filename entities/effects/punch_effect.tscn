@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://baj0j2aj0r87a"]
 
-[ext_resource type="Script" uid="uid://ceobdprmmxtlg" path="res://entities/effects/punch_effect.gd" id="1_2knk8"]
+[ext_resource type="Script" uid="uid://ceobdprmmxtlg" path="res://entities/effects/particle_effect.gd" id="1_2knk8"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_swwsm"]
 spread = 180.0
