@@ -26,7 +26,7 @@ expanded_output_ports = [0]
 texture = SubResource("NoiseTexture2D_g70dc")
 
 [sub_resource type="Gradient" id="Gradient_g70dc"]
-offsets = PackedFloat32Array(0, 0.897623)
+offsets = PackedFloat32Array(0.84188, 0.997863)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1i62p"]
 gradient = SubResource("Gradient_g70dc")
@@ -107,7 +107,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-511.742, 158.11)
+graph_offset = Vector2(-797.355, -191.176)
 modes/cull = 2
 flags/unshaded = true
 flags/shadows_disabled = true

@@ -73,7 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19933, 1.12019, -1.14549)
 [node name="PowerUpSpawnPoint5" type="Marker3D" parent="PowerUpSpawner" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88166, 0.636582, -3.44482)
 
-[node name="KothManager" parent="." index="10" node_paths=PackedStringArray("koth_rings")]
+[node name="KothManager" parent="." index="11" node_paths=PackedStringArray("koth_rings")]
 koth_rings = [NodePath("KothRing1"), NodePath("KothRing2"), NodePath("KothRing3"), NodePath("KothRing4")]
 
 [node name="KothRing1" parent="KothManager" index="0" instance=ExtResource("2_esk4g")]

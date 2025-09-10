@@ -22,8 +22,7 @@ func execute_child() -> void:
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.RING_OF_FIRE,
 		"aoe_ttl" : RING_OF_FIRE_TTL,
-		"spawn_position" : global_position + (spawn_direction * 3),
-		"spawn_direction" : spawn_direction
+		"spawn_position" : global_position
 	});
 
 func is_usable_child() -> bool:

@@ -28,6 +28,7 @@
 			"tasks": [
 				"891e1fe7-0371-4f73-9609-128045e6b021",
 				"65532763-67e3-498b-8fe5-042820b441d1",
+				"f513085e-e0dd-4ae1-b67e-48099aa9297b",
 				"82726aec-877b-4d2f-9585-e5da7640aa49",
 				"788e604f-98a4-4326-aeaf-92c679aa7bbb",
 				"f8d5efb6-5d44-4865-a908-b126ab972b61",
@@ -41,8 +42,8 @@
 				"deb5fde0-a457-4a90-b440-960d01b7d500",
 				"2e93210f-3e93-4e3c-8004-858b13519cab",
 				"7d2b472b-17ff-45b4-97b5-d047152458e8",
-				"e84e04d9-d709-47d5-bade-40c46486a266",
 				"aff81dcc-8cab-4ffc-8327-c25ef012536a",
+				"0e57903a-0b33-4e14-a856-d582aadbc098",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"236d2668-6a73-4681-9dd9-573d84bb982c",
@@ -54,7 +55,6 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"223b125d-4861-4a2d-9a9b-d965859f09e3",
 				"fa716395-6400-4b4b-9ab9-c7db09808206",
 				"16c59b02-2803-4eeb-83aa-56fe65c7280e"
 			]
@@ -63,6 +63,8 @@
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"e84e04d9-d709-47d5-bade-40c46486a266",
+				"223b125d-4861-4a2d-9a9b-d965859f09e3",
 				"44af2190-a756-4119-87e5-65fa654d7b3f",
 				"b79fcc3d-0878-448b-9637-26c409229432",
 				"fe0ea389-8224-4b69-89c2-9928f0a4224d",
@@ -880,6 +882,20 @@
 			"title": "Both status effect and player.gd tryign to remove status effects",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "f513085e-e0dd-4ae1-b67e-48099aa9297b",
+			"title": "Add animation to ring of fire, probably same as lay trap for woody",
+			"description": "",
+			"category": "e30bcdd5-0c2d-466e-ba39-49d85d5d0b57",
+			"steps": []
+		},
+		{
+			"uuid": "0e57903a-0b33-4e14-a856-d582aadbc098",
+			"title": "Third Person Game Mode?",
+			"description": "",
+			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
 			"steps": []
 		}
 	],

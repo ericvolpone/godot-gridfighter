@@ -7,10 +7,7 @@ var blizzard_scene: PackedScene = preload("res://entities/objects/slushy/blizzar
 var harden_scene: PackedScene = preload("res://entities/player/heroes/rocky/actions/harden.tscn")
 var thorn_trap_scene: PackedScene = preload("res://entities/player/heroes/woody/action/thorn_trap/thorn_trap.tscn")
 var bush_scene: PackedScene = preload("res://entities/objects/map/environment/bush.tscn")
-#endregion
-
-#region Var:Effects
-var shocked_effect: PackedScene = preload("res://entities/effects/statuses/shocked_effect.tscn")
+var ring_of_fire_scene: PackedScene = preload("res://entities/objects/torchy/ring_of_fire.tscn")
 #endregion
 
 
@@ -39,6 +36,8 @@ func _configure_aoe_spawner() -> void:
 			AOE.Type.BUSH:
 				aoe = bush_scene.instantiate()
 				aoe.is_growing = true
+			AOE.Type.RING_OF_FIRE:
+				aoe = ring_of_fire_scene.instantiate()
 			_:
 				pass
 		

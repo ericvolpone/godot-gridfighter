@@ -39,7 +39,8 @@ func _initialize_from_spawn_data() -> void:
 			break
 	if not is_tracking:
 		global_position = spawn_data["spawn_position"]
-		look_at(global_position - spawn_data["spawn_direction"])
+		if spawn_data.has("spawn_direction"):
+			look_at(global_position - spawn_data["spawn_direction"])
 	else:
 		global_position = owning_player.global_position
 
