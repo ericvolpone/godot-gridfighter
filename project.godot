@@ -13,7 +13,8 @@ config_version=5
 config/name="GridFighter"
 run/main_scene="uid://cly568e1kmem5"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cvbryclb7q3qp"
+config/windows_native_icon="res://_game_icons/icon_256px.ico"
 
 [autoload]
 

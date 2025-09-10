@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jyqyq4otw8bj"]
+
+[ext_resource type="Script" uid="uid://bv1jdihii0268" path="res://models/sprites/generated_sprites/png_extractor.gd" id="1_dvtjy"]
+[ext_resource type="Texture2D" uid="uid://dmat16clmpm7i" path="res://_game_icons/game_icon_64px.tres" id="2_34tai"]
+
+[node name="PngExtractor" type="Node2D"]
+script = ExtResource("1_dvtjy")
+image_texture = ExtResource("2_34tai")
+png_name = "icon_64px"
