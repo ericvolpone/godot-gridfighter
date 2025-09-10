@@ -126,7 +126,7 @@ noise = SubResource("FastNoiseLite_mjkyc")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3gytd"]
 render_priority = 0
 shader = SubResource("Shader_mjkyc")
-shader_parameter/albedo = Color(8.42288e-07, 0.316179, 0.143938, 1)
+shader_parameter/albedo = Color(0.396035, 0.126275, 0.121854, 1)
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.0
