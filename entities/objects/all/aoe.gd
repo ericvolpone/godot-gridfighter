@@ -49,7 +49,7 @@ func _initialize_from_spawn_data() -> void:
 	if get_area_3d() and is_multiplayer_authority():
 		get_area_3d().monitoring = true;
 
-func _tick(delta: float, _tick: int) -> void:
+func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion():
 		return
 

@@ -62,6 +62,8 @@ var is_in_menu: bool = false;
 var gust_total_direction: Vector3 = Vector3.ZERO
 var jump_pad_velocity: Vector3 = Vector3.ZERO
 var colliding_aoes: Dictionary[AOE, bool] = {}
+var tracking_aoes: Dictionary[AOE, bool] = {}
+var status_effects: Dictionary[StatusEffect, bool] = {}
 
 		#endregion
 		#region Var:PlayerStats:StatusEffects

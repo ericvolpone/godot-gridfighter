@@ -20,7 +20,7 @@ func _ready() -> void:
 	_initialize_from_spawn_data()
 	NetworkTime.on_tick.connect(_tick);
 
-func _tick(delta: float, tick: int) -> void:
+func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion(): return
 	alive_time += delta
 	if is_multiplayer_authority() and alive_time >= projectile_ttl:

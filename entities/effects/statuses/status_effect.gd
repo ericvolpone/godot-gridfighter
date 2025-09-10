@@ -39,7 +39,7 @@ func _initialize_from_spawn_data() -> void:
 
 	effect_ttl = spawn_data["effect_ttl"]
 
-func _tick(delta: float, _tick: int) -> void:
+func _tick(delta: float, _tick_id: int) -> void:
 	global_position = tracking_player.global_position
 	effect_ttl -= delta
 	if effect_ttl <= 0 and is_multiplayer_authority():

@@ -17,6 +17,9 @@ var hero_selection_menu_scene: PackedScene
 
 # Lobby Variables
 @onready var scoreboard: Scoreboard = $Scoreboard
+@onready var water_floor: MeshInstance3D = $WaterFloor
+var water_floor_albedo: Color
+
 # TODO: I can probably just like... do a groups check or something
 var player_chars: Dictionary = {}
 # TODO: It may clean things up to actually sync this some day
@@ -24,6 +27,9 @@ var lobby_settings: LobbySettings;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var water_shader_material: ShaderMaterial = water_floor.mesh.material
+	water_floor_albedo = water_shader_material.get_shader_parameter("albedo")
+	
 	hero_selection_menu_scene = load("res://entities/menu/hero_select/hero_selection_menu.tscn")
 
 	# Init default settings
@@ -87,5 +93,6 @@ func handle_player_death(player: Player) -> void:
 @rpc("call_local", "authority", "unreliable")
 func _spawn_death_explosion(location: Vector3) -> void:
 	var death: PlayerDeath = death_scene.instantiate();
+	death.explosion_color = water_floor_albedo
 	add_child(death)
 	death.global_position = location
