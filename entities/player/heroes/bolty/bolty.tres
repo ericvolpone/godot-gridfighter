@@ -12,4 +12,6 @@ display_name = "Bolty"
 hero_scene = ExtResource("2_gjbsa")
 hero_portrait = ExtResource("1_gjbsa")
 hero_name = ExtResource("1_7ywcc")
+starting_move_speed = 6.0
+starting_strength = 3.0
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

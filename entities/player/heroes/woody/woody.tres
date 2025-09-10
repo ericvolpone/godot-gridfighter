@@ -12,4 +12,6 @@ display_name = "Woody"
 hero_scene = ExtResource("1_06gbu")
 hero_portrait = ExtResource("2_p31cy")
 hero_name = ExtResource("1_yl655")
+starting_move_speed = 4.0
+starting_strength = 5.0
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

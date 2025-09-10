@@ -1,9 +1,14 @@
 class_name Hero extends Node3D
 
-# Animation Data
+#region Signals
 signal punch_frame;
+#endregion
 
+#region Variables
+	#region Var:Definition
 var definition: HeroDefinition
+	#endregion
+#endregion
 
 # HUD
 const HUD_PATH := "res://entities/ui/hud/ActionHUDContainer.tscn"
@@ -60,3 +65,9 @@ func _init_combat_actions() -> void:
 # Helpers
 func get_hero_id() -> int:
 	return definition.hero_id
+
+func get_starting_move_speed() -> float:
+	return definition.starting_move_speed
+
+func get_starting_strength() -> float:
+	return definition.starting_strength

@@ -62,7 +62,7 @@ var is_in_menu: bool = false;
 var gust_total_direction: Vector3 = Vector3.ZERO
 var jump_pad_velocity: Vector3 = Vector3.ZERO
 var colliding_aoes: Dictionary[AOE, bool] = {}
-var tracking_aoes: Dictionary[AOE, bool] = {}
+var active_aoes: Dictionary[AOE, bool] = {}
 var status_effects: Dictionary[StatusEffect, bool] = {}
 
 		#endregion
@@ -89,15 +89,11 @@ const ROOT_SLOW_MODIFIER: float = .9;
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
 
-var starting_move_speed: float = 4.0;
-var current_move_speed: float = starting_move_speed;
 var speed_boost_modifier: float = 0;
 var slow_modifier: float = 0;
 var max_player_speed: float = 10;
 		#endregion
 		#region Var:PlayerStats:Strength
-var starting_strength: float = 5;
-var current_strength: float = starting_strength;
 var current_strength_modifier: float = 0;
 var max_player_strength: float = 10;
 		#endregion
@@ -198,7 +194,10 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	#region Movement
 func movement_speed() -> float:
 	var modifier: float = clampf(slow_modifier, 0, 1)
-	return current_move_speed * (1 - modifier)
+	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
+
+func strength() -> float:
+	return hero.get_starting_strength() + current_strength_modifier
 
 func process_knock() -> void:
 	if(is_knocked and state_machine.state != &"KnockedState"):
@@ -312,19 +311,17 @@ func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;
 	speed_boost_modifier += value;
-	current_move_speed += value;
 	
-	if current_move_speed >= max_player_speed:
-		current_move_speed = max_player_speed
+	if speed_boost_modifier >= max_player_speed - hero.get_starting_move_speed():
+		speed_boost_modifier = max_player_speed - hero.get_starting_move_speed()
 
 func apply_strength_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;
 	current_strength_modifier += value;
-	current_strength += value;
 	
-	if current_strength >= max_player_strength:
-		current_strength = max_player_strength
+	if current_strength_modifier >= max_player_strength - hero.get_starting_strength():
+		current_strength_modifier = max_player_strength - hero.get_starting_strength()
 
 #endregion
 	#region Func:Animation

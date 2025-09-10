@@ -19,11 +19,27 @@ func respawn_player(player: Player) -> void:
 			player.velocity = Vector3.ZERO
 			player.shock_value = 0;
 			player.burn_value = 0
+			player.speed_boost_modifier = 0
+			player.current_strength_modifier = 0
 			if player.is_cold:
 				player.remove_cold()
 			if player.is_frozen:
 				player.remove_freeze()
+			if player.is_rooted:
+				player.remove_root()
 			
+			# Remove status and AOE nodes
+			for status_effect: StatusEffect in player.status_effects.keys():
+				player.status_effects.erase(status_effect)
+				if not status_effect.is_queued_for_deletion():
+					status_effect.queue_free()
+			
+			for aoe: AOE in player.active_aoes.keys():
+				if aoe.is_tracking:
+					player.active_aoes.erase(aoe)
+					if not aoe.is_queued_for_deletion():
+						aoe.queue_free()
+
 			get_tree().create_timer(respawn_time + 1).timeout.connect(func() -> void:
 				respawn_point_availability[respawn_point] = true;
 			)

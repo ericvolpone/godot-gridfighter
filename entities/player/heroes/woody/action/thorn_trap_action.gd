@@ -32,4 +32,4 @@ func _kneel_frame_enact() -> void:
 	});
 
 func is_usable_child() -> bool:
-	return true;
+	return hero.player.is_on_floor();

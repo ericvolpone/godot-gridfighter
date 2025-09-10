@@ -12,4 +12,6 @@ display_name = "Rocky"
 hero_scene = ExtResource("1_nq00h")
 hero_portrait = ExtResource("1_p8otv")
 hero_name = ExtResource("1_dmjof")
+starting_move_speed = 3.0
+starting_strength = 6.0
 metadata/_custom_type_script = "uid://mjrdfur8vhg8"

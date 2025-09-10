@@ -51,7 +51,7 @@ func handle_animation_signal() -> void:
 			continue
 		if obj is RigidBody3D and obj.is_in_group(Groups.PUNCHABLE_RB):  # whitelist
 			var to_obj: Vector3 = (obj.global_position - global_position).normalized()
-			var force: Vector3 = to_obj * hero.player.current_strength * 20  # Tune force as needed
+			var force: Vector3 = to_obj * hero.player.strength() * 20  # Tune force as needed
 			obj.apply_central_impulse(force)
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
 			var player_obj: Player = obj
@@ -59,4 +59,4 @@ func handle_animation_signal() -> void:
 				continue
 			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
 			var force: Vector3 = to_obj * 2  # Tune force as needed
-			player_obj.knock_back(force, hero.player.current_strength)
+			player_obj.knock_back(force, hero.player.strength())

@@ -5,6 +5,8 @@ class_name HeroDefinition extends Resource
 @export var hero_scene: PackedScene;
 @export var hero_portrait: ImageTexture
 @export var hero_name: Texture2D
+@export var starting_move_speed: float
+@export var starting_strength: float
 
 func instantiate() -> Hero:
 	var hero: Hero = hero_scene.instantiate();

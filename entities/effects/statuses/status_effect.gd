@@ -34,6 +34,7 @@ func _initialize_from_spawn_data() -> void:
 	for player: Player in players:
 		if player.player_id == owner_player_id:
 			tracking_player = player
+			player.status_effects[self] = true
 			break
 	global_position = tracking_player.global_position
 
@@ -43,4 +44,5 @@ func _tick(delta: float, _tick_id: int) -> void:
 	global_position = tracking_player.global_position
 	effect_ttl -= delta
 	if effect_ttl <= 0 and is_multiplayer_authority():
+		tracking_player.status_effects.erase(self)
 		queue_free()

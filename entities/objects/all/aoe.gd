@@ -36,6 +36,7 @@ func _initialize_from_spawn_data() -> void:
 	for player: Player in players:
 		if player.player_id == owner_peer_id:
 			owning_player = player
+			player.active_aoes[self] = true
 			break
 	if not is_tracking:
 		global_position = spawn_data["spawn_position"]
@@ -58,6 +59,7 @@ func _tick(delta: float, _tick_id: int) -> void:
 	
 	aoe_ttl -= delta
 	if aoe_ttl <= 0 and is_multiplayer_authority():
+		owning_player.active_aoes.erase(self)
 		queue_free()
 
 func apply_effect(_player: Player, _delta: float) -> void:
