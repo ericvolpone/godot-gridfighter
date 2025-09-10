@@ -1,6 +1,7 @@
 class_name Fireball extends Projectile
 
 func _ready() -> void:
+	super._ready();
 	contact_monitor = true
 	max_contacts_reported = 4
 	self.body_entered.connect(_on_body_entered)

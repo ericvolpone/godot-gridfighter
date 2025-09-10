@@ -6,12 +6,28 @@ enum Type {
 	FIREBALL
 }
 
+const PROJECTILE_TTL: float = 5;
+
+var spawn_data: Dictionary
+
 var direction: Vector3 = Vector3.ZERO
 var speed: float = 0;
 var force: float = 0
 var owner_peer_id: int = -1
+var alive_time: float = 0;
 
-func initialize_from_spawn_data(spawn_data: Dictionary) -> void:
+
+func _ready() -> void:
+	_initialize_from_spawn_data()
+	NetworkTime.on_tick.connect(_tick);
+
+func _tick(delta: float, tick: int) -> void:
+	if is_queued_for_deletion(): return
+	alive_time += delta
+	if is_multiplayer_authority() and alive_time >= PROJECTILE_TTL:
+		queue_free();
+
+func _initialize_from_spawn_data() -> void:
 	global_position = spawn_data["spawn_location"]
 	direction = spawn_data["direction"]
 	speed = spawn_data.get("speed", 0)
@@ -20,9 +36,9 @@ func initialize_from_spawn_data(spawn_data: Dictionary) -> void:
 	look_at(global_position - direction)
 
 	if(speed > 0):
-		call_deferred("_apply_initial_velocity")
+		_apply_initial_velocity()
 	elif force > 0:
-		call_deferred("_apply_initial_force")
+		_apply_initial_force()
 	else:
 		push_error("Must provide a positive speed or force to projectile spawner")
 
