@@ -13,7 +13,7 @@ func _ready() -> void:
 	hero_image.texture = hero_definition.hero_portrait
 	name_image.texture = hero_definition.hero_name
 	var name_size: Vector2 = name_image.texture.get_size()
-	var aspect_ratio: int = name_size.x / 134
+	var aspect_ratio: float = name_size.x / 134.0
 	
 	name_image.size = name_size / aspect_ratio 
 	name_image.position.x -= name_image.size.x / 2
