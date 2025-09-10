@@ -47,7 +47,8 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"fa716395-6400-4b4b-9ab9-c7db09808206"
+				"fa716395-6400-4b4b-9ab9-c7db09808206",
+				"aae400b9-3952-4460-9b84-a39740f33eb0"
 			]
 		},
 		{
@@ -896,6 +897,13 @@
 			"title": "Third Person Game Mode?",
 			"description": "",
 			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "aae400b9-3952-4460-9b84-a39740f33eb0",
+			"title": "Animations a bit glitchy on connected peers",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

@@ -144,7 +144,7 @@ noise = SubResource("FastNoiseLite_2bfne")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3vcw"]
 render_priority = 0
 shader = SubResource("Shader_py8lp")
-shader_parameter/albedo = Color(7.70092e-07, 0.615292, 0.615489, 1)
+shader_parameter/albedo = Color(0.215588, 0.200078, 0.350668, 1)
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.0
@@ -183,6 +183,11 @@ transform = Transform3D(-0.931693, -0.353442, -0.0838302, -0.163924, 0.203154, 0
 light_color = Color(0.999697, 0.823163, 0.880265, 1)
 light_energy = 0.8
 shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.233004, 6.82296, 14.7074)
+light_color = Color(0.659665, 0.26346, 0.620087, 1)
+spot_range = 57.51
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -1.64285, 8.57687, 15.7015)
