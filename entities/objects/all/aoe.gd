@@ -50,6 +50,9 @@ func _initialize_from_spawn_data() -> void:
 		get_area_3d().monitoring = true;
 
 func _tick(delta: float, _tick: int) -> void:
+	if is_queued_for_deletion():
+		return
+
 	if is_tracking and owning_player:
 		global_position = owning_player.global_position
 	

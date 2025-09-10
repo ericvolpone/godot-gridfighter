@@ -275,23 +275,23 @@ func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 func process_combat_actions_state() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
-		if not multiplayer.is_server():
+		if multiplayer.is_server() and not brain.is_multiplayer_authority():
 			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 1, hero.combat_action_1.cd_available_time)
 		state_machine.transition(&"PunchState")
 	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
 		hero.combat_action_2.execute()
-		if not multiplayer.is_server():
+		if multiplayer.is_server() and not brain.is_multiplayer_authority():
 			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 2, hero.combat_action_2.cd_available_time)
 		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
-		if not multiplayer.is_server():
+		if multiplayer.is_server() and not brain.is_multiplayer_authority():
 			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 3, hero.combat_action_3.cd_available_time)
 		if hero.combat_action_3.is_action_state:
 			state_machine.transition(hero.combat_action_3.action_state_string)
 	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
 		hero.combat_action_4.execute()
-		if not multiplayer.is_server():
+		if multiplayer.is_server() and not brain.is_multiplayer_authority():
 			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 4, hero.combat_action_4.cd_available_time)
 		if hero.combat_action_4.is_action_state:
 			state_machine.transition(hero.combat_action_4.action_state_string)
@@ -375,25 +375,16 @@ func apply_root(duration: float) -> void:
 	root_time_remaining = duration
 
 func remove_cold() -> void:
-	if cold_effect:
-		cold_effect.queue_free()
-		cold_effect = null;
 	cold_time_remaining = 0
 	is_cold = false;
 	slow_modifier -= COLD_SLOW_MODIFIER;
 
 func remove_freeze() -> void:
-	if frozen_effect:
-		frozen_effect.queue_free()
-		frozen_effect = null;
 	freeze_time_remaining = 0
 	is_frozen = false;
 	slow_modifier -= FREEZE_SLOW_MODIFIER;
 
 func remove_root() -> void:
-	if rooted_effect:
-		rooted_effect.queue_free()
-		rooted_effect = null;
 	root_time_remaining = 0
 	is_rooted = false;
 	slow_modifier -= ROOT_SLOW_MODIFIER;
