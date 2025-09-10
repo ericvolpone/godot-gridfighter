@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxc3fhi5rl6ld"]
+[gd_scene load_steps=8 format=3 uid="uid://dxc3fhi5rl6ld"]
 
 [ext_resource type="Script" uid="uid://n461ouwipj3n" path="res://entities/effects/death/player_death.gd" id="1_jbdyn"]
 
@@ -15,8 +15,19 @@ gravity = Vector3(0, 0, 0)
 hue_variation_min = -0.21
 hue_variation_max = 0.26
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jbdyn"]
+noise_type = 0
+offset = Vector3(184.4, 0, 0)
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j711k"]
+noise = SubResource("FastNoiseLite_jbdyn")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbdyn"]
-albedo_color = Color(0.00778005, 0.776778, 0.806625, 1)
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 0.05
+emission_texture = SubResource("NoiseTexture2D_j711k")
 
 [sub_resource type="SphereMesh" id="SphereMesh_j711k"]
 material = SubResource("StandardMaterial3D_jbdyn")
@@ -31,13 +42,14 @@ script = ExtResource("1_jbdyn")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 emitting = false
-amount = 100
+amount = 80
 lifetime = 4.0
 one_shot = true
 speed_scale = 2.42
 explosiveness = 0.8
 use_fixed_seed = true
 seed = 1941193095
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_j711k")
 draw_pass_1 = SubResource("SphereMesh_j711k")
 draw_skin = SubResource("Skin_qk5hc")
