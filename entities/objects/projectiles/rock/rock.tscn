@@ -5,9 +5,9 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t8sxr"]
 resource_local_to_scene = true
-friction = 0.5
+friction = 3.0
 rough = true
-bounce = 0.5
+bounce = 0.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t8sxr"]
 radius = 0.4
@@ -23,6 +23,7 @@ properties/1/replication_mode = 1
 [node name="Rock_RigidBody3D" type="RigidBody3D" groups=["PunchableRB"]]
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_t8sxr")
+gravity_scale = 0.8
 script = ExtResource("1_2dker")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

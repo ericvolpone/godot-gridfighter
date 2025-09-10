@@ -6,14 +6,13 @@ enum Type {
 	FIREBALL
 }
 
-const PROJECTILE_TTL: float = 5;
-
 var spawn_data: Dictionary
 
 var direction: Vector3 = Vector3.ZERO
 var speed: float = 0;
 var force: float = 0
 var owner_peer_id: int = -1
+var projectile_ttl: float = 5 #Default, overridable via spawn data
 var alive_time: float = 0;
 
 
@@ -24,7 +23,7 @@ func _ready() -> void:
 func _tick(delta: float, tick: int) -> void:
 	if is_queued_for_deletion(): return
 	alive_time += delta
-	if is_multiplayer_authority() and alive_time >= PROJECTILE_TTL:
+	if is_multiplayer_authority() and alive_time >= projectile_ttl:
 		queue_free();
 
 func _initialize_from_spawn_data() -> void:
@@ -33,6 +32,8 @@ func _initialize_from_spawn_data() -> void:
 	speed = spawn_data.get("speed", 0)
 	force = spawn_data.get("force", 0)
 	owner_peer_id = spawn_data["owner_peer_id"]
+	if spawn_data.has("projectile_ttl"):
+		projectile_ttl = spawn_data["projectile_ttl"]
 	look_at(global_position - direction)
 
 	if(speed > 0):
