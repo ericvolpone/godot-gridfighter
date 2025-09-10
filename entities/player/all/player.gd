@@ -105,7 +105,7 @@ var max_player_strength: float = 10;
 @export var is_standing_back_up: bool = false;
 @export var is_blocking: bool = false;
 @export var is_respawning: bool = false;
-@onready var global_combat_cooldown_next_use: float = Time.get_unix_time_from_system()
+@onready var global_combat_cooldown_next_use: float = NetworkTime.time
 var is_immune_to_knockback: bool = false;
 	#endregion
 	#region Var:Netfox
@@ -275,16 +275,24 @@ func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 func process_combat_actions_state() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
+		if not multiplayer.is_server():
+			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 1, hero.combat_action_1.cd_available_time)
 		state_machine.transition(&"PunchState")
 	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
 		hero.combat_action_2.execute()
+		if not multiplayer.is_server():
+			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 2, hero.combat_action_2.cd_available_time)
 		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
+		if not multiplayer.is_server():
+			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 3, hero.combat_action_3.cd_available_time)
 		if hero.combat_action_3.is_action_state:
 			state_machine.transition(hero.combat_action_3.action_state_string)
 	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
 		hero.combat_action_4.execute()
+		if not multiplayer.is_server():
+			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 4, hero.combat_action_4.cd_available_time)
 		if hero.combat_action_4.is_action_state:
 			state_machine.transition(hero.combat_action_4.action_state_string)
 	#endregion
@@ -389,6 +397,24 @@ func remove_root() -> void:
 	root_time_remaining = 0
 	is_rooted = false;
 	slow_modifier -= ROOT_SLOW_MODIFIER;
+
+	#endregion
+	#region Func:RPC
+
+@rpc("call_local", "any_peer", "reliable")
+func _update_action_cooldown(action_number: int, next_available_use: float) -> void:
+	if brain.is_multiplayer_authority():
+		match action_number:
+			1:
+				hero.combat_action_1.cd_available_time = next_available_use
+			2:
+				hero.combat_action_2.cd_available_time = next_available_use
+			3:
+				hero.combat_action_3.cd_available_time = next_available_use
+			4:
+				hero.combat_action_4.cd_available_time = next_available_use
+			_:
+				push_error("Unrecognized action number for updating cooldown")
 
 	#endregion
 	#region Func:Unused?

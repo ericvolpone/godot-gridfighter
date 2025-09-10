@@ -17,7 +17,7 @@ var seconds_between_rings: float = 1
 var current_ring: KothRing = null;
 
 var time_between_scoring: float = 1.5;
-var time_until_next_score: float = Time.get_unix_time_from_system();
+var time_until_next_score: float = NetworkTime.time;
 
 # Utility
 var rng: RandomNumberGenerator = RandomNumberGenerator.new();
@@ -59,7 +59,7 @@ func _physics_process(_delta: float) -> void:
 func increment_koth_score() -> void:
 	if not is_multiplayer_authority(): return;
 	
-	var current_time: float = Time.get_unix_time_from_system()
+	var current_time: float = NetworkTime.time
 	
 	if(current_time > time_until_next_score):
 		if(current_ring != null):
@@ -99,7 +99,7 @@ func create_timer_for_next_hill() -> void:
 			current_ring_index = rng.randi_range(0, ring_index_count-1)
 			current_ring = koth_rings[current_ring_index]
 			current_ring.mark_active()
-			time_until_next_score = Time.get_unix_time_from_system() + time_between_scoring
+			time_until_next_score = NetworkTime.time + time_between_scoring
 			create_timer_for_next_hill()
 			)
 		)

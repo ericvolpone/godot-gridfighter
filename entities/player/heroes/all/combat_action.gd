@@ -6,21 +6,21 @@ const GLOBAL_CD: float = 0.5;
 var is_interuptable: bool = true;
 var is_action_state: bool = false;
 var action_state_string: StringName;
-var cd_available_time: float = Time.get_unix_time_from_system()
+var cd_available_time: float = NetworkTime.time
 
 @onready var hero: Hero = get_parent();
 
 func is_on_cooldown() -> bool:
-	var time: float = Time.get_unix_time_from_system();
+	var time: float = NetworkTime.time;
 	return time < cd_available_time;
 
 func get_remaining_cooldown_time_in_secs() -> int:
-	var time: float = Time.get_unix_time_from_system();
+	var time: float = NetworkTime.time;
 	var time_remaining: float = cd_available_time - time;
 	return ceil(time_remaining)
 
 func is_usable() -> bool:
-	var time: float = Time.get_unix_time_from_system();
+	var time: float = NetworkTime.time;
 	
 	return 	hero.player.has_control() and \
 		not is_on_cooldown() and \
@@ -34,7 +34,7 @@ func execute() -> void:
 	if !is_usable():
 		pass
 	
-	var execution_time: float = Time.get_unix_time_from_system();
+	var execution_time: float = NetworkTime.time
 	cd_available_time = execution_time + get_cd_time();
 	hero.player.global_combat_cooldown_next_use = execution_time + GLOBAL_CD;
 	execute_child();
