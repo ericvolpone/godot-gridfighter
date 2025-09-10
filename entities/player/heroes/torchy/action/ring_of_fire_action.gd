@@ -6,6 +6,9 @@ const RING_OF_FIRE_TTL: float = 4
 
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
+	
+	is_action_state = true;
+	action_state_string = "KneelState"
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/RingOfFireActionIcon.png";
@@ -17,7 +20,9 @@ func get_cd_time() -> float:
 func execute_child() -> void:
 	if not is_multiplayer_authority(): return;
 
-	var spawn_direction: Vector3 = hero.player.get_facing_direction()
+func _kneel_frame_enact() -> void:
+	if not is_multiplayer_authority(): return;
+
 	aoe_spawner.spawn_aoe.rpc({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.RING_OF_FIRE,

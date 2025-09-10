@@ -179,6 +179,15 @@ animation_name = "master_animations/Burnt"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://bek2jfukllxlf"
 
+[node name="KneelState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_3cock")
+state_time = 1.5
+can_move = false
+can_jump = false
+animation_name = "master_animations/Kneel"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
+
 [node name="Shadow" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_o6siw")
 

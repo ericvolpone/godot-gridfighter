@@ -5,6 +5,9 @@ const THORN_TRAP_TTL: float = 20
 
 func _ready() -> void:
 	if not is_multiplayer_authority(): return;
+	
+	is_action_state = true
+	action_state_string = "KneelState"
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/ThornTrapActionIcon.png";
@@ -14,6 +17,9 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child() -> void:
+	if not is_multiplayer_authority(): return;
+
+func _kneel_frame_enact() -> void:
 	if not is_multiplayer_authority(): return;
 	
 	var spawn_direction: Vector3 = hero.player.get_facing_direction()
