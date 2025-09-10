@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dqr1v6pc5o1o"
-path="res://.godot/imported/YBotPacked_Kneel.glb-aad0a075b29e62fd261ee48f0035c4c7.scn"
+uid="uid://cxvvfjpd3pr50"
+path="res://.godot/imported/YBotPacked.glb-65c8a71cb2864c66086a31ea16ca94da.scn"
 
 [deps]
 
-source_file="res://models/master/YBotPacked_Kneel.glb"
-dest_files=["res://.godot/imported/YBotPacked_Kneel.glb-aad0a075b29e62fd261ee48f0035c4c7.scn"]
+source_file="res://models/master/YBotPacked.glb"
+dest_files=["res://.godot/imported/YBotPacked.glb-65c8a71cb2864c66086a31ea16ca94da.scn"]
 
 [params]
 
@@ -36,12 +36,6 @@ _subresources={
 "nodes": {
 "PATH:Armature/Skeleton3D": {
 "retarget/bone_map": Resource("res://models/master/Mixamo BoneMap.tres")
-},
-"PATH:Armature_001": {
-"import/skip_import": true
-},
-"PATH:Armature_002": {
-"import/skip_import": true
 }
 }
 }

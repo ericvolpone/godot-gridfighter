@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=18 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://nvvaqfdybxph" path="res://entities/player/all/state/action_state.gd" id="10_3cock"]
 [ext_resource type="Script" uid="uid://dbncsmhq3p71b" path="res://entities/player/all/state/knocked_state.gd" id="11_x6u7t"]
 [ext_resource type="Script" uid="uid://dloeblieqj300" path="res://entities/player/all/state/respawn_state.gd" id="12_o6siw"]
-[ext_resource type="Material" uid="uid://bgxx5v3oh5tmu" path="res://resources/materials/mat_transparent.tres" id="13_gurk5"]
 [ext_resource type="Script" uid="uid://bek2jfukllxlf" path="res://entities/player/all/state/status_effect_state.gd" id="13_tictr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
@@ -26,10 +25,6 @@ properties/1/path = NodePath(".:is_respawning")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_o6siw"]
-material = ExtResource("13_gurk5")
-height = 0.001
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gurk5"]
 noise_type = 5
 seed = 2
@@ -41,12 +36,10 @@ height = 64
 noise = SubResource("FastNoiseLite_gurk5")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gurk5"]
+shading_mode = 0
 albedo_color = Color(0.806697, 0.100879, 0.181326, 1)
 albedo_texture = SubResource("NoiseTexture2D_g2ike")
-metallic_specular = 0.45
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.01
+disable_receive_shadows = true
 
 [node name="Player_CharacterBody3D" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -188,11 +181,18 @@ animation_name = "master_animations/Kneel"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
 
-[node name="Shadow" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_o6siw")
+[node name="UppercutState" type="Node" parent="RewindableStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_3cock")
+state_time = 0.9
+can_move = false
+can_jump = false
+animation_name = "master_animations/UpperCut"
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://nvvaqfdybxph"
 
 [node name="RingIndicator" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16536, 0)
+cast_shadow = 0
 radius = 0.75
 height = 0.001
 material = SubResource("StandardMaterial3D_gurk5")

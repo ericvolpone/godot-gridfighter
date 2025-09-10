@@ -1,7 +1,5 @@
 class_name Rocky extends Hero
 
-signal cast_frame
-
 # Interface Methods
 func _init_combat_actions() -> void:
 	combat_action_3 = ThrowRockAction.new()
@@ -12,6 +10,3 @@ func _init_combat_actions() -> void:
 		)
 	combat_action_4 = HardenAction.new()
 	combat_action_4.name = "HardenAction"
-
-func _signal_cast_frame() -> void:
-	emit_signal(cast_frame.get_name())

@@ -1,8 +1,5 @@
 class_name Torchy extends Hero
 
-signal cast_frame
-signal kneel_frame
-
 # Interface Methods
 func _init_combat_actions() -> void:
 	combat_action_3 = FireballAction.new()
@@ -16,9 +13,3 @@ func _init_combat_actions() -> void:
 	kneel_frame.connect(func() -> void:
 		combat_action_4._kneel_frame_enact()
 		)
-
-func _signal_cast_frame() -> void:
-	emit_signal(cast_frame.get_name())
-
-func _signal_kneel_frame() -> void:
-	emit_signal(kneel_frame.get_name())

@@ -2,6 +2,9 @@ class_name Hero extends Node3D
 
 #region Signals
 signal punch_frame;
+signal cast_frame;
+signal kneel_frame
+signal uppercut_frame
 #endregion
 
 #region Variables
@@ -54,8 +57,14 @@ func init_combat_actions() -> void:
 			action_hud_container.add_action(combat_action_4)
 
 # Animation Signals
-func emit_punch_signal() -> void:
-	emit_signal("punch_frame")
+func _emit_punch_signal() -> void:
+	emit_signal(punch_frame.get_name())
+func _emit_cast_signal() -> void:
+	emit_signal(cast_frame.get_name())
+func _emit_kneel_signal() -> void:
+	emit_signal(kneel_frame.get_name())
+func _emit_uppercut_signal() -> void:
+	emit_signal(uppercut_frame.get_name())
 
 # Interface Methods
 func _init_combat_actions() -> void:

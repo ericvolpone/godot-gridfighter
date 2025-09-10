@@ -1,7 +1,5 @@
 class_name Slushy extends Hero
 
-signal cast_frame
-
 # Interface Methods
 func _init_combat_actions() -> void:
 	combat_action_3 = IceBoltAction.new()
@@ -12,6 +10,6 @@ func _init_combat_actions() -> void:
 		)
 	combat_action_4 = BlizzardAction.new()
 	combat_action_4.name = "BlizzardAction"
-
-func _signal_cast_frame() -> void:
-	emit_signal(cast_frame.get_name())
+	uppercut_frame.connect(func() -> void:
+		combat_action_4._uppercut_frame_enact()
+		)
