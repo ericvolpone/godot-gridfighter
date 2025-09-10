@@ -17,8 +17,10 @@ script = ExtResource("1_70fbe")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 376.0
-offset_bottom = 264.0
+offset_left = 8.0
+offset_top = 97.0
+offset_right = 423.0
+offset_bottom = 361.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -125,9 +127,10 @@ virtual_keyboard_type = 2
 
 [node name="PowerUpContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_top = 272.0
-offset_right = 376.0
-offset_bottom = 392.0
+offset_left = 8.0
+offset_top = 377.0
+offset_right = 384.0
+offset_bottom = 497.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PowerUpContainer"]
 layout_mode = 2
@@ -171,8 +174,8 @@ layout_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.01
-offset_left = 431.0
-offset_right = 729.0
+offset_left = 8.0
+offset_right = 306.0
 offset_bottom = 72.0
 
 [node name="HostSettings" type="HBoxContainer" parent="HostContainer"]

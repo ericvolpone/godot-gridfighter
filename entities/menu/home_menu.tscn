@@ -185,7 +185,7 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.27391, 15.7015)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -1.64285, 8.57687, 15.7015)
 fov = 50.0
 
 [node name="WaterFloor" type="MeshInstance3D" parent="."]
@@ -199,6 +199,31 @@ mesh = SubResource("BoxMesh_fiqdu")
 [node name="Rocky" parent="." instance=ExtResource("2_wr481")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97, 4, 8.778)
 script = null
+
+[node name="GeneralSkeleton" parent="Rocky/Armature" index="0"]
+bones/0/position = Vector3(-0.0761752, 0.519551, -0.0371707)
+bones/0/rotation = Quaternion(-0.0366419, -0.0170568, 0.0545, 0.997696)
+bones/1/rotation = Quaternion(0.0718575, 0.0099251, 0.0559747, 0.995794)
+bones/2/rotation = Quaternion(0.00392152, 0.00101299, 0.0170398, 0.999847)
+bones/3/rotation = Quaternion(0.00381349, -0.00129081, 0.017141, 0.999845)
+bones/4/rotation = Quaternion(0.519969, 0.496113, 0.526928, -0.453708)
+bones/5/rotation = Quaternion(-0.0285695, 0.917554, -0.0657313, 0.391097)
+bones/6/rotation = Quaternion(0.616456, -0.416992, 0.527523, 0.409657)
+bones/7/rotation = Quaternion(8.82937e-09, 0.707107, 8.82937e-09, 0.707107)
+bones/8/rotation = Quaternion(0.0579857, 0.00264932, 0.00103215, 0.998313)
+bones/9/rotation = Quaternion(-0.0405894, 0.0615252, -0.0991998, 0.992334)
+bones/11/rotation = Quaternion(0.495799, -0.458646, -0.524126, -0.518768)
+bones/12/rotation = Quaternion(-0.122943, 0.862175, -0.0708808, -0.486329)
+bones/13/rotation = Quaternion(0.468596, 0.519808, -0.490004, 0.519724)
+bones/14/rotation = Quaternion(-9.80435e-10, -0.707107, 9.80435e-10, 0.707107)
+bones/15/rotation = Quaternion(0.25946, 0.0357675, 0.963819, 0.0495354)
+bones/16/rotation = Quaternion(-0.0556761, 0.953497, -0.274484, -0.111365)
+bones/17/rotation = Quaternion(-0.12929, 0.585941, -0.793379, 0.102505)
+bones/18/rotation = Quaternion(0.00144513, 0.999916, -0.00883841, -0.00932161)
+bones/19/rotation = Quaternion(-0.205639, 0.140431, 0.948259, 0.196969)
+bones/20/rotation = Quaternion(0.0623609, 0.923946, -0.35971, 0.114206)
+bones/21/rotation = Quaternion(0.24794, 0.621161, -0.724571, -0.166376)
+bones/22/rotation = Quaternion(0.00326407, 0.999476, 0.0229373, -0.0226195)
 
 [node name="Bolty" parent="." instance=ExtResource("3_rm2r3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47, 4, 8.778)
@@ -220,3 +245,5 @@ script = null
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 8.81696)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_l13iv")
+
+[editable path="Rocky"]

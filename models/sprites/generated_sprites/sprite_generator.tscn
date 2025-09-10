@@ -22,9 +22,9 @@ glow_enabled = true
 
 [node name="Sprite Generator" type="SubViewport"]
 transparent_bg = true
-size = Vector2i(256, 256)
+size = Vector2i(1024, 1024)
 script = ExtResource("1_t5qso")
-image_texture_name = "game_icon_256px"
+image_texture_name = "game_icon_1024px"
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.712712, 0.701457, 0, -0.701457, 0.712712, 0, 3.38013, 1.31653)
