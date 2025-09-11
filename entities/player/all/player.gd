@@ -68,6 +68,7 @@ var status_effects: Dictionary[StatusEffect, bool] = {}
 		#region Var:PlayerStats:StatusEffects
 var shock_value: float = 0;
 var burn_value: float = 0;
+var freeze_value: float = 0;
 
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;
@@ -75,7 +76,6 @@ var cold_effect: StatusEffect = null
 const COLD_SLOW_MODIFIER: float = .5;
 
 var is_frozen: bool = false;
-var freeze_value: float = 0;
 var freeze_time_remaining: float = 0;
 var frozen_effect: StatusEffect = null;
 const FREEZE_SLOW_MODIFIER: float = 1;
@@ -89,7 +89,6 @@ const ROOT_SLOW_MODIFIER: float = .9;
 var jump_velocity: float = 4.5;
 
 var speed_boost_modifier: float = 0;
-var slow_modifier: float = 0;
 var max_player_speed: float = 10;
 		#endregion
 		#region Var:PlayerStats:Strength
@@ -192,7 +191,10 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 
 	#region Movement
 func movement_speed() -> float:
-	var modifier: float = clampf(slow_modifier, 0, 1)
+	var modifier: float = 0
+	if is_frozen: modifier = FREEZE_SLOW_MODIFIER
+	elif is_rooted: modifier = ROOT_SLOW_MODIFIER
+	elif is_cold: modifier = COLD_SLOW_MODIFIER
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
 
 func strength() -> float:
@@ -336,53 +338,45 @@ func knock_back(direction: Vector3, force: float) -> void:
 		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
 
+# TODO Honestly, we should just spawn a new effect no matter what maybe?
 func apply_cold(duration: float) -> void:
-	if not is_cold:
-		level.status_effect_spawner.spawn_effect.rpc({
-			"owner_player_id" : player_id,
-			"effect_ttl" : duration,
-			"effect_type" : StatusEffect.Type.COLD
-		})
-		is_cold = true;
-		slow_modifier += COLD_SLOW_MODIFIER
+	level.status_effect_spawner.spawn_effect.rpc({
+		"owner_player_id" : player_id,
+		"effect_ttl" : duration,
+		"effect_type" : StatusEffect.Type.COLD
+	})
+	is_cold = true;
 	cold_time_remaining = duration
 
 func apply_freeze(duration: float) -> void:
-	if not is_frozen:
-		level.status_effect_spawner.spawn_effect.rpc({
-			"owner_player_id" : player_id,
-			"effect_ttl" : duration,
-			"effect_type" : StatusEffect.Type.FROZEN
-		})
-		is_frozen = true;
-		slow_modifier += FREEZE_SLOW_MODIFIER
+	level.status_effect_spawner.spawn_effect.rpc({
+		"owner_player_id" : player_id,
+		"effect_ttl" : duration,
+		"effect_type" : StatusEffect.Type.FROZEN
+	})
+	is_frozen = true;
 	freeze_time_remaining = duration
 
 func apply_root(duration: float) -> void:
-	if not is_rooted:
-		level.status_effect_spawner.spawn_effect.rpc({
-			"owner_player_id" : player_id,
-			"effect_ttl" : duration,
-			"effect_type" : StatusEffect.Type.ROOTED
-		})
-		is_rooted = true;
-		slow_modifier += ROOT_SLOW_MODIFIER
+	level.status_effect_spawner.spawn_effect.rpc({
+		"owner_player_id" : player_id,
+		"effect_ttl" : duration,
+		"effect_type" : StatusEffect.Type.ROOTED
+	})
+	is_rooted = true;
 	root_time_remaining = duration
 
 func remove_cold() -> void:
 	cold_time_remaining = 0
 	is_cold = false;
-	slow_modifier -= COLD_SLOW_MODIFIER;
 
 func remove_freeze() -> void:
 	freeze_time_remaining = 0
 	is_frozen = false;
-	slow_modifier -= FREEZE_SLOW_MODIFIER;
 
 func remove_root() -> void:
 	root_time_remaining = 0
 	is_rooted = false;
-	slow_modifier -= ROOT_SLOW_MODIFIER;
 
 	#endregion
 	#region Func:RPC
