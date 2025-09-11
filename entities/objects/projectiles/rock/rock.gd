@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
 
 	if(global_position.y < -5.0):
-		queue_free();
+		clear_self();
 	
 	# TODO: Figure out how to animate "transparancy" per instance
 	if is_slow_disappearing:
@@ -40,4 +40,4 @@ func _physics_process(delta: float) -> void:
 		else:
 			time_under_removable_velocity += delta
 			if(time_under_removable_velocity >= TIME_FOR_LOW_VELOCITY_REMOVAL):
-				queue_free()
+				clear_self()

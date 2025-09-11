@@ -245,7 +245,7 @@ func process_status_effects(delta: float) -> void:
 		freeze_time_remaining -= delta
 		if freeze_time_remaining <= 0:
 			remove_freeze()
-	elif freeze_value > 3:
+	elif freeze_value > 4:
 		freeze_value = 0;
 		apply_freeze(2)
 

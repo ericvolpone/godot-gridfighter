@@ -46,3 +46,4 @@ func _tick(delta: float, _tick_id: int) -> void:
 	if effect_ttl <= 0 and is_multiplayer_authority():
 		tracking_player.status_effects.erase(self)
 		queue_free()
+		NetworkTime.on_tick.disconnect(_tick)

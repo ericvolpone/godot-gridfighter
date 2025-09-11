@@ -66,6 +66,7 @@ func _tick(delta: float, _tick_id: int) -> void:
 	aoe_ttl -= delta
 	if aoe_ttl <= 0 and is_multiplayer_authority():
 		owning_player.active_aoes.erase(self)
+		NetworkTime.on_tick.disconnect(_tick)
 		queue_free()
 
 func apply_effect(_player: Player, _delta: float) -> void:

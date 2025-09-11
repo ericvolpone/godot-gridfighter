@@ -26,7 +26,7 @@ func _tick(delta: float, _tick_id: int) -> void:
 	alive_time += delta
 
 	if is_multiplayer_authority() and alive_time >= projectile_ttl:
-		queue_free();
+		clear_self()
 
 func _rollback_tick(_tick_id: int) -> void:
 	for body: Node3D in get_colliding_bodies():
@@ -48,6 +48,11 @@ func _initialize_from_spawn_data() -> void:
 		_apply_initial_force()
 	else:
 		push_error("Must provide a positive speed or force to projectile spawner")
+
+func clear_self() -> void:
+	NetworkTime.on_tick.disconnect(_tick)
+	NetworkRollback.on_process_tick.disconnect(_rollback_tick)
+	queue_free();
 
 func _apply_initial_velocity() -> void:
 	linear_velocity = direction.normalized() * speed
