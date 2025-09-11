@@ -333,10 +333,10 @@ func _on_display_state_changed(_old_state: RewindableState, new_state: Rewindabl
 
 	#endregion
 	#region Func:ExternalAppliers
-func knock_back(direction: Vector3, strength: float) -> void:
+func knock_back(direction: Vector3, force: float) -> void:
 	if(!is_immune_to_knockback and not is_knocked):
 		var knocked_state: ActionState = $RewindableStateMachine/KnockedState
-		knocked_state.xz_velocity_override = direction * strength
+		knocked_state.xz_velocity_override = direction * force
 		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
 

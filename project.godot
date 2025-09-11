@@ -14,7 +14,7 @@ config/name="GridFighter"
 run/main_scene="uid://cly568e1kmem5"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/image="uid://bni8gmuq0jp2y"
-config/icon="uid://cvbryclb7q3qp"
+config/icon="uid://b2m3v65jqueah"
 config/windows_native_icon="res://_game_icons/icon_256px.ico"
 
 [autoload]

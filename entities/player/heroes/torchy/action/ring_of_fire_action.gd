@@ -5,8 +5,6 @@ const RING_OF_FIRE_TTL: float = 4
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func _ready() -> void:
-	if not is_multiplayer_authority(): return;
-	
 	is_action_state = true;
 	action_state_string = "KneelState"
 

@@ -4,8 +4,6 @@ const THORN_TRAP_TTL: float = 20
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
 func _ready() -> void:
-	if not is_multiplayer_authority(): return;
-	
 	is_action_state = true
 	action_state_string = "KneelState"
 

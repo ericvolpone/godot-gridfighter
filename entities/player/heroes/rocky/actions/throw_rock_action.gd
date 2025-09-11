@@ -3,8 +3,6 @@ class_name ThrowRockAction extends CombatAction
 var projectile_spawner: ProjectileSpawner;
 
 func _ready() -> void:
-	if not is_multiplayer_authority(): return;
-	
 	is_action_state = true
 	action_state_string = "CastState"
 
