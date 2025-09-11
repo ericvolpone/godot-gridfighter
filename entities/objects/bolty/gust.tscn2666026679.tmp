@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://c84lvinhmlr1x"]
+
+[ext_resource type="Script" uid="uid://jgsqfl1lvqrb" path="res://entities/objects/bolty/gust.gd" id="1_8qn7w"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8qn7w"]
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2wf54"]
+size = Vector3(0.01, 0.01, 1.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lrarj"]
+height = 6.0
+radius = 1.0
+
+[node name="Gust" type="Node3D"]
+script = ExtResource("1_8qn7w")
+
+[node name="Container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.75)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Container"]
+amount = 12
+lifetime = 1.1
+trail_lifetime = 2.35
+process_material = SubResource("ParticleProcessMaterial_8qn7w")
+draw_pass_1 = SubResource("BoxMesh_2wf54")
+
+[node name="GustArea" type="Area3D" parent="Container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/GustArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 3)
+shape = SubResource("CylinderShape3D_lrarj")
+
+[connection signal="body_entered" from="Container/GustArea" to="." method="_on_gust_area_body_entered"]
+[connection signal="body_exited" from="Container/GustArea" to="." method="_on_gust_area_body_exited"]

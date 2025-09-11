@@ -47,12 +47,18 @@ func _initialize_from_spawn_data() -> void:
 
 	aoe_ttl = spawn_data["aoe_ttl"]
 
-	if get_area_3d() and is_multiplayer_authority():
+	if get_area_3d():
 		get_area_3d().monitoring = true;
 
 func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion():
 		return
+
+	if get_area_3d():
+		for body: Node3D in get_area_3d().get_overlapping_bodies():
+			if body is Player:
+				var overlapping_player: Player = body as Player
+				apply_effect(overlapping_player, delta)
 
 	if is_tracking and owning_player:
 		global_position = owning_player.global_position

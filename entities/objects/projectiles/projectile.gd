@@ -19,12 +19,18 @@ var alive_time: float = 0;
 func _ready() -> void:
 	_initialize_from_spawn_data()
 	NetworkTime.on_tick.connect(_tick);
+	NetworkRollback.on_process_tick.connect(_rollback_tick)
 
 func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion(): return
 	alive_time += delta
+
 	if is_multiplayer_authority() and alive_time >= projectile_ttl:
 		queue_free();
+
+func _rollback_tick(_tick_id: int) -> void:
+	for body: Node3D in get_colliding_bodies():
+		_apply_collision(body)
 
 func _initialize_from_spawn_data() -> void:
 	global_position = spawn_data["spawn_location"]
@@ -48,3 +54,7 @@ func _apply_initial_velocity() -> void:
 
 func _apply_initial_force() -> void:
 	apply_impulse(direction * force)
+
+# Fix this collision stuff to be less work for each child
+func _apply_collision(body: Node3D) -> void:
+	push_error("Must implement _apply_collision for projectile")

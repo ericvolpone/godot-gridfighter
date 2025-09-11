@@ -13,10 +13,12 @@ func get_area_3d() -> Area3D:
 func _on_gust_area_body_entered(body: Node3D) -> void:
 	if body is Player:
 		var player: Player = body as Player
-		player.gust_total_direction += gust_direction
-
+		player.colliding_aoes.set(self, true)
 
 func _on_gust_area_body_exited(body: Node3D) -> void:
 	if body is Player:
 		var player: Player = body as Player
-		player.gust_total_direction -= gust_direction
+		player.colliding_aoes.erase(self)
+
+func apply_effect(player: Player, delta: float) -> void:
+	player._snapshot_and_apply_velocity(gust_direction * delta * 30)

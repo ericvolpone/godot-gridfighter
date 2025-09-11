@@ -59,9 +59,8 @@ var is_in_menu: bool = false;
 	#endregion
 	#region Var:PlayerStats
 		#region Var:PlayerStats:Modifiers
-var gust_total_direction: Vector3 = Vector3.ZERO
 var jump_pad_velocity: Vector3 = Vector3.ZERO
-var colliding_aoes: Dictionary[AOE, bool] = {}
+var colliding_aoes: Dictionary[AOE, bool] = {} # TODO Move this into rollback tick
 var active_aoes: Dictionary[AOE, bool] = {}
 var status_effects: Dictionary[StatusEffect, bool] = {}
 
@@ -179,7 +178,7 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	process_menu_input();
 	process_combat_actions_state();
 	process_knock();
-	process_external_modifiers(delta)
+	process_external_modifiers(delta, tick)
 	process_status_effects(delta);
 
 	if global_position.y <= -8 and tick > respawn_tick and is_fresh:
@@ -206,13 +205,10 @@ func process_knock() -> void:
 func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
 
-func process_external_modifiers(delta: float) -> void:
-	# TODO Move gust into Colliding AOEs
-	if gust_total_direction:
-		_snapshot_and_apply_velocity(gust_total_direction * delta * 30)
+func process_external_modifiers(delta: float, tick: int) -> void:
 	if jump_pad_velocity:
 		velocity.y = jump_pad_velocity.y
-	
+
 	# Process colliding AOEs
 	for aoe: AOE in colliding_aoes.keys():
 		aoe.apply_effect(self, delta);

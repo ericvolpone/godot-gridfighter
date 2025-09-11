@@ -12,13 +12,10 @@ func _ready() -> void:
 	super._ready();
 	contact_monitor = true
 	max_contacts_reported = 4
-	self.body_entered.connect(_on_body_entered)
 
-func _on_body_entered(body: Node) -> void:
-	if not is_multiplayer_authority(): return
-
-	if body is CharacterBody3D:
-		var player := body as Player
+func _apply_collision(body: Node3D) -> void:
+	if body is Player:
+		var player: Player = body as Player
 		var impact_force: float = linear_velocity.length()
 		if impact_force > LOW_VELOCITY_THRESHOLD:
 			if(player.is_blocking):

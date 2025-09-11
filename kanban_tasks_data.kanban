@@ -47,13 +47,15 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"d160e8b6-9c2a-4ea1-acc2-c95387b72b2f"
+				"0c0b3ead-de01-48ee-9862-61dd5749d5b2",
+				"c2ceee0f-e938-44f7-a439-5e501af4758a"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"d160e8b6-9c2a-4ea1-acc2-c95387b72b2f",
 				"aae400b9-3952-4460-9b84-a39740f33eb0",
 				"fa716395-6400-4b4b-9ab9-c7db09808206",
 				"408e7618-fcbb-4880-b868-f786f7273146",
@@ -910,6 +912,20 @@
 		{
 			"uuid": "d160e8b6-9c2a-4ea1-acc2-c95387b72b2f",
 			"title": "Status Effects not syncing across clients",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "0c0b3ead-de01-48ee-9862-61dd5749d5b2",
+			"title": "Rock Collision is odd",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "c2ceee0f-e938-44f7-a439-5e501af4758a",
+			"title": "AOE Reference on respawn is broken",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
