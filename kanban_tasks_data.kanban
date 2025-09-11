@@ -47,14 +47,15 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"fa716395-6400-4b4b-9ab9-c7db09808206",
-				"aae400b9-3952-4460-9b84-a39740f33eb0"
+				"d160e8b6-9c2a-4ea1-acc2-c95387b72b2f"
 			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"aae400b9-3952-4460-9b84-a39740f33eb0",
+				"fa716395-6400-4b4b-9ab9-c7db09808206",
 				"408e7618-fcbb-4880-b868-f786f7273146",
 				"f0bed60f-c96f-4fcf-9ae1-7c260456da24",
 				"d102234a-b98f-4934-9696-8c4a60c177bb",
@@ -902,6 +903,13 @@
 		{
 			"uuid": "aae400b9-3952-4460-9b84-a39740f33eb0",
 			"title": "Animations a bit glitchy on connected peers",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "d160e8b6-9c2a-4ea1-acc2-c95387b72b2f",
+			"title": "Status Effects not syncing across clients",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
