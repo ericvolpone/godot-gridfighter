@@ -10,6 +10,6 @@ func _init_combat_actions() -> void:
 		)
 	combat_action_4 = RingOfFireAction.new()
 	combat_action_4.name = "RingOfFireAction"
-	kneel_frame.connect(func() -> void:
-		combat_action_4._kneel_frame_enact()
+	uppercut_frame.connect(func() -> void:
+		combat_action_4._uppercut_frame_enact()
 		)

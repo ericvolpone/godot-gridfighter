@@ -6,7 +6,7 @@ const RING_OF_FIRE_TTL: float = 4
 
 func _ready() -> void:
 	is_action_state = true;
-	action_state_string = "KneelState"
+	action_state_string = "UppercutState"
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/RingOfFireActionIcon.png";
@@ -18,7 +18,7 @@ func get_cd_time() -> float:
 func execute_child() -> void:
 	if not is_multiplayer_authority(): return;
 
-func _kneel_frame_enact() -> void:
+func _uppercut_frame_enact() -> void:
 	if not is_multiplayer_authority(): return;
 
 	aoe_spawner.spawn_aoe.rpc({

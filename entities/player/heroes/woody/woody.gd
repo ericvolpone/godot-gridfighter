@@ -9,5 +9,5 @@ func _init_combat_actions() -> void:
 		)
 	combat_action_4 = BushAction.new()
 	combat_action_4.name = "BushAction"
-	cast_frame.connect(func() -> void:
-		combat_action_4._cast_frame_enact())
+	uppercut_frame.connect(func() -> void:
+		combat_action_4._uppercut_frame_enact())
