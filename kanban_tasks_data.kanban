@@ -48,7 +48,12 @@
 			"title": "Doing",
 			"tasks": [
 				"0c0b3ead-de01-48ee-9862-61dd5749d5b2",
-				"c2ceee0f-e938-44f7-a439-5e501af4758a"
+				"c2ceee0f-e938-44f7-a439-5e501af4758a",
+				"4a034be2-2f51-46ec-a755-aa72e6063b38",
+				"ccc982c9-e90a-453e-944e-526fcdfa0760",
+				"88abea09-18d2-4228-9ed5-e753c24ec7fe",
+				"253330a3-34ec-4b95-bb46-a5bfba7db571",
+				"e3d93cf8-f813-4983-ae60-cc3996cf2536"
 			]
 		},
 		{
@@ -918,7 +923,7 @@
 		},
 		{
 			"uuid": "0c0b3ead-de01-48ee-9862-61dd5749d5b2",
-			"title": "Rock Collision is odd",
+			"title": "Rock Collision is not really working lol",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
@@ -926,6 +931,41 @@
 		{
 			"uuid": "c2ceee0f-e938-44f7-a439-5e501af4758a",
 			"title": "AOE Reference on respawn is broken",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "4a034be2-2f51-46ec-a755-aa72e6063b38",
+			"title": "Slushy: Ice Bolt _apply_collision is inside tree error",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "ccc982c9-e90a-453e-944e-526fcdfa0760",
+			"title": "Status Effect Ticks: Is inside tree error",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "88abea09-18d2-4228-9ed5-e753c24ec7fe",
+			"title": "Slushy - Freeze is super glitchy lol, guy be sliding and shit, maybe bc of 0 movement speed",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "253330a3-34ec-4b95-bb46-a5bfba7db571",
+			"title": "Torchy: Fireball: _apply_collision is inside tree error",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "e3d93cf8-f813-4983-ae60-cc3996cf2536",
+			"title": "Woody: Root doesn't seem to be slowing",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

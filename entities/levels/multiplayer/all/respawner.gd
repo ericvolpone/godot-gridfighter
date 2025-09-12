@@ -19,6 +19,7 @@ func respawn_player(player: Player) -> void:
 			player.velocity = Vector3.ZERO
 			player.shock_value = 0;
 			player.burn_value = 0
+			player.freeze_value = 0
 			player.speed_boost_modifier = 0
 			player.current_strength_modifier = 0
 			if player.is_cold:
