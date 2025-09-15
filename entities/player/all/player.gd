@@ -72,17 +72,14 @@ var freeze_value: float = 0;
 
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;
-var cold_effect: StatusEffect = null
 const COLD_SLOW_MODIFIER: float = .5;
 
 var is_frozen: bool = false;
 var freeze_time_remaining: float = 0;
-var frozen_effect: StatusEffect = null;
 const FREEZE_SLOW_MODIFIER: float = 1;
 
 var is_rooted: bool = false;
 var root_time_remaining: float = 0;
-var rooted_effect: StatusEffect = null;
 const ROOT_SLOW_MODIFIER: float = .9;
 		#endregion
 		#region Var:PlayerStats:Movement
@@ -207,7 +204,7 @@ func process_knock() -> void:
 func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
 
-func process_external_modifiers(delta: float, tick: int) -> void:
+func process_external_modifiers(delta: float, _tick: int) -> void:
 	if jump_pad_velocity:
 		velocity.y = jump_pad_velocity.y
 
@@ -226,13 +223,9 @@ func process_status_effects(delta: float) -> void:
 		})
 		state_machine.transition(&"ShockedState")
 	if burn_value > 2:
+		print(multiplayer.get_unique_id(), " - ", NetworkTime.tick, " - Detected Burn")
 		burn_value = 0
-		level.status_effect_spawner.spawn_effect.rpc({
-			"owner_player_id" : player_id,
-			"effect_ttl" : 1.9,
-			"effect_type" : StatusEffect.Type.BURNT
-		})
-		state_machine.transition(&"BurntState")
+		apply_burn(1.9)
 	
 	# COLD
 	if is_cold:
@@ -274,24 +267,16 @@ func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 func process_combat_actions_state() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
-		if multiplayer.is_server() and not brain.is_multiplayer_authority():
-			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 1, hero.combat_action_1.cd_available_time)
 		state_machine.transition(&"PunchState")
 	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
 		hero.combat_action_2.execute()
-		if multiplayer.is_server() and not brain.is_multiplayer_authority():
-			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 2, hero.combat_action_2.cd_available_time)
 		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
 		hero.combat_action_3.execute()
-		if multiplayer.is_server() and not brain.is_multiplayer_authority():
-			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 3, hero.combat_action_3.cd_available_time)
 		if hero.combat_action_3.is_action_state:
 			state_machine.transition(hero.combat_action_3.action_state_string)
 	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
 		hero.combat_action_4.execute()
-		if multiplayer.is_server() and not brain.is_multiplayer_authority():
-			_update_action_cooldown.rpc_id(brain.get_multiplayer_authority(), 4, hero.combat_action_4.cd_available_time)
 		if hero.combat_action_4.is_action_state:
 			state_machine.transition(hero.combat_action_4.action_state_string)
 	#endregion
@@ -340,7 +325,7 @@ func knock_back(direction: Vector3, force: float) -> void:
 
 # TODO Honestly, we should just spawn a new effect no matter what maybe?
 func apply_cold(duration: float) -> void:
-	level.status_effect_spawner.spawn_effect.rpc({
+	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.COLD
@@ -349,7 +334,7 @@ func apply_cold(duration: float) -> void:
 	cold_time_remaining = duration
 
 func apply_freeze(duration: float) -> void:
-	level.status_effect_spawner.spawn_effect.rpc({
+	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.FROZEN
@@ -358,13 +343,21 @@ func apply_freeze(duration: float) -> void:
 	freeze_time_remaining = duration
 
 func apply_root(duration: float) -> void:
-	level.status_effect_spawner.spawn_effect.rpc({
+	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.ROOTED
 	})
 	is_rooted = true;
 	root_time_remaining = duration
+
+func apply_burn(duration: float) -> void:
+	level.status_effect_spawner.spawn({
+			"owner_player_id" : player_id,
+			"effect_ttl" : duration,
+			"effect_type" : StatusEffect.Type.BURNT
+		})
+	state_machine.transition(&"BurntState")
 
 func remove_cold() -> void:
 	cold_time_remaining = 0
@@ -381,6 +374,9 @@ func remove_root() -> void:
 	#endregion
 	#region Func:RPC
 
+	#endregion
+	#region Func:Unused?
+
 @rpc("call_local", "any_peer", "reliable")
 func _update_action_cooldown(action_number: int, next_available_use: float) -> void:
 	if brain.is_multiplayer_authority():
@@ -395,9 +391,6 @@ func _update_action_cooldown(action_number: int, next_available_use: float) -> v
 				hero.combat_action_4.cd_available_time = next_available_use
 			_:
 				push_error("Unrecognized action number for updating cooldown")
-
-	#endregion
-	#region Func:Unused?
 
 	#endregion
 #endregion

@@ -28,8 +28,6 @@ func _apply_collision(body: Node3D) -> void:
 				player.knock_back(throw_direction, knockback_velocity)
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
-
 	if(global_position.y < -5.0):
 		clear_self();
 	

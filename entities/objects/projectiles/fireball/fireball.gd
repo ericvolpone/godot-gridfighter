@@ -10,9 +10,10 @@ func _apply_collision(body: Node3D) -> void:
 		var player: Player = body as Player
 		if(player.is_blocking):
 			# If they are blocking, remove
-			if is_multiplayer_authority(): clear_self()
+			clear_self()
 		else:
-			player.burn_value += 6
-			if is_multiplayer_authority(): clear_self()
+			# TODO Constant?
+			player.burn_value += 5
+			clear_self()
 	else:
-		if is_multiplayer_authority(): clear_self()
+		clear_self()
