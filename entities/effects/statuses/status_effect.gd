@@ -27,6 +27,9 @@ func _ready() -> void:
 	_initialize_from_spawn_data()
 	NetworkTime.on_tick.connect(_tick)
 
+func _remove_from_tick_loop() -> void:
+	NetworkTime.on_tick.disconnect(_tick)
+
 func _initialize_from_spawn_data() -> void:
 	var owner_player_id: String = spawn_data["owner_player_id"]
 	var players: Array[Node] = get_tree().get_nodes_in_group(Groups.PLAYER)

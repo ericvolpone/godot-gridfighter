@@ -13,6 +13,10 @@ func _ready() -> void:
 	call_deferred("_configure_status_effect_spawner")
 
 func _configure_status_effect_spawner() -> void:
+	despawned.connect(func(effect: StatusEffect) -> void:
+		effect._remove_from_tick_loop()
+	)
+	
 	spawn_function = func(spawn_data: Dictionary) -> StatusEffect:
 		var effect_type: StatusEffect.Type = spawn_data["effect_type"]
 		var effect: StatusEffect;

@@ -56,4 +56,3 @@ void fragment(){
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
 }
-
