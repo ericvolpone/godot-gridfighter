@@ -46,7 +46,9 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"bddf4824-69bc-4f7a-a923-b2e47ca812b8"
+			]
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
@@ -975,6 +977,13 @@
 			"title": "Maybe we should just say F this multiplayer spawner everywhere and do this in _tick and _rollback_tick",
 			"description": "",
 			"category": "a93a7556-34b9-415c-ae6c-6f87b8475858",
+			"steps": []
+		},
+		{
+			"uuid": "bddf4824-69bc-4f7a-a923-b2e47ca812b8",
+			"title": "Status Effects not always syncing?  Especially in Projectiles, probably from how they are ticking",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []
 		}
 	],

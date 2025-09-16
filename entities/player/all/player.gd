@@ -268,7 +268,7 @@ func process_combat_actions_state() -> void:
 	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
 		hero.combat_action_1.execute()
 		state_machine.transition(&"PunchState")
-	elif brain.using_combat_action_2 and hero.combat_action_1.is_usable():
+	elif brain.using_combat_action_2 and hero.combat_action_2.is_usable():
 		hero.combat_action_2.execute()
 		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
