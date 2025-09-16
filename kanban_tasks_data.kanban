@@ -46,21 +46,20 @@
 		{
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
-			"tasks": [
-				"683d2141-6472-4ba2-abd1-65fe602eee20",
-				"0c0b3ead-de01-48ee-9862-61dd5749d5b2",
-				"c2ceee0f-e938-44f7-a439-5e501af4758a",
-				"4a034be2-2f51-46ec-a755-aa72e6063b38",
-				"ccc982c9-e90a-453e-944e-526fcdfa0760",
-				"88abea09-18d2-4228-9ed5-e753c24ec7fe",
-				"253330a3-34ec-4b95-bb46-a5bfba7db571",
-				"e3d93cf8-f813-4983-ae60-cc3996cf2536"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "5a719666-6adb-4cab-acd2-30eaa79168da",
 			"title": "Done",
 			"tasks": [
+				"0c0b3ead-de01-48ee-9862-61dd5749d5b2",
+				"c2ceee0f-e938-44f7-a439-5e501af4758a",
+				"88abea09-18d2-4228-9ed5-e753c24ec7fe",
+				"e3d93cf8-f813-4983-ae60-cc3996cf2536",
+				"253330a3-34ec-4b95-bb46-a5bfba7db571",
+				"ccc982c9-e90a-453e-944e-526fcdfa0760",
+				"4a034be2-2f51-46ec-a755-aa72e6063b38",
+				"683d2141-6472-4ba2-abd1-65fe602eee20",
 				"d160e8b6-9c2a-4ea1-acc2-c95387b72b2f",
 				"aae400b9-3952-4460-9b84-a39740f33eb0",
 				"fa716395-6400-4b4b-9ab9-c7db09808206",

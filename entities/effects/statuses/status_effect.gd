@@ -1,12 +1,5 @@
 class_name StatusEffect extends Node3D
 
-## Example Spawn Data
-#{
-	#"owner_player_id" : player.player_id,
-	#"effect_ttl" : 5,
-	#"effect_type" : Type.SHOCKED
-#}
-
 @export var status_effect_image: Texture2D
 @onready var effect_sprite: Sprite3D = $Sprite3D
 

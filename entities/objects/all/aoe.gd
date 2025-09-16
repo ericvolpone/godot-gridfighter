@@ -58,7 +58,8 @@ func _tick(delta: float, _tick_id: int) -> void:
 		for body: Node3D in get_area_3d().get_overlapping_bodies():
 			if body is Player:
 				var overlapping_player: Player = body as Player
-				apply_effect(overlapping_player, delta)
+				if overlapping_player != owning_player:
+					apply_effect(overlapping_player, delta)
 
 	if is_tracking and owning_player:
 		global_position = owning_player.global_position

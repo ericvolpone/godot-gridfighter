@@ -33,8 +33,6 @@ _surfaces = [{
 script = ExtResource("3_0eoss")
 radius = 0.1
 heigth = 0.2
-_uv_type = 0
-edge_count = 16
 metadata/_custom_type_script = "uid://p25m47j1t1on"
 
 [node name="BurntEffect" instance=ExtResource("1_0eoss")]
