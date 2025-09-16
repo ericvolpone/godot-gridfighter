@@ -46,7 +46,7 @@ operator = 1
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
 
 uniform vec4 Fireball_Head_Color : source_color;
 uniform sampler2D tex_frg_4;
