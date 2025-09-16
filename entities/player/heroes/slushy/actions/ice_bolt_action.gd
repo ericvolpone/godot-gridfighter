@@ -19,8 +19,6 @@ func execute_child() -> void:
 	pass
 
 func _cast_frame_enact() -> void:
-	if not is_multiplayer_authority(): return
-
 	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0, .5, 0)
 	
 	# TODO Maybe make speed adjustable by power ups?
@@ -31,4 +29,4 @@ func _cast_frame_enact() -> void:
 		"speed": 12,
 		"owner_peer_id": hero.player.get_multiplayer_authority()
 	}
-	projectile_spawner.spawn_projectile.rpc(spawn_data)
+	projectile_spawner.spawn(spawn_data)

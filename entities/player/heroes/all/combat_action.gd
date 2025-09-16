@@ -29,11 +29,9 @@ func is_usable() -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func execute() -> void:
-	if not is_multiplayer_authority(): return
-
 	if !is_usable():
 		pass
-	
+	print(multiplayer.get_unique_id(), " - ", NetworkTime.tick, " - Executing action")
 	var execution_time: float = NetworkTime.time
 	cd_available_time = execution_time + get_cd_time();
 	hero.player.global_combat_cooldown_next_use = execution_time + GLOBAL_CD;

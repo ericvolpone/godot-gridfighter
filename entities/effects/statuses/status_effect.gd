@@ -28,22 +28,13 @@ func _ready() -> void:
 	NetworkTime.on_tick.connect(_tick)
 
 func _initialize_from_spawn_data() -> void:
-	var owner_player_id: String = spawn_data["owner_player_id"]
-	var players: Array[Node] = get_tree().get_nodes_in_group(Groups.PLAYER)
-
-	for player: Player in players:
-		if player.player_id == owner_player_id:
-			tracking_player = player
-			player.status_effects[self] = true
-			break
 	global_position = tracking_player.global_position
-
 	effect_ttl = spawn_data["effect_ttl"]
 
 func _tick(delta: float, _tick_id: int) -> void:
 	global_position = tracking_player.global_position
 	effect_ttl -= delta
-	if effect_ttl <= 0 and is_multiplayer_authority():
+	if effect_ttl <= 0:
 		tracking_player.status_effects.erase(self)
 		queue_free()
 		NetworkTime.on_tick.disconnect(_tick)

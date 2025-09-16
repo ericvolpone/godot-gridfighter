@@ -17,10 +17,10 @@ func _apply_collision(body: Node3D) -> void:
 		var player: Player = body as Player
 		if(player.is_blocking):
 			# If they are blocking, remove
-			if is_multiplayer_authority(): clear_self()
+			clear_self()
 		else:
 			player.apply_cold(COLD_DURATION)
-			if is_multiplayer_authority(): clear_self()
+			clear_self()
 	else:
 		# TODO Maybe shatter animation
-		if is_multiplayer_authority(): clear_self()
+		clear_self()

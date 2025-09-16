@@ -25,11 +25,12 @@ func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion(): return
 	alive_time += delta
 
-	if is_multiplayer_authority() and alive_time >= projectile_ttl:
+	if alive_time >= projectile_ttl:
 		clear_self()
 
 func _rollback_tick(_tick_id: int) -> void:
 	for body: Node3D in get_colliding_bodies():
+		print(multiplayer.get_unique_id(), " - Applying FB Collision on tick: ", str(_tick_id))
 		_apply_collision(body)
 
 func _initialize_from_spawn_data() -> void:
@@ -61,5 +62,5 @@ func _apply_initial_force() -> void:
 	apply_impulse(direction * force)
 
 # Fix this collision stuff to be less work for each child
-func _apply_collision(body: Node3D) -> void:
+func _apply_collision(_body: Node3D) -> void:
 	push_error("Must implement _apply_collision for projectile")
