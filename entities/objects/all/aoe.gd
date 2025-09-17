@@ -65,7 +65,7 @@ func _tick(delta: float, _tick_id: int) -> void:
 		global_position = owning_player.global_position
 	
 	aoe_ttl -= delta
-	if aoe_ttl <= 0 and is_multiplayer_authority():
+	if aoe_ttl <= 0:
 		owning_player.active_aoes.erase(self)
 		NetworkTime.on_tick.disconnect(_tick)
 		queue_free()

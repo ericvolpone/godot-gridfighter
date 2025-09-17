@@ -47,9 +47,9 @@ func _initialize_from_spawn_data() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	_apply_collision(body)
-	if body is Player:
-		# Might need to apply some updates like tick count?
-		NetworkRollback.mutate(body)
+	#if body is Player:
+		## Might need to apply some updates like tick count?
+		#NetworkRollback.mutate(body)
 
 func clear_self() -> void:
 	NetworkTime.on_tick.disconnect(_tick)

@@ -47,7 +47,8 @@
 			"uuid": "c492c179-d139-4b2f-aaff-10c32af1cde5",
 			"title": "Doing",
 			"tasks": [
-				"bddf4824-69bc-4f7a-a923-b2e47ca812b8"
+				"bddf4824-69bc-4f7a-a923-b2e47ca812b8",
+				"b0062d92-2851-41ce-bbec-b7a13e5b382c"
 			]
 		},
 		{
@@ -982,6 +983,13 @@
 		{
 			"uuid": "bddf4824-69bc-4f7a-a923-b2e47ca812b8",
 			"title": "Status Effects not always syncing?  Especially in Projectiles, probably from how they are ticking",
+			"description": "",
+			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
+			"steps": []
+		},
+		{
+			"uuid": "b0062d92-2851-41ce-bbec-b7a13e5b382c",
+			"title": "State doesn't always seem to change on projectile collision",
 			"description": "",
 			"category": "f6c1f10a-5ce7-4705-bcbc-58790d54da57",
 			"steps": []

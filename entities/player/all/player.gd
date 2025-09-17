@@ -216,12 +216,7 @@ func process_status_effects(delta: float) -> void:
 	# SHOCKED
 	if shock_value > 3:
 		shock_value = 0
-		level.status_effect_spawner.spawn_effect.rpc({
-			"owner_player_id" : player_id,
-			"effect_ttl" : .75,
-			"effect_type" : StatusEffect.Type.SHOCKED
-		})
-		state_machine.transition(&"ShockedState")
+		apply_shock(.75)
 	if burn_value > 2:
 		print(multiplayer.get_unique_id(), " - ", NetworkTime.tick, " - Detected Burn")
 		burn_value = 0
@@ -339,6 +334,7 @@ func apply_freeze(duration: float) -> void:
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.FROZEN
 	})
+	freeze_value = 0
 	is_frozen = true;
 	freeze_time_remaining = duration
 
@@ -357,7 +353,17 @@ func apply_burn(duration: float) -> void:
 			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.BURNT
 		})
+	burn_value = 0
 	state_machine.transition(&"BurntState")
+
+func apply_shock(duration: float) -> void:
+	level.status_effect_spawner.spawn({
+			"owner_player_id" : player_id,
+			"effect_ttl" : duration,
+			"effect_type" : StatusEffect.Type.SHOCKED
+		})
+	shock_value = 0
+	state_machine.transition(&"ShockedState")
 
 func remove_cold() -> void:
 	cold_time_remaining = 0
