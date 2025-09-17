@@ -16,7 +16,6 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 func move_player(_delta: float, speed: float = player.movement_speed()) -> void:
 	var input_dir : Vector3 = get_movement_input()
 	
-	# Based on https://github.com/godotengine/godot-demo-projects/blob/4.2-31d1c0c/3d/platformer/player/player.gd#L65
 	var position_target: Vector3 = input_dir * speed
 
 	var horizontal_velocity: Vector3 = player.velocity

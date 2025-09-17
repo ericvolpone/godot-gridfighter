@@ -55,6 +55,7 @@ var chosen_hero_id: int = 0;
 	#region Var:Menu
 # TODO Make this default in scene and disable if brain not multiplayer authority (have a task)
 var is_in_menu: bool = false;
+var _menu_tick: int = -1;
 @onready var in_game_menu: InGameMenu = load("res://entities/menu/in_game_menu.tscn").instantiate();
 	#endregion
 	#region Var:PlayerStats
@@ -158,8 +159,13 @@ func _change_hero(hero_id: int) -> void:
 
 	#endregion
 	#region Func:Menu
-func process_menu_input() -> void:
+func process_menu_input(tick: int) -> void:
+	# Some pause between menu inputs to make usable
+	if tick < _menu_tick + 8:
+		return
+
 	if brain.opening_in_game_menu:
+		_menu_tick = tick;
 		if(is_in_menu):
 			is_in_menu = false
 			in_game_menu.hide()
@@ -171,7 +177,7 @@ func process_menu_input() -> void:
 
 func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	_force_update_is_on_floor()
-	process_menu_input();
+	process_menu_input(tick);
 	process_combat_actions_state();
 	process_knock();
 	process_external_modifiers(delta, tick)
