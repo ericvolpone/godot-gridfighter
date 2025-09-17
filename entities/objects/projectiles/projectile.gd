@@ -19,7 +19,7 @@ var alive_time: float = 0;
 func _ready() -> void:
 	_initialize_from_spawn_data()
 	NetworkTime.on_tick.connect(_tick);
-	NetworkRollback.on_process_tick.connect(_rollback_tick)
+	body_entered.connect(_on_body_entered)
 
 func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion(): return
@@ -27,11 +27,6 @@ func _tick(delta: float, _tick_id: int) -> void:
 
 	if alive_time >= projectile_ttl:
 		clear_self()
-
-func _rollback_tick(_tick_id: int) -> void:
-	for body: Node3D in get_colliding_bodies():
-		print(multiplayer.get_unique_id(), " - Applying FB Collision on tick: ", str(_tick_id))
-		_apply_collision(body)
 
 func _initialize_from_spawn_data() -> void:
 	global_position = spawn_data["spawn_location"]
@@ -50,9 +45,15 @@ func _initialize_from_spawn_data() -> void:
 	else:
 		push_error("Must provide a positive speed or force to projectile spawner")
 
+func _on_body_entered(body: Node3D) -> void:
+	_apply_collision(body)
+	if body is Player:
+		# Might need to apply some updates like tick count?
+		NetworkRollback.mutate(body)
+
 func clear_self() -> void:
 	NetworkTime.on_tick.disconnect(_tick)
-	NetworkRollback.on_process_tick.disconnect(_rollback_tick)
+	body_entered.disconnect(_on_body_entered)
 	queue_free();
 
 func _apply_initial_velocity() -> void:
