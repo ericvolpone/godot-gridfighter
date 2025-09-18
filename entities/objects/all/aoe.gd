@@ -38,14 +38,15 @@ func _initialize_from_spawn_data() -> void:
 			owning_player = player
 			player.active_aoes[self] = true
 			break
+
+	aoe_ttl = spawn_data["aoe_ttl"]
+	
 	if not is_tracking:
 		global_position = spawn_data["spawn_position"]
 		if spawn_data.has("spawn_direction"):
 			look_at(global_position - spawn_data["spawn_direction"])
 	else:
 		global_position = owning_player.global_position
-
-	aoe_ttl = spawn_data["aoe_ttl"]
 
 	if get_area_3d():
 		get_area_3d().monitoring = true;

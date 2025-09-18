@@ -16,13 +16,11 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child() -> void:
-	if not is_multiplayer_authority(): return;
+	pass
 
 func _uppercut_frame_enact() -> void:
-	if not is_multiplayer_authority(): return
-
 	var spawn_direction: Vector3 = hero.player.get_facing_direction()
-	aoe_spawner.spawn_aoe.rpc({
+	aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.BLIZZARD,
 		"aoe_ttl" : BLIZZARD_TTL,

@@ -145,14 +145,14 @@ void fragment() {
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mjkyc"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eus47"]
+noise = SubResource("FastNoiseLite_mjkyc")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_mjkyc")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8tg4l"]
+noise = SubResource("FastNoiseLite_mjkyc")
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_mjkyc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2bfne"]
 render_priority = 0
@@ -201,31 +201,30 @@ spawn_path = NodePath(".")
 script = ExtResource("2_quiwk")
 respawner = NodePath("../Respawner")
 
-[node name="Respawner" type="Node" parent="."]
-script = ExtResource("4_27bor")
-metadata/_custom_type_script = "uid://dgyka6dxbswed"
-
-[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath(".")
-script = ExtResource("4_mjkyc")
-
 [node name="PowerUpSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath(".")
 script = ExtResource("5_mjkyc")
-
-[node name="AOESpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath(".")
-script = ExtResource("6_eus47")
-
-[node name="StatusEffectSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath(".")
-script = ExtResource("10_8tg4l")
-metadata/_custom_type_script = "uid://3bdiqen17rc8"
 
 [node name="ParticleEffectSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath(".")
 script = ExtResource("11_i3vcw")
 metadata/_custom_type_script = "uid://uham1yhe3syr"
+
+[node name="Respawner" type="Node" parent="."]
+script = ExtResource("4_27bor")
+metadata/_custom_type_script = "uid://dgyka6dxbswed"
+
+[node name="ProjectileSpawner" type="Node" parent="."]
+script = ExtResource("4_mjkyc")
+metadata/_custom_type_script = "uid://cry6vs4abvsk4"
+
+[node name="AOESpawner" type="Node" parent="."]
+script = ExtResource("6_eus47")
+metadata/_custom_type_script = "uid://cqxvu8yj5bdg2"
+
+[node name="StatusEffectSpawner" type="Node" parent="."]
+script = ExtResource("10_8tg4l")
+metadata/_custom_type_script = "uid://3bdiqen17rc8"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_eus47")

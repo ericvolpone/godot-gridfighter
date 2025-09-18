@@ -12,7 +12,7 @@ func get_cd_time() -> float:
 	return 8.0;
 
 func execute_child() -> void:
-	aoe_spawner.spawn_aoe.rpc({
+	aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.HARDEN,
 		"aoe_ttl" : HARDEN_TTL

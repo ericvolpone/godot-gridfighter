@@ -65,15 +65,17 @@ var _available_states: Dictionary = {}
 ## and does nothing when transitioning to an unknown state.
 func transition(new_state_name: StringName) -> void:
 	if state == new_state_name:
+		if new_state_name == &"BurntState": VLogger.log_mp("Transition.1")
 		return
-
 	if not _available_states.has(new_state_name):
+		if new_state_name == &"BurntState": VLogger.log_mp("Transition.2")
 		_logger.warning("Attempted to transition from state '%s' into unknown state '%s'", [state, new_state_name])
 		return
 
 	var new_state: RewindableState = _available_states[new_state_name]
 	if _state_object:
 		if !new_state.can_enter(_state_object):
+			if new_state_name == &"BurntState": VLogger.log_mp("Transition.3")
 			return
 
 		_state_object.exit(new_state, NetworkRollback.tick)
@@ -82,6 +84,7 @@ func transition(new_state_name: StringName) -> void:
 	_state_object = new_state
 	on_state_changed.emit(_previous_state, new_state)
 	_state_object.enter(_previous_state, NetworkRollback.tick)
+	if new_state_name == &"BurntState": VLogger.log_mp("Transition.4")
 
 func _notification(what: int):
 	# Use notification instead of _ready, so users can write their own _ready

@@ -16,12 +16,10 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child() -> void:
-	if not is_multiplayer_authority(): return;
+	pass
 
 func _uppercut_frame_enact() -> void:
-	if not is_multiplayer_authority(): return;
-
-	aoe_spawner.spawn_aoe.rpc({
+	aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.RING_OF_FIRE,
 		"aoe_ttl" : RING_OF_FIRE_TTL,

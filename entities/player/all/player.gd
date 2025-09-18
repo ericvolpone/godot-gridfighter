@@ -224,7 +224,7 @@ func process_status_effects(delta: float) -> void:
 		shock_value = 0
 		apply_shock(.75)
 	if burn_value > 2:
-		print(multiplayer.get_unique_id(), " - ", NetworkTime.tick, " - Detected Burn")
+		VLogger.log_mp(" - Detected Burn")
 		burn_value = 0
 		apply_burn(1.9)
 	
@@ -360,6 +360,7 @@ func apply_burn(duration: float) -> void:
 			"effect_type" : StatusEffect.Type.BURNT
 		})
 	burn_value = 0
+	VLogger.log_mp("About to move to Burn State from ", state_machine.state)
 	state_machine.transition(&"BurntState")
 
 func apply_shock(duration: float) -> void:

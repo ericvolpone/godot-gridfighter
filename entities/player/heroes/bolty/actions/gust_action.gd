@@ -22,10 +22,8 @@ func is_usable_child() -> bool:
 	return true;
 
 func _cast_frame_enact() -> void:
-	if not is_multiplayer_authority(): return;
-
 	var spawn_direction: Vector3 = hero.player.get_facing_direction()
-	aoe_spawner.spawn_aoe.rpc({
+	aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.GUST,
 		"aoe_ttl" : Gust_TTL,

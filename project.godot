@@ -28,6 +28,7 @@ NetworkEvents="*res://addons/netfox/network-events.gd"
 NetworkPerformance="*res://addons/netfox/network-performance.gd"
 NetworkManager="*res://entities/network/network_manager.gd"
 WindowTiler="*res://addons/netfox.extras/window-tiler.gd"
+VLogger="*res://entities/utility/vlogger.gd"
 
 [debug]
 
