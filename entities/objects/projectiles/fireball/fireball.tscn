@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=4 uid="uid://64msla2mqb3x"]
+[gd_scene load_steps=12 format=4 uid="uid://64msla2mqb3x"]
 
 [ext_resource type="Shader" uid="uid://dpw7tkxmwgwio" path="res://entities/objects/projectiles/fireball/fireball_shader.tres" id="1_egawj"]
 [ext_resource type="Script" uid="uid://c43utfuxnfxqt" path="res://entities/objects/projectiles/fireball/fireball.gd" id="1_w1g1h"]
+[ext_resource type="PackedScene" uid="uid://dp77efy6v18rb" path="res://entities/objects/projectiles/fireball/fireball_impact.tscn" id="2_5uprk"]
 [ext_resource type="Shader" uid="uid://bon4k3u5jihhq" path="res://entities/objects/projectiles/fireball/fireball_inner_shader.tres" id="2_w142t"]
+[ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="5_0gq48"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w142t"]
+radius = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w142t"]
 render_priority = 0
@@ -35,12 +40,11 @@ shader_parameter/InnerColor = Color(3, 0.6, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_5uprk"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_w142t"]
-radius = 0.3
-
-[node name="Fireball" type="RigidBody3D"]
-gravity_scale = 0.0
+[node name="Fireball" type="ShapeCast3D"]
+shape = SubResource("SphereShape3D_w142t")
+target_position = Vector3(0, 0, 0)
 script = ExtResource("1_w1g1h")
+impact_scene = ExtResource("2_5uprk")
 metadata/_custom_type_script = "uid://c43utfuxnfxqt"
 
 [node name="Fireball" type="Node3D" parent="."]
@@ -56,5 +60,8 @@ material_override = SubResource("ShaderMaterial_w1g1h")
 mesh = SubResource("SphereMesh_5uprk")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_w142t")
+[node name="TickInterpolator" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("5_0gq48")
+root = NodePath("..")
+properties = Array[String]([":global_position"])
+metadata/_custom_type_script = "uid://dour8fehaaugp"

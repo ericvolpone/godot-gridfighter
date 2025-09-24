@@ -70,6 +70,8 @@ var status_effects: Dictionary[StatusEffect, bool] = {}
 var shock_value: float = 0;
 var burn_value: float = 0;
 var freeze_value: float = 0;
+var cold_value: float = 0;
+var root_value: float = 0;
 
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;
@@ -224,7 +226,7 @@ func process_status_effects(delta: float) -> void:
 		shock_value = 0
 		apply_shock(.75)
 	if burn_value > 2:
-		VLogger.log_mp(" - Detected Burn")
+		VLogger.log_mp("Detected Burn")
 		burn_value = 0
 		apply_burn(1.9)
 	

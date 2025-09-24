@@ -1,37 +1,25 @@
 [gd_scene load_steps=6 format=3 uid="uid://fghp8k6tca08"]
 
 [ext_resource type="Script" uid="uid://buffw4so33xkv" path="res://entities/objects/projectiles/rock/rock.gd" id="1_2dker"]
+[ext_resource type="PackedScene" uid="uid://d0ljfir55pma7" path="res://entities/objects/projectiles/rock/rock_impact.tscn" id="2_cfvs7"]
 [ext_resource type="PackedScene" uid="uid://bwe8m7i5apyvm" path="res://entities/objects/projectiles/rock/rock.glb" id="2_efmhq"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t8sxr"]
-resource_local_to_scene = true
-friction = 3.0
-rough = true
-bounce = 0.8
+[ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="4_4ayd1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t8sxr"]
 radius = 0.4
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbih6"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:linear_velocity")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
-[node name="Rock" type="RigidBody3D" groups=["PunchableRB"]]
-mass = 30.0
-physics_material_override = SubResource("PhysicsMaterial_t8sxr")
-gravity_scale = 0.8
-script = ExtResource("1_2dker")
-metadata/_custom_type_script = "uid://buffw4so33xkv"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Rock" type="ShapeCast3D" groups=["PunchableRB"]]
 shape = SubResource("SphereShape3D_t8sxr")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_wbih6")
+target_position = Vector3(0, 0, 0)
+script = ExtResource("1_2dker")
+impact_scene = ExtResource("2_cfvs7")
+metadata/_custom_type_script = "uid://buffw4so33xkv"
 
 [node name="RockModel" parent="." instance=ExtResource("2_efmhq")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="TickInterpolator" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("4_4ayd1")
+root = NodePath("..")
+properties = Array[String]([":global_position"])
+metadata/_custom_type_script = "uid://dour8fehaaugp"

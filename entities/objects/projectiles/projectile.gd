@@ -1,4 +1,6 @@
-class_name Projectile extends RigidBody3D
+class_name Projectile extends ShapeCast3D
+
+@export var impact_scene: PackedScene;
 
 enum Type {
 	ROCK,
@@ -14,54 +16,63 @@ var force: float = 0
 var owner_peer_id: int = -1
 var projectile_ttl: float = 5 #Default, overridable via spawn data
 var alive_time: float = 0;
+var has_collided: bool = false;
+var is_first_tick: bool = true
 
 
 func _ready() -> void:
 	_initialize_from_spawn_data()
 	NetworkTime.on_tick.connect(_tick);
-	body_entered.connect(_on_body_entered)
+	NetworkTime.after_tick_loop.connect(_after_loop);
 
 func _tick(delta: float, _tick_id: int) -> void:
 	if is_queued_for_deletion(): return
 	alive_time += delta
 
+	var distance: float = speed * delta
+	var motion: Vector3 = direction * distance
+	target_position = global_position + motion
+	
+	force_shapecast_update()
+	
+	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state 
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.motion = motion
+	query.shape = shape
+	query.transform = global_transform
+	
+	var hit_interval := space_state.cast_motion(query)
+	if hit_interval[0] != 1.0 or hit_interval[1] != 1.0 and not is_first_tick:
+		# Move to collision
+		position += motion * hit_interval[1]
+		collide()
+	else:
+		position += motion
+
+	is_first_tick = false
+
 	if alive_time >= projectile_ttl:
 		clear_self()
+
+func _after_loop() -> void:
+	if has_collided:
+		queue_free();
 
 func _initialize_from_spawn_data() -> void:
 	global_position = spawn_data["spawn_location"]
 	direction = spawn_data["direction"]
 	speed = spawn_data.get("speed", 0)
-	force = spawn_data.get("force", 0)
 	owner_peer_id = spawn_data["owner_peer_id"]
 	if spawn_data.has("projectile_ttl"):
 		projectile_ttl = spawn_data["projectile_ttl"]
 	look_at(global_position - direction)
 
-	if(speed > 0):
-		_apply_initial_velocity()
-	elif force > 0:
-		_apply_initial_force()
-	else:
-		push_error("Must provide a positive speed or force to projectile spawner")
-
-func _on_body_entered(body: Node3D) -> void:
-	_apply_collision(body)
-	#if body is Player:
-		## Might need to apply some updates like tick count?
-		#NetworkRollback.mutate(body)
+func collide() -> void:
+	var impact: ProjectileImpact = impact_scene.instantiate();
+	get_tree().root.add_child(impact)
+	impact.global_position = global_position
+	clear_self()
 
 func clear_self() -> void:
 	NetworkTime.on_tick.disconnect(_tick)
-	body_entered.disconnect(_on_body_entered)
 	queue_free();
-
-func _apply_initial_velocity() -> void:
-	linear_velocity = direction.normalized() * speed
-
-func _apply_initial_force() -> void:
-	apply_impulse(direction * force)
-
-# Fix this collision stuff to be less work for each child
-func _apply_collision(_body: Node3D) -> void:
-	push_error("Must implement _apply_collision for projectile")

@@ -56,6 +56,7 @@ shape = SubResource("CapsuleShape3D_g2els")
 replication_config = SubResource("SceneReplicationConfig_x6u7t")
 
 [node name="RollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true

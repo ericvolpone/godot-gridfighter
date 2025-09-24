@@ -23,9 +23,9 @@ func _cast_frame_enact() -> void:
 	
 	var spawn_data: Dictionary = {
 		"projectile_type": Projectile.Type.ROCK,
-		"direction": hero.player.get_facing_direction(),
+		"direction": hero.player.get_facing_direction() + (Vector3.DOWN * .25),
 		"spawn_location": spawn_location,
-		"force": hero.player.strength(),
+		"speed": hero.player.strength() * 2,
 		"owner_peer_id": hero.player.get_multiplayer_authority()
 	}
 	projectile_spawner.spawn(spawn_data)
