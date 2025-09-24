@@ -71,6 +71,7 @@ func collide() -> void:
 	var impact: ProjectileImpact = impact_scene.instantiate();
 	get_tree().root.add_child(impact)
 	impact.global_position = global_position
+	impact.look_at(direction)
 	clear_self()
 
 func clear_self() -> void:

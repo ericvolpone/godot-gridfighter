@@ -31,6 +31,7 @@ func _rollback_tick(tick: int) -> void:
 		var diff := player.global_position - global_position
 		var offset := Vector3(diff.x, max(0, diff.y), diff.z).normalized()
 		
+		VLogger.log_mp("Applying impact to player ", player.player_name)
 		apply_impact(player, offset)
 		NetworkRollback.mutate(player)
 

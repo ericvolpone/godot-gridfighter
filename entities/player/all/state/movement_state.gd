@@ -8,9 +8,7 @@ class_name MovementState  extends RewindableState
 
 # Default movement, override as needed
 func move_player(_delta: float, _speed: float = player.movement_speed()) -> void:
-	player.velocity *= NetworkTime.physics_factor
-	player.move_and_slide()
-	player.velocity /= NetworkTime.physics_factor
+	player.move_and_slide_physics_factor()
 
 # https://foxssake.github.io/netfox/netfox/tutorials/rollback-caveats/#characterbody-on-floor
 func force_update_is_on_floor() -> void:
@@ -23,4 +21,6 @@ func get_movement_input() -> Vector3:
 	return player_input.move_direction
 
 func get_jump() -> float:
+	if not player.can_jump(): return 0;
+
 	return player_input.jump_strength

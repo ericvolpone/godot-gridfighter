@@ -9,6 +9,8 @@ const ANIM_PUNCH: StringName = "master_animations/Punch"
 const ANIM_BLOCK: StringName = "master_animations/Block"
 const ANIM_SHOUT: StringName = "master_animations/Shout"
 const ANIM_CAST: StringName = "master_animations/Cast"
+const ANIM_BURNT: StringName = "master_animations/Burnt"
+const ANIM_TPOSE: StringName = "master_animations/T-Pose"
 
 var animator: AnimationPlayer;
 	#endregion
@@ -73,17 +75,31 @@ var freeze_value: float = 0;
 var cold_value: float = 0;
 var root_value: float = 0;
 
+var is_shocked: bool = false
+var shock_time_remaining: float = 0;
+const SHOCK_SLOW_MODIFIER: float = 1.0;
+const SHOCK_DURATION: float = 1.0
+
+var is_burnt: bool = false;
+var burnt_time_remaining: float = 0;
+const BURN_Y_VELOCITY: float = 3;
+const BURN_SLOW_MODIFIER: float = .5;
+const BURN_DURATION: float = 1.9;
+
 var is_cold: bool = false;
 var cold_time_remaining: float = 0;
 const COLD_SLOW_MODIFIER: float = .5;
+const COLD_DURATION: float = 3
 
 var is_frozen: bool = false;
 var freeze_time_remaining: float = 0;
 const FREEZE_SLOW_MODIFIER: float = 1;
+const FREEZE_DURATION: float = 1.5
 
 var is_rooted: bool = false;
 var root_time_remaining: float = 0;
 const ROOT_SLOW_MODIFIER: float = .9;
+const ROOT_DURATION: float = 2
 		#endregion
 		#region Var:PlayerStats:Movement
 var jump_velocity: float = 4.5;
@@ -197,10 +213,20 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	#region Movement
 func movement_speed() -> float:
 	var modifier: float = 0
-	if is_frozen: modifier = FREEZE_SLOW_MODIFIER
-	elif is_rooted: modifier = ROOT_SLOW_MODIFIER
-	elif is_cold: modifier = COLD_SLOW_MODIFIER
+	if is_shocked: modifier = max(modifier, SHOCK_SLOW_MODIFIER)
+	if is_burnt: modifier = max(modifier, BURN_SLOW_MODIFIER)
+	if is_frozen: modifier = max(modifier, FREEZE_SLOW_MODIFIER)
+	if is_rooted: modifier = max(modifier, ROOT_SLOW_MODIFIER)
+	if is_cold: modifier = max(modifier, COLD_SLOW_MODIFIER)
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
+
+func can_jump() -> bool:
+	return not (is_burnt or is_shocked or is_frozen or is_rooted or is_knocked)
+
+func y_velocity_override() -> float:
+	if is_burnt:
+		return BURN_Y_VELOCITY * (1 - (BURN_DURATION - burnt_time_remaining))
+	return 0
 
 func strength() -> float:
 	return hero.get_starting_strength() + current_strength_modifier
@@ -222,13 +248,21 @@ func process_external_modifiers(delta: float, _tick: int) -> void:
 
 func process_status_effects(delta: float) -> void:
 	# SHOCKED
-	if shock_value > 3:
-		shock_value = 0
-		apply_shock(.75)
-	if burn_value > 2:
-		VLogger.log_mp("Detected Burn")
-		burn_value = 0
-		apply_burn(1.9)
+	if is_shocked:
+		shock_time_remaining -= delta
+		if shock_time_remaining <= 0:
+			remove_shock()
+	elif shock_value > 3:
+		apply_shock(SHOCK_DURATION)
+	
+	# BURNT
+	if is_burnt:
+		VLogger.log_mp("Removing burn")
+		burnt_time_remaining -= delta
+		if burnt_time_remaining <= 0:
+			remove_burn()
+	elif burn_value > 2:
+		apply_burn(BURN_DURATION)
 	
 	# COLD
 	if is_cold:
@@ -245,13 +279,15 @@ func process_status_effects(delta: float) -> void:
 		freeze_value = 0;
 		apply_freeze(2)
 
-	# FROZEN
+	# ROOTED
 	if is_rooted:
 		root_time_remaining -= delta
 		if root_time_remaining <= 0:
 			remove_root()
 
 func move_and_slide_physics_factor() -> void:
+	if y_velocity_override() > 0:
+		velocity.y = y_velocity_override()
 	velocity *= NetworkTime.physics_factor
 	move_and_slide()
 	velocity /= NetworkTime.physics_factor
@@ -314,7 +350,11 @@ func apply_strength_boost(value: int) -> void:
 
 func _on_display_state_changed(_old_state: RewindableState, new_state: RewindableState) -> void:
 	var animation_name: String = new_state.animation_name
-	if animation_name != "":
+	if is_shocked:
+		animator.play(ANIM_TPOSE)
+	elif is_burnt:
+		animator.play(ANIM_BURNT)
+	elif animation_name != "":
 		animator.play(animation_name, 0.2)
 
 	#endregion
@@ -327,7 +367,7 @@ func knock_back(direction: Vector3, force: float) -> void:
 		is_knocked = true
 
 # TODO Honestly, we should just spawn a new effect no matter what maybe?
-func apply_cold(duration: float) -> void:
+func apply_cold(duration: float = COLD_DURATION) -> void:
 	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
@@ -336,17 +376,16 @@ func apply_cold(duration: float) -> void:
 	is_cold = true;
 	cold_time_remaining = duration
 
-func apply_freeze(duration: float) -> void:
+func apply_freeze(duration: float = FREEZE_DURATION) -> void:
 	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.FROZEN
 	})
-	freeze_value = 0
 	is_frozen = true;
 	freeze_time_remaining = duration
 
-func apply_root(duration: float) -> void:
+func apply_root(duration: float = ROOT_DURATION) -> void:
 	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
@@ -355,25 +394,36 @@ func apply_root(duration: float) -> void:
 	is_rooted = true;
 	root_time_remaining = duration
 
-func apply_burn(duration: float) -> void:
+func apply_burn(duration: float = BURN_DURATION) -> void:
+	animator.play(ANIM_BURNT)
 	level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
 			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.BURNT
 		})
-	burn_value = 0
-	VLogger.log_mp("About to move to Burn State from ", state_machine.state)
-	state_machine.transition(&"BurntState")
+	is_burnt = true
+	burn_value = 0;
+	burnt_time_remaining = duration
 
-func apply_shock(duration: float) -> void:
+func apply_shock(duration: float = SHOCK_DURATION) -> void:
+	animator.play(ANIM_TPOSE)
 	level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
 			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.SHOCKED
 		})
+	is_shocked = true
 	shock_value = 0
-	state_machine.transition(&"ShockedState")
+	shock_time_remaining = duration
 
+func remove_shock() -> void:
+	shock_time_remaining = 0
+	is_shocked = false;
+	
+func remove_burn() -> void:
+	burnt_time_remaining = 0
+	is_burnt = false;
+	
 func remove_cold() -> void:
 	cold_time_remaining = 0
 	is_cold = false;

@@ -10,7 +10,7 @@ func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 			state_machine.transition(&"IdleState")
 		elif get_jump():
 			state_machine.transition(&"JumpState")
-	else:
+	elif player.y_velocity_override() == 0:
 		state_machine.transition(&"FallState")
 
 func move_player(_delta: float, speed: float = player.movement_speed()) -> void:

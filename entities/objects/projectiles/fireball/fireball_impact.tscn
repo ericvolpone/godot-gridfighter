@@ -5,10 +5,11 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_s0hic"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s0hic"]
-spread = 70.0
+direction = Vector3(-1, 0, 0)
+spread = 180.0
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rxjr"]
 albedo_color = Color(1, 0.627451, 0.015686275, 1)
