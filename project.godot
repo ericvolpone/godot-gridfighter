@@ -19,6 +19,10 @@ config/windows_native_icon="res://_game_icons/icon_256px.ico"
 
 [autoload]
 
+NetworkManager="*res://entities/network/network_manager.gd"
+VLogger="*res://entities/utility/vlogger.gd"
+WindowTiler="*res://addons/netfox.extras/window-tiler.gd"
+NetworkSimulator="*res://addons/netfox.extras/network-simulator.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 NetworkTime="*res://addons/netfox/network-time.gd"
@@ -26,9 +30,6 @@ NetworkTimeSynchronizer="*res://addons/netfox/network-time-synchronizer.gd"
 NetworkRollback="*res://addons/netfox/rollback/network-rollback.gd"
 NetworkEvents="*res://addons/netfox/network-events.gd"
 NetworkPerformance="*res://addons/netfox/network-performance.gd"
-NetworkManager="*res://entities/network/network_manager.gd"
-WindowTiler="*res://addons/netfox.extras/window-tiler.gd"
-VLogger="*res://entities/utility/vlogger.gd"
 
 [debug]
 

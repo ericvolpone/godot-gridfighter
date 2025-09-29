@@ -80,7 +80,6 @@ var shock_time_remaining: float = 0;
 const SHOCK_SLOW_MODIFIER: float = 1.0;
 const SHOCK_DURATION: float = 1.0
 
-var is_burnt: bool = false;
 var burnt_time_remaining: float = 0;
 const BURN_Y_VELOCITY: float = 3;
 const BURN_SLOW_MODIFIER: float = .5;
@@ -214,17 +213,17 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 func movement_speed() -> float:
 	var modifier: float = 0
 	if is_shocked: modifier = max(modifier, SHOCK_SLOW_MODIFIER)
-	if is_burnt: modifier = max(modifier, BURN_SLOW_MODIFIER)
+	if is_burnt(): modifier = max(modifier, BURN_SLOW_MODIFIER)
 	if is_frozen: modifier = max(modifier, FREEZE_SLOW_MODIFIER)
 	if is_rooted: modifier = max(modifier, ROOT_SLOW_MODIFIER)
 	if is_cold: modifier = max(modifier, COLD_SLOW_MODIFIER)
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
 
 func can_jump() -> bool:
-	return not (is_burnt or is_shocked or is_frozen or is_rooted or is_knocked)
+	return not (is_burnt() or is_shocked or is_frozen or is_rooted or is_knocked)
 
 func y_velocity_override() -> float:
-	if is_burnt:
+	if is_burnt():
 		return BURN_Y_VELOCITY * (1 - (BURN_DURATION - burnt_time_remaining))
 	return 0
 
@@ -256,8 +255,7 @@ func process_status_effects(delta: float) -> void:
 		apply_shock(SHOCK_DURATION)
 	
 	# BURNT
-	if is_burnt:
-		VLogger.log_mp("Removing burn")
+	if is_burnt():
 		burnt_time_remaining -= delta
 		if burnt_time_remaining <= 0:
 			remove_burn()
@@ -311,6 +309,7 @@ func process_combat_actions_state() -> void:
 		hero.combat_action_2.execute()
 		state_machine.transition(&"BlockState")
 	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
+		VLogger.log_mp("Using Combat Action")
 		hero.combat_action_3.execute()
 		if hero.combat_action_3.is_action_state:
 			state_machine.transition(hero.combat_action_3.action_state_string)
@@ -352,7 +351,7 @@ func _on_display_state_changed(_old_state: RewindableState, new_state: Rewindabl
 	var animation_name: String = new_state.animation_name
 	if is_shocked:
 		animator.play(ANIM_TPOSE)
-	elif is_burnt:
+	elif is_burnt():
 		animator.play(ANIM_BURNT)
 	elif animation_name != "":
 		animator.play(animation_name, 0.2)
@@ -394,6 +393,9 @@ func apply_root(duration: float = ROOT_DURATION) -> void:
 	is_rooted = true;
 	root_time_remaining = duration
 
+func is_burnt() -> bool:
+	return burnt_time_remaining > 0
+
 func apply_burn(duration: float = BURN_DURATION) -> void:
 	animator.play(ANIM_BURNT)
 	level.status_effect_spawner.spawn({
@@ -401,7 +403,6 @@ func apply_burn(duration: float = BURN_DURATION) -> void:
 			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.BURNT
 		})
-	is_burnt = true
 	burn_value = 0;
 	burnt_time_remaining = duration
 
@@ -422,7 +423,6 @@ func remove_shock() -> void:
 	
 func remove_burn() -> void:
 	burnt_time_remaining = 0
-	is_burnt = false;
 	
 func remove_cold() -> void:
 	cold_time_remaining = 0

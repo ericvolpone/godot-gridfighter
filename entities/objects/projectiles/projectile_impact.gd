@@ -7,6 +7,7 @@ var has_checked: bool = false
 var birth_tick: int
 var death_tick: int
 var despawn_tick: int
+var players_impacted: Dictionary[Player, bool] = {}
 
 func _ready() -> void:
 	birth_tick = NetworkTime.tick
@@ -23,16 +24,17 @@ func _rollback_tick(tick: int) -> void:
 	if tick < birth_tick or tick > death_tick:
 		# Tick outside of range
 		return
-	if has_checked:
-		return
-	has_checked = true
 
 	for player in _get_overlapping_players():
+		# Check if we have already applied our impact to the player
+		if players_impacted.has(player):
+			return;
+		players_impacted.set(player, true)
 		var diff := player.global_position - global_position
 		var offset := Vector3(diff.x, max(0, diff.y), diff.z).normalized()
 		
 		VLogger.log_mp("Applying impact to player ", player.player_name)
-		apply_impact(player, offset)
+		apply_impact(player, offset) # For Fireball, this increases burn_value by 5
 		NetworkRollback.mutate(player)
 
 func _tick(_delta: float, tick: int) -> void:
@@ -49,9 +51,7 @@ func _get_overlapping_players() -> Array[Player]:
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = shape
 	query.transform = global_transform
-	
-	# TODO: Move map geo and brawlers to separate layers, so map doesn't clog up
-	# the 32 max_results - this would enable bigger collision shapes
+
 	var hits := state.intersect_shape(query)
 	for hit in hits:
 		var hit_object: Node3D = hit["collider"]

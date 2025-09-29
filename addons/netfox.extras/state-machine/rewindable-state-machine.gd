@@ -16,7 +16,7 @@ class_name RewindableStateMachine
 ## To implement states, extend the [RewindableState] class and add it as a child
 ## node.
 ##
-## @tutorial(RewindableStateMachine Guide): https://foxssake.github.io/netfox/netfox.extras/guides/rewindable-state-machine/
+## @tutorial(RewindableStateMachine Guide): https://foxssake.github.io/netfox/latest/netfox.extras/guides/rewindable-state-machine/
 
 ## Name of the current state.
 ##
@@ -65,17 +65,15 @@ var _available_states: Dictionary = {}
 ## and does nothing when transitioning to an unknown state.
 func transition(new_state_name: StringName) -> void:
 	if state == new_state_name:
-		if new_state_name == &"BurntState": VLogger.log_mp("Transition.1")
 		return
+
 	if not _available_states.has(new_state_name):
-		if new_state_name == &"BurntState": VLogger.log_mp("Transition.2")
 		_logger.warning("Attempted to transition from state '%s' into unknown state '%s'", [state, new_state_name])
 		return
 
 	var new_state: RewindableState = _available_states[new_state_name]
 	if _state_object:
 		if !new_state.can_enter(_state_object):
-			if new_state_name == &"BurntState": VLogger.log_mp("Transition.3")
 			return
 
 		_state_object.exit(new_state, NetworkRollback.tick)
@@ -84,18 +82,23 @@ func transition(new_state_name: StringName) -> void:
 	_state_object = new_state
 	on_state_changed.emit(_previous_state, new_state)
 	_state_object.enter(_previous_state, NetworkRollback.tick)
-	if new_state_name == &"BurntState": VLogger.log_mp("Transition.4")
 
 func _notification(what: int):
 	# Use notification instead of _ready, so users can write their own _ready
 	# callback without having to call super()
-	if what == NOTIFICATION_READY:
-		# Gather known states
-		for child in find_children("*", "RewindableState", false):
-			_available_states[child.name] = child
+	if Engine.is_editor_hint(): return
+
+	if what == NOTIFICATION_ENTER_TREE:
+		# Gather known states if we haven't yet
+		if _available_states.is_empty():
+			for child in find_children("*", "RewindableState", false):
+				_available_states[child.name] = child
 
 		# Compare states after tick loop
 		NetworkTime.after_tick_loop.connect(_after_tick_loop)
+	elif what == NOTIFICATION_EXIT_TREE:
+		# Disconnect handlers
+		NetworkTime.after_tick_loop.disconnect(_after_tick_loop)
 
 func _get_configuration_warnings():
 	const MISSING_SYNCHRONIZER_ERROR := \

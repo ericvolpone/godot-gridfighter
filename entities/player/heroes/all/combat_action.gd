@@ -31,7 +31,7 @@ func is_usable() -> bool:
 func execute() -> void:
 	if !is_usable():
 		pass
-	print(multiplayer.get_unique_id(), " - ", NetworkTime.tick, " - Executing action")
+	VLogger.log_mp("Executing Action - ", name)
 	var execution_time: float = NetworkTime.time
 	cd_available_time = execution_time + get_cd_time();
 	hero.player.global_combat_cooldown_next_use = execution_time + GLOBAL_CD;
