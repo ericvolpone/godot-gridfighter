@@ -44,7 +44,13 @@ func init_combat_actions() -> void:
 	add_child(combat_action_3)
 	if combat_action_4: 
 		add_child(combat_action_4)
-	
+
+	# Allow combat actions to mutate the player
+	combat_action_1.mutate(player)
+	combat_action_2.mutate(player)
+	combat_action_3.mutate(player)
+	combat_action_4.mutate(player)
+
 	if player.brain.is_multiplayer_authority():
 		# TODO It sucks that we couldnt figure out preload here
 		var hud_scene: PackedScene = load(HUD_PATH)

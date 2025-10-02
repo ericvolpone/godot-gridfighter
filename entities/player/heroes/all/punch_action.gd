@@ -2,16 +2,13 @@ class_name PunchAction extends CombatAction
 
 @onready var particle_effect_spawner: ParticleEffectSpawner = hero.player.level.particle_effect_spawner
 
-func _ready() -> void:
-	if not is_multiplayer_authority(): return;
-
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/PunchActionIcon.png";
 
 func get_cd_time() -> float:
 	return 1.0;
 
-func execute_child() -> void:
+func execute_child(tick: int) -> void:
 	pass;
 
 func is_usable_child() -> bool:
@@ -33,7 +30,7 @@ func handle_animation_signal() -> void:
 		"spawn_position" : punch_position
 	})
 	
-	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+	var space_state: PhysicsDirectSpaceState3D = hero.get_world_3d().direct_space_state
 
 	var sphere: SphereShape3D = SphereShape3D.new()
 	sphere.radius = punch_radius
@@ -50,13 +47,13 @@ func handle_animation_signal() -> void:
 		if obj == self:
 			continue
 		if obj is RigidBody3D and obj.is_in_group(Groups.PUNCHABLE_RB):  # whitelist
-			var to_obj: Vector3 = (obj.global_position - global_position).normalized()
+			var to_obj: Vector3 = (obj.global_position - hero.global_position).normalized()
 			var force: Vector3 = to_obj * hero.player.strength() * 20  # Tune force as needed
 			obj.apply_central_impulse(force)
 		if obj is CharacterBody3D and obj.is_in_group(Groups.PLAYER):  # whitelist
 			var player_obj: Player = obj
 			if(player_obj == hero.player or player_obj.is_blocking):
 				continue
-			var to_obj: Vector3 = (player_obj.global_position - global_position).normalized()
+			var to_obj: Vector3 = (player_obj.global_position - hero.global_position).normalized()
 			var force: Vector3 = to_obj * 2  # Tune force as needed
 			player_obj.knock_back(force, hero.player.strength())

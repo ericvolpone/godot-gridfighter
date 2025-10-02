@@ -11,7 +11,7 @@ func get_action_image_path() -> String:
 func get_cd_time() -> float:
 	return 8.0;
 
-func execute_child() -> void:
+func execute_child(tick: int) -> void:
 	aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.HARDEN,

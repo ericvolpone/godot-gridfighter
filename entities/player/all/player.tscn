@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=19 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
+[ext_resource type="Script" uid="uid://dhffq6h1i553p" path="res://entities/player/all/hero_socket.gd" id="2_gurk5"]
 [ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_vak66"]
 [ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="4_vak66"]
 [ext_resource type="Script" uid="uid://byrgwv2o7hstx" path="res://addons/netfox.extras/state-machine/rewindable-state-machine.gd" id="5_jue3x"]
@@ -16,14 +17,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.8
 height = 2.6
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x6u7t"]
-properties/0/path = NodePath(".:is_knocked")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:is_respawning")
-properties/1/spawn = true
-properties/1/replication_mode = 1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gurk5"]
 noise_type = 5
@@ -41,6 +34,14 @@ albedo_color = Color(0.806697, 0.100879, 0.181326, 1)
 albedo_texture = SubResource("NoiseTexture2D_g2ike")
 disable_receive_shadows = true
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x6u7t"]
+properties/0/path = NodePath(".:is_knocked")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:is_respawning")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player_CharacterBody3D" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 3
@@ -50,7 +51,20 @@ script = ExtResource("1_lvxji")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 shape = SubResource("CapsuleShape3D_g2els")
 
+[node name="RingIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16536, 0)
+cast_shadow = 0
+radius = 0.75
+height = 0.001
+material = SubResource("StandardMaterial3D_gurk5")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RingIndicator"]
+operation = 2
+radius = 0.65
+height = 0.001
+
 [node name="HeroSocket" type="Node3D" parent="."]
+script = ExtResource("2_gurk5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_x6u7t")
@@ -190,15 +204,3 @@ can_jump = false
 animation_name = "master_animations/UpperCut"
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://nvvaqfdybxph"
-
-[node name="RingIndicator" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16536, 0)
-cast_shadow = 0
-radius = 0.75
-height = 0.001
-material = SubResource("StandardMaterial3D_gurk5")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RingIndicator"]
-operation = 2
-radius = 0.65
-height = 0.001

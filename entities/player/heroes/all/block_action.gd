@@ -10,7 +10,7 @@ func get_action_image_path() -> String:
 func get_cd_time() -> float:
 	return 5.0;
 
-func execute_child() -> void:
+func execute_child(tick: int) -> void:
 	pass
 
 func is_usable_child() -> bool:

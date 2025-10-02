@@ -46,7 +46,7 @@ var player_name: String;
 @onready var ring_indicator: CSGCylinder3D = $RingIndicator
 #endregion
 	#region Var:Hero
-@onready var hero_socket: Node3D = $HeroSocket
+@onready var hero_socket: HeroSocket = $HeroSocket
 var hero: Hero;
 # Maybe move "change hero" into the set function, exposing it is confusing
 # need this for multiplayer though
@@ -116,7 +116,7 @@ var max_player_strength: float = 10;
 @export var is_standing_back_up: bool = false;
 @export var is_blocking: bool = false;
 @export var is_respawning: bool = false;
-@onready var global_combat_cooldown_next_use: float = NetworkTime.time
+@onready var global_combat_cooldown_next_use_tick: int = -1
 var is_immune_to_knockback: bool = false;
 	#endregion
 	#region Var:Netfox
@@ -170,6 +170,7 @@ func _change_hero(hero_id: int) -> void:
 	
 	hero = hero_definition.instantiate()
 	hero_socket.add_child(hero)
+	hero_socket.hero = hero
 	hero = hero
 	hero.call_deferred("init_combat_actions")
 	animator = hero.animator
@@ -195,7 +196,8 @@ func process_menu_input(tick: int) -> void:
 func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 	_force_update_is_on_floor()
 	process_menu_input(tick);
-	process_combat_actions_state();
+	process_combat_actions_state(tick);
+	process_combat_actions(tick);
 	process_knock();
 	process_external_modifiers(delta, tick)
 	process_status_effects(delta);
@@ -301,22 +303,48 @@ func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 
 	#endregion
 	#region Func:Actions
-func process_combat_actions_state() -> void:
-	if brain.using_combat_action_1 and hero.combat_action_1.is_usable():
-		hero.combat_action_1.execute()
-		state_machine.transition(&"PunchState")
-	elif brain.using_combat_action_2 and hero.combat_action_2.is_usable():
-		hero.combat_action_2.execute()
-		state_machine.transition(&"BlockState")
-	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable():
-		VLogger.log_mp("Using Combat Action")
-		hero.combat_action_3.execute()
-		if hero.combat_action_3.is_action_state:
-			state_machine.transition(hero.combat_action_3.action_state_string)
-	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable():
-		hero.combat_action_4.execute()
-		if hero.combat_action_4.is_action_state:
-			state_machine.transition(hero.combat_action_4.action_state_string)
+
+func process_combat_actions_state(tick: int) -> void:
+	if not hero.combat_action_1:
+		return
+	if brain.using_combat_action_1 and hero.combat_action_1.is_usable(tick):
+		hero.combat_action_1.execute(tick)
+	elif brain.using_combat_action_2 and hero.combat_action_2.is_usable(tick):
+		hero.combat_action_2.execute(tick)
+	elif brain.using_combat_action_3 and hero.combat_action_3.is_usable(tick):
+		hero.combat_action_3.execute(tick)
+	elif brain.using_combat_action_4 and hero.combat_action_4.is_usable(tick):
+		hero.combat_action_4.execute(tick)
+
+func process_combat_actions(tick: int) -> void:
+	if not hero.combat_action_1 or not hero.combat_action_2 or not hero.combat_action_3 or not hero.combat_action_4:
+		return
+	match hero.combat_action_1.get_status():
+		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			hero.combat_action_1.execute_child(tick)
+			state_machine.transition(&"PunchState")
+		RewindableAction.CANCELLING:
+			hero.combat_action_1.erase_context()
+	match hero.combat_action_2.get_status():
+		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			hero.combat_action_2.execute_child(tick)
+			state_machine.transition(&"BlockState")
+		RewindableAction.CANCELLING:
+			hero.combat_action_2.erase_context()
+	match hero.combat_action_3.get_status():
+		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			hero.combat_action_3.execute_child(tick)
+			if hero.combat_action_3.is_action_state:
+				state_machine.transition(hero.combat_action_3.action_state_string)
+		RewindableAction.CANCELLING:
+			hero.combat_action_3.erase_context()
+	match hero.combat_action_4.get_status():
+		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			hero.combat_action_4.execute_child(tick)
+			if hero.combat_action_4.is_action_state:
+				state_machine.transition(hero.combat_action_4.action_state_string)
+		RewindableAction.CANCELLING:
+			hero.combat_action_4.erase_context()
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
@@ -328,6 +356,7 @@ func get_facing_direction() -> Vector3:
 
 	#endregion
 	#region Func:PowerUp
+
 func apply_speed_boost(value: int) -> void:
 	if not is_multiplayer_authority():
 		return;

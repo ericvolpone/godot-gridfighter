@@ -15,7 +15,7 @@ func get_cd_time() -> float:
 func is_usable_child() -> bool:
 	return true;
 
-func execute_child() -> void:
+func execute_child(tick: int) -> void:
 	pass
 
 func _cast_frame_enact() -> void:

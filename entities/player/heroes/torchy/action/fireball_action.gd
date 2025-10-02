@@ -17,15 +17,15 @@ func get_cd_time() -> float:
 func is_usable_child() -> bool:
 	return true;
 
-func execute_child() -> void:
-	cast_tick = NetworkTime.tick + NetworkTime.seconds_to_ticks(.5)
+func execute_child(tick: int) -> void:
+	cast_tick = tick + NetworkTime.seconds_to_ticks(.5)
 
 func _tick(delta: float, tick: int) -> void:
 	if cast_tick != -1 and NetworkTime.tick == cast_tick:
 		cast_tick = -1
-		_cast_frame_enact()
+		cast()
 
-func _cast_frame_enact() -> void:
+func cast() -> void:
 	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0, .5, 0)
 	
 	# TODO Maybe make speed adjustable by power ups?

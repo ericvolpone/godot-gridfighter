@@ -2,12 +2,11 @@ class_name PlayerBrain extends Brain
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	NetworkTime.before_tick_loop.connect(_gather)
-	
-	if not is_multiplayer_authority():
-		set_process(false)
-		set_physics_process(false)
-	
+	NetworkTime.before_tick_loop.connect(func() -> void:
+		if is_multiplayer_authority():
+			_gather()
+	)
+
 	gather_movement_direction()
 
 func _gather() -> void:

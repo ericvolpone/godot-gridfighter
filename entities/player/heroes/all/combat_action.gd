@@ -1,4 +1,5 @@
-class_name CombatAction extends Node3D
+@abstract
+class_name CombatAction extends RewindableAction
 
 const DEFAULT_CD: float = 5.0;
 const GLOBAL_CD: float = 0.5;
@@ -6,36 +7,27 @@ const GLOBAL_CD: float = 0.5;
 var is_interuptable: bool = true;
 var is_action_state: bool = false;
 var action_state_string: StringName;
-var cd_available_time: float = NetworkTime.time
+var cd_available_tick: int = -1
 
 @onready var hero: Hero = get_parent();
 
-func is_on_cooldown() -> bool:
-	var time: float = NetworkTime.time;
-	return time < cd_available_time;
+func is_on_cooldown(tick: int) -> bool:
+	return tick < cd_available_tick;
 
-func get_remaining_cooldown_time_in_secs() -> int:
-	var time: float = NetworkTime.time;
-	var time_remaining: float = cd_available_time - time;
+func get_remaining_cooldown_time_in_secs(tick: int) -> int:
+	var time_remaining: float = NetworkTime.ticks_to_seconds(cd_available_tick - tick);
 	return ceil(time_remaining)
 
-func is_usable() -> bool:
-	var time: float = NetworkTime.time;
-	
+func is_usable(tick: int) -> bool:
 	return 	hero.player.has_control() and \
-		not is_on_cooldown() and \
-		time >= hero.player.global_combat_cooldown_next_use and \
+		not is_on_cooldown(tick) and \
+		tick >= hero.player.global_combat_cooldown_next_use_tick and \
 		is_usable_child();
 
-# Called when the node enters the scene tree for the first time.
-func execute() -> void:
-	if !is_usable():
-		pass
-	VLogger.log_mp("Executing Action - ", name)
-	var execution_time: float = NetworkTime.time
-	cd_available_time = execution_time + get_cd_time();
-	hero.player.global_combat_cooldown_next_use = execution_time + GLOBAL_CD;
-	execute_child();
+func execute(tick: int) -> void:
+	cd_available_tick = tick + NetworkTime.seconds_to_ticks(get_cd_time());
+	hero.player.global_combat_cooldown_next_use_tick = tick + NetworkTime.seconds_to_ticks(GLOBAL_CD);
+	set_active(true)
 
 # Interface Methods
 func get_action_image_path() -> String:
@@ -45,9 +37,8 @@ func get_action_image_path() -> String:
 func get_cd_time() -> float:
 	return DEFAULT_CD
 
-func execute_child() -> void:
-	push_error("Implement Interface execute_child");
-	pass
+@abstract
+func execute_child(tick: int) -> void;
 
 func is_usable_child() -> bool:
 	return true;
