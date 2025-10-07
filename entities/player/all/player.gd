@@ -138,8 +138,8 @@ func _ready() -> void:
 		current_hero_id = (chosen_hero_id)
 
 	animator = hero.animator
-	state_machine.state = &"RespawnState"
-	state_machine.on_display_state_changed.connect(_on_display_state_changed)
+	#state_machine.state = &"RespawnState"
+	#state_machine.on_display_state_changed.connect(_on_display_state_changed)
 	
 	if not brain.is_ai() and brain.is_multiplayer_authority():
 		# TODO Probably put this elsewhere?
@@ -194,6 +194,7 @@ func process_menu_input(tick: int) -> void:
 	#region Func:Native
 
 func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
+	process_movement(delta, tick, is_fresh)
 	_force_update_is_on_floor()
 	process_menu_input(tick);
 	process_combat_actions_state(tick);
@@ -211,7 +212,36 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 
 	#endregion
 
-	#region Movement
+	#region Movement\
+func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
+	var is_jumping: bool = false;
+	if can_jump():
+		is_jumping = brain.jump_strength > 0
+	if is_on_floor():
+		if is_jumping:
+			velocity.y = jump_velocity
+		else:
+			velocity.y = 0
+	else:
+		apply_gravity(delta)
+	
+	var movement_direction: Vector3 = brain.move_direction
+
+	var speed: float = movement_speed()
+	
+	var horizontal_velocity: Vector3 = movement_direction.normalized() * speed
+	
+	if horizontal_velocity:
+		velocity.x = horizontal_velocity.x
+		velocity.z = horizontal_velocity.z
+		rotation.y = -atan2(-movement_direction.x, movement_direction.z)
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+	
+	move_and_slide_physics_factor()
+
+
 func movement_speed() -> float:
 	var modifier: float = 0
 	if is_shocked: modifier = max(modifier, SHOCK_SLOW_MODIFIER)
@@ -219,6 +249,8 @@ func movement_speed() -> float:
 	if is_frozen: modifier = max(modifier, FREEZE_SLOW_MODIFIER)
 	if is_rooted: modifier = max(modifier, ROOT_SLOW_MODIFIER)
 	if is_cold: modifier = max(modifier, COLD_SLOW_MODIFIER)
+	#if state_machine.state == "CastState":
+		#VLogger.log_mp("Cast State Movement Speed Modifier: ", modifier)
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
 
 func can_jump() -> bool:
@@ -289,6 +321,9 @@ func move_and_slide_physics_factor() -> void:
 	if y_velocity_override() > 0:
 		velocity.y = y_velocity_override()
 	velocity *= NetworkTime.physics_factor
+	
+	#if state_machine.state == "CastState":
+		#VLogger.log_mp("Cast State Velocity", velocity)
 	move_and_slide()
 	velocity /= NetworkTime.physics_factor
 
@@ -298,7 +333,9 @@ func _force_update_is_on_floor() -> void:
 func _snapshot_and_apply_velocity(velocity_to_apply: Vector3) -> void:
 	var old_velocity: Vector3 = velocity
 	velocity = velocity_to_apply
-	move_and_slide_physics_factor()
+	velocity *= NetworkTime.physics_factor
+	move_and_slide()
+	velocity /= NetworkTime.physics_factor
 	velocity = old_velocity
 
 	#endregion
@@ -322,34 +359,35 @@ func process_combat_actions(tick: int) -> void:
 	match hero.combat_action_1.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			hero.combat_action_1.execute_child(tick)
-			state_machine.transition(&"PunchState")
+			#state_machine.transition(&"PunchState")
 		RewindableAction.CANCELLING:
 			hero.combat_action_1.erase_context()
 	match hero.combat_action_2.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			hero.combat_action_2.execute_child(tick)
-			state_machine.transition(&"BlockState")
+			#state_machine.transition(&"BlockState")
 		RewindableAction.CANCELLING:
 			hero.combat_action_2.erase_context()
 	match hero.combat_action_3.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			hero.combat_action_3.execute_child(tick)
-			if hero.combat_action_3.is_action_state:
-				state_machine.transition(hero.combat_action_3.action_state_string)
+			#if hero.combat_action_3.is_action_state:
+				#state_machine.transition(hero.combat_action_3.action_state_string)
 		RewindableAction.CANCELLING:
 			hero.combat_action_3.erase_context()
 	match hero.combat_action_4.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			hero.combat_action_4.execute_child(tick)
-			if hero.combat_action_4.is_action_state:
-				state_machine.transition(hero.combat_action_4.action_state_string)
+			#if hero.combat_action_4.is_action_state:
+				#state_machine.transition(hero.combat_action_4.action_state_string)
 		RewindableAction.CANCELLING:
 			hero.combat_action_4.erase_context()
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
 	var control_states: Array[StringName] = [&"MoveState", &"IdleState", &"JumpState", &"FallState"]
-	return !is_knocked and !is_in_menu and state_machine.state in control_states;
+	return !is_knocked and !is_in_menu;
+	#return !is_knocked and !is_in_menu and state_machine.state in control_states;
 
 func get_facing_direction() -> Vector3:
 	return global_transform.basis.z.normalized()

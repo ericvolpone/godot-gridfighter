@@ -23,6 +23,8 @@ func enter(_previous_state: RewindableState, _tick: int) -> void:
 	state_time_start = NetworkTime.time;
 
 func tick(delta: float, _tick: int, _is_fresh: bool) -> void:
+	if not _is_fresh:
+		return
 	move_player(delta)
 	force_update_is_on_floor()
 
@@ -47,7 +49,9 @@ func move_player(delta: float, speed: float = player.movement_speed()) -> void:
 
 	var horizontal_velocity: Vector3;
 	var input_dir : Vector3 = get_movement_input()
+	#VLogger.log_mp("Cast State Input: ", input_dir)
 	if xz_velocity_override:
+		#VLogger.log_mp("Cast State OVERRIDE")
 		var deceleration: float = 0
 		if is_xz_velocity_override_decellerating:
 			deceleration = (NetworkTime.time - state_time_start) / state_time
@@ -56,6 +60,7 @@ func move_player(delta: float, speed: float = player.movement_speed()) -> void:
 		var position_target: Vector3 = input_dir * speed
 		horizontal_velocity = position_target * xz_movement_modifier
 	else:
+		#VLogger.log_mp("Cast State ELSE")
 		pass
 
 	if horizontal_velocity:
@@ -66,4 +71,5 @@ func move_player(delta: float, speed: float = player.movement_speed()) -> void:
 		player.velocity.x = move_toward(player.velocity.x, 0, speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 
+	#VLogger.log_mp("Cast State H Velocity: ", horizontal_velocity)
 	player.move_and_slide_physics_factor()

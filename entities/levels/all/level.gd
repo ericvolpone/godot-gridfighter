@@ -83,7 +83,7 @@ func handle_player_death(player: Player) -> void:
 		next_hero_id = 0
 
 	player.current_hero_id = next_hero_id
-	player.state_machine.transition(&"RespawnState")
+	#player.state_machine.transition(&"RespawnState")
 
 	if is_multiplayer_authority():
 		_spawn_death_explosion.rpc(player.global_position)
