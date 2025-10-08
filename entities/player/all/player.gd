@@ -9,6 +9,8 @@ const ANIM_PUNCH: StringName = "master_animations/Punch"
 const ANIM_BLOCK: StringName = "master_animations/Block"
 const ANIM_SHOUT: StringName = "master_animations/Shout"
 const ANIM_CAST: StringName = "master_animations/Cast"
+const ANIM_UPPERCUT: StringName = "master_animations/UpperCut"
+const ANIM_KNEEL: StringName = "master_animations/Kneel"
 const ANIM_BURNT: StringName = "master_animations/Burnt"
 const ANIM_TPOSE: StringName = "master_animations/T-Pose"
 
@@ -61,6 +63,10 @@ var _menu_tick: int = -1;
 @onready var in_game_menu: InGameMenu = load("res://entities/menu/in_game_menu.tscn").instantiate();
 	#endregion
 	#region Var:PlayerStats
+		#region Var:PlayerStats:ActionTimers
+var active_action_number: int = -1;
+var active_action_end_tick: int = -1;
+		#endregion
 		#region Var:PlayerStats:Modifiers
 var jump_pad_velocity: Vector3 = Vector3.ZERO
 var colliding_aoes: Dictionary[AOE, bool] = {} # TODO Move this into rollback tick
@@ -194,8 +200,9 @@ func process_menu_input(tick: int) -> void:
 	#region Func:Native
 
 func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
-	process_movement(delta, tick, is_fresh)
 	_force_update_is_on_floor()
+	process_movement(delta, tick, is_fresh)
+	process_animations(delta, tick, is_fresh)
 	process_menu_input(tick);
 	process_combat_actions_state(tick);
 	process_combat_actions(tick);
@@ -241,6 +248,30 @@ func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
 	
 	move_and_slide_physics_factor()
 
+func process_animations(delta: float, tick: int, is_fresh: bool) -> void:
+	if active_action_number != -1:
+		match active_action_number:
+			1:
+				animator.play(ANIM_PUNCH)
+			2:
+				animator.play(ANIM_BLOCK)
+			3:
+				if hero.combat_action_3.is_action_state:
+					animator.play(hero.combat_action_3.action_animation)
+			4:
+				if hero.combat_action_4.is_action_state:
+					animator.play(hero.combat_action_4.action_animation)
+		if tick > active_action_end_tick:
+			active_action_number = -1
+			active_action_end_tick = -1
+	else:
+		if is_on_floor():
+			if brain.move_direction:
+				animator.play(ANIM_RUN)
+			else:
+				animator.play(ANIM_IDLE)
+		else:
+			animator.play(ANIM_JUMP)
 
 func movement_speed() -> float:
 	var modifier: float = 0
@@ -358,29 +389,48 @@ func process_combat_actions(tick: int) -> void:
 		return
 	match hero.combat_action_1.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			active_action_number = 1;
+			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_PUNCH).length)
 			hero.combat_action_1.execute_child(tick)
 			#state_machine.transition(&"PunchState")
 		RewindableAction.CANCELLING:
+			active_action_number = -1
+			active_action_end_tick = -1
 			hero.combat_action_1.erase_context()
 	match hero.combat_action_2.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			active_action_number = 2;
+			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_BLOCK).length)
 			hero.combat_action_2.execute_child(tick)
 			#state_machine.transition(&"BlockState")
 		RewindableAction.CANCELLING:
+			active_action_number = -1
+			active_action_end_tick = -1
 			hero.combat_action_2.erase_context()
 	match hero.combat_action_3.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
-			hero.combat_action_3.execute_child(tick)
+			if hero.combat_action_3.is_action_state:
+				active_action_number = 3;
+				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_3.action_animation).length)
+				hero.combat_action_3.execute_child(tick)
 			#if hero.combat_action_3.is_action_state:
 				#state_machine.transition(hero.combat_action_3.action_state_string)
 		RewindableAction.CANCELLING:
+			active_action_number = -1
+			active_action_end_tick = -1
 			hero.combat_action_3.erase_context()
 	match hero.combat_action_4.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
+			if hero.combat_action_4.is_action_state:
+				active_action_number = 4;
+				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_4.action_animation).length)
 			hero.combat_action_4.execute_child(tick)
 			#if hero.combat_action_4.is_action_state:
 				#state_machine.transition(hero.combat_action_4.action_state_string)
 		RewindableAction.CANCELLING:
+			active_action_number = -1
+			active_action_end_tick = -1
+			hero.combat_action_4.erase_context()
 			hero.combat_action_4.erase_context()
 	#endregion
 	#region Func:Helpers

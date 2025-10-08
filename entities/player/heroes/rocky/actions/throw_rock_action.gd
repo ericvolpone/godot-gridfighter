@@ -5,6 +5,7 @@ var projectile_spawner: ProjectileSpawner;
 func _ready() -> void:
 	is_action_state = true
 	action_state_string = "CastState"
+	action_animation = Player.ANIM_CAST
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/ThrowRockActionIcon.png";

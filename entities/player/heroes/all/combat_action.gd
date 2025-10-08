@@ -7,6 +7,7 @@ const GLOBAL_CD: float = 0.5;
 var is_interuptable: bool = true;
 var is_action_state: bool = false;
 var action_state_string: StringName;
+var action_animation: StringName;
 var cd_available_tick: int = -1
 
 @onready var hero: Hero = get_parent();

@@ -8,6 +8,7 @@ var cast_tick: int = -1
 func _ready() -> void:
 	is_action_state = true;
 	action_state_string = "UppercutState"
+	action_animation = Player.ANIM_UPPERCUT
 	NetworkTime.on_tick.connect(_tick)
 
 func get_action_image_path() -> String:

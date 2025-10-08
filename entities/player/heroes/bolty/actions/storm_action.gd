@@ -7,6 +7,7 @@ const STORM_TTL: float = 4
 func _ready() -> void:
 	is_action_state = true;
 	action_state_string = "ShoutState"
+	action_animation = Player.ANIM_SHOUT
 
 func get_action_image_path() -> String:
 	return "res://models/sprites/hud/actions/generated/LightningStormActionIcon.png";

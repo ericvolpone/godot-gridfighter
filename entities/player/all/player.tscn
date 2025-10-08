@@ -74,7 +74,7 @@ unique_name_in_owner = true
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", "RewindableStateMachine:state", ":current_hero_id", ":burn_value", ":burnt_time_remaining"])
+state_properties = Array[String]([":global_transform", ":velocity", "RewindableStateMachine:state", ":current_hero_id", ":burn_value", ":burnt_time_remaining", ":active_action_number", ":active_action_end_tick"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 
