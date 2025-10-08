@@ -25,5 +25,8 @@ func y_velocity_override() -> float:
 func y_velocity_override_deceleration() -> bool:
 	return false
 
+func rewind() -> void:
+	pass
+
 func is_usable_child() -> bool:
 	return true;

@@ -18,16 +18,20 @@ func respawn_player(player: Player) -> void:
 			player.is_blocking = false;
 			player.velocity = Vector3.ZERO
 			player.shock_value = 0;
+			player.cold_value = 0
+			player.root_value = 0
 			player.burn_value = 0
 			player.freeze_value = 0
+			player.shock_time_remaining = 0
+			player.freeze_time_remaining = 0
+			player.burnt_time_remaining = 0
+			player.root_time_remaining = 0
+			player.cold_time_remaining = 0
 			player.speed_boost_modifier = 0
 			player.current_strength_modifier = 0
-			if player.is_cold:
-				player.remove_cold()
-			if player.is_frozen:
-				player.remove_freeze()
-			if player.is_rooted:
-				player.remove_root()
+			player.active_action_number = -1
+			player.active_action_start_tick = -1
+			player.active_action_end_tick = -1
 			
 			# Remove status and AOE nodes
 			for status_effect: StatusEffect in player.status_effects.keys():

@@ -44,7 +44,6 @@ var player_name: String;
 @onready var player_spawner: PlayerSpawner = get_parent() # TODO Not really needed
 @onready var level: Level = player_spawner.get_parent(); # TODO Probably just signal this up
 @onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
-@onready var state_machine: RewindableStateMachine = $RewindableStateMachine
 @onready var ring_indicator: CSGCylinder3D = $RingIndicator
 #endregion
 	#region Var:Hero
@@ -222,30 +221,35 @@ func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
 	var xz_multiplier: float = 1
 	var y_velocity_override: float = 0
 	
-	# TODO Helper Function to get combat action by active action num
-	match active_action_number:
-		1:
-			can_move = hero.combat_action_1.can_move()
-			xz_multiplier = hero.combat_action_1.xz_multiplier()
-			y_velocity_override = hero.combat_action_1.y_velocity_override()
-		2:
-			can_move = hero.combat_action_2.can_move()
-			xz_multiplier = hero.combat_action_2.xz_multiplier()
-			y_velocity_override = hero.combat_action_2.y_velocity_override()
-		3:
-			can_move = hero.combat_action_3.can_move()
-			xz_multiplier = hero.combat_action_3.xz_multiplier()
-			y_velocity_override = hero.combat_action_3.y_velocity_override()
-			if hero.combat_action_3.y_velocity_override_deceleration():
-				y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
-		4:
-			can_move = hero.combat_action_4.can_move()
-			xz_multiplier = hero.combat_action_4.xz_multiplier()
-			y_velocity_override = hero.combat_action_4.y_velocity_override()
-			if hero.combat_action_4.y_velocity_override_deceleration():
-				y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
-		_:
-			pass
+	if is_burnt():
+		y_velocity_override = BURN_Y_VELOCITY * (1 - (burnt_time_remaining / BURN_DURATION))
+	elif is_shocked():
+		can_move = false;
+	else:
+		# TODO Helper Function to get combat action by active action num
+		match active_action_number:
+			1:
+				can_move = hero.combat_action_1.can_move()
+				xz_multiplier = hero.combat_action_1.xz_multiplier()
+				y_velocity_override = hero.combat_action_1.y_velocity_override()
+			2:
+				can_move = hero.combat_action_2.can_move()
+				xz_multiplier = hero.combat_action_2.xz_multiplier()
+				y_velocity_override = hero.combat_action_2.y_velocity_override()
+			3:
+				can_move = hero.combat_action_3.can_move()
+				xz_multiplier = hero.combat_action_3.xz_multiplier()
+				y_velocity_override = hero.combat_action_3.y_velocity_override()
+				if hero.combat_action_3.y_velocity_override_deceleration():
+					y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
+			4:
+				can_move = hero.combat_action_4.can_move()
+				xz_multiplier = hero.combat_action_4.xz_multiplier()
+				y_velocity_override = hero.combat_action_4.y_velocity_override()
+				if hero.combat_action_4.y_velocity_override_deceleration():
+					y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
+			_:
+				pass
 
 	if y_velocity_override == 0:
 		var is_jumping: bool = false;
@@ -277,6 +281,13 @@ func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
 		move_and_slide_physics_factor()
 
 func process_animations(delta: float, tick: int, is_fresh: bool) -> void:
+	if is_burnt():
+		animator.play(ANIM_BURNT, .2)
+		return
+	elif is_shocked():
+		animator.play(ANIM_TPOSE, .2)
+		return
+
 	if active_action_number != -1:
 		match active_action_number:
 			1:
@@ -315,17 +326,12 @@ func movement_speed() -> float:
 func can_jump() -> bool:
 	return not (is_burnt() or is_shocked() or is_frozen() or is_rooted() or is_knocked)
 
-func y_velocity_override() -> float:
-	if is_burnt():
-		return BURN_Y_VELOCITY * (1 - (BURN_DURATION - burnt_time_remaining))
-	return 0
-
 func strength() -> float:
 	return hero.get_starting_strength() + current_strength_modifier
 
 func process_knock() -> void:
-	if(is_knocked and state_machine.state != &"KnockedState"):
-		state_machine.transition(&"KnockedState")
+	if(is_knocked):
+		pass;
 
 func apply_gravity(delta: float) -> void:
 	velocity.y -= 9.8 * delta
@@ -377,12 +383,7 @@ func process_status_effects(delta: float) -> void:
 			remove_root()
 
 func move_and_slide_physics_factor() -> void:
-	if y_velocity_override() > 0:
-		velocity.y = y_velocity_override()
 	velocity *= NetworkTime.physics_factor
-	
-	#if state_machine.state == "CastState":
-		#VLogger.log_mp("Cast State Velocity", velocity)
 	move_and_slide()
 	velocity /= NetworkTime.physics_factor
 
@@ -427,6 +428,7 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_1.erase_context()
+			hero.combat_action_4.rewind()
 	match hero.combat_action_2.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			active_action_number = 2;
@@ -439,6 +441,7 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_2.erase_context()
+			hero.combat_action_4.rewind()
 	match hero.combat_action_3.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			if hero.combat_action_3.is_action_state:
@@ -453,6 +456,7 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_3.erase_context()
+			hero.combat_action_4.rewind()
 	match hero.combat_action_4.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			if hero.combat_action_4.is_action_state:
@@ -467,13 +471,11 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_4.erase_context()
-			hero.combat_action_4.erase_context()
+			hero.combat_action_4.rewind()
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
-	var control_states: Array[StringName] = [&"MoveState", &"IdleState", &"JumpState", &"FallState"]
-	return !is_knocked and !is_in_menu;
-	#return !is_knocked and !is_in_menu and state_machine.state in control_states;
+	return !is_knocked and !is_in_menu and active_action_number == -1;
 
 func get_facing_direction() -> Vector3:
 	return global_transform.basis.z.normalized()

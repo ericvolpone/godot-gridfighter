@@ -1,6 +1,7 @@
 class_name StormAction extends CombatAction
 
 const STORM_TTL: float = 4
+var active_storm: AOE
 
 @onready var aoe_spawner: AOESpawner = hero.player.level.aoe_spawner;
 
@@ -17,7 +18,7 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child(tick: int) -> void:
-	aoe_spawner.spawn({
+	active_storm = aoe_spawner.spawn({
 		"owner_peer_id" : hero.player.player_id,
 		"aoe_type" : AOE.Type.STORM,
 		"aoe_ttl" : STORM_TTL
@@ -34,6 +35,11 @@ func y_velocity_override() -> float:
 
 func y_velocity_override_deceleration() -> bool:
 	return true
+
+func rewind() -> void:
+	if active_storm:
+		active_storm.queue_free()
+		active_storm = null
 
 func is_usable_child() -> bool:
 	return true;

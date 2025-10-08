@@ -18,7 +18,7 @@ func get_cd_time() -> float:
 	return 5.0;
 
 func execute_child(tick: int) -> void:
-	cast_tick = tick + NetworkTime.seconds_to_ticks(.5)
+	cast_tick = tick + NetworkTime.seconds_to_ticks(.75)
 
 func can_move() -> bool:
 	return false
@@ -36,6 +36,9 @@ func _tick(delta: float, tick: int) -> void:
 	if cast_tick != -1 and NetworkTime.tick == cast_tick:
 		cast_tick = -1
 		spawn_trap()
+
+func rewind() -> void:
+	cast_tick = -1
 
 func spawn_trap() -> void:
 	var spawn_direction: Vector3 = hero.player.get_facing_direction()

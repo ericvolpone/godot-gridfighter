@@ -26,6 +26,9 @@ func y_velocity_override_deceleration() -> bool:
 func is_usable_child() -> bool:
 	return true;
 
+func rewind() -> void:
+	pass;
+
 func handle_animation_signal() -> void:
 	if not is_multiplayer_authority(): return;
 

@@ -33,6 +33,9 @@ func y_velocity_override() -> float:
 func y_velocity_override_deceleration() -> bool:
 	return false
 
+func rewind() -> void:
+	cast_tick = -1
+
 func _tick(delta: float, tick: int) -> void:
 	if cast_tick != -1 and NetworkTime.tick == cast_tick:
 		cast_tick = -1
