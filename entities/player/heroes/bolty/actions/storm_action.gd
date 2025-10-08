@@ -30,7 +30,7 @@ func xz_multiplier() -> float:
 	return .25
 
 func y_velocity_override() -> float:
-	return 1
+	return 2
 
 func y_velocity_override_deceleration() -> bool:
 	return true

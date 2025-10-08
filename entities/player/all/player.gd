@@ -240,10 +240,14 @@ func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
 			can_move = hero.combat_action_3.can_move()
 			xz_multiplier = hero.combat_action_3.xz_multiplier()
 			y_velocity_override = hero.combat_action_3.y_velocity_override()
+			if hero.combat_action_3.y_velocity_override_deceleration():
+				y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
 		4:
 			can_move = hero.combat_action_4.can_move()
 			xz_multiplier = hero.combat_action_4.xz_multiplier()
 			y_velocity_override = hero.combat_action_4.y_velocity_override()
+			if hero.combat_action_4.y_velocity_override_deceleration():
+				y_velocity_override *= 1.0 - (float(tick - active_action_start_tick) / float(active_action_end_tick - active_action_start_tick))
 		_:
 			pass
 
