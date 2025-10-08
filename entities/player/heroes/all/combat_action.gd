@@ -38,8 +38,11 @@ func get_action_image_path() -> String:
 func get_cd_time() -> float:
 	return DEFAULT_CD
 
-@abstract
-func execute_child(tick: int) -> void;
+@abstract func can_move() -> bool;
+@abstract func xz_multiplier() -> float;
+@abstract func y_velocity_override() -> float;
+@abstract func y_velocity_override_deceleration() ->bool;
+@abstract func execute_child(tick: int) -> void;
 
 func is_usable_child() -> bool:
 	return true;

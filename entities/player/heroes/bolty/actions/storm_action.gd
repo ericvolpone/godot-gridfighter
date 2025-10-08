@@ -23,5 +23,17 @@ func execute_child(tick: int) -> void:
 		"aoe_ttl" : STORM_TTL
 	});
 
+func can_move() -> bool:
+	return true
+
+func xz_multiplier() -> float:
+	return .25
+
+func y_velocity_override() -> float:
+	return 1
+
+func y_velocity_override_deceleration() -> bool:
+	return true
+
 func is_usable_child() -> bool:
 	return true;

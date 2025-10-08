@@ -19,6 +19,18 @@ func is_usable_child() -> bool:
 func execute_child(tick: int) -> void:
 	pass
 
+func can_move() -> bool:
+	return true
+
+func xz_multiplier() -> float:
+	return .5
+
+func y_velocity_override() -> float:
+	return 0
+
+func y_velocity_override_deceleration() -> bool:
+	return false
+
 func _cast_frame_enact() -> void:
 	var spawn_location: Vector3 = hero.player.global_position + (hero.player.get_facing_direction()) + Vector3(0,1,0);
 	

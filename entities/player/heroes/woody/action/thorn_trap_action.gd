@@ -20,6 +20,18 @@ func get_cd_time() -> float:
 func execute_child(tick: int) -> void:
 	cast_tick = tick + NetworkTime.seconds_to_ticks(.5)
 
+func can_move() -> bool:
+	return false
+
+func xz_multiplier() -> float:
+	return 0
+
+func y_velocity_override() -> float:
+	return 0
+
+func y_velocity_override_deceleration() -> bool:
+	return false
+
 func _tick(delta: float, tick: int) -> void:
 	if cast_tick != -1 and NetworkTime.tick == cast_tick:
 		cast_tick = -1

@@ -65,6 +65,7 @@ var _menu_tick: int = -1;
 	#region Var:PlayerStats
 		#region Var:PlayerStats:ActionTimers
 var active_action_number: int = -1;
+var active_action_start_tick: int = -1;
 var active_action_end_tick: int = -1;
 		#endregion
 		#region Var:PlayerStats:Modifiers
@@ -221,57 +222,84 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 
 	#region Movement\
 func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
-	var is_jumping: bool = false;
-	if can_jump():
-		is_jumping = brain.jump_strength > 0
-	if is_on_floor():
-		if is_jumping:
-			velocity.y = jump_velocity
-		else:
-			velocity.y = 0
-	else:
-		apply_gravity(delta)
+	var can_move: bool = true
+	var xz_multiplier: float = 1
+	var y_velocity_override: float = 0
 	
-	var movement_direction: Vector3 = brain.move_direction
+	# TODO Helper Function to get combat action by active action num
+	match active_action_number:
+		1:
+			can_move = hero.combat_action_1.can_move()
+			xz_multiplier = hero.combat_action_1.xz_multiplier()
+			y_velocity_override = hero.combat_action_1.y_velocity_override()
+		2:
+			can_move = hero.combat_action_2.can_move()
+			xz_multiplier = hero.combat_action_2.xz_multiplier()
+			y_velocity_override = hero.combat_action_2.y_velocity_override()
+		3:
+			can_move = hero.combat_action_3.can_move()
+			xz_multiplier = hero.combat_action_3.xz_multiplier()
+			y_velocity_override = hero.combat_action_3.y_velocity_override()
+		4:
+			can_move = hero.combat_action_4.can_move()
+			xz_multiplier = hero.combat_action_4.xz_multiplier()
+			y_velocity_override = hero.combat_action_4.y_velocity_override()
+		_:
+			pass
 
-	var speed: float = movement_speed()
-	
-	var horizontal_velocity: Vector3 = movement_direction.normalized() * speed
-	
-	if horizontal_velocity:
-		velocity.x = horizontal_velocity.x
-		velocity.z = horizontal_velocity.z
-		rotation.y = -atan2(-movement_direction.x, movement_direction.z)
+	if y_velocity_override == 0:
+		var is_jumping: bool = false;
+		if can_jump():
+			is_jumping = brain.jump_strength > 0
+		if is_on_floor():
+			if is_jumping:
+				velocity.y = jump_velocity
+			else:
+				velocity.y = 0
+		else:
+			apply_gravity(delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
-	
-	move_and_slide_physics_factor()
+		velocity.y = y_velocity_override
+
+	if can_move:
+		var movement_direction: Vector3 = brain.move_direction
+		var speed: float = movement_speed() * xz_multiplier
+		var horizontal_velocity: Vector3 = movement_direction.normalized() * speed
+		
+		if horizontal_velocity:
+			velocity.x = horizontal_velocity.x
+			velocity.z = horizontal_velocity.z
+			rotation.y = -atan2(-movement_direction.x, movement_direction.z)
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.z = move_toward(velocity.z, 0, speed)
+		
+		move_and_slide_physics_factor()
 
 func process_animations(delta: float, tick: int, is_fresh: bool) -> void:
 	if active_action_number != -1:
 		match active_action_number:
 			1:
-				animator.play(ANIM_PUNCH)
+				animator.play(ANIM_PUNCH, .2)
 			2:
-				animator.play(ANIM_BLOCK)
+				animator.play(ANIM_BLOCK, .2)
 			3:
 				if hero.combat_action_3.is_action_state:
-					animator.play(hero.combat_action_3.action_animation)
+					animator.play(hero.combat_action_3.action_animation, .2)
 			4:
 				if hero.combat_action_4.is_action_state:
-					animator.play(hero.combat_action_4.action_animation)
+					animator.play(hero.combat_action_4.action_animation, .2)
 		if tick > active_action_end_tick:
 			active_action_number = -1
 			active_action_end_tick = -1
 	else:
 		if is_on_floor():
 			if brain.move_direction:
-				animator.play(ANIM_RUN)
+				animator.play(ANIM_RUN, .2)
 			else:
-				animator.play(ANIM_IDLE)
+				animator.play(ANIM_IDLE, .2)
 		else:
-			animator.play(ANIM_JUMP)
+			animator.play(ANIM_JUMP, .2)
 
 func movement_speed() -> float:
 	var modifier: float = 0
@@ -390,45 +418,53 @@ func process_combat_actions(tick: int) -> void:
 	match hero.combat_action_1.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			active_action_number = 1;
+			active_action_start_tick = tick
 			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_PUNCH).length)
 			hero.combat_action_1.execute_child(tick)
 			#state_machine.transition(&"PunchState")
 		RewindableAction.CANCELLING:
 			active_action_number = -1
+			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_1.erase_context()
 	match hero.combat_action_2.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			active_action_number = 2;
+			active_action_start_tick = tick
 			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_BLOCK).length)
 			hero.combat_action_2.execute_child(tick)
 			#state_machine.transition(&"BlockState")
 		RewindableAction.CANCELLING:
 			active_action_number = -1
+			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_2.erase_context()
 	match hero.combat_action_3.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			if hero.combat_action_3.is_action_state:
 				active_action_number = 3;
+				active_action_start_tick = tick
 				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_3.action_animation).length)
 				hero.combat_action_3.execute_child(tick)
 			#if hero.combat_action_3.is_action_state:
 				#state_machine.transition(hero.combat_action_3.action_state_string)
 		RewindableAction.CANCELLING:
 			active_action_number = -1
+			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_3.erase_context()
 	match hero.combat_action_4.get_status():
 		RewindableAction.CONFIRMING, RewindableAction.ACTIVE:
 			if hero.combat_action_4.is_action_state:
 				active_action_number = 4;
+				active_action_start_tick = tick
 				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_4.action_animation).length)
 			hero.combat_action_4.execute_child(tick)
 			#if hero.combat_action_4.is_action_state:
 				#state_machine.transition(hero.combat_action_4.action_state_string)
 		RewindableAction.CANCELLING:
 			active_action_number = -1
+			active_action_start_tick = -1
 			active_action_end_tick = -1
 			hero.combat_action_4.erase_context()
 			hero.combat_action_4.erase_context()

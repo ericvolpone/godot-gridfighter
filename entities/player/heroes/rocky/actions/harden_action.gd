@@ -18,5 +18,17 @@ func execute_child(tick: int) -> void:
 		"aoe_ttl" : HARDEN_TTL
 	});
 
+func can_move() -> bool:
+	return true
+
+func xz_multiplier() -> float:
+	return 1
+
+func y_velocity_override() -> float:
+	return 0
+
+func y_velocity_override_deceleration() -> bool:
+	return false
+
 func is_usable_child() -> bool:
 	return true;

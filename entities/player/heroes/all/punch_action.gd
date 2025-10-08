@@ -11,6 +11,18 @@ func get_cd_time() -> float:
 func execute_child(tick: int) -> void:
 	pass;
 
+func can_move() -> bool:
+	return true
+
+func xz_multiplier() -> float:
+	return .5
+
+func y_velocity_override() -> float:
+	return 0
+
+func y_velocity_override_deceleration() -> bool:
+	return false
+
 func is_usable_child() -> bool:
 	return true;
 
