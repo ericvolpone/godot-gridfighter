@@ -76,33 +76,29 @@ var status_effects: Dictionary[StatusEffect, bool] = {}
 
 		#endregion
 		#region Var:PlayerStats:StatusEffects
-var shock_value: float = 0;
-var burn_value: float = 0;
-var freeze_value: float = 0;
-var cold_value: float = 0;
-var root_value: float = 0;
 
-var is_shocked: bool = false
+var shock_value: float = 0;
 var shock_time_remaining: float = 0;
 const SHOCK_SLOW_MODIFIER: float = 1.0;
 const SHOCK_DURATION: float = 1.0
 
+var burn_value: float = 0;
 var burnt_time_remaining: float = 0;
 const BURN_Y_VELOCITY: float = 3;
 const BURN_SLOW_MODIFIER: float = .5;
 const BURN_DURATION: float = 1.9;
 
-var is_cold: bool = false;
+var cold_value: float = 0;
 var cold_time_remaining: float = 0;
 const COLD_SLOW_MODIFIER: float = .5;
 const COLD_DURATION: float = 3
 
-var is_frozen: bool = false;
+var freeze_value: float = 0;
 var freeze_time_remaining: float = 0;
 const FREEZE_SLOW_MODIFIER: float = 1;
 const FREEZE_DURATION: float = 1.5
 
-var is_rooted: bool = false;
+var root_value: float = 0;
 var root_time_remaining: float = 0;
 const ROOT_SLOW_MODIFIER: float = .9;
 const ROOT_DURATION: float = 2
@@ -307,17 +303,17 @@ func process_animations(delta: float, tick: int, is_fresh: bool) -> void:
 
 func movement_speed() -> float:
 	var modifier: float = 0
-	if is_shocked: modifier = max(modifier, SHOCK_SLOW_MODIFIER)
+	if is_shocked(): modifier = max(modifier, SHOCK_SLOW_MODIFIER)
 	if is_burnt(): modifier = max(modifier, BURN_SLOW_MODIFIER)
-	if is_frozen: modifier = max(modifier, FREEZE_SLOW_MODIFIER)
-	if is_rooted: modifier = max(modifier, ROOT_SLOW_MODIFIER)
-	if is_cold: modifier = max(modifier, COLD_SLOW_MODIFIER)
+	if is_frozen(): modifier = max(modifier, FREEZE_SLOW_MODIFIER)
+	if is_rooted(): modifier = max(modifier, ROOT_SLOW_MODIFIER)
+	if is_cold(): modifier = max(modifier, COLD_SLOW_MODIFIER)
 	#if state_machine.state == "CastState":
 		#VLogger.log_mp("Cast State Movement Speed Modifier: ", modifier)
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
 
 func can_jump() -> bool:
-	return not (is_burnt() or is_shocked or is_frozen or is_rooted or is_knocked)
+	return not (is_burnt() or is_shocked() or is_frozen() or is_rooted() or is_knocked)
 
 func y_velocity_override() -> float:
 	if is_burnt():
@@ -344,7 +340,7 @@ func process_external_modifiers(delta: float, _tick: int) -> void:
 
 func process_status_effects(delta: float) -> void:
 	# SHOCKED
-	if is_shocked:
+	if is_shocked():
 		shock_time_remaining -= delta
 		if shock_time_remaining <= 0:
 			remove_shock()
@@ -360,13 +356,13 @@ func process_status_effects(delta: float) -> void:
 		apply_burn(BURN_DURATION)
 	
 	# COLD
-	if is_cold:
+	if is_cold():
 		cold_time_remaining -= delta
 		if cold_time_remaining <= 0:
 			remove_cold()
 	
 	# FROZEN
-	if is_frozen:
+	if is_frozen():
 		freeze_time_remaining -= delta
 		if freeze_time_remaining <= 0:
 			remove_freeze()
@@ -375,7 +371,7 @@ func process_status_effects(delta: float) -> void:
 		apply_freeze(2)
 
 	# ROOTED
-	if is_rooted:
+	if is_rooted():
 		root_time_remaining -= delta
 		if root_time_remaining <= 0:
 			remove_root()
@@ -502,18 +498,6 @@ func apply_strength_boost(value: int) -> void:
 		current_strength_modifier = max_player_strength - hero.get_starting_strength()
 
 #endregion
-	#region Func:Animation
-
-func _on_display_state_changed(_old_state: RewindableState, new_state: RewindableState) -> void:
-	var animation_name: String = new_state.animation_name
-	if is_shocked:
-		animator.play(ANIM_TPOSE)
-	elif is_burnt():
-		animator.play(ANIM_BURNT)
-	elif animation_name != "":
-		animator.play(animation_name, 0.2)
-
-	#endregion
 	#region Func:ExternalAppliers
 func knock_back(direction: Vector3, force: float) -> void:
 	if(!is_immune_to_knockback and not is_knocked):
@@ -522,15 +506,20 @@ func knock_back(direction: Vector3, force: float) -> void:
 		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
 		is_knocked = true
 
-# TODO Honestly, we should just spawn a new effect no matter what maybe?
+func is_cold() -> bool:
+	return cold_time_remaining > 0
+
 func apply_cold(duration: float = COLD_DURATION) -> void:
 	level.status_effect_spawner.spawn({
 		"owner_player_id" : player_id,
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.COLD
 	})
-	is_cold = true;
+	cold_value = 0
 	cold_time_remaining = duration
+
+func is_frozen() -> bool:
+	return freeze_time_remaining > 0
 
 func apply_freeze(duration: float = FREEZE_DURATION) -> void:
 	level.status_effect_spawner.spawn({
@@ -538,8 +527,11 @@ func apply_freeze(duration: float = FREEZE_DURATION) -> void:
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.FROZEN
 	})
-	is_frozen = true;
+	freeze_value = 0
 	freeze_time_remaining = duration
+
+func is_rooted() -> bool:
+	return root_time_remaining > 0
 
 func apply_root(duration: float = ROOT_DURATION) -> void:
 	level.status_effect_spawner.spawn({
@@ -547,14 +539,13 @@ func apply_root(duration: float = ROOT_DURATION) -> void:
 		"effect_ttl" : duration,
 		"effect_type" : StatusEffect.Type.ROOTED
 	})
-	is_rooted = true;
+	root_value = 0
 	root_time_remaining = duration
 
 func is_burnt() -> bool:
 	return burnt_time_remaining > 0
 
 func apply_burn(duration: float = BURN_DURATION) -> void:
-	animator.play(ANIM_BURNT)
 	level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
 			"effect_ttl" : duration,
@@ -563,35 +554,32 @@ func apply_burn(duration: float = BURN_DURATION) -> void:
 	burn_value = 0;
 	burnt_time_remaining = duration
 
+func is_shocked() -> bool:
+	return shock_time_remaining > 0
+
 func apply_shock(duration: float = SHOCK_DURATION) -> void:
-	animator.play(ANIM_TPOSE)
 	level.status_effect_spawner.spawn({
 			"owner_player_id" : player_id,
 			"effect_ttl" : duration,
 			"effect_type" : StatusEffect.Type.SHOCKED
 		})
-	is_shocked = true
 	shock_value = 0
 	shock_time_remaining = duration
 
 func remove_shock() -> void:
 	shock_time_remaining = 0
-	is_shocked = false;
 	
 func remove_burn() -> void:
 	burnt_time_remaining = 0
 	
 func remove_cold() -> void:
 	cold_time_remaining = 0
-	is_cold = false;
 
 func remove_freeze() -> void:
 	freeze_time_remaining = 0
-	is_frozen = false;
 
 func remove_root() -> void:
 	root_time_remaining = 0
-	is_rooted = false;
 
 	#endregion
 	#region Func:RPC
