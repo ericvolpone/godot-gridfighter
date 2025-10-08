@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2wyldslu3fnh"]
+[gd_scene load_steps=9 format=3 uid="uid://b2wyldslu3fnh"]
 
 [ext_resource type="Script" uid="uid://b4woa8kj0huvq" path="res://entities/player/all/player.gd" id="1_lvxji"]
 [ext_resource type="Script" uid="uid://dhffq6h1i553p" path="res://entities/player/all/hero_socket.gd" id="2_gurk5"]
@@ -25,14 +25,6 @@ albedo_color = Color(0.806697, 0.100879, 0.181326, 1)
 albedo_texture = SubResource("NoiseTexture2D_g2ike")
 disable_receive_shadows = true
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x6u7t"]
-properties/0/path = NodePath(".:is_knocked")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:is_respawning")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [node name="Player_CharacterBody3D" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 3
@@ -57,15 +49,12 @@ height = 0.001
 [node name="HeroSocket" type="Node3D" parent="."]
 script = ExtResource("2_gurk5")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_x6u7t")
-
 [node name="RollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
 unique_name_in_owner = true
 script = ExtResource("3_vak66")
 root = NodePath("..")
 enable_prediction = true
-state_properties = Array[String]([":global_transform", ":velocity", ":current_hero_id", ":burn_value", ":burnt_time_remaining", ":active_action_number", ":active_action_start_tick", ":active_action_end_tick", ":shock_value", ":shock_time_remaining", ":cold_value", ":cold_time_remaining", ":root_value", ":root_time_remaining", ":freeze_value", ":freeze_time_remaining"])
+state_properties = Array[String]([":global_transform", ":velocity", ":current_hero_id", ":burn_value", ":burnt_time_remaining", ":active_action_number", ":active_action_start_tick", ":active_action_end_tick", ":shock_value", ":shock_time_remaining", ":cold_value", ":cold_time_remaining", ":root_value", ":root_time_remaining", ":freeze_value", ":freeze_time_remaining", ":knocked_time_remaining", ":knocked_direction"])
 input_properties = Array[String](["Brain:move_direction", "Brain:jump_strength", "Brain:using_combat_action_1", "Brain:using_combat_action_2", "Brain:using_combat_action_3", "Brain:using_combat_action_4", "Brain:opening_in_game_menu"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
 

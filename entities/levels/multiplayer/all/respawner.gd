@@ -13,7 +13,6 @@ func respawn_player(player: Player) -> void:
 			# Point is available, we can occupy and respawn
 			respawn_point_availability[respawn_point] = false;
 			player.global_position = respawn_point.global_position;
-			player.is_knocked = false;
 			player.is_standing_back_up = false;
 			player.is_blocking = false;
 			player.velocity = Vector3.ZERO
@@ -27,6 +26,7 @@ func respawn_player(player: Player) -> void:
 			player.burnt_time_remaining = 0
 			player.root_time_remaining = 0
 			player.cold_time_remaining = 0
+			player.knocked_time_remaining = 0
 			player.speed_boost_modifier = 0
 			player.current_strength_modifier = 0
 			player.active_action_number = -1

@@ -114,7 +114,8 @@ var max_player_strength: float = 10;
 		#endregion
 	#endregion
 	#region Var:State
-@export var is_knocked: bool = false;
+var knocked_time_remaining: float = 0
+var knocked_direction: Vector3
 @export var is_standing_back_up: bool = false;
 @export var is_blocking: bool = false;
 @export var is_respawning: bool = false;
@@ -265,7 +266,13 @@ func process_movement(delta: float, tick: int, is_fresh: bool) -> void:
 	else:
 		velocity.y = y_velocity_override
 
-	if can_move:
+	if is_knocked():
+		var knocked_velocity: float = knocked_time_remaining / 1.5
+		velocity.x = knocked_direction.x * knocked_velocity
+		velocity.z = knocked_direction.z * knocked_velocity
+		knocked_time_remaining -= delta
+		move_and_slide_physics_factor()
+	elif can_move:
 		var movement_direction: Vector3 = brain.move_direction
 		var speed: float = movement_speed() * xz_multiplier
 		var horizontal_velocity: Vector3 = movement_direction.normalized() * speed
@@ -286,6 +293,9 @@ func process_animations(delta: float, tick: int, is_fresh: bool) -> void:
 		return
 	elif is_shocked():
 		animator.play(ANIM_TPOSE, .2)
+		return
+	elif is_knocked():
+		animator.play(ANIM_FALL, .2)
 		return
 
 	if active_action_number != -1:
@@ -319,18 +329,16 @@ func movement_speed() -> float:
 	if is_frozen(): modifier = max(modifier, FREEZE_SLOW_MODIFIER)
 	if is_rooted(): modifier = max(modifier, ROOT_SLOW_MODIFIER)
 	if is_cold(): modifier = max(modifier, COLD_SLOW_MODIFIER)
-	#if state_machine.state == "CastState":
-		#VLogger.log_mp("Cast State Movement Speed Modifier: ", modifier)
 	return (hero.get_starting_move_speed() + speed_boost_modifier) * (1 - modifier)
 
 func can_jump() -> bool:
-	return not (is_burnt() or is_shocked() or is_frozen() or is_rooted() or is_knocked)
+	return not (is_burnt() or is_shocked() or is_frozen() or is_rooted() or is_knocked())
 
 func strength() -> float:
 	return hero.get_starting_strength() + current_strength_modifier
 
 func process_knock() -> void:
-	if(is_knocked):
+	if(is_knocked()):
 		pass;
 
 func apply_gravity(delta: float) -> void:
@@ -422,7 +430,6 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = tick
 			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_PUNCH).length)
 			hero.combat_action_1.execute_child(tick)
-			#state_machine.transition(&"PunchState")
 		RewindableAction.CANCELLING:
 			active_action_number = -1
 			active_action_start_tick = -1
@@ -435,7 +442,6 @@ func process_combat_actions(tick: int) -> void:
 			active_action_start_tick = tick
 			active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(ANIM_BLOCK).length)
 			hero.combat_action_2.execute_child(tick)
-			#state_machine.transition(&"BlockState")
 		RewindableAction.CANCELLING:
 			active_action_number = -1
 			active_action_start_tick = -1
@@ -449,8 +455,6 @@ func process_combat_actions(tick: int) -> void:
 				active_action_start_tick = tick
 				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_3.action_animation).length)
 				hero.combat_action_3.execute_child(tick)
-			#if hero.combat_action_3.is_action_state:
-				#state_machine.transition(hero.combat_action_3.action_state_string)
 		RewindableAction.CANCELLING:
 			active_action_number = -1
 			active_action_start_tick = -1
@@ -464,8 +468,6 @@ func process_combat_actions(tick: int) -> void:
 				active_action_start_tick = tick
 				active_action_end_tick = tick + NetworkTime.seconds_to_ticks(animator.get_animation(hero.combat_action_4.action_animation).length)
 			hero.combat_action_4.execute_child(tick)
-			#if hero.combat_action_4.is_action_state:
-				#state_machine.transition(hero.combat_action_4.action_state_string)
 		RewindableAction.CANCELLING:
 			active_action_number = -1
 			active_action_start_tick = -1
@@ -475,7 +477,7 @@ func process_combat_actions(tick: int) -> void:
 	#endregion
 	#region Func:Helpers
 func has_control() -> bool:
-	return !is_knocked and !is_in_menu and active_action_number == -1;
+	return !is_knocked() and !is_in_menu and active_action_number == -1;
 
 func get_facing_direction() -> Vector3:
 	return global_transform.basis.z.normalized()
@@ -502,11 +504,12 @@ func apply_strength_boost(value: int) -> void:
 #endregion
 	#region Func:ExternalAppliers
 func knock_back(direction: Vector3, force: float) -> void:
-	if(!is_immune_to_knockback and not is_knocked):
-		var knocked_state: ActionState = $RewindableStateMachine/KnockedState
-		knocked_state.xz_velocity_override = direction * force
-		# TODO Could adjust this to have a static "Gravity" y velocity override, :shrug:
-		is_knocked = true
+	if(!is_immune_to_knockback and not is_knocked()):
+		knocked_direction = direction * force
+		knocked_time_remaining = 1.5
+
+func is_knocked() -> bool:
+	return knocked_time_remaining > 0
 
 func is_cold() -> bool:
 	return cold_time_remaining > 0
